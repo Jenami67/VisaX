@@ -19,7 +19,12 @@ namespace VisaX
             Application.CurrentCulture = new System.Globalization.CultureInfo("fr-FR");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmAddPassenger());
+#if DEBUG
+            VisaXEntities ctx = new VisaX.VisaXEntities();
+            var pa = (from p in ctx.Passengers where p.ID == 1 select p).First();
+            //Application.Run(new frmAddPassenger((Passenger)pa));
+            Application.Run(new frmMain());
+#endif
         }
     }
 }
