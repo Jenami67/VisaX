@@ -115,6 +115,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="packages.config" />
+    <Content Include="PassengerList.xls">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -128,6 +131,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>VisaXModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="VisaForm.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="VisaXModel.edmx.diagram">
       <DependentUpon>VisaXModel.edmx</DependentUpon>
     </None>
