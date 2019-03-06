@@ -77,9 +77,7 @@ namespace VisaX
                 excelWorkBook = excelApllication.Workbooks.Open(absPath, 0, true, 5, "", "", true, Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
                 excelWorkSheet = (Excel.Worksheet)excelWorkBook.Worksheets.get_Item(1);
 
-
-
-                for (int i = 0; i < dgvPassengers.SelectedRows.Count; i++)
+                for (int i = MinIndex(); i < dgvPassengers.SelectedRows.Count; i++)
                 {
                     excelWorkSheet.Cells[i + 8, 8].Value = string.Format("{0} {1} {2}", dgvPassengers[1, i].Value, dgvPassengers[3, i].Value, dgvPassengers[2, i].Value);
                     excelWorkSheet.Cells[i + 8, 7].Value = dgvPassengers[4, i].Value;
@@ -90,18 +88,6 @@ namespace VisaX
                     excelWorkSheet.Cells[i + 8, 4].Value2 = dgvPassengers[6, i].Value;
                     excelWorkSheet.Cells[i + 8, 3].Value2 = dgvPassengers[7, i].Value;
                 }//for
-
-                //foreach (DataGridViewRow r in dgvPassengers.SelectedRows)
-                //{
-                //    excelWorkSheet.Cells[i + 8, 8].Value = string.Format("{0} {1} {2}", dgvPassengers[1, i].Value, dgvPassengers[3, i].Value, dgvPassengers[2, i].Value);
-                //    excelWorkSheet.Cells[i + 8, 7].Value = dgvPassengers[4, i].Value;
-                //    excelWorkSheet.Cells[i + 8, 6].Value2 = (byte)dgvPassengers[8, i].Value == 0 ? "ذکر" : "انثی";
-
-                //    //format error: Exception from HRESULT: 0x800A03EC
-                //    excelWorkSheet.Cells[i + 8, 5].Value2 = dgvPassengers[5, i].Value;
-                //    excelWorkSheet.Cells[i + 8, 4].Value2 = dgvPassengers[6, i].Value;
-                //    excelWorkSheet.Cells[i + 8, 3].Value2 = dgvPassengers[7, i].Value;
-                //}
 
                 excelWorkBook.SaveAs(sfd.FileName, Excel.XlFileFormat.xlWorkbookNormal);
 
@@ -171,7 +157,7 @@ namespace VisaX
         {
             var l = from p in ctx.Passengers
                     where p.Family.Contains(txtFilter.Text) || p.Name.Contains(txtFilter.Text) ||
-p.Father.Contains(txtFilter.Text) || p.PassportNum.Contains(txtFilter.Text)
+                    p.Father.Contains(txtFilter.Text) || p.PassportNum.Contains(txtFilter.Text)
                     select p;
             dgvPassengers.DataSource = l.ToList();
         }
@@ -194,20 +180,19 @@ p.Father.Contains(txtFilter.Text) || p.PassportNum.Contains(txtFilter.Text)
                 btnSearch_Click(null, null);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private int MinIndex()
         {
-            
+            int min = int.MaxValue;
+            foreach (DataGridViewRow r in dgvPassengers.SelectedRows)
+                if (min > r.Index)
+                    min = r.Index;
+            return min;
+        }
 
-            MessageBox.Show(dgvPassengers.CurrentCell.RowIndex.ToString());
-            MessageBox.Show(dgvPassengers.SelectedRows[0].Index.ToString());
-            if (dgvPassengers.SelectedRows.Count > 0)
-            {
-                int firstRowIndex = dgvPassengers.SelectedRows.Count - 1;
+        private void llbSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+             new frmSettings().ShowDialog();
 
-                string cell = dgvPassengers.SelectedRows[0].Cells[0].Value.ToString();
-                string cell2 = dgvPassengers.SelectedRows[firstRowIndex].Cells[0].Value.ToString();
-                MessageBox.Show("First sel:" + firstRowIndex + "Last value: " + cell + " First value: " + cell2);
-            }
         }
     }
 }

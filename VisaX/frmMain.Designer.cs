@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvPassengers = new System.Windows.Forms.DataGridView();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,7 +50,7 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtFilter = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.llbSettings = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPassengers)).BeginInit();
             this.panel1.SuspendLayout();
@@ -80,8 +80,8 @@
             // 
             this.dgvPassengers.AllowUserToAddRows = false;
             this.dgvPassengers.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2);
-            this.dgvPassengers.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2);
+            this.dgvPassengers.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvPassengers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPassengers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPassengers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -171,7 +171,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.llbSettings);
             this.panel1.Controls.Add(this.btnExportPDF);
             this.panel1.Controls.Add(this.btnExportExcel);
             this.panel1.Controls.Add(this.btnDelete);
@@ -275,15 +275,17 @@
             this.txtFilter.TabIndex = 0;
             this.txtFilter.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilter_KeyDown);
             // 
-            // button1
+            // llbSettings
             // 
-            this.button1.Location = new System.Drawing.Point(203, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 22;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.llbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.llbSettings.AutoSize = true;
+            this.llbSettings.Location = new System.Drawing.Point(7, 42);
+            this.llbSettings.Name = "llbSettings";
+            this.llbSettings.Size = new System.Drawing.Size(47, 14);
+            this.llbSettings.TabIndex = 22;
+            this.llbSettings.TabStop = true;
+            this.llbSettings.Text = "تنظیمات";
+            this.llbSettings.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbSettings_LinkClicked);
             // 
             // frmMain
             // 
@@ -301,6 +303,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPassengers)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -330,7 +333,7 @@
         private System.Windows.Forms.Button btnExportPDF;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.LinkLabel llbSettings;
     }
 }
 
