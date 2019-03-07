@@ -41,6 +41,7 @@
             this.colExpiryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGender = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.llbSettings = new System.Windows.Forms.LinkLabel();
             this.btnExportPDF = new System.Windows.Forms.Button();
             this.btnExportExcel = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -50,7 +51,7 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtFilter = new System.Windows.Forms.TextBox();
-            this.llbSettings = new System.Windows.Forms.LinkLabel();
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPassengers)).BeginInit();
             this.panel1.SuspendLayout();
@@ -171,6 +172,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.llbSettings);
             this.panel1.Controls.Add(this.btnExportPDF);
             this.panel1.Controls.Add(this.btnExportExcel);
@@ -183,13 +185,25 @@
             this.panel1.Size = new System.Drawing.Size(939, 64);
             this.panel1.TabIndex = 16;
             // 
+            // llbSettings
+            // 
+            this.llbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.llbSettings.AutoSize = true;
+            this.llbSettings.Location = new System.Drawing.Point(7, 42);
+            this.llbSettings.Name = "llbSettings";
+            this.llbSettings.Size = new System.Drawing.Size(47, 14);
+            this.llbSettings.TabIndex = 4;
+            this.llbSettings.TabStop = true;
+            this.llbSettings.Text = "تنظیمات";
+            this.llbSettings.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbSettings_LinkClicked);
+            // 
             // btnExportPDF
             // 
             this.btnExportPDF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExportPDF.Location = new System.Drawing.Point(303, 9);
             this.btnExportPDF.Name = "btnExportPDF";
             this.btnExportPDF.Size = new System.Drawing.Size(142, 45);
-            this.btnExportPDF.TabIndex = 21;
+            this.btnExportPDF.TabIndex = 3;
             this.btnExportPDF.Text = "تولید پی دی اف";
             this.btnExportPDF.UseVisualStyleBackColor = true;
             this.btnExportPDF.Click += new System.EventHandler(this.btnExportPDF_Click);
@@ -200,7 +214,7 @@
             this.btnExportExcel.Location = new System.Drawing.Point(460, 9);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(142, 45);
-            this.btnExportExcel.TabIndex = 20;
+            this.btnExportExcel.TabIndex = 2;
             this.btnExportExcel.Text = "تولید اکسل";
             this.btnExportExcel.UseVisualStyleBackColor = true;
             this.btnExportExcel.Click += new System.EventHandler(this.btnExportExcel_Click);
@@ -221,7 +235,7 @@
             this.btnEdit.Location = new System.Drawing.Point(619, 9);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(142, 45);
-            this.btnEdit.TabIndex = 16;
+            this.btnEdit.TabIndex = 1;
             this.btnEdit.Text = "ویرایش";
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -232,7 +246,7 @@
             this.btnNew.Location = new System.Drawing.Point(777, 9);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(142, 45);
-            this.btnNew.TabIndex = 15;
+            this.btnNew.TabIndex = 0;
             this.btnNew.Text = "جدید";
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
@@ -250,6 +264,7 @@
             // 
             // btnSearch
             // 
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearch.Location = new System.Drawing.Point(619, 14);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
@@ -260,6 +275,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(865, 17);
             this.label1.Name = "label1";
@@ -269,23 +285,22 @@
             // 
             // txtFilter
             // 
+            this.txtFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilter.Location = new System.Drawing.Point(700, 14);
             this.txtFilter.Name = "txtFilter";
             this.txtFilter.Size = new System.Drawing.Size(159, 22);
             this.txtFilter.TabIndex = 0;
             this.txtFilter.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilter_KeyDown);
             // 
-            // llbSettings
+            // button1
             // 
-            this.llbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.llbSettings.AutoSize = true;
-            this.llbSettings.Location = new System.Drawing.Point(7, 42);
-            this.llbSettings.Name = "llbSettings";
-            this.llbSettings.Size = new System.Drawing.Size(47, 14);
-            this.llbSettings.TabIndex = 22;
-            this.llbSettings.TabStop = true;
-            this.llbSettings.Text = "تنظیمات";
-            this.llbSettings.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbSettings_LinkClicked);
+            this.button1.Location = new System.Drawing.Point(222, 22);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmMain
             // 
@@ -298,6 +313,7 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.Text = "شرکه زهره البصره";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmMain_Paint);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -334,6 +350,7 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel llbSettings;
+        private System.Windows.Forms.Button button1;
     }
 }
 

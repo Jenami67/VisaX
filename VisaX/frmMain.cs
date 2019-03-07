@@ -34,21 +34,19 @@ namespace VisaX
         private void btnEdit_Click(object sender, EventArgs e)
         {
             frmAddPassenger frmAddPassenger = new frmAddPassenger((Passenger)dgvPassengers.CurrentRow.DataBoundItem);
-            frmAddPassenger.ShowDialog();
-            if (frmAddPassenger.DialogResult == DialogResult.OK)
-            {
+            if (frmAddPassenger.ShowDialog() == DialogResult.OK)
                 frmMain_Load(null, null);
-            }
         }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            frmAddPassenger frmAddPassenger = new frmAddPassenger();
-            frmAddPassenger.ShowDialog();
-            if (frmAddPassenger.DialogResult == DialogResult.OK)
-            {
+            //frmAddPassenger frmAddPassenger = new frmAddPassenger();
+            //frmAddPassenger.ShowDialog();
+            //if (frmAddPassenger.DialogResult == DialogResult.OK)
+            //    frmMain_Load(null, null);
+
+            if (new frmAddPassenger().ShowDialog() == DialogResult.OK)
                 frmMain_Load(null, null);
-            }
         }
 
         public void rowColor()
@@ -145,7 +143,7 @@ namespace VisaX
 
                 stamp.Close();
                 Process.Start(sfd.FileName);
-            }
+            }//if
         }
 
         private void frmMain_Paint(object sender, PaintEventArgs e)
@@ -162,6 +160,12 @@ namespace VisaX
             dgvPassengers.DataSource = l.ToList();
         }
 
+        private void txtFilter_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                btnSearch_Click(null, null);
+        }
+
         private void dgvPassengers_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
             btnNew.Enabled = btnDelete.Enabled = btnEdit.Enabled = btnExportExcel.Enabled = btnExportPDF.Enabled =
@@ -174,10 +178,10 @@ namespace VisaX
                 dgvPassengers.Rows.Count != 0;
         }
 
-        private void txtFilter_KeyDown(object sender, KeyEventArgs e)
+        private void llbSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-                btnSearch_Click(null, null);
+            new frmSettings().ShowDialog();
+
         }
 
         private int MinIndex()
@@ -189,9 +193,56 @@ namespace VisaX
             return min;
         }
 
-        private void llbSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-             new frmSettings().ShowDialog();
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Adobe Acrobat Documents (*.pdf)|*.pdf";
+            sfd.FileName = "VisaApply.pdf";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                int i = 1;
+                foreach (DataGridViewRow r in dgvPassengers.SelectedRows)
+                {
+                    //Path to source file
+                    String source = ".\\VisaForm.pdf";
+                    //Create PdfReader object to read the source file
+                    PdfReader reader = new PdfReader(source);
+                    //PdfStamper object to modify the content of the PDF
+                    string fullPath = sfd.FileName.Insert(sfd.FileName.LastIndexOf(".pdf"), string.Format(" - {0:00}", i));
+                    PdfStamper stamp = new PdfStamper(reader, new FileStream(fullPath, FileMode.Create));
+                    AcroFields form = stamp.AcroFields;
+
+                    Passenger p = (Passenger)r.DataBoundItem;
+                    form.SetField("form1[0].#subform[0].#field[0]", string.Format("{0} {1} {2}", p.Name, p.Father, p.Family));
+                    //form.SetField("form1[0].#subform[0].#field[1]", "اسلام");
+                    //Radio for Gender
+                    form.SetField("form1[0].#subform[0].RadioButtonList[0]", (2 - p.Gender).ToString());
+                    //form.SetField("form1[0].#subform[0].#field[2]", "ایرانیه");
+                    //form.SetField("form1[0].#subform[0].#field[3]", "ایرانیه");
+                    //form.SetField("form1[0].#subform[0].#field[9]", "ایران");
+                    form.SetField("form1[0].#subform[0].#field[8]", p.BornDate.Year.ToString());
+                    form.SetField("form1[0].#subform[0].#field[5]", p.BornDate.Month.ToString("00"));
+                    form.SetField("form1[0].#subform[0].#field[6]", p.BornDate.Day.ToString("00"));
+                    form.SetField("form1[0].#subform[0].#field[21]", p.PassportNum);
+
+                    //Issue Date
+                    form.SetField("form1[0].#subform[0].#field[25]", p.IssueDate.Year.ToString());
+                    form.SetField("form1[0].#subform[0].#field[22]", p.IssueDate.Month.ToString("00"));
+                    form.SetField("form1[0].#subform[0].#field[23]", p.IssueDate.Day.ToString("00"));
+
+                    //Expiry Date
+                    form.SetField("form1[0].#subform[0].#field[30]", p.ExpiryDate.Year.ToString());
+                    form.SetField("form1[0].#subform[0].#field[27]", p.ExpiryDate.Month.ToString("00"));//Month
+                    form.SetField("form1[0].#subform[0].#field[28]", p.ExpiryDate.Day.ToString("00"));//Day
+                    stamp.Close();
+                    i++;
+                }
+
+                //Process.Start(sfd.FileName);
+            }//if
+
+
+
 
         }
     }

@@ -262,6 +262,7 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(164, 247);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(122, 42);
@@ -301,9 +302,12 @@
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmAddPassenger";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
+            this.ShowInTaskbar = false;
             this.Text = "افزودن متقاضی";
             ((System.ComponentModel.ISupportInitialize)(this.erp)).EndInit();
             this.ResumeLayout(false);
