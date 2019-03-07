@@ -19,10 +19,8 @@ namespace VisaX
             Application.CurrentCulture = new System.Globalization.CultureInfo("fr-FR");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //VisaXEntities ctx = new VisaX.VisaXEntities();
-            //var pa = (from p in ctx.Passengers where p.ID == 1 select p).FirstOrDefault();
-            //Application.Run(new frmAddPassenger((Passenger)pa));
-            Application.Run(new frmMain());
+            if (DateTime.Now < new DateTime(2019, 4, 30))
+                  Application.Run(new frmMain());
         }
     }
 }
