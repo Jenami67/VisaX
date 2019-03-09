@@ -130,8 +130,14 @@ namespace VisaX
 
                 ctx.SaveChanges();
                 MessageBox.Show(sucMessage);
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+
+                txtName.Focus();
+                txtName.Text = txtFamily.Text = txtFather.Text = txtPassportNum.Text = txtBornDate.Text =
+                    txtExpiryDate.Text = txtIssueDate.Text = string.Empty;
+
+                //this.DialogResult = DialogResult.OK;
+                // InitializeComponent();
+
             }//if
         }
 
@@ -182,7 +188,13 @@ namespace VisaX
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void txtIssueDate_Leave(object sender, EventArgs e)
+        {
+            txtExpiryDate.Text = DateTime.Parse(txtIssueDate.Text).AddYears(5).ToShortDateString();
         }
     }
 }

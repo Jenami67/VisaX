@@ -176,6 +176,7 @@
             this.txtIssueDate.TabIndex = 12;
             this.txtIssueDate.ValidatingType = typeof(System.DateTime);
             this.txtIssueDate.TypeValidationCompleted += new System.Windows.Forms.TypeValidationEventHandler(this.txtIssueDate_TypeValidationCompleted);
+            this.txtIssueDate.Leave += new System.EventHandler(this.txtIssueDate_Leave);
             // 
             // label7
             // 

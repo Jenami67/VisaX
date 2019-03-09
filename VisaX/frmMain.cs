@@ -47,8 +47,13 @@ namespace VisaX
             //if (frmAddPassenger.DialogResult == DialogResult.OK)
             //    frmMain_Load(null, null);
 
-            if (new frmAddPassenger().ShowDialog() == DialogResult.OK)
+            // new frmAddPassenger().ShowDialog();
+            if (new frmAddPassenger().ShowDialog() == DialogResult.Cancel)
                 frmMain_Load(null, null);
+
+            //    new frmAddPassenger().ShowDialog();
+            //else
+            //    frmMain_Load(null, null);
         }
 
         public void rowColor()
@@ -77,16 +82,16 @@ namespace VisaX
                 excelWorkBook = excelApllication.Workbooks.Open(absPath, 0, true, 5, "", "", true, Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
                 excelWorkSheet = (Excel.Worksheet)excelWorkBook.Worksheets.get_Item(1);
 
-                for (int i = MinIndex(); i < dgvPassengers.SelectedRows.Count; i++)
+                for (int i = MinIndex()+1; i <= dgvPassengers.SelectedRows.Count; i++)
                 {
-                    excelWorkSheet.Cells[i + 8, 8].Value = string.Format("{0} {1} {2}", dgvPassengers[1, i].Value, dgvPassengers[3, i].Value, dgvPassengers[2, i].Value);
-                    excelWorkSheet.Cells[i + 8, 7].Value = dgvPassengers[4, i].Value;
-                    excelWorkSheet.Cells[i + 8, 6].Value2 = (byte)dgvPassengers[8, i].Value == 0 ? "ذکر" : "انثی";
+                    excelWorkSheet.Cells[i + 7, 8].Value = string.Format("{0} {1} {2}", dgvPassengers[1, i-1].Value, dgvPassengers[3, i-1].Value, dgvPassengers[2, i-1].Value);
+                    excelWorkSheet.Cells[i + 7, 7].Value = dgvPassengers[4, i-1].Value;
+                    excelWorkSheet.Cells[i + 7, 6].Value2 = (byte)dgvPassengers[8, i-1].Value == 0 ? "ذکر" : "انثی";
 
                     //format error: Exception from HRESULT: 0x800A03EC
-                    excelWorkSheet.Cells[i + 8, 5].Value2 = dgvPassengers[5, i].Value;
-                    excelWorkSheet.Cells[i + 8, 4].Value2 = dgvPassengers[6, i].Value;
-                    excelWorkSheet.Cells[i + 8, 3].Value2 = dgvPassengers[7, i].Value;
+                    excelWorkSheet.Cells[i + 7, 5].Value2 = dgvPassengers[5, i-1].Value;
+                    excelWorkSheet.Cells[i + 7, 4].Value2 = dgvPassengers[6, i-1].Value;
+                    excelWorkSheet.Cells[i + 7, 3].Value2 = dgvPassengers[7, i-1].Value;
                 }//for
 
                 excelWorkBook.SaveAs(sfd.FileName, Excel.XlFileFormat.xlWorkbookNormal);
@@ -112,9 +117,9 @@ namespace VisaX
             if (sfd.ShowDialog() == DialogResult.OK)
                 for (int i = 0; i < dgvPassengers.SelectedRows.Count; i++)
                     generatePdf(dgvPassengers.SelectedRows[i], i + 1);
-                if (dgvPassengers.SelectedRows.Count > 1)
-                    Process.Start(Path.GetDirectoryName(sfd.FileName));
-                else
+            if (dgvPassengers.SelectedRows.Count > 1)
+                Process.Start(Path.GetDirectoryName(sfd.FileName));
+            else
                 Process.Start(sfd.FileName.Insert(sfd.FileName.LastIndexOf(".pdf"), string.Format(" - {0:00}", 1)));
         }//btnExportPDF_Click
 
@@ -201,9 +206,27 @@ namespace VisaX
             stamp.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void frmMain_KeyDown(object sender, KeyEventArgs e)
         {
-
+            switch (e.KeyCode)
+            {
+                case Keys.F2:
+                    btnNew_Click(null, null);
+                    break;
+                case Keys.F4:
+                    btnEdit_Click(null, null);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
+
+//Add Shortcuts
+//Export by day - grid just current day or one day
+//pdf in one page
+//passport num in first to check if exist
+//auto expiry date
+//login password
+
