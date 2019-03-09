@@ -82,16 +82,16 @@ namespace VisaX
                 excelWorkBook = excelApllication.Workbooks.Open(absPath, 0, true, 5, "", "", true, Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
                 excelWorkSheet = (Excel.Worksheet)excelWorkBook.Worksheets.get_Item(1);
 
-                for (int i = MinIndex()+1; i <= dgvPassengers.SelectedRows.Count; i++)
+                for (int i = MinIndex() + 1; i <= dgvPassengers.SelectedRows.Count; i++)
                 {
-                    excelWorkSheet.Cells[i + 7, 8].Value = string.Format("{0} {1} {2}", dgvPassengers[1, i-1].Value, dgvPassengers[3, i-1].Value, dgvPassengers[2, i-1].Value);
-                    excelWorkSheet.Cells[i + 7, 7].Value = dgvPassengers[4, i-1].Value;
-                    excelWorkSheet.Cells[i + 7, 6].Value2 = (byte)dgvPassengers[8, i-1].Value == 0 ? "ذکر" : "انثی";
+                    excelWorkSheet.Cells[i + 7, 8].Value = string.Format("{0} {1} {2}", dgvPassengers[1, i - 1].Value, dgvPassengers[3, i - 1].Value, dgvPassengers[2, i - 1].Value);
+                    excelWorkSheet.Cells[i + 7, 7].Value = dgvPassengers[4, i - 1].Value;
+                    excelWorkSheet.Cells[i + 7, 6].Value2 = (byte)dgvPassengers[8, i - 1].Value == 0 ? "ذکر" : "انثی";
 
                     //format error: Exception from HRESULT: 0x800A03EC
-                    excelWorkSheet.Cells[i + 7, 5].Value2 = dgvPassengers[5, i-1].Value;
-                    excelWorkSheet.Cells[i + 7, 4].Value2 = dgvPassengers[6, i-1].Value;
-                    excelWorkSheet.Cells[i + 7, 3].Value2 = dgvPassengers[7, i-1].Value;
+                    excelWorkSheet.Cells[i + 7, 5].Value2 = dgvPassengers[5, i - 1].Value;
+                    excelWorkSheet.Cells[i + 7, 4].Value2 = dgvPassengers[6, i - 1].Value;
+                    excelWorkSheet.Cells[i + 7, 3].Value2 = dgvPassengers[7, i - 1].Value;
                 }//for
 
                 excelWorkBook.SaveAs(sfd.FileName, Excel.XlFileFormat.xlWorkbookNormal);
@@ -180,8 +180,14 @@ namespace VisaX
             string fullPath = sfd.FileName.Insert(sfd.FileName.LastIndexOf(".pdf"), string.Format(" - {0:00}", i));
             PdfStamper stamp = new PdfStamper(reader, new FileStream(fullPath, FileMode.Create));
             AcroFields form = stamp.AcroFields;
-
+            // stamp.FormFlattening = true;
+            //form.GenerateAppearances = true;
+            //stamp.FormFlattening = true;
             Passenger p = (Passenger)r.DataBoundItem;
+            //form.
+          //  form.SetField("form1[0].#subform[0].#field[0]", "کفتا");
+           // form.SetField("form1[0].#subform[0].#field[0]", string.Format("{0} {1} {2}", p.Name, p.Father, p.Family));
+           // form.SetFieldProperty("form1[0].#subform[0].#field[0]", "setfflags", PdfFormField.FF_READ_ONLY, null);
             form.SetField("form1[0].#subform[0].#field[0]", string.Format("{0} {1} {2}", p.Name, p.Father, p.Family));
             //form.SetField("form1[0].#subform[0].#field[1]", "اسلام");
             //Radio for Gender
@@ -203,7 +209,11 @@ namespace VisaX
             form.SetField("form1[0].#subform[0].#field[30]", p.ExpiryDate.Year.ToString());
             form.SetField("form1[0].#subform[0].#field[27]", p.ExpiryDate.Month.ToString("00"));//Month
             form.SetField("form1[0].#subform[0].#field[28]", p.ExpiryDate.Day.ToString("00"));//Day
+            //form.SetFieldProperty("form1[0].#subform[0].#field[0]", "textcolor", iTextSharp.text.BaseColor.RED, null);
+            //form.SetFieldProperty("form1[0].#subform[0].#field[0]", "bgcolor", iTextSharp.text.BaseColor.BLACK, null);
+
             stamp.Close();
+            reader.Close();
         }
 
         private void frmMain_KeyDown(object sender, KeyEventArgs e)
@@ -227,6 +237,6 @@ namespace VisaX
 //Export by day - grid just current day or one day
 //pdf in one page
 //passport num in first to check if exist
-//auto expiry date
+//-auto expiry date
 //login password
 
