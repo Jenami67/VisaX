@@ -44,17 +44,17 @@ namespace VisaX
 
             erp.Clear();
 
-            if (txtName.Text.Trim().Length < 3)
+            if (txtName.Text.Trim().Length < 1)
             {
                 cntr = txtName;
                 retVal = false;
             }
-            else if (txtFamily.Text.Trim().Length < 3)
+            else if (txtFamily.Text.Trim().Length < 1)
             {
                 cntr = txtFamily;
                 retVal = false;
             }
-            else if (txtFather.Text.Trim().Length < 3)
+            else if (txtFather.Text.Trim().Length < 1)
             {
                 cntr = txtFather;
                 retVal = false;
@@ -97,7 +97,7 @@ namespace VisaX
             {
                 if (this.passenger == null)
                 {
-                    Passenger p = new VisaX.Passenger
+                    Passenger p = new Passenger
                     {
                         Name = txtName.Text,
                         Family = txtFamily.Text,
@@ -111,6 +111,8 @@ namespace VisaX
 
                     ctx.Passengers.Add(p);
                     sucMessage = "رکورد جدید اضافه شد";
+                    lblStatusMsg.ForeColor = Color.DarkGreen;
+                    lblStatusMsg.Text = string.Format("{0} ({1} {2})", sucMessage, p.Name, p.Family);
                 }
                 else //if edit mode
                 {
@@ -126,12 +128,14 @@ namespace VisaX
                     ctx.Passengers.Attach(this.passenger);
                     ctx.Entry(this.passenger).State = System.Data.Entity.EntityState.Modified;
                     sucMessage = "رکورد ویرایش شد";
+                    lblStatusMsg.ForeColor = Color.DarkBlue;
+                    lblStatusMsg.Text = string.Format("{0} ({1} {2})", sucMessage, passenger.Name, passenger.Family);
                 }//else
 
                 ctx.SaveChanges();
-                MessageBox.Show(sucMessage);
+                //MessageBox.Show(sucMessage);
 
-                txtName.Focus();
+                txtPassportNum.Focus();
                 txtName.Text = txtFamily.Text = txtFather.Text = txtPassportNum.Text = txtBornDate.Text =
                     txtExpiryDate.Text = txtIssueDate.Text = string.Empty;
 
@@ -195,6 +199,29 @@ namespace VisaX
         private void txtIssueDate_Leave(object sender, EventArgs e)
         {
             txtExpiryDate.Text = DateTime.Parse(txtIssueDate.Text).AddYears(5).ToShortDateString();
+        }
+
+        private void txtPassportNum_TextChanged(object sender, EventArgs e)
+        {
+            if (txtPassportNum.Text.Length == 8)
+            {
+                lblStatusMsg.Text = string.Empty;
+                Passenger pas = (from p in ctx.Passengers
+                                 where p.PassportNum == txtPassportNum.Text
+                                 select p).FirstOrDefault();
+                if (pas !=null)
+                {
+
+                    txtName.Text = pas.Name;
+                    txtFamily.Text = pas.Family;
+                    txtFather.Text = pas.Father;
+                    txtPassportNum.Text = pas.PassportNum;
+                    cmbGender.SelectedIndex = pas.Gender;
+                    txtBornDate.Text = pas.BornDate.ToShortDateString();
+                    txtIssueDate.Text = pas.IssueDate.ToShortDateString();
+                    txtExpiryDate.Text = pas.ExpiryDate.ToShortDateString();
+                }
+            }
         }
     }
 }

@@ -51,13 +51,16 @@
             this.lblExpiryDate = new System.Windows.Forms.Label();
             this.erp = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnCancel = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblStatusMsg = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.erp)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 9);
+            this.label1.Location = new System.Drawing.Point(21, 80);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 19);
@@ -66,14 +69,14 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(18, 31);
+            this.txtName.Location = new System.Drawing.Point(18, 102);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(177, 27);
-            this.txtName.TabIndex = 1;
+            this.txtName.TabIndex = 2;
             // 
             // txtFamily
             // 
-            this.txtFamily.Location = new System.Drawing.Point(219, 31);
+            this.txtFamily.Location = new System.Drawing.Point(219, 102);
             this.txtFamily.Name = "txtFamily";
             this.txtFamily.Size = new System.Drawing.Size(177, 27);
             this.txtFamily.TabIndex = 3;
@@ -81,7 +84,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(222, 9);
+            this.label2.Location = new System.Drawing.Point(222, 80);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 19);
@@ -90,15 +93,15 @@
             // 
             // txtFather
             // 
-            this.txtFather.Location = new System.Drawing.Point(419, 31);
+            this.txtFather.Location = new System.Drawing.Point(419, 102);
             this.txtFather.Name = "txtFather";
             this.txtFather.Size = new System.Drawing.Size(177, 27);
-            this.txtFather.TabIndex = 5;
+            this.txtFather.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(422, 9);
+            this.label3.Location = new System.Drawing.Point(422, 80);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 19);
@@ -108,7 +111,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(21, 82);
+            this.label4.Location = new System.Drawing.Point(21, 15);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(116, 19);
@@ -117,16 +120,17 @@
             // 
             // txtPassportNum
             // 
-            this.txtPassportNum.Location = new System.Drawing.Point(18, 105);
+            this.txtPassportNum.Location = new System.Drawing.Point(18, 38);
             this.txtPassportNum.Mask = "00000000";
             this.txtPassportNum.Name = "txtPassportNum";
             this.txtPassportNum.Size = new System.Drawing.Size(119, 27);
-            this.txtPassportNum.TabIndex = 7;
+            this.txtPassportNum.TabIndex = 0;
+            this.txtPassportNum.TextChanged += new System.EventHandler(this.txtPassportNum_TextChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(222, 82);
+            this.label5.Location = new System.Drawing.Point(222, 15);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(64, 19);
@@ -140,26 +144,26 @@
             this.cmbGender.Items.AddRange(new object[] {
             "مرد",
             "زن"});
-            this.cmbGender.Location = new System.Drawing.Point(219, 105);
+            this.cmbGender.Location = new System.Drawing.Point(219, 38);
             this.cmbGender.Name = "cmbGender";
             this.cmbGender.Size = new System.Drawing.Size(121, 27);
-            this.cmbGender.TabIndex = 8;
+            this.cmbGender.TabIndex = 1;
             // 
             // txtBornDate
             // 
-            this.txtBornDate.Location = new System.Drawing.Point(18, 173);
+            this.txtBornDate.Location = new System.Drawing.Point(18, 175);
             this.txtBornDate.Mask = "00/00/0000";
             this.txtBornDate.Name = "txtBornDate";
             this.txtBornDate.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtBornDate.Size = new System.Drawing.Size(119, 27);
-            this.txtBornDate.TabIndex = 10;
+            this.txtBornDate.TabIndex = 5;
             this.txtBornDate.ValidatingType = typeof(System.DateTime);
             this.txtBornDate.TypeValidationCompleted += new System.Windows.Forms.TypeValidationEventHandler(this.txtBornDate_TypeValidationCompleted);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(21, 150);
+            this.label6.Location = new System.Drawing.Point(21, 152);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(69, 19);
@@ -168,12 +172,12 @@
             // 
             // txtIssueDate
             // 
-            this.txtIssueDate.Location = new System.Drawing.Point(219, 173);
+            this.txtIssueDate.Location = new System.Drawing.Point(219, 175);
             this.txtIssueDate.Mask = "00/00/0000";
             this.txtIssueDate.Name = "txtIssueDate";
             this.txtIssueDate.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtIssueDate.Size = new System.Drawing.Size(119, 27);
-            this.txtIssueDate.TabIndex = 12;
+            this.txtIssueDate.TabIndex = 6;
             this.txtIssueDate.ValidatingType = typeof(System.DateTime);
             this.txtIssueDate.TypeValidationCompleted += new System.Windows.Forms.TypeValidationEventHandler(this.txtIssueDate_TypeValidationCompleted);
             this.txtIssueDate.Leave += new System.EventHandler(this.txtIssueDate_Leave);
@@ -181,7 +185,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(222, 150);
+            this.label7.Location = new System.Drawing.Point(222, 152);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -191,29 +195,29 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(18, 247);
+            this.btnOK.Location = new System.Drawing.Point(18, 228);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(122, 42);
-            this.btnOK.TabIndex = 14;
+            this.btnOK.TabIndex = 8;
             this.btnOK.Text = "ثبت";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // txtExpiryDate
             // 
-            this.txtExpiryDate.Location = new System.Drawing.Point(419, 173);
+            this.txtExpiryDate.Location = new System.Drawing.Point(419, 175);
             this.txtExpiryDate.Mask = "00/00/0000";
             this.txtExpiryDate.Name = "txtExpiryDate";
             this.txtExpiryDate.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtExpiryDate.Size = new System.Drawing.Size(119, 27);
-            this.txtExpiryDate.TabIndex = 13;
+            this.txtExpiryDate.TabIndex = 7;
             this.txtExpiryDate.ValidatingType = typeof(System.DateTime);
             this.txtExpiryDate.TypeValidationCompleted += new System.Windows.Forms.TypeValidationEventHandler(this.txtExpiryDate_TypeValidationCompleted);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(422, 150);
+            this.label8.Location = new System.Drawing.Point(422, 152);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(110, 19);
@@ -225,7 +229,7 @@
             this.lblBornDate.AutoSize = true;
             this.lblBornDate.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBornDate.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblBornDate.Location = new System.Drawing.Point(64, 203);
+            this.lblBornDate.Location = new System.Drawing.Point(64, 205);
             this.lblBornDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBornDate.Name = "lblBornDate";
             this.lblBornDate.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -237,7 +241,7 @@
             this.lblIssueDate.AutoSize = true;
             this.lblIssueDate.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIssueDate.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblIssueDate.Location = new System.Drawing.Point(262, 203);
+            this.lblIssueDate.Location = new System.Drawing.Point(262, 205);
             this.lblIssueDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblIssueDate.Name = "lblIssueDate";
             this.lblIssueDate.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -249,7 +253,7 @@
             this.lblExpiryDate.AutoSize = true;
             this.lblExpiryDate.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblExpiryDate.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.lblExpiryDate.Location = new System.Drawing.Point(462, 203);
+            this.lblExpiryDate.Location = new System.Drawing.Point(462, 205);
             this.lblExpiryDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblExpiryDate.Name = "lblExpiryDate";
             this.lblExpiryDate.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -264,13 +268,28 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(164, 247);
+            this.btnCancel.Location = new System.Drawing.Point(164, 228);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(122, 42);
-            this.btnCancel.TabIndex = 19;
+            this.btnCancel.TabIndex = 9;
             this.btnCancel.Text = "لغو";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblStatusMsg});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 289);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(636, 22);
+            this.statusStrip1.TabIndex = 20;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblStatusMsg
+            // 
+            this.lblStatusMsg.Name = "lblStatusMsg";
+            this.lblStatusMsg.Size = new System.Drawing.Size(0, 17);
             // 
             // frmAddPassenger
             // 
@@ -278,7 +297,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(636, 301);
+            this.ClientSize = new System.Drawing.Size(636, 311);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblExpiryDate);
             this.Controls.Add(this.lblIssueDate);
@@ -311,6 +331,8 @@
             this.ShowInTaskbar = false;
             this.Text = "افزودن متقاضی";
             ((System.ComponentModel.ISupportInitialize)(this.erp)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -340,5 +362,7 @@
         private System.Windows.Forms.Label lblExpiryDate;
         private System.Windows.Forms.ErrorProvider erp;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lblStatusMsg;
     }
 }
