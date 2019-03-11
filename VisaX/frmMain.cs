@@ -84,7 +84,7 @@ namespace VisaX
 
                 for (int i = MinIndex() + 1; i <= dgvPassengers.SelectedRows.Count; i++)
                 {
-                    excelWorkSheet.Cells[i + 7, 8].Value = string.Format("{0} {1} {2}", dgvPassengers[1, i - 1].Value, dgvPassengers[3, i - 1].Value, dgvPassengers[2, i - 1].Value);
+                    excelWorkSheet.Cells[i + 7, 8].Value = dgvPassengers[1, i - 1].Value;
                     excelWorkSheet.Cells[i + 7, 7].Value = dgvPassengers[4, i - 1].Value;
                     excelWorkSheet.Cells[i + 7, 6].Value2 = (byte)dgvPassengers[8, i - 1].Value == 0 ? "ذکر" : "انثی";
 
@@ -131,8 +131,8 @@ namespace VisaX
         private void btnSearch_Click(object sender, EventArgs e)
         {
             var l = from p in ctx.Passengers
-                    where p.Family.Contains(txtFilter.Text) || p.Name.Contains(txtFilter.Text) ||
-                    p.Father.Contains(txtFilter.Text) || p.PassportNum.Contains(txtFilter.Text)
+                    where  p.FullName.Contains(txtFilter.Text) 
+                     || p.PassportNum.Contains(txtFilter.Text)
                     select p;
             dgvPassengers.DataSource = l.ToList();
         }
@@ -188,7 +188,7 @@ namespace VisaX
           //  form.SetField("form1[0].#subform[0].#field[0]", "کفتا");
            // form.SetField("form1[0].#subform[0].#field[0]", string.Format("{0} {1} {2}", p.Name, p.Father, p.Family));
            // form.SetFieldProperty("form1[0].#subform[0].#field[0]", "setfflags", PdfFormField.FF_READ_ONLY, null);
-            form.SetField("form1[0].#subform[0].#field[0]", string.Format("{0} {1} {2}", p.Name, p.Father, p.Family));
+            form.SetField("form1[0].#subform[0].#field[0]", p.FullName);
             //form.SetField("form1[0].#subform[0].#field[1]", "اسلام");
             //Radio for Gender
             form.SetField("form1[0].#subform[0].RadioButtonList[0]", (2 - p.Gender).ToString());

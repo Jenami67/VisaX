@@ -43,9 +43,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtFilter = new System.Windows.Forms.TextBox();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFamily = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFather = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPassportNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBornDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIssueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -86,9 +84,7 @@
             this.dgvPassengers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPassengers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colID,
-            this.colName,
-            this.colFamily,
-            this.colFather,
+            this.colFullName,
             this.colPassportNum,
             this.colBornDate,
             this.colIssueDate,
@@ -233,26 +229,12 @@
             this.colID.Name = "colID";
             this.colID.ReadOnly = true;
             // 
-            // colName
+            // colFullName
             // 
-            this.colName.DataPropertyName = "Name";
-            this.colName.HeaderText = "نام";
-            this.colName.Name = "colName";
-            this.colName.ReadOnly = true;
-            // 
-            // colFamily
-            // 
-            this.colFamily.DataPropertyName = "Family";
-            this.colFamily.HeaderText = "فامیل";
-            this.colFamily.Name = "colFamily";
-            this.colFamily.ReadOnly = true;
-            // 
-            // colFather
-            // 
-            this.colFather.DataPropertyName = "Father";
-            this.colFather.HeaderText = "نام پدر";
-            this.colFather.Name = "colFather";
-            this.colFather.ReadOnly = true;
+            this.colFullName.DataPropertyName = "FullName";
+            this.colFullName.HeaderText = "نام";
+            this.colFullName.Name = "colFullName";
+            this.colFullName.ReadOnly = true;
             // 
             // colPassportNum
             // 
@@ -332,9 +314,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel llbSettings;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFamily;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFather;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFullName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPassportNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBornDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIssueDate;

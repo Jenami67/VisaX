@@ -93,9 +93,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>VisaXModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="VisaXModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -16,5 +16,14 @@ namespace VisaX
         {
             InitializeComponent();
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            if (txtPassword.Text == Properties.Settings.Default.Pass )
+            {
+                new frmMain().Show();
+                this.Hide();
+            }
+        }
     }
 }

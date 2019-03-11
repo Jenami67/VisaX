@@ -15,13 +15,12 @@ namespace VisaX
     public partial class Passenger
     {
         public int ID { get; set; }
-        public string Name { get; set; }
-        public string Family { get; set; }
-        public string Father { get; set; }
         public byte Gender { get; set; }
         public string PassportNum { get; set; }
         public System.DateTime BornDate { get; set; }
         public System.DateTime IssueDate { get; set; }
         public System.DateTime ExpiryDate { get; set; }
+        public string FullName { get; set; }
+        public System.DateTime EntryDate { get; set; }
     }
 }

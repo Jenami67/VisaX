@@ -25,9 +25,7 @@ namespace VisaX
 
         public frmAddPassenger(Passenger p) : this()
         {
-            txtName.Text = p.Name;
-            txtFamily.Text = p.Family;
-            txtFather.Text = p.Father;
+            txtFullName.Text = p.FullName;
             txtPassportNum.Text = p.PassportNum;
             cmbGender.SelectedIndex = p.Gender;
             txtBornDate.Text = p.BornDate.ToShortDateString();
@@ -44,19 +42,9 @@ namespace VisaX
 
             erp.Clear();
 
-            if (txtName.Text.Trim().Length < 1)
+            if (txtFullName.Text.Trim().Length < 3)
             {
-                cntr = txtName;
-                retVal = false;
-            }
-            else if (txtFamily.Text.Trim().Length < 1)
-            {
-                cntr = txtFamily;
-                retVal = false;
-            }
-            else if (txtFather.Text.Trim().Length < 1)
-            {
-                cntr = txtFather;
+                cntr = txtFullName;
                 retVal = false;
             }
             else if (txtPassportNum.Text.Trim().Length != 8)
@@ -99,9 +87,7 @@ namespace VisaX
                 {
                     Passenger p = new Passenger
                     {
-                        Name = txtName.Text,
-                        Family = txtFamily.Text,
-                        Father = txtFather.Text,
+                        FullName = txtFullName.Text,
                         PassportNum = txtPassportNum.Text,
                         Gender = (byte)cmbGender.SelectedIndex,
                         BornDate = DateTime.Parse(txtBornDate.Text),
@@ -112,13 +98,11 @@ namespace VisaX
                     ctx.Passengers.Add(p);
                     sucMessage = "رکورد جدید اضافه شد";
                     lblStatusMsg.ForeColor = Color.DarkGreen;
-                    lblStatusMsg.Text = string.Format("{0} ({1} {2})", sucMessage, p.Name, p.Family);
+                    lblStatusMsg.Text = string.Format("{0} ({1})", sucMessage, p.FullName);
                 }
                 else //if edit mode
                 {
-                    this.passenger.Name = txtName.Text;
-                    this.passenger.Family = txtFamily.Text;
-                    this.passenger.Father = txtFather.Text;
+                    this.passenger.FullName = txtFullName.Text;
                     this.passenger.PassportNum = txtPassportNum.Text;
                     this.passenger.Gender = (byte)cmbGender.SelectedIndex;
                     this.passenger.BornDate = DateTime.Parse(txtBornDate.Text);
@@ -129,15 +113,14 @@ namespace VisaX
                     ctx.Entry(this.passenger).State = System.Data.Entity.EntityState.Modified;
                     sucMessage = "رکورد ویرایش شد";
                     lblStatusMsg.ForeColor = Color.DarkBlue;
-                    lblStatusMsg.Text = string.Format("{0} ({1} {2})", sucMessage, passenger.Name, passenger.Family);
+                    lblStatusMsg.Text = string.Format("{0} ({1})", sucMessage, passenger.FullName);
                 }//else
 
                 ctx.SaveChanges();
                 //MessageBox.Show(sucMessage);
 
                 txtPassportNum.Focus();
-                txtName.Text = txtFamily.Text = txtFather.Text = txtPassportNum.Text = txtBornDate.Text =
-                    txtExpiryDate.Text = txtIssueDate.Text = string.Empty;
+                txtFullName.Text = txtPassportNum.Text = txtBornDate.Text = txtExpiryDate.Text = txtIssueDate.Text = string.Empty;
 
                 //this.DialogResult = DialogResult.OK;
                 // InitializeComponent();
@@ -209,18 +192,15 @@ namespace VisaX
                 Passenger pas = (from p in ctx.Passengers
                                  where p.PassportNum == txtPassportNum.Text
                                  select p).FirstOrDefault();
-                if (pas !=null)
+                if (pas != null)
                 {
-
-                    txtName.Text = pas.Name;
-                    txtFamily.Text = pas.Family;
-                    txtFather.Text = pas.Father;
+                    txtFullName.Text = pas.FullName;
                     txtPassportNum.Text = pas.PassportNum;
                     cmbGender.SelectedIndex = pas.Gender;
                     txtBornDate.Text = pas.BornDate.ToShortDateString();
                     txtIssueDate.Text = pas.IssueDate.ToShortDateString();
                     txtExpiryDate.Text = pas.ExpiryDate.ToShortDateString();
-                }
+                }//if
             }
         }
     }

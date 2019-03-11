@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="6d5557ebc5bb439abd04f31603c5d4b8" Name="Diagram1">
         <EntityTypeShape EntityType="VisaXModel.Passenger" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="VisaXModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
