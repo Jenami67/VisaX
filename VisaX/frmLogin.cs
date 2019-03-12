@@ -21,10 +21,10 @@ namespace VisaX
         {
             if (txtPassword.Text == Properties.Settings.Default.Pass )
             {
-                this.Hide();
+                Hide();
                 new frmMain().ShowDialog();
-                this.Close();
-            }
+                Close();
+            }//if
         }
     }
 }

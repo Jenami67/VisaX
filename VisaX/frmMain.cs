@@ -245,7 +245,6 @@ namespace VisaX
                 dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == DateTime.Today select p).ToList();
             else
                 dgvPassengers.DataSource = (from p in ctx.Passengers select p).ToList();
-
         }
     }
 }
