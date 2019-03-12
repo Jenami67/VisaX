@@ -19,7 +19,7 @@ namespace VisaX
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             if (DateTime.Now < new DateTime(2019, 4, 30))
-                  Application.Run(new frmMain());
+                  Application.Run(new frmLogin());
         }
     }
 }

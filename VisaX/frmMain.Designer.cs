@@ -28,9 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvPassengers = new System.Windows.Forms.DataGridView();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPassportNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colBornDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIssueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colExpiryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGender = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.llbSettings = new System.Windows.Forms.LinkLabel();
             this.btnExportPDF = new System.Windows.Forms.Button();
@@ -42,13 +49,8 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtFilter = new System.Windows.Forms.TextBox();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPassportNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colBornDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIssueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colExpiryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGender = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rbToday = new System.Windows.Forms.RadioButton();
+            this.rbAll = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPassengers)).BeginInit();
             this.panel1.SuspendLayout();
@@ -78,8 +80,8 @@
             // 
             this.dgvPassengers.AllowUserToAddRows = false;
             this.dgvPassengers.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2);
-            this.dgvPassengers.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2);
+            this.dgvPassengers.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvPassengers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPassengers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPassengers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -99,6 +101,57 @@
             this.dgvPassengers.TabIndex = 0;
             this.dgvPassengers.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvPassengers_RowsAdded);
             this.dgvPassengers.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvPassengers_RowsRemoved);
+            // 
+            // colID
+            // 
+            this.colID.DataPropertyName = "ID";
+            this.colID.FillWeight = 50F;
+            this.colID.HeaderText = "کد";
+            this.colID.Name = "colID";
+            this.colID.ReadOnly = true;
+            // 
+            // colFullName
+            // 
+            this.colFullName.DataPropertyName = "FullName";
+            this.colFullName.HeaderText = "نام";
+            this.colFullName.Name = "colFullName";
+            this.colFullName.ReadOnly = true;
+            // 
+            // colPassportNum
+            // 
+            this.colPassportNum.DataPropertyName = "PassportNum";
+            this.colPassportNum.HeaderText = "شماره پاسپورت";
+            this.colPassportNum.Name = "colPassportNum";
+            this.colPassportNum.ReadOnly = true;
+            // 
+            // colBornDate
+            // 
+            this.colBornDate.DataPropertyName = "BornDate";
+            this.colBornDate.HeaderText = "ت.تولد";
+            this.colBornDate.Name = "colBornDate";
+            this.colBornDate.ReadOnly = true;
+            // 
+            // colIssueDate
+            // 
+            this.colIssueDate.DataPropertyName = "IssueDate";
+            this.colIssueDate.HeaderText = "صدور پاسپورت";
+            this.colIssueDate.Name = "colIssueDate";
+            this.colIssueDate.ReadOnly = true;
+            // 
+            // colExpiryDate
+            // 
+            this.colExpiryDate.DataPropertyName = "ExpiryDate";
+            this.colExpiryDate.HeaderText = "انقضاء پاسپورت";
+            this.colExpiryDate.Name = "colExpiryDate";
+            this.colExpiryDate.ReadOnly = true;
+            // 
+            // colGender
+            // 
+            this.colGender.DataPropertyName = "Gender";
+            this.colGender.HeaderText = "جنست";
+            this.colGender.Name = "colGender";
+            this.colGender.ReadOnly = true;
+            this.colGender.Visible = false;
             // 
             // panel1
             // 
@@ -182,6 +235,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.rbAll);
+            this.panel2.Controls.Add(this.rbToday);
             this.panel2.Controls.Add(this.btnSearch);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.txtFilter);
@@ -221,56 +276,29 @@
             this.txtFilter.TabIndex = 0;
             this.txtFilter.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilter_KeyDown);
             // 
-            // colID
+            // rbToday
             // 
-            this.colID.DataPropertyName = "ID";
-            this.colID.FillWeight = 50F;
-            this.colID.HeaderText = "کد";
-            this.colID.Name = "colID";
-            this.colID.ReadOnly = true;
+            this.rbToday.AutoSize = true;
+            this.rbToday.Checked = true;
+            this.rbToday.Location = new System.Drawing.Point(19, 5);
+            this.rbToday.Name = "rbToday";
+            this.rbToday.Size = new System.Drawing.Size(48, 18);
+            this.rbToday.TabIndex = 1;
+            this.rbToday.TabStop = true;
+            this.rbToday.Text = "امروز";
+            this.rbToday.UseVisualStyleBackColor = true;
+            this.rbToday.CheckedChanged += new System.EventHandler(this.rbToday_CheckedChanged);
             // 
-            // colFullName
+            // rbAll
             // 
-            this.colFullName.DataPropertyName = "FullName";
-            this.colFullName.HeaderText = "نام";
-            this.colFullName.Name = "colFullName";
-            this.colFullName.ReadOnly = true;
-            // 
-            // colPassportNum
-            // 
-            this.colPassportNum.DataPropertyName = "PassportNum";
-            this.colPassportNum.HeaderText = "شماره پاسپورت";
-            this.colPassportNum.Name = "colPassportNum";
-            this.colPassportNum.ReadOnly = true;
-            // 
-            // colBornDate
-            // 
-            this.colBornDate.DataPropertyName = "BornDate";
-            this.colBornDate.HeaderText = "ت.تولد";
-            this.colBornDate.Name = "colBornDate";
-            this.colBornDate.ReadOnly = true;
-            // 
-            // colIssueDate
-            // 
-            this.colIssueDate.DataPropertyName = "IssueDate";
-            this.colIssueDate.HeaderText = "صدور پاسپورت";
-            this.colIssueDate.Name = "colIssueDate";
-            this.colIssueDate.ReadOnly = true;
-            // 
-            // colExpiryDate
-            // 
-            this.colExpiryDate.DataPropertyName = "ExpiryDate";
-            this.colExpiryDate.HeaderText = "انقضاء پاسپورت";
-            this.colExpiryDate.Name = "colExpiryDate";
-            this.colExpiryDate.ReadOnly = true;
-            // 
-            // colGender
-            // 
-            this.colGender.DataPropertyName = "Gender";
-            this.colGender.HeaderText = "جنست";
-            this.colGender.Name = "colGender";
-            this.colGender.ReadOnly = true;
-            this.colGender.Visible = false;
+            this.rbAll.AutoSize = true;
+            this.rbAll.Location = new System.Drawing.Point(19, 29);
+            this.rbAll.Name = "rbAll";
+            this.rbAll.Size = new System.Drawing.Size(47, 18);
+            this.rbAll.TabIndex = 3;
+            this.rbAll.TabStop = true;
+            this.rbAll.Text = "همه";
+            this.rbAll.UseVisualStyleBackColor = true;
             // 
             // frmMain
             // 
@@ -287,6 +315,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmMain_Paint);
+            this.Enter += new System.EventHandler(this.frmMain_Enter);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmMain_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPassengers)).EndInit();
@@ -320,6 +349,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colIssueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colExpiryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGender;
+        private System.Windows.Forms.RadioButton rbAll;
+        private System.Windows.Forms.RadioButton rbToday;
     }
 }
 

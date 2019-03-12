@@ -21,8 +21,9 @@ namespace VisaX
         {
             if (txtPassword.Text == Properties.Settings.Default.Pass )
             {
-                new frmMain().Show();
                 this.Hide();
+                new frmMain().ShowDialog();
+                this.Close();
             }
         }
     }

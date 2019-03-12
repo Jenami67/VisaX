@@ -30,7 +30,8 @@ namespace VisaX
         private void frmMain_Load(object sender, EventArgs e)
         {
             dgvPassengers.AutoGenerateColumns = false;
-            dgvPassengers.DataSource = (from p in ctx.Passengers select p).ToList();
+            rbToday_CheckedChanged(null, null);
+           // dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == DateTime.Today select p).ToList();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -125,13 +126,12 @@ namespace VisaX
 
         private void frmMain_Paint(object sender, PaintEventArgs e)
         {
-            this.rowColor();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
             var l = from p in ctx.Passengers
-                    where  p.FullName.Contains(txtFilter.Text) 
+                    where p.FullName.Contains(txtFilter.Text)
                      || p.PassportNum.Contains(txtFilter.Text)
                     select p;
             dgvPassengers.DataSource = l.ToList();
@@ -185,9 +185,9 @@ namespace VisaX
             //stamp.FormFlattening = true;
             Passenger p = (Passenger)r.DataBoundItem;
             //form.
-          //  form.SetField("form1[0].#subform[0].#field[0]", "کفتا");
-           // form.SetField("form1[0].#subform[0].#field[0]", string.Format("{0} {1} {2}", p.Name, p.Father, p.Family));
-           // form.SetFieldProperty("form1[0].#subform[0].#field[0]", "setfflags", PdfFormField.FF_READ_ONLY, null);
+            //  form.SetField("form1[0].#subform[0].#field[0]", "کفتا");
+            // form.SetField("form1[0].#subform[0].#field[0]", string.Format("{0} {1} {2}", p.Name, p.Father, p.Family));
+            // form.SetFieldProperty("form1[0].#subform[0].#field[0]", "setfflags", PdfFormField.FF_READ_ONLY, null);
             form.SetField("form1[0].#subform[0].#field[0]", p.FullName);
             //form.SetField("form1[0].#subform[0].#field[1]", "اسلام");
             //Radio for Gender
@@ -223,6 +223,9 @@ namespace VisaX
                 case Keys.F2:
                     btnNew_Click(null, null);
                     break;
+                case Keys.F3:
+                    txtFilter.Focus();
+                    break;
                 case Keys.F4:
                     btnEdit_Click(null, null);
                     break;
@@ -230,13 +233,27 @@ namespace VisaX
                     break;
             }
         }
+
+        private void frmMain_Enter(object sender, EventArgs e)
+        {
+            this.rowColor();
+        }
+
+        private void rbToday_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbToday.Checked)
+                dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == DateTime.Today select p).ToList();
+            else
+                dgvPassengers.DataSource = (from p in ctx.Passengers select p).ToList();
+
+        }
     }
 }
 
-//Add Shortcuts
+//-Add Shortcuts
 //Export by day - grid just current day or one day
 //pdf in one page
-//passport num in first to check if exist
+//-passport num in first to check if exist
 //-auto expiry date
-//login password
+//-login password
 

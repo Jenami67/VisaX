@@ -83,7 +83,7 @@ namespace VisaX
             string sucMessage = string.Empty;
             if (validateForm())
             {
-                if (this.passenger == null)
+                if (this.passenger == null) //if Add mode
                 {
                     Passenger p = new Passenger
                     {
@@ -92,7 +92,9 @@ namespace VisaX
                         Gender = (byte)cmbGender.SelectedIndex,
                         BornDate = DateTime.Parse(txtBornDate.Text),
                         IssueDate = DateTime.Parse(txtIssueDate.Text),
-                        ExpiryDate = DateTime.Parse(txtExpiryDate.Text)
+                        ExpiryDate = DateTime.Parse(txtExpiryDate.Text),
+                        EntryDate = DateTime.Today
+
                     };
 
                     ctx.Passengers.Add(p);
@@ -186,7 +188,7 @@ namespace VisaX
 
         private void txtPassportNum_TextChanged(object sender, EventArgs e)
         {
-            if (txtPassportNum.Text.Length == 8)
+            if (txtPassportNum.Text.Length == 8 && this.passenger ==null)
             {
                 lblStatusMsg.Text = string.Empty;
                 Passenger pas = (from p in ctx.Passengers
