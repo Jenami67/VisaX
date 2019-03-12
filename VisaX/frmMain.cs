@@ -31,7 +31,7 @@ namespace VisaX
         {
             dgvPassengers.AutoGenerateColumns = false;
             rbToday_CheckedChanged(null, null);
-           // dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == DateTime.Today select p).ToList();
+            // dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == DateTime.Today select p).ToList();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -83,17 +83,31 @@ namespace VisaX
                 excelWorkBook = excelApllication.Workbooks.Open(absPath, 0, true, 5, "", "", true, Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
                 excelWorkSheet = (Excel.Worksheet)excelWorkBook.Worksheets.get_Item(1);
 
-                for (int i = MinIndex() + 1; i <= dgvPassengers.SelectedRows.Count; i++)
+                //for (int i = MinIndex() + 1; i <= dgvPassengers.SelectedRows.Count; i++)
+                //{
+                //    excelWorkSheet.Cells[i + 7, 8].Value = dgvPassengers[1, i - 1].Value;
+                //    excelWorkSheet.Cells[i + 7, 7].Value = dgvPassengers[2, i - 1].Value;
+                //    excelWorkSheet.Cells[i + 7, 6].Value2 = (byte)dgvPassengers[6, i - 1].Value == 0 ? "ذکر" : "انثی";
+
+                //    //format error: Exception from HRESULT: 0x800A03EC
+                //    excelWorkSheet.Cells[i + 7, 5].Value2 = dgvPassengers[3, i - 1].Value;
+                //    excelWorkSheet.Cells[i + 7, 4].Value2 = dgvPassengers[4, i - 1].Value;
+                //    excelWorkSheet.Cells[i + 7, 3].Value2 = dgvPassengers[5, i - 1].Value;
+                //}//for
+
+                int i = 1;
+                foreach (DataGridViewRow row in dgvPassengers.SelectedRows)
                 {
-                    excelWorkSheet.Cells[i + 7, 8].Value = dgvPassengers[1, i - 1].Value;
-                    excelWorkSheet.Cells[i + 7, 7].Value = dgvPassengers[4, i - 1].Value;
-                    excelWorkSheet.Cells[i + 7, 6].Value2 = (byte)dgvPassengers[8, i - 1].Value == 0 ? "ذکر" : "انثی";
+                    excelWorkSheet.Cells[i + 7, 8].Value = row.Cells[1].Value;
+                    excelWorkSheet.Cells[i + 7, 7].Value = row.Cells[2].Value;
+                    excelWorkSheet.Cells[i + 7, 6].Value2 = (byte)row.Cells[6].Value == 0 ? "ذکر" : "انثی";
 
                     //format error: Exception from HRESULT: 0x800A03EC
-                    excelWorkSheet.Cells[i + 7, 5].Value2 = dgvPassengers[5, i - 1].Value;
-                    excelWorkSheet.Cells[i + 7, 4].Value2 = dgvPassengers[6, i - 1].Value;
-                    excelWorkSheet.Cells[i + 7, 3].Value2 = dgvPassengers[7, i - 1].Value;
-                }//for
+                    excelWorkSheet.Cells[i + 7, 5].Value2 = row.Cells[3].Value;
+                    excelWorkSheet.Cells[i + 7, 4].Value2 = row.Cells[4].Value;
+                    excelWorkSheet.Cells[i + 7, 3].Value2 = row.Cells[5].Value;
+                    i++;
+                }
 
                 excelWorkBook.SaveAs(sfd.FileName, Excel.XlFileFormat.xlWorkbookNormal);
 
@@ -124,18 +138,19 @@ namespace VisaX
                 Process.Start(sfd.FileName.Insert(sfd.FileName.LastIndexOf(".pdf"), string.Format(" - {0:00}", 1)));
         }//btnExportPDF_Click
 
-        private void frmMain_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            var l = from p in ctx.Passengers
-                    where p.FullName.Contains(txtFilter.Text)
-                     || p.PassportNum.Contains(txtFilter.Text)
-                    select p;
-            dgvPassengers.DataSource = l.ToList();
-        }
+            if (rbToday.Checked)
+                dgvPassengers.DataSource = (from p in ctx.Passengers
+                                            where (p.FullName.Contains(txtFilter.Text)
+                                                || p.PassportNum.Contains(txtFilter.Text)) && p.EntryDate == DateTime.Today
+                                            select p).ToList();
+            else
+                dgvPassengers.DataSource = (from p in ctx.Passengers
+                                            where p.FullName.Contains(txtFilter.Text)
+                                               || p.PassportNum.Contains(txtFilter.Text)
+                                            select p).ToList();
+        }//btnSearch_Click
 
         private void txtFilter_KeyDown(object sender, KeyEventArgs e)
         {
