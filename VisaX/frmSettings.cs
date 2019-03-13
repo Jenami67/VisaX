@@ -28,7 +28,16 @@ namespace VisaX
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.Save();
+            if(txtCurrentPass.Text == Properties.Settings.Default.Pass)
+                if(txtNewPass.Text == txtRepNewPass.Text)
+                {
+                    Properties.Settings.Default.Pass = txtNewPass.Text;
+                    Properties.Settings.Default.Save();
+                    MessageBox.Show("رمز عبور جدید تنظیم شد");
+                }//if
+            else
+                    MessageBox.Show("رمز عبور با تکرار آن تطابق ندارد");
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

@@ -46,11 +46,12 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.rbAll = new System.Windows.Forms.RadioButton();
+            this.rbToday = new System.Windows.Forms.RadioButton();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtFilter = new System.Windows.Forms.TextBox();
-            this.rbToday = new System.Windows.Forms.RadioButton();
-            this.rbAll = new System.Windows.Forms.RadioButton();
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPassengers)).BeginInit();
             this.panel1.SuspendLayout();
@@ -155,6 +156,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.llbSettings);
             this.panel1.Controls.Add(this.btnExportPDF);
             this.panel1.Controls.Add(this.btnExportExcel);
@@ -182,6 +184,7 @@
             // btnExportPDF
             // 
             this.btnExportPDF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportPDF.Enabled = false;
             this.btnExportPDF.Location = new System.Drawing.Point(303, 9);
             this.btnExportPDF.Name = "btnExportPDF";
             this.btnExportPDF.Size = new System.Drawing.Size(142, 45);
@@ -193,6 +196,7 @@
             // btnExportExcel
             // 
             this.btnExportExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportExcel.Enabled = false;
             this.btnExportExcel.Location = new System.Drawing.Point(460, 9);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(142, 45);
@@ -204,6 +208,7 @@
             // btnDelete
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.Enabled = false;
             this.btnDelete.Location = new System.Drawing.Point(460, 9);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(142, 45);
@@ -214,6 +219,7 @@
             // btnEdit
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEdit.Enabled = false;
             this.btnEdit.Location = new System.Drawing.Point(619, 9);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(142, 45);
@@ -246,6 +252,30 @@
             this.panel2.Size = new System.Drawing.Size(939, 50);
             this.panel2.TabIndex = 17;
             // 
+            // rbAll
+            // 
+            this.rbAll.AutoSize = true;
+            this.rbAll.Location = new System.Drawing.Point(19, 29);
+            this.rbAll.Name = "rbAll";
+            this.rbAll.Size = new System.Drawing.Size(47, 18);
+            this.rbAll.TabIndex = 3;
+            this.rbAll.TabStop = true;
+            this.rbAll.Text = "همه";
+            this.rbAll.UseVisualStyleBackColor = true;
+            // 
+            // rbToday
+            // 
+            this.rbToday.AutoSize = true;
+            this.rbToday.Checked = true;
+            this.rbToday.Location = new System.Drawing.Point(19, 5);
+            this.rbToday.Name = "rbToday";
+            this.rbToday.Size = new System.Drawing.Size(48, 18);
+            this.rbToday.TabIndex = 1;
+            this.rbToday.TabStop = true;
+            this.rbToday.Text = "امروز";
+            this.rbToday.UseVisualStyleBackColor = true;
+            this.rbToday.CheckedChanged += new System.EventHandler(this.rbToday_CheckedChanged);
+            // 
             // btnSearch
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -276,29 +306,15 @@
             this.txtFilter.TabIndex = 0;
             this.txtFilter.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilter_KeyDown);
             // 
-            // rbToday
+            // button1
             // 
-            this.rbToday.AutoSize = true;
-            this.rbToday.Checked = true;
-            this.rbToday.Location = new System.Drawing.Point(19, 5);
-            this.rbToday.Name = "rbToday";
-            this.rbToday.Size = new System.Drawing.Size(48, 18);
-            this.rbToday.TabIndex = 1;
-            this.rbToday.TabStop = true;
-            this.rbToday.Text = "امروز";
-            this.rbToday.UseVisualStyleBackColor = true;
-            this.rbToday.CheckedChanged += new System.EventHandler(this.rbToday_CheckedChanged);
-            // 
-            // rbAll
-            // 
-            this.rbAll.AutoSize = true;
-            this.rbAll.Location = new System.Drawing.Point(19, 29);
-            this.rbAll.Name = "rbAll";
-            this.rbAll.Size = new System.Drawing.Size(47, 18);
-            this.rbAll.TabIndex = 3;
-            this.rbAll.TabStop = true;
-            this.rbAll.Text = "همه";
-            this.rbAll.UseVisualStyleBackColor = true;
+            this.button1.Location = new System.Drawing.Point(222, 20);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmMain
             // 
@@ -350,6 +366,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colGender;
         private System.Windows.Forms.RadioButton rbAll;
         private System.Windows.Forms.RadioButton rbToday;
+        private System.Windows.Forms.Button button1;
     }
 }
 

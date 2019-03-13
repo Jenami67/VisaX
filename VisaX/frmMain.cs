@@ -13,6 +13,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Core;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
+using iTextSharp.text;
 using iTextSharp.text.pdf;
 
 namespace VisaX
@@ -225,10 +226,47 @@ namespace VisaX
             form.SetField("form1[0].#subform[0].#field[27]", p.ExpiryDate.Month.ToString("00"));//Month
             form.SetField("form1[0].#subform[0].#field[28]", p.ExpiryDate.Day.ToString("00"));//Day
             //form.SetFieldProperty("form1[0].#subform[0].#field[0]", "textcolor", iTextSharp.text.BaseColor.RED, null);
-            //form.SetFieldProperty("form1[0].#subform[0].#field[0]", "bgcolor", iTextSharp.text.BaseColor.BLACK, null);
-
+            stamp.FormFlattening = true;
+            //stamp.Close();
+            
+            iTextSharp.text.Rectangle rect = reader.GetCropBox(1);
+            stamp.InsertPage(2, rect);
+            stamp.ReplacePage(reader, 1, 2);
             stamp.Close();
             reader.Close();
+        }
+
+        private void copy()
+        {
+            Document doc = new Document();
+            PdfSmartCopy copy = new PdfSmartCopy(doc, new FileStream(@"D:\Programing\VisaX\VisaX\VisaX\VisaForm.pdf", FileMode.Create));
+            doc.Open();
+
+            PdfReader mainReader = new PdfReader("timesheet.pdf");
+
+            PdfReader reader;
+            PdfStamper stamper;
+            AcroFields frm;
+            FileStream baos;
+
+            for (int i = 0; i < 2; i++)
+            {
+
+                reader = new PdfReader(mainReader);
+                baos = new FileStream(@"D:\vsx.pdf",FileMode.Create);
+                stamper = new PdfStamper(reader, baos);
+                 frm = stamper.AcroFields;
+
+                //methods to fill forms
+
+                stamper.FormFlattening=true;
+                stamper.Close();
+
+                reader = new PdfReader(baos);
+                copy.AddPage(copy.GetImportedPage(reader, 1));
+            }
+
+            doc.Close();
         }
 
         private void frmMain_KeyDown(object sender, KeyEventArgs e)
@@ -261,9 +299,14 @@ namespace VisaX
             else
                 dgvPassengers.DataSource = (from p in ctx.Passengers select p).ToList();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            copy();
+        }
     }
 }
-
+//TODO: 
 //-Add Shortcuts
 //Export by day - grid just current day or one day
 //pdf in one page
