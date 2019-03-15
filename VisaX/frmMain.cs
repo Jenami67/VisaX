@@ -28,34 +28,43 @@ namespace VisaX
             InitializeComponent();
         }
 
+        private void refreshGrid()
+        {
+            DateTime yesterday = DateTime.Today.AddDays(-1);
+            dgvPassengers.AutoGenerateColumns = false;
+            if (chkNotPrinted.Checked)
+                if (rbToday.Checked)
+                    dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == DateTime.Today && p.Printed == false select p).ToList();
+                else if (rbYesterday.Checked)
+                    dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == yesterday && p.Printed == false select p).ToList();
+                else
+                    dgvPassengers.DataSource = (from p in ctx.Passengers where p.Printed == false select p).ToList();
+            else
+            {
+                if (rbToday.Checked)
+                    dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == DateTime.Today select p).ToList();
+                else if (rbYesterday.Checked)
+                    dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == yesterday select p).ToList();
+                else
+                    dgvPassengers.DataSource = (from p in ctx.Passengers select p).ToList();
+            }
+        }
+
         private void frmMain_Load(object sender, EventArgs e)
         {
-            dgvPassengers.AutoGenerateColumns = false;
-            rbToday_CheckedChanged(null, null);
-            // dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == DateTime.Today select p).ToList();
+            this.refreshGrid();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            frmAddPassenger frmAddPassenger = new frmAddPassenger((Passenger)dgvPassengers.CurrentRow.DataBoundItem);
-            if (frmAddPassenger.ShowDialog() == DialogResult.OK)
-                frmMain_Load(null, null);
+            new frmAddPassenger((Passenger)dgvPassengers.CurrentRow.DataBoundItem, this.ctx).ShowDialog();
+            this.refreshGrid();
         }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            //frmAddPassenger frmAddPassenger = new frmAddPassenger();
-            //frmAddPassenger.ShowDialog();
-            //if (frmAddPassenger.DialogResult == DialogResult.OK)
-            //    frmMain_Load(null, null);
-
-            // new frmAddPassenger().ShowDialog();
-            if (new frmAddPassenger().ShowDialog() == DialogResult.Cancel)
-                frmMain_Load(null, null);
-
-            //    new frmAddPassenger().ShowDialog();
-            //else
-            //    frmMain_Load(null, null);
+            if (new frmAddPassenger(ctx).ShowDialog() == DialogResult.Cancel)
+                refreshGrid();
         }
 
         public void rowColor()
@@ -70,9 +79,19 @@ namespace VisaX
             string path = "./PassengerList.xls";
             string absPath = Path.GetFullPath(path);
 
+            Statistic st = (from s in ctx.Statistics where s.Day == DateTime.Today select s).FirstOrDefault();
+            if (st != null)
+                st.Times++;
+            else
+            {
+                st = new Statistic { Day = DateTime.Today, Times = 1 };
+                ctx.Statistics.Add(st);
+            }
+            ctx.SaveChanges();
+
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Excel Documents (*.xls)|*.xls";
-            sfd.FileName = "Visa_Export.xls";
+            sfd.FileName = DateTime.Today.ToString("yyyy-MM-dd") + string.Format("({0:00})", st.Times);
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 Excel.Application excelApllication = null;
@@ -83,18 +102,6 @@ namespace VisaX
                 System.Threading.Thread.Sleep(2000);
                 excelWorkBook = excelApllication.Workbooks.Open(absPath, 0, true, 5, "", "", true, Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
                 excelWorkSheet = (Excel.Worksheet)excelWorkBook.Worksheets.get_Item(1);
-
-                //for (int i = MinIndex() + 1; i <= dgvPassengers.SelectedRows.Count; i++)
-                //{
-                //    excelWorkSheet.Cells[i + 7, 8].Value = dgvPassengers[1, i - 1].Value;
-                //    excelWorkSheet.Cells[i + 7, 7].Value = dgvPassengers[2, i - 1].Value;
-                //    excelWorkSheet.Cells[i + 7, 6].Value2 = (byte)dgvPassengers[6, i - 1].Value == 0 ? "ذکر" : "انثی";
-
-                //    //format error: Exception from HRESULT: 0x800A03EC
-                //    excelWorkSheet.Cells[i + 7, 5].Value2 = dgvPassengers[3, i - 1].Value;
-                //    excelWorkSheet.Cells[i + 7, 4].Value2 = dgvPassengers[4, i - 1].Value;
-                //    excelWorkSheet.Cells[i + 7, 3].Value2 = dgvPassengers[5, i - 1].Value;
-                //}//for
 
                 int i = 1;
                 foreach (DataGridViewRow row in dgvPassengers.SelectedRows)
@@ -127,16 +134,39 @@ namespace VisaX
 
         private void btnExportPDF_Click(object sender, EventArgs e)
         {
-            sfd.Filter = "Adobe Acrobat Documents (*.pdf)|*.pdf";
-            sfd.FileName = "VisaApply.pdf";
+            //Statistic st = (from s in ctx.Statistics where s.Day == DateTime.Today select s).FirstOrDefault();
+            //if (st != null)
+            //    st.Times++;
+            //else
+            //{
+            //    st = new Statistic { Day = DateTime.Today, Times = 1, xlsTimes=1 };
+            //    ctx.Statistics.Add(st);
+            //}
+            //ctx.SaveChanges();
 
+            sfd.Filter = "Adobe Acrobat Documents (*.pdf)|*.pdf";
+            sfd.FileName = DateTime.Today.ToString("yyyy-MM-dd"); //+ string.Format("({0:00})", st.Times);
+
+            Boolean xlsToo = MessageBox.Show("آیا مایل فایل اکسل رکوردهای انتخاب شده هم تولید شود؟", "تولید همزمان اکسل", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes;
+            List<string> files = new List<string>();
             if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                foreach (string file in Directory.GetFiles(Path.GetTempPath() + "VisaX"))
+                    File.Delete(file);
+                Directory.CreateDirectory(Path.GetTempPath() + "VisaX");
+
                 for (int i = 0; i < dgvPassengers.SelectedRows.Count; i++)
-                    generatePdf(dgvPassengers.SelectedRows[i], i + 1);
-            if (dgvPassengers.SelectedRows.Count > 1)
-                Process.Start(Path.GetDirectoryName(sfd.FileName));
-            else
-                Process.Start(sfd.FileName.Insert(sfd.FileName.LastIndexOf(".pdf"), string.Format(" - {0:00}", 1)));
+                {
+                    files.Add(generatePdf(dgvPassengers.SelectedRows[i], i + 1));
+                    ((Passenger)dgvPassengers.SelectedRows[i].DataBoundItem).Printed = true;
+                }//for
+                MergePDFs(files, sfd.FileName);
+                ctx.SaveChanges();
+                Process.Start(sfd.FileName);
+                if (xlsToo)
+                    btnExportExcel_Click(null, null);
+                this.refreshGrid();
+            }//if
         }//btnExportPDF_Click
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -161,14 +191,16 @@ namespace VisaX
 
         private void dgvPassengers_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            btnNew.Enabled = btnDelete.Enabled = btnEdit.Enabled = btnExportExcel.Enabled = btnExportPDF.Enabled =
-                dgvPassengers.Rows.Count != 0;
+            btnDelete.Enabled = btnEdit.Enabled = btnExportExcel.Enabled = btnExportPDF.Enabled =
+               dgvPassengers.Rows.Count != 0;
+            this.rowColor();
         }
 
         private void dgvPassengers_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            btnNew.Enabled = btnDelete.Enabled = btnEdit.Enabled = btnExportExcel.Enabled = btnExportPDF.Enabled =
-                dgvPassengers.Rows.Count != 0;
+            btnDelete.Enabled = btnEdit.Enabled = btnExportExcel.Enabled = btnExportPDF.Enabled =
+               dgvPassengers.Rows.Count != 0;
+            this.rowColor();
         }
 
         private void llbSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -176,16 +208,7 @@ namespace VisaX
             new frmSettings().ShowDialog();
         }
 
-        private int MinIndex()
-        {
-            int min = int.MaxValue;
-            foreach (DataGridViewRow r in dgvPassengers.SelectedRows)
-                if (min > r.Index)
-                    min = r.Index;
-            return min;
-        }
-
-        private void generatePdf(DataGridViewRow r, int i)
+        private string generatePdf(DataGridViewRow r, int i)
         {
             //Path to source file
             String source = ".\\VisaForm.pdf";
@@ -193,19 +216,14 @@ namespace VisaX
             PdfReader reader = new PdfReader(source);
 
             //PdfStamper object to modify the content of the PDF
-            string fullPath = sfd.FileName.Insert(sfd.FileName.LastIndexOf(".pdf"), string.Format(" - {0:00}", i));
+            string fullPath = Path.GetTempPath() + String.Format("VisaX\\{0:00}.pdf", i);
             PdfStamper stamp = new PdfStamper(reader, new FileStream(fullPath, FileMode.Create));
             AcroFields form = stamp.AcroFields;
             // stamp.FormFlattening = true;
             //form.GenerateAppearances = true;
             //stamp.FormFlattening = true;
             Passenger p = (Passenger)r.DataBoundItem;
-            //form.
-            //  form.SetField("form1[0].#subform[0].#field[0]", "کفتا");
-            // form.SetField("form1[0].#subform[0].#field[0]", string.Format("{0} {1} {2}", p.Name, p.Father, p.Family));
-            // form.SetFieldProperty("form1[0].#subform[0].#field[0]", "setfflags", PdfFormField.FF_READ_ONLY, null);
             form.SetField("form1[0].#subform[0].#field[0]", p.FullName);
-            //form.SetField("form1[0].#subform[0].#field[1]", "اسلام");
             //Radio for Gender
             form.SetField("form1[0].#subform[0].RadioButtonList[0]", (2 - p.Gender).ToString());
             //form.SetField("form1[0].#subform[0].#field[2]", "ایرانیه");
@@ -226,47 +244,47 @@ namespace VisaX
             form.SetField("form1[0].#subform[0].#field[27]", p.ExpiryDate.Month.ToString("00"));//Month
             form.SetField("form1[0].#subform[0].#field[28]", p.ExpiryDate.Day.ToString("00"));//Day
             //form.SetFieldProperty("form1[0].#subform[0].#field[0]", "textcolor", iTextSharp.text.BaseColor.RED, null);
-            stamp.FormFlattening = true;
-            //stamp.Close();
-            
-            iTextSharp.text.Rectangle rect = reader.GetCropBox(1);
-            stamp.InsertPage(2, rect);
-            stamp.ReplacePage(reader, 1, 2);
+
             stamp.Close();
             reader.Close();
+            return fullPath;
         }
 
-        private void copy()
+        public static bool MergePDFs(IEnumerable<string> fileNames, string targetPdf)
         {
-            Document doc = new Document();
-            PdfSmartCopy copy = new PdfSmartCopy(doc, new FileStream(@"D:\Programing\VisaX\VisaX\VisaX\VisaForm.pdf", FileMode.Create));
-            doc.Open();
-
-            PdfReader mainReader = new PdfReader("timesheet.pdf");
-
-            PdfReader reader;
-            PdfStamper stamper;
-            AcroFields frm;
-            FileStream baos;
-
-            for (int i = 0; i < 2; i++)
+            bool merged = true;
+            using (FileStream stream = new FileStream(targetPdf, FileMode.Create))
             {
-
-                reader = new PdfReader(mainReader);
-                baos = new FileStream(@"D:\vsx.pdf",FileMode.Create);
-                stamper = new PdfStamper(reader, baos);
-                 frm = stamper.AcroFields;
-
-                //methods to fill forms
-
-                stamper.FormFlattening=true;
-                stamper.Close();
-
-                reader = new PdfReader(baos);
-                copy.AddPage(copy.GetImportedPage(reader, 1));
+                Document document = new Document();
+                PdfCopy pdf = new PdfCopy(document, stream);
+                PdfReader reader = null;
+                try
+                {
+                    document.Open();
+                    foreach (string file in fileNames)
+                    {
+                        reader = new PdfReader(file);
+                        pdf.AddDocument(reader);
+                        reader.Close();
+                    }
+                }
+                catch (Exception)
+                {
+                    merged = false;
+                    if (reader != null)
+                    {
+                        reader.Close();
+                    }
+                }
+                finally
+                {
+                    if (document != null)
+                    {
+                        document.Close();
+                    }
+                }
             }
-
-            doc.Close();
+            return merged;
         }
 
         private void frmMain_KeyDown(object sender, KeyEventArgs e)
@@ -287,30 +305,42 @@ namespace VisaX
             }
         }
 
-        private void frmMain_Enter(object sender, EventArgs e)
-        {
-            this.rowColor();
-        }
-
         private void rbToday_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbToday.Checked)
-                dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == DateTime.Today select p).ToList();
-            else
-                dgvPassengers.DataSource = (from p in ctx.Passengers select p).ToList();
+            this.refreshGrid();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            Passenger p = (Passenger)dgvPassengers.CurrentRow.DataBoundItem;
+            if (MessageBox.Show("آیا مایل به حذف این رکورد هستید؟", p.FullName, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes)
+            {
+                ctx.Passengers.Remove(p);
+                ctx.SaveChanges();
+                refreshGrid();
+            }//if
+        }
+
+        private void chkNotPrinted_CheckedChanged(object sender, EventArgs e)
+        {
+            refreshGrid();
+        }
+
+        private void rbYesterday_CheckedChanged(object sender, EventArgs e)
+        {
+            this.refreshGrid();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            copy();
+
         }
     }
 }
 //TODO: 
 //-Add Shortcuts
-//Export by day - grid just current day or one day
-//pdf in one page
+//-Export by day - grid just current day or one day
+//-pdf in one page
 //-passport num in first to check if exist
 //-auto expiry date
 //-login password
-

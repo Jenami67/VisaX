@@ -94,6 +94,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Statistic.cs">
+      <DependentUpon>VisaXModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="VisaXModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -129,6 +132,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <Content Include="PassengerList.xls">
@@ -147,6 +151,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>VisaXModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Resources\simple_shape_by_xcutiner-d36v53c.jpg" />
     <Content Include="VisaForm.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

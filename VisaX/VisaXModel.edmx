@@ -17,9 +17,19 @@
           <Property Name="IssueDate" Type="date" Nullable="false" />
           <Property Name="ExpiryDate" Type="date" Nullable="false" />
           <Property Name="EntryDate" Type="date" Nullable="false" />
+          <Property Name="Printed" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Statistics">
+          <Key>
+            <PropertyRef Name="Day" />
+          </Key>
+          <Property Name="Day" Type="date" Nullable="false" />
+          <Property Name="Times" Type="tinyint" Nullable="false" />
+          <Property Name="xlsTimes" Type="tinyint" />
         </EntityType>
         <EntityContainer Name="VisaXModelStoreContainer">
           <EntitySet Name="Passenger" EntityType="Self.Passenger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statistics" EntityType="Self.Statistics" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -37,10 +47,20 @@
           <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="FullName" Type="String" Nullable="false" MaxLength="90" FixedLength="false" Unicode="true" />
           <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Printed" Type="Boolean" Nullable="false" DefaultValue="False" />
         </EntityType>
         <EntityContainer Name="VisaXEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Passengers" EntityType="Self.Passenger" />
+          <EntitySet Name="Statistics" EntityType="VisaXModel.Statistic" />
         </EntityContainer>
+        <EntityType Name="Statistic">
+          <Key>
+            <PropertyRef Name="Day" />
+          </Key>
+          <Property Name="Day" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Times" Type="Byte" Nullable="false" />
+          <Property Name="xlsTimes" Type="Byte" DefaultValue="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -50,6 +70,7 @@
           <EntitySetMapping Name="Passengers">
             <EntityTypeMapping TypeName="VisaXModel.Passenger">
               <MappingFragment StoreEntitySet="Passenger">
+                <ScalarProperty Name="Printed" ColumnName="Printed" />
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
@@ -58,6 +79,15 @@
                 <ScalarProperty Name="BornDate" ColumnName="BornDate" />
                 <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
                 <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statistics">
+            <EntityTypeMapping TypeName="VisaXModel.Statistic">
+              <MappingFragment StoreEntitySet="Statistics">
+                <ScalarProperty Name="xlsTimes" ColumnName="xlsTimes" />
+                <ScalarProperty Name="Times" ColumnName="Times" />
+                <ScalarProperty Name="Day" ColumnName="Day" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

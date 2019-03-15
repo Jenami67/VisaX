@@ -46,12 +46,13 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.chkNotPrinted = new System.Windows.Forms.CheckBox();
             this.rbAll = new System.Windows.Forms.RadioButton();
             this.rbToday = new System.Windows.Forms.RadioButton();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtFilter = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.rbYesterday = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPassengers)).BeginInit();
             this.panel1.SuspendLayout();
@@ -156,7 +157,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.llbSettings);
             this.panel1.Controls.Add(this.btnExportPDF);
             this.panel1.Controls.Add(this.btnExportExcel);
@@ -176,7 +176,7 @@
             this.llbSettings.Location = new System.Drawing.Point(7, 42);
             this.llbSettings.Name = "llbSettings";
             this.llbSettings.Size = new System.Drawing.Size(47, 14);
-            this.llbSettings.TabIndex = 4;
+            this.llbSettings.TabIndex = 5;
             this.llbSettings.TabStop = true;
             this.llbSettings.Text = "تنظیمات";
             this.llbSettings.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbSettings_LinkClicked);
@@ -185,10 +185,10 @@
             // 
             this.btnExportPDF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExportPDF.Enabled = false;
-            this.btnExportPDF.Location = new System.Drawing.Point(303, 9);
+            this.btnExportPDF.Location = new System.Drawing.Point(335, 9);
             this.btnExportPDF.Name = "btnExportPDF";
             this.btnExportPDF.Size = new System.Drawing.Size(142, 45);
-            this.btnExportPDF.TabIndex = 3;
+            this.btnExportPDF.TabIndex = 4;
             this.btnExportPDF.Text = "تولید pdf";
             this.btnExportPDF.UseVisualStyleBackColor = true;
             this.btnExportPDF.Click += new System.EventHandler(this.btnExportPDF_Click);
@@ -197,10 +197,10 @@
             // 
             this.btnExportExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExportExcel.Enabled = false;
-            this.btnExportExcel.Location = new System.Drawing.Point(460, 9);
+            this.btnExportExcel.Location = new System.Drawing.Point(186, 9);
             this.btnExportExcel.Name = "btnExportExcel";
             this.btnExportExcel.Size = new System.Drawing.Size(142, 45);
-            this.btnExportExcel.TabIndex = 2;
+            this.btnExportExcel.TabIndex = 3;
             this.btnExportExcel.Text = "تولید اکسل";
             this.btnExportExcel.UseVisualStyleBackColor = true;
             this.btnExportExcel.Click += new System.EventHandler(this.btnExportExcel_Click);
@@ -209,18 +209,19 @@
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(460, 9);
+            this.btnDelete.Location = new System.Drawing.Point(485, 9);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(142, 45);
-            this.btnDelete.TabIndex = 17;
+            this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "حذف";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEdit.Enabled = false;
-            this.btnEdit.Location = new System.Drawing.Point(619, 9);
+            this.btnEdit.Location = new System.Drawing.Point(635, 9);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(142, 45);
             this.btnEdit.TabIndex = 1;
@@ -231,7 +232,7 @@
             // btnNew
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNew.Location = new System.Drawing.Point(777, 9);
+            this.btnNew.Location = new System.Drawing.Point(785, 9);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(142, 45);
             this.btnNew.TabIndex = 0;
@@ -241,6 +242,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.rbYesterday);
+            this.panel2.Controls.Add(this.chkNotPrinted);
             this.panel2.Controls.Add(this.rbAll);
             this.panel2.Controls.Add(this.rbToday);
             this.panel2.Controls.Add(this.btnSearch);
@@ -252,14 +255,25 @@
             this.panel2.Size = new System.Drawing.Size(939, 50);
             this.panel2.TabIndex = 17;
             // 
+            // chkNotPrinted
+            // 
+            this.chkNotPrinted.AutoSize = true;
+            this.chkNotPrinted.Location = new System.Drawing.Point(9, 27);
+            this.chkNotPrinted.Name = "chkNotPrinted";
+            this.chkNotPrinted.Size = new System.Drawing.Size(120, 18);
+            this.chkNotPrinted.TabIndex = 5;
+            this.chkNotPrinted.Text = "فقط چاپ نشده ها";
+            this.chkNotPrinted.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkNotPrinted.UseVisualStyleBackColor = true;
+            this.chkNotPrinted.CheckedChanged += new System.EventHandler(this.chkNotPrinted_CheckedChanged);
+            // 
             // rbAll
             // 
             this.rbAll.AutoSize = true;
-            this.rbAll.Location = new System.Drawing.Point(19, 29);
+            this.rbAll.Location = new System.Drawing.Point(17, 3);
             this.rbAll.Name = "rbAll";
             this.rbAll.Size = new System.Drawing.Size(47, 18);
-            this.rbAll.TabIndex = 3;
-            this.rbAll.TabStop = true;
+            this.rbAll.TabIndex = 4;
             this.rbAll.Text = "همه";
             this.rbAll.UseVisualStyleBackColor = true;
             // 
@@ -267,11 +281,10 @@
             // 
             this.rbToday.AutoSize = true;
             this.rbToday.Checked = true;
-            this.rbToday.Location = new System.Drawing.Point(19, 5);
+            this.rbToday.Location = new System.Drawing.Point(80, 3);
             this.rbToday.Name = "rbToday";
             this.rbToday.Size = new System.Drawing.Size(48, 18);
-            this.rbToday.TabIndex = 1;
-            this.rbToday.TabStop = true;
+            this.rbToday.TabIndex = 3;
             this.rbToday.Text = "امروز";
             this.rbToday.UseVisualStyleBackColor = true;
             this.rbToday.CheckedChanged += new System.EventHandler(this.rbToday_CheckedChanged);
@@ -282,7 +295,7 @@
             this.btnSearch.Location = new System.Drawing.Point(639, 13);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 2;
+            this.btnSearch.TabIndex = 1;
             this.btnSearch.Text = ">>>";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -306,15 +319,16 @@
             this.txtFilter.TabIndex = 0;
             this.txtFilter.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilter_KeyDown);
             // 
-            // button1
+            // rbYesterday
             // 
-            this.button1.Location = new System.Drawing.Point(222, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.rbYesterday.AutoSize = true;
+            this.rbYesterday.Location = new System.Drawing.Point(137, 3);
+            this.rbYesterday.Name = "rbYesterday";
+            this.rbYesterday.Size = new System.Drawing.Size(48, 18);
+            this.rbYesterday.TabIndex = 2;
+            this.rbYesterday.Text = "دیروز";
+            this.rbYesterday.UseVisualStyleBackColor = true;
+            this.rbYesterday.CheckedChanged += new System.EventHandler(this.rbYesterday_CheckedChanged);
             // 
             // frmMain
             // 
@@ -324,13 +338,13 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeyPreview = true;
+            this.MinimumSize = new System.Drawing.Size(960, 522);
             this.Name = "frmMain";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.Text = "شرکه زهره البصره";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMain_Load);
-            this.Enter += new System.EventHandler(this.frmMain_Enter);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmMain_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPassengers)).EndInit();
@@ -366,7 +380,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colGender;
         private System.Windows.Forms.RadioButton rbAll;
         private System.Windows.Forms.RadioButton rbToday;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox chkNotPrinted;
+        private System.Windows.Forms.RadioButton rbYesterday;
     }
 }
 

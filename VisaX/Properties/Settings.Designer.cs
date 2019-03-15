@@ -26,18 +26,6 @@ namespace VisaX.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string PdfPath {
-            get {
-                return ((string)(this["PdfPath"]));
-            }
-            set {
-                this["PdfPath"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string Pass {
             get {
                 return ((string)(this["Pass"]));

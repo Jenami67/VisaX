@@ -50,6 +50,7 @@
             this.label1.Size = new System.Drawing.Size(125, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "محل ذخیره فایل های pdf:";
+            this.label1.Visible = false;
             // 
             // txtPdfPath
             // 
@@ -58,6 +59,7 @@
             this.txtPdfPath.ReadOnly = true;
             this.txtPdfPath.Size = new System.Drawing.Size(292, 20);
             this.txtPdfPath.TabIndex = 1;
+            this.txtPdfPath.Visible = false;
             // 
             // btnBrowse
             // 
@@ -67,6 +69,7 @@
             this.btnBrowse.TabIndex = 2;
             this.btnBrowse.Text = "...";
             this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Visible = false;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // btnSave

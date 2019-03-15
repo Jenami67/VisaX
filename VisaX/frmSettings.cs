@@ -22,7 +22,7 @@ namespace VisaX
             if (fbdPdf.ShowDialog() == DialogResult.OK)
             {
                 txtPdfPath.Text = fbdPdf.SelectedPath;
-                Properties.Settings.Default.PdfPath = fbdPdf.SelectedPath;
+                //Properties.Settings.Default.PdfPath = fbdPdf.SelectedPath;
             }
         }
 
@@ -47,8 +47,8 @@ namespace VisaX
 
         private void frmSettings_Load(object sender, EventArgs e)
         {
-            txtPdfPath.Text = Properties.Settings.Default.PdfPath;
-            fbdPdf.SelectedPath = Properties.Settings.Default.PdfPath;
+            //txtPdfPath.Text = Properties.Settings.Default.PdfPath;
+            //fbdPdf.SelectedPath = Properties.Settings.Default.PdfPath;
         }
     }
 }

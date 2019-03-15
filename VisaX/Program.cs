@@ -18,7 +18,7 @@ namespace VisaX
             Application.CurrentCulture = new System.Globalization.CultureInfo("fr-FR");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            if (DateTime.Now < new DateTime(2019, 4, 30))
+            if (DateTime.Now < new DateTime(2019, 4, 28))
                   Application.Run(new frmLogin());
         }
     }

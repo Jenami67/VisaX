@@ -14,6 +14,12 @@ namespace VisaX
     
     public partial class Passenger
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Passenger()
+        {
+            this.Printed = false;
+        }
+    
         public int ID { get; set; }
         public byte Gender { get; set; }
         public string PassportNum { get; set; }
@@ -22,5 +28,6 @@ namespace VisaX
         public System.DateTime ExpiryDate { get; set; }
         public string FullName { get; set; }
         public System.DateTime EntryDate { get; set; }
+        public bool Printed { get; set; }
     }
 }
