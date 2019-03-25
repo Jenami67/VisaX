@@ -161,14 +161,14 @@ namespace VisaX
 
         private void dgvPassengers_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            btnNew.Enabled = btnDelete.Enabled = btnEdit.Enabled = btnExportExcel.Enabled = btnExportPDF.Enabled =
+            btnExportXls.Enabled = btnEdit.Enabled = btnExportExcel.Enabled = btnExportPDF.Enabled =
                 dgvPassengers.Rows.Count != 0;
         }
 
         private void dgvPassengers_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            btnNew.Enabled = btnDelete.Enabled = btnEdit.Enabled = btnExportExcel.Enabled = btnExportPDF.Enabled =
-                dgvPassengers.Rows.Count != 0;
+            btnExportXls.Enabled = btnEdit.Enabled = btnExportExcel.Enabled = btnExportPDF.Enabled =
+               dgvPassengers.Rows.Count != 0;
         }
 
         private void llbSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -228,7 +228,7 @@ namespace VisaX
             //form.SetFieldProperty("form1[0].#subform[0].#field[0]", "textcolor", iTextSharp.text.BaseColor.RED, null);
             stamp.FormFlattening = true;
             //stamp.Close();
-            
+
             iTextSharp.text.Rectangle rect = reader.GetCropBox(1);
             stamp.InsertPage(2, rect);
             stamp.ReplacePage(reader, 1, 2);
@@ -253,13 +253,13 @@ namespace VisaX
             {
 
                 reader = new PdfReader(mainReader);
-                baos = new FileStream(@"D:\vsx.pdf",FileMode.Create);
+                baos = new FileStream(@"D:\vsx.pdf", FileMode.Create);
                 stamper = new PdfStamper(reader, baos);
-                 frm = stamper.AcroFields;
+                frm = stamper.AcroFields;
 
                 //methods to fill forms
 
-                stamper.FormFlattening=true;
+                stamper.FormFlattening = true;
                 stamper.Close();
 
                 reader = new PdfReader(baos);
@@ -295,6 +295,7 @@ namespace VisaX
         private void rbToday_CheckedChanged(object sender, EventArgs e)
         {
             if (rbToday.Checked)
+                
                 dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == DateTime.Today select p).ToList();
             else
                 dgvPassengers.DataSource = (from p in ctx.Passengers select p).ToList();
@@ -302,7 +303,44 @@ namespace VisaX
 
         private void button1_Click(object sender, EventArgs e)
         {
-            copy();
+            files
+            MergePDFs( )
+        }
+        public static bool MergePDFs(IEnumerable<string> fileNames, string targetPdf)
+        {
+            bool merged = true;
+            using (FileStream stream = new FileStream(targetPdf, FileMode.Create))
+            {
+                Document document = new Document();
+                PdfCopy pdf = new PdfCopy(document, stream);
+                PdfReader reader = null;
+                try
+                {
+                    document.Open();
+                    foreach (string file in fileNames)
+                    {
+                        reader = new PdfReader(file);
+                        pdf.AddDocument(reader);
+                        reader.Close();
+                    }
+                }
+                catch (Exception)
+                {
+                    merged = false;
+                    if (reader != null)
+                    {
+                        reader.Close();
+                    }
+                }
+                finally
+                {
+                    if (document != null)
+                    {
+                        document.Close();
+                    }
+                }
+            }
+            return merged;
         }
     }
 }
@@ -313,4 +351,5 @@ namespace VisaX
 //-passport num in first to check if exist
 //-auto expiry date
 //-login password
+//datagrid doesnt update
 

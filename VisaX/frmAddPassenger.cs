@@ -94,7 +94,6 @@ namespace VisaX
                         IssueDate = DateTime.Parse(txtIssueDate.Text),
                         ExpiryDate = DateTime.Parse(txtExpiryDate.Text),
                         EntryDate = DateTime.Today
-
                     };
 
                     ctx.Passengers.Add(p);
@@ -104,12 +103,13 @@ namespace VisaX
                 }
                 else //if edit mode
                 {
-                    this.passenger.FullName = txtFullName.Text;
-                    this.passenger.PassportNum = txtPassportNum.Text;
-                    this.passenger.Gender = (byte)cmbGender.SelectedIndex;
-                    this.passenger.BornDate = DateTime.Parse(txtBornDate.Text);
-                    this.passenger.IssueDate = DateTime.Parse(txtIssueDate.Text);
-                    this.passenger.ExpiryDate = DateTime.Parse(txtExpiryDate.Text);
+                    passenger.FullName = txtFullName.Text;
+                    passenger.PassportNum = txtPassportNum.Text;
+                    passenger.Gender = (byte)cmbGender.SelectedIndex;
+                    passenger.BornDate = DateTime.Parse(txtBornDate.Text);
+                    passenger.IssueDate = DateTime.Parse(txtIssueDate.Text);
+                    passenger.ExpiryDate = DateTime.Parse(txtExpiryDate.Text);
+                    passenger.EntryDate = DateTime.Today;
 
                     ctx.Passengers.Attach(this.passenger);
                     ctx.Entry(this.passenger).State = System.Data.Entity.EntityState.Modified;
@@ -119,13 +119,9 @@ namespace VisaX
                 }//else
 
                 ctx.SaveChanges();
-                //MessageBox.Show(sucMessage);
 
                 txtPassportNum.Focus();
                 txtFullName.Text = txtPassportNum.Text = txtBornDate.Text = txtExpiryDate.Text = txtIssueDate.Text = string.Empty;
-
-                //this.DialogResult = DialogResult.OK;
-                // InitializeComponent();
 
             }//if
         }
@@ -188,22 +184,22 @@ namespace VisaX
 
         private void txtPassportNum_TextChanged(object sender, EventArgs e)
         {
-            if (txtPassportNum.Text.Length == 8 && this.passenger ==null)
+            if (txtPassportNum.Text.Length == 8 && this.passenger == null)
             {
                 lblStatusMsg.Text = string.Empty;
-                Passenger pas = (from p in ctx.Passengers
-                                 where p.PassportNum == txtPassportNum.Text
-                                 select p).FirstOrDefault();
-                if (pas != null)
+                passenger = (from p in ctx.Passengers
+                             where p.PassportNum == txtPassportNum.Text
+                             select p).FirstOrDefault();
+                if (passenger != null)
                 {
-                    txtFullName.Text = pas.FullName;
-                    txtPassportNum.Text = pas.PassportNum;
-                    cmbGender.SelectedIndex = pas.Gender;
-                    txtBornDate.Text = pas.BornDate.ToShortDateString();
-                    txtIssueDate.Text = pas.IssueDate.ToShortDateString();
-                    txtExpiryDate.Text = pas.ExpiryDate.ToShortDateString();
+                    txtFullName.Text = passenger.FullName;
+                    txtPassportNum.Text = passenger.PassportNum;
+                    cmbGender.SelectedIndex = passenger.Gender;
+                    txtBornDate.Text = passenger.BornDate.ToShortDateString();
+                    txtIssueDate.Text = passenger.IssueDate.ToShortDateString();
+                    txtExpiryDate.Text = passenger.ExpiryDate.ToShortDateString();
                 }//if
-            }
+            }//if
         }
     }
 }
