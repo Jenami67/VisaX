@@ -12,25 +12,21 @@ namespace VisaX
     using System;
     using System.Collections.Generic;
     
-    public partial class Passenger
+    public partial class Shift
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Passenger()
+        public Shift()
         {
             this.Requests = new HashSet<Request>();
         }
     
         public int ID { get; set; }
-        public byte Gender { get; set; }
-        public string PassportNum { get; set; }
-        public Nullable<System.DateTime> BornDate { get; set; }
-        public Nullable<System.DateTime> IssueDate { get; set; }
-        public Nullable<System.DateTime> ExpiryDate { get; set; }
-        public string FullName { get; set; }
+        public System.DateTime Date { get; set; }
+        public byte ShiftNum { get; set; }
         public int UserID { get; set; }
     
-        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Request> Requests { get; set; }
+        public virtual User User { get; set; }
     }
 }

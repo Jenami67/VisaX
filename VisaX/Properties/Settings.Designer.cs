@@ -34,5 +34,16 @@ namespace VisaX.Properties {
                 this["Pass"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::VisaX.User User {
+            get {
+                return ((global::VisaX.User)(this["User"]));
+            }
+            set {
+                this["User"] = value;
+            }
+        }
     }
 }

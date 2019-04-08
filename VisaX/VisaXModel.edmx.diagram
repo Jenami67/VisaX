@@ -5,8 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6d5557ebc5bb439abd04f31603c5d4b8" Name="Diagram1">
-        <EntityTypeShape EntityType="VisaXModel.Passenger" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="VisaXModel.Statistic" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="VisaXModel.Passenger" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="VisaXModel.Request" Width="1.5" PointX="5.25" PointY="3" />
+        <EntityTypeShape EntityType="VisaXModel.Shift" Width="1.5" PointX="8.375" PointY="3" />
+        <EntityTypeShape EntityType="VisaXModel.User" Width="1.5" PointX="5.25" PointY="6.125" />
+        <AssociationConnector Association="VisaXModel.FK_Passenger_User" />
+        <AssociationConnector Association="VisaXModel.FK_Request_Passenger" />
+        <AssociationConnector Association="VisaXModel.FK_Request_Shift" ManuallyRouted="true" >
+          <ConnectorPoint PointX="8.375" PointY="4.0862939453125" />
+          <ConnectorPoint PointX="6.75" PointY="4.0862939453125" />
+        </AssociationConnector>
+        <AssociationConnector Association="VisaXModel.FK_Request_User" />
+        <AssociationConnector Association="VisaXModel.FK_Shift_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -17,27 +17,30 @@ namespace VisaX
         private PersianCalendar pc = new PersianCalendar();
         private DateTime dt;
         private Passenger passenger;
+        Shift selectedShift;
+        private bool justEdit;
 
         public frmAddPassenger()
         {
             InitializeComponent();
         }
 
-        public frmAddPassenger( VisaXEntities ctx) : this()
+        public frmAddPassenger(VisaXEntities ctx, Shift shift) : this()
         {
             this.ctx = ctx;
+            this.selectedShift = shift;
         }
 
-        public frmAddPassenger(Passenger p, VisaXEntities ctx) : this(ctx)
+        public frmAddPassenger(Passenger p, VisaXEntities ctx, Shift shift, bool justEdit = false) : this(ctx, shift)
         {
-           // this.ctx = ctx;
             txtFullName.Text = p.FullName;
             txtPassportNum.Text = p.PassportNum;
             cmbGender.SelectedIndex = p.Gender;
-            txtBornDate.Text = p.BornDate.ToShortDateString();
-            txtIssueDate.Text = p.IssueDate.ToShortDateString();
-            txtExpiryDate.Text = p.ExpiryDate.ToShortDateString();
+            txtBornDate.Text = p.BornDate.HasValue ? p.BornDate.Value.ToShortDateString() : string.Empty;
+            txtIssueDate.Text = p.IssueDate.HasValue ? p.BornDate.Value.ToShortDateString() : string.Empty;
+            txtExpiryDate.Text = p.ExpiryDate.HasValue ? p.BornDate.Value.ToShortDateString() : string.Empty;
             this.passenger = p;
+            this.justEdit = justEdit;
         }
 
         private bool validateForm()
@@ -99,11 +102,19 @@ namespace VisaX
                         BornDate = DateTime.Parse(txtBornDate.Text),
                         IssueDate = DateTime.Parse(txtIssueDate.Text),
                         ExpiryDate = DateTime.Parse(txtExpiryDate.Text),
-                        EntryDate = DateTime.Today,
-                        Printed = false
+                        UserID = Properties.Settings.Default.User.ID
+                        //EntryDate = DateTime.Today,
+                        // Printed = false
                     };
 
+                    p.Requests.Add(new Request
+                    {
+                        ShiftID = this.selectedShift.ID,
+                        UserID = Properties.Settings.Default.User.ID,
+                    });
+
                     ctx.Passengers.Add(p);
+
                     sucMessage = "رکورد جدید اضافه شد";
                     lblStatusMsg.ForeColor = Color.DarkGreen;
                     lblStatusMsg.Text = string.Format("{0} ({1})", sucMessage, p.FullName);
@@ -116,15 +127,21 @@ namespace VisaX
                     this.passenger.BornDate = DateTime.Parse(txtBornDate.Text);
                     this.passenger.IssueDate = DateTime.Parse(txtIssueDate.Text);
                     this.passenger.ExpiryDate = DateTime.Parse(txtExpiryDate.Text);
+                    this.passenger.UserID = Properties.Settings.Default.User.ID;
 
-                    //ctx.Passengers.Attach(this.passenger);
-                    //ctx.Entry(this.passenger).State = System.Data.Entity.EntityState.Modified;
                     sucMessage = "رکورد ویرایش شد";
                     lblStatusMsg.ForeColor = Color.DarkBlue;
                     lblStatusMsg.Text = string.Format("{0} ({1})", sucMessage, passenger.FullName);
+                    if (!this.justEdit)
+                        this.passenger.Requests.Add(new Request
+                        {
+                            ShiftID = this.selectedShift.ID,
+                            UserID = Properties.Settings.Default.User.ID,
+                        });
                 }//else
 
                 ctx.SaveChanges();
+                this.passenger = null;
                 txtPassportNum.Focus();
                 txtFullName.Text = txtPassportNum.Text = txtBornDate.Text = txtExpiryDate.Text = txtIssueDate.Text = string.Empty;
             }//if
@@ -188,22 +205,21 @@ namespace VisaX
 
         private void txtPassportNum_TextChanged(object sender, EventArgs e)
         {
-            if (txtPassportNum.Text.Length == 8 && this.passenger ==null)
+            if (txtPassportNum.Text.Length == 8 && this.passenger == null)
             {
                 lblStatusMsg.Text = string.Empty;
                 this.passenger = (from p in ctx.Passengers
-                                 where p.PassportNum == txtPassportNum.Text
-                                 select p).FirstOrDefault();
+                                  where p.PassportNum == txtPassportNum.Text
+                                  select p).FirstOrDefault();
                 if (this.passenger != null)
                 {
                     txtFullName.Text = this.passenger.FullName;
                     txtPassportNum.Text = this.passenger.PassportNum;
                     cmbGender.SelectedIndex = this.passenger.Gender;
-                    txtBornDate.Text = this.passenger.BornDate.ToShortDateString();
-                    txtIssueDate.Text = this.passenger.IssueDate.ToShortDateString();
-                    txtExpiryDate.Text = this.passenger.ExpiryDate.ToShortDateString();
-                    this.passenger.EntryDate = DateTime.Today;
-                    this.passenger.Printed = false;
+                    txtBornDate.Text = this.passenger.BornDate.HasValue ? this.passenger.BornDate.Value.ToShortDateString() : string.Empty;
+                    txtIssueDate.Text = this.passenger.BornDate.HasValue ? this.passenger.BornDate.Value.ToShortDateString() : string.Empty;
+                    txtExpiryDate.Text = this.passenger.BornDate.HasValue ? this.passenger.BornDate.Value.ToShortDateString() : string.Empty;
+
                 }//if
             }
         }

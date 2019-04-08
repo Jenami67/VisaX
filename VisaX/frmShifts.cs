@@ -1,0 +1,111 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace VisaX
+{
+    public partial class frmShifts : Form
+    {
+        VisaXEntities ctx = new VisaXEntities();
+        public frmShifts()
+        {
+            InitializeComponent();
+        }
+
+        private void frmShifts_Load(object sender, EventArgs e)
+        {
+            dtpFrom.Value = dtpTo.Value.AddMonths(-1);
+            refreshGrid();
+        }
+
+        private void refreshGrid()
+        {
+            dgvShifts.DataSource = (from s in ctx.Shifts
+                                    where s.Date >= dtpFrom.Value.Date && s.Date <= dtpTo.Value
+                                    select new
+                                    {
+                                        s.ID,
+                                        s.Date,
+                                        s.ShiftNum,
+                                        s.User.RealName,
+                                        s.Requests.Count
+                                    }).ToList();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            refreshGrid();
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            byte max = (from s in ctx.Shifts where s.Date == DateTime.Today select s.ShiftNum).Max();
+            max++;
+            string message = string.Format("تولید شیفت شماره {0} به تاریخ {1} توسط {2}؟", max, DateTime.Today.ToShortDateString(), Properties.Settings.Default.User.RealName);
+            if (MessageBox.Show(message, "شیفت جدید", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes)
+            {
+                ctx.Shifts.Add(new Shift
+                {
+                    Date = DateTime.Today,
+                    UserID = Properties.Settings.Default.User.ID,
+                    ShiftNum = max
+                });
+                ctx.SaveChanges();
+                refreshGrid();
+            }//if
+
+        }//btnNew
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int id = (int)dgvShifts.SelectedRows[0].Cells[0].Value;
+            Shift shift = (from s in ctx.Shifts where s.ID == id select s).First();
+            if (MessageBox.Show("آیا مایل به حذف این شیفت هستید؟", "حذف شیفت", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes)
+            {
+                ctx.Shifts.Remove(shift);
+                try
+                {
+                    ctx.SaveChanges();
+                }
+                catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
+                {
+                    MessageBox.Show("امکان حذف شیفتی که متقاضی در آن ثبت شده وجود ندارد.\n" +ex.ToString());
+                    ctx.Entry(shift).Reload();
+                }
+                refreshGrid();
+            }//if
+        }
+
+        private void btnList_Click(object sender, EventArgs e)
+        {
+            int id = (int)dgvShifts.SelectedRows[0].Cells[0].Value;
+            Shift shift = (from s in ctx.Shifts where s.ID == id select s).First();
+            new frmRequests(shift).ShowDialog();
+        }
+
+        private void dgvPassengers_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            btnDelete.Enabled = btnList.Enabled = dgvShifts.Rows.Count != 0;
+            this.rowColor();
+        }
+
+        private void dgvPassengers_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            btnDelete.Enabled = btnList.Enabled = dgvShifts.Rows.Count != 0;
+            this.rowColor();
+        }
+
+        public void rowColor()
+        {
+            for (int i = 0; i < dgvShifts.Rows.Count; i++)
+                if (i % 2 != 0)
+                    dgvShifts.Rows[i].DefaultCellStyle.BackColor = Color.WhiteSmoke;
+        }
+    }
+}

@@ -12,16 +12,15 @@ namespace VisaX
     using System;
     using System.Collections.Generic;
     
-    public partial class Statistic
+    public partial class Request
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Statistic()
-        {
-            this.xlsTimes = 0;
-        }
+        public int ID { get; set; }
+        public int PassengerID { get; set; }
+        public int ShiftID { get; set; }
+        public int UserID { get; set; }
     
-        public System.DateTime Day { get; set; }
-        public byte Times { get; set; }
-        public Nullable<byte> xlsTimes { get; set; }
+        public virtual Passenger Passenger { get; set; }
+        public virtual Shift Shift { get; set; }
+        public virtual User User { get; set; }
     }
 }

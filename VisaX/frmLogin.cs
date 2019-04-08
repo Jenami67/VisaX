@@ -22,7 +22,7 @@ namespace VisaX
             if (txtPassword.Text == Properties.Settings.Default.Pass)
             {
                 Hide();
-                new frmMain().ShowDialog();
+                new frmRequests().ShowDialog();
                 Close();
             }//if
             else

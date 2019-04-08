@@ -26,6 +26,8 @@ namespace VisaX
         }
     
         public virtual DbSet<Passenger> Passengers { get; set; }
-        public virtual DbSet<Statistic> Statistics { get; set; }
+        public virtual DbSet<Request> Requests { get; set; }
+        public virtual DbSet<Shift> Shifts { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

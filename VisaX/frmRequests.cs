@@ -18,36 +18,55 @@ using iTextSharp.text.pdf;
 
 namespace VisaX
 {
-    public partial class frmMain : Form
+    public partial class frmRequests : Form
     {
         VisaXEntities ctx = new VisaXEntities();
+        Shift SelectedShift;
         SaveFileDialog sfd = new SaveFileDialog();
 
-        public frmMain()
+        public frmRequests()
         {
             InitializeComponent();
         }
 
+        public frmRequests(Shift selectedShift) : this()
+        {
+            this.SelectedShift = selectedShift;
+        }
+
         private void refreshGrid()
         {
-            DateTime yesterday = DateTime.Today.AddDays(-1);
-            dgvPassengers.AutoGenerateColumns = false;
-            if (chkNotPrinted.Checked)
-                if (rbToday.Checked)
-                    dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == DateTime.Today && p.Printed == false select p).ToList();
-                else if (rbYesterday.Checked)
-                    dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == yesterday && p.Printed == false select p).ToList();
-                else
-                    dgvPassengers.DataSource = (from p in ctx.Passengers where p.Printed == false select p).ToList();
-            else
-            {
-                if (rbToday.Checked)
-                    dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == DateTime.Today select p).ToList();
-                else if (rbYesterday.Checked)
-                    dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == yesterday select p).ToList();
-                else
-                    dgvPassengers.DataSource = (from p in ctx.Passengers select p).ToList();
-            }
+            dgvPassengers.DataSource = (from r in ctx.Requests
+                                        where r.ShiftID == SelectedShift.ID
+                                        select new
+                                        {
+                                            r.ID,
+                                            r.PassengerID,
+                                            r.Passenger.PassportNum,
+                                            r.Passenger.FullName,
+                                            r.Passenger.BornDate,
+                                            r.Passenger.IssueDate,
+                                            r.Passenger.ExpiryDate
+                                        }).ToList();
+
+            //DateTime yesterday = DateTime.Today.AddDays(-1);
+            //dgvPassengers.AutoGenerateColumns = false;
+            //if (chkNotPrinted.Checked)
+            //    if (rbToday.Checked)
+            //        dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == DateTime.Today && p.Printed == false select p).ToList();
+            //    else if (rbYesterday.Checked)
+            //        dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == yesterday && p.Printed == false select p).ToList();
+            //    else
+            //        dgvPassengers.DataSource = (from p in ctx.Passengers where p.Printed == false select p).ToList();
+            //else
+            //{
+            //    if (rbToday.Checked)
+            //        dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == DateTime.Today select p).ToList();
+            //    else if (rbYesterday.Checked)
+            //        dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == yesterday select p).ToList();
+            //    else
+            //        dgvPassengers.DataSource = (from p in ctx.Passengers select p).ToList();
+            //}
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -57,13 +76,15 @@ namespace VisaX
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            new frmAddPassenger((Passenger)dgvPassengers.CurrentRow.DataBoundItem, this.ctx).ShowDialog();
+            int id = (int)dgvPassengers.SelectedRows[0].Cells["colPassengerID"].Value;
+            Passenger passenger = (from p in ctx.Passengers where p.ID == id select p).First();
+            new frmAddPassenger(passenger, this.ctx, this.SelectedShift,true).ShowDialog();
             this.refreshGrid();
         }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            if (new frmAddPassenger(ctx).ShowDialog() == DialogResult.Cancel)
+            if (new frmAddPassenger(ctx, this.SelectedShift).ShowDialog() == DialogResult.Cancel)
                 refreshGrid();
         }
 
@@ -79,19 +100,21 @@ namespace VisaX
             string path = "./PassengerList.xls";
             string absPath = Path.GetFullPath(path);
 
-            Statistic st = (from s in ctx.Statistics where s.Day == DateTime.Today select s).FirstOrDefault();
-            if (st != null)
-                st.Times++;
-            else
-            {
-                st = new Statistic { Day = DateTime.Today, Times = 1 };
-                ctx.Statistics.Add(st);
-            }
+            //Statistic st = (from s in ctx.Statistics where s.Day == DateTime.Today select s).FirstOrDefault();
+            //if (st != null)
+            //    st.Times++;
+            //else
+            //{
+            //    st = new Statistic { Day = DateTime.Today, Times = 1 };
+            //    ctx.Statistics.Add(st);
+            //}
+
+
             ctx.SaveChanges();
 
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Excel Documents (*.xls)|*.xls";
-            sfd.FileName = DateTime.Today.ToString("yyyy-MM-dd") + string.Format("({0:00})", st.Times);
+            sfd.FileName = this.SelectedShift.Date.ToString("yyyy-MM-dd") + string.Format("({0:00})", this.SelectedShift.ShiftNum);
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 Excel.Application excelApllication = null;
@@ -134,20 +157,10 @@ namespace VisaX
 
         private void btnExportPDF_Click(object sender, EventArgs e)
         {
-            //Statistic st = (from s in ctx.Statistics where s.Day == DateTime.Today select s).FirstOrDefault();
-            //if (st != null)
-            //    st.Times++;
-            //else
-            //{
-            //    st = new Statistic { Day = DateTime.Today, Times = 1, xlsTimes=1 };
-            //    ctx.Statistics.Add(st);
-            //}
-            //ctx.SaveChanges();
-
             sfd.Filter = "Adobe Acrobat Documents (*.pdf)|*.pdf";
             sfd.FileName = DateTime.Today.ToString("yyyy-MM-dd"); //+ string.Format("({0:00})", st.Times);
 
-            Boolean xlsToo = MessageBox.Show("آیا مایل فایل اکسل رکوردهای انتخاب شده هم تولید شود؟", "تولید همزمان اکسل", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes;
+            Boolean xlsToo = MessageBox.Show("آیا مایلید فایل اکسل رکوردهای انتخاب شده هم تولید شود؟", "تولید همزمان اکسل", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes;
             List<string> files = new List<string>();
             if (sfd.ShowDialog() == DialogResult.OK)
             {
@@ -158,7 +171,7 @@ namespace VisaX
                 for (int i = 0; i < dgvPassengers.SelectedRows.Count; i++)
                 {
                     files.Add(generatePdf(dgvPassengers.SelectedRows[i], i + 1));
-                    ((Passenger)dgvPassengers.SelectedRows[i].DataBoundItem).Printed = true;
+                    //  ((Passenger)dgvPassengers.SelectedRows[i].DataBoundItem).Printed = true;
                 }//for
                 MergePDFs(files, sfd.FileName);
                 ctx.SaveChanges();
@@ -171,16 +184,16 @@ namespace VisaX
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if (rbToday.Checked)
-                dgvPassengers.DataSource = (from p in ctx.Passengers
-                                            where (p.FullName.Contains(txtFilter.Text)
-                                                || p.PassportNum.Contains(txtFilter.Text)) && p.EntryDate == DateTime.Today
-                                            select p).ToList();
-            else
-                dgvPassengers.DataSource = (from p in ctx.Passengers
-                                            where p.FullName.Contains(txtFilter.Text)
-                                               || p.PassportNum.Contains(txtFilter.Text)
-                                            select p).ToList();
+            //if (rbToday.Checked)
+            //    dgvPassengers.DataSource = (from p in ctx.Passengers
+            //                                where (p.FullName.Contains(txtFilter.Text)
+            //                                    || p.PassportNum.Contains(txtFilter.Text)) && p.EntryDate == DateTime.Today
+            //                                select p).ToList();
+            //else
+            dgvPassengers.DataSource = (from p in ctx.Passengers
+                                        where p.FullName.Contains(txtFilter.Text)
+                                           || p.PassportNum.Contains(txtFilter.Text)
+                                        select p).ToList();
         }//btnSearch_Click
 
         private void txtFilter_KeyDown(object sender, KeyEventArgs e)
@@ -229,20 +242,20 @@ namespace VisaX
             //form.SetField("form1[0].#subform[0].#field[2]", "ایرانیه");
             //form.SetField("form1[0].#subform[0].#field[3]", "ایرانیه");
             //form.SetField("form1[0].#subform[0].#field[9]", "ایران");
-            form.SetField("form1[0].#subform[0].#field[8]", p.BornDate.Year.ToString());
-            form.SetField("form1[0].#subform[0].#field[5]", p.BornDate.Month.ToString("00"));
-            form.SetField("form1[0].#subform[0].#field[6]", p.BornDate.Day.ToString("00"));
+            form.SetField("form1[0].#subform[0].#field[8]", p.BornDate.HasValue ? p.BornDate.Value.Year.ToString() : string.Empty);
+            form.SetField("form1[0].#subform[0].#field[5]", p.BornDate.HasValue ? p.BornDate.Value.Year.ToString("00") : string.Empty);
+            form.SetField("form1[0].#subform[0].#field[6]", p.BornDate.HasValue ? p.BornDate.Value.Day.ToString("00") : string.Empty);
             form.SetField("form1[0].#subform[0].#field[21]", p.PassportNum);
 
             //Issue Date
-            form.SetField("form1[0].#subform[0].#field[25]", p.IssueDate.Year.ToString());
-            form.SetField("form1[0].#subform[0].#field[22]", p.IssueDate.Month.ToString("00"));
-            form.SetField("form1[0].#subform[0].#field[23]", p.IssueDate.Day.ToString("00"));
+            form.SetField("form1[0].#subform[0].#field[25]", p.IssueDate.HasValue ? p.IssueDate.Value.Year.ToString() : string.Empty);
+            form.SetField("form1[0].#subform[0].#field[22]", p.IssueDate.HasValue ? p.IssueDate.Value.Month.ToString("00") : string.Empty);
+            form.SetField("form1[0].#subform[0].#field[23]", p.IssueDate.HasValue ? p.IssueDate.Value.Day.ToString("00") : string.Empty);
 
             //Expiry Date
-            form.SetField("form1[0].#subform[0].#field[30]", p.ExpiryDate.Year.ToString());
-            form.SetField("form1[0].#subform[0].#field[27]", p.ExpiryDate.Month.ToString("00"));//Month
-            form.SetField("form1[0].#subform[0].#field[28]", p.ExpiryDate.Day.ToString("00"));//Day
+            form.SetField("form1[0].#subform[0].#field[30]", p.ExpiryDate.HasValue ? p.ExpiryDate.Value.Year.ToString() : string.Empty);
+            form.SetField("form1[0].#subform[0].#field[27]", p.ExpiryDate.HasValue ? p.ExpiryDate.Value.Month.ToString() : string.Empty);//Month
+            form.SetField("form1[0].#subform[0].#field[28]", p.ExpiryDate.HasValue ? p.ExpiryDate.Value.Day.ToString() : string.Empty); ;//Day
             //form.SetFieldProperty("form1[0].#subform[0].#field[0]", "textcolor", iTextSharp.text.BaseColor.RED, null);
 
             stamp.Close();
@@ -312,10 +325,11 @@ namespace VisaX
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            Passenger p = (Passenger)dgvPassengers.CurrentRow.DataBoundItem;
-            if (MessageBox.Show("آیا مایل به حذف این رکورد هستید؟", p.FullName, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes)
+            int id = (int)dgvPassengers.SelectedRows[0].Cells["colRequestID"].Value;
+            Request req = (from p in ctx.Requests where p.ID == id select p).First();
+            if (MessageBox.Show("آیا مایل به حذف این درخواست هستید؟", req.Passenger.FullName, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes)
             {
-                ctx.Passengers.Remove(p);
+                ctx.Requests.Remove(req);
                 ctx.SaveChanges();
                 refreshGrid();
             }//if
@@ -334,6 +348,13 @@ namespace VisaX
         private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnHistory_Click(object sender, EventArgs e)
+        {
+            int id = (int)dgvPassengers.SelectedRows[0].Cells["colPassengerID"].Value;
+            Passenger p = (from ps in ctx.Passengers where ps.ID == id select ps).First();
+            new frmHistory(p).ShowDialog();
         }
     }
 }

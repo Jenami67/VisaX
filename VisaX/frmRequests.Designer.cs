@@ -1,6 +1,6 @@
 ﻿namespace VisaX
 {
-    partial class frmMain
+    partial class frmRequests
     {
         /// <summary>
         /// Required designer variable.
@@ -28,31 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvPassengers = new System.Windows.Forms.DataGridView();
+            this.colPassengerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRequestID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPassportNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBornDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIssueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colExpiryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colGender = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.llbSettings = new System.Windows.Forms.LinkLabel();
+            this.btnHistory = new System.Windows.Forms.Button();
             this.btnExportPDF = new System.Windows.Forms.Button();
             this.btnExportExcel = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.rbYesterday = new System.Windows.Forms.RadioButton();
             this.chkNotPrinted = new System.Windows.Forms.CheckBox();
             this.rbAll = new System.Windows.Forms.RadioButton();
             this.rbToday = new System.Windows.Forms.RadioButton();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtFilter = new System.Windows.Forms.TextBox();
-            this.rbYesterday = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPassengers)).BeginInit();
             this.panel1.SuspendLayout();
@@ -82,18 +83,19 @@
             // 
             this.dgvPassengers.AllowUserToAddRows = false;
             this.dgvPassengers.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2);
-            this.dgvPassengers.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2);
+            this.dgvPassengers.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPassengers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPassengers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPassengers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colPassengerID,
+            this.colRequestID,
             this.colID,
-            this.colFullName,
             this.colPassportNum,
+            this.colFullName,
             this.colBornDate,
             this.colIssueDate,
-            this.colExpiryDate,
-            this.colGender});
+            this.colExpiryDate});
             this.dgvPassengers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPassengers.Location = new System.Drawing.Point(3, 59);
             this.dgvPassengers.Name = "dgvPassengers";
@@ -104,20 +106,28 @@
             this.dgvPassengers.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvPassengers_RowsAdded);
             this.dgvPassengers.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvPassengers_RowsRemoved);
             // 
+            // colPassengerID
+            // 
+            this.colPassengerID.DataPropertyName = "PassengerID";
+            this.colPassengerID.HeaderText = "PassengerID";
+            this.colPassengerID.Name = "colPassengerID";
+            this.colPassengerID.ReadOnly = true;
+            this.colPassengerID.Visible = false;
+            // 
+            // colRequestID
+            // 
+            this.colRequestID.DataPropertyName = "ID";
+            this.colRequestID.HeaderText = "RequestID";
+            this.colRequestID.Name = "colRequestID";
+            this.colRequestID.ReadOnly = true;
+            this.colRequestID.Visible = false;
+            // 
             // colID
             // 
-            this.colID.DataPropertyName = "ID";
             this.colID.FillWeight = 50F;
             this.colID.HeaderText = "کد";
             this.colID.Name = "colID";
             this.colID.ReadOnly = true;
-            // 
-            // colFullName
-            // 
-            this.colFullName.DataPropertyName = "FullName";
-            this.colFullName.HeaderText = "نام";
-            this.colFullName.Name = "colFullName";
-            this.colFullName.ReadOnly = true;
             // 
             // colPassportNum
             // 
@@ -125,6 +135,13 @@
             this.colPassportNum.HeaderText = "شماره پاسپورت";
             this.colPassportNum.Name = "colPassportNum";
             this.colPassportNum.ReadOnly = true;
+            // 
+            // colFullName
+            // 
+            this.colFullName.DataPropertyName = "FullName";
+            this.colFullName.HeaderText = "نام";
+            this.colFullName.Name = "colFullName";
+            this.colFullName.ReadOnly = true;
             // 
             // colBornDate
             // 
@@ -147,17 +164,9 @@
             this.colExpiryDate.Name = "colExpiryDate";
             this.colExpiryDate.ReadOnly = true;
             // 
-            // colGender
-            // 
-            this.colGender.DataPropertyName = "Gender";
-            this.colGender.HeaderText = "جنست";
-            this.colGender.Name = "colGender";
-            this.colGender.ReadOnly = true;
-            this.colGender.Visible = false;
-            // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.llbSettings);
+            this.panel1.Controls.Add(this.btnHistory);
             this.panel1.Controls.Add(this.btnExportPDF);
             this.panel1.Controls.Add(this.btnExportExcel);
             this.panel1.Controls.Add(this.btnDelete);
@@ -169,17 +178,17 @@
             this.panel1.Size = new System.Drawing.Size(939, 64);
             this.panel1.TabIndex = 16;
             // 
-            // llbSettings
+            // btnHistory
             // 
-            this.llbSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.llbSettings.AutoSize = true;
-            this.llbSettings.Location = new System.Drawing.Point(7, 42);
-            this.llbSettings.Name = "llbSettings";
-            this.llbSettings.Size = new System.Drawing.Size(47, 14);
-            this.llbSettings.TabIndex = 5;
-            this.llbSettings.TabStop = true;
-            this.llbSettings.Text = "تنظیمات";
-            this.llbSettings.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbSettings_LinkClicked);
+            this.btnHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHistory.Enabled = false;
+            this.btnHistory.Location = new System.Drawing.Point(36, 9);
+            this.btnHistory.Name = "btnHistory";
+            this.btnHistory.Size = new System.Drawing.Size(142, 45);
+            this.btnHistory.TabIndex = 5;
+            this.btnHistory.Text = "سابقه";
+            this.btnHistory.UseVisualStyleBackColor = true;
+            this.btnHistory.Click += new System.EventHandler(this.btnHistory_Click);
             // 
             // btnExportPDF
             // 
@@ -255,6 +264,18 @@
             this.panel2.Size = new System.Drawing.Size(939, 50);
             this.panel2.TabIndex = 17;
             // 
+            // rbYesterday
+            // 
+            this.rbYesterday.AutoSize = true;
+            this.rbYesterday.Location = new System.Drawing.Point(137, 3);
+            this.rbYesterday.Name = "rbYesterday";
+            this.rbYesterday.Size = new System.Drawing.Size(48, 18);
+            this.rbYesterday.TabIndex = 2;
+            this.rbYesterday.Text = "دیروز";
+            this.rbYesterday.UseVisualStyleBackColor = true;
+            this.rbYesterday.Visible = false;
+            this.rbYesterday.CheckedChanged += new System.EventHandler(this.rbYesterday_CheckedChanged);
+            // 
             // chkNotPrinted
             // 
             this.chkNotPrinted.AutoSize = true;
@@ -265,6 +286,7 @@
             this.chkNotPrinted.Text = "فقط چاپ نشده ها";
             this.chkNotPrinted.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkNotPrinted.UseVisualStyleBackColor = true;
+            this.chkNotPrinted.Visible = false;
             this.chkNotPrinted.CheckedChanged += new System.EventHandler(this.chkNotPrinted_CheckedChanged);
             // 
             // rbAll
@@ -276,6 +298,7 @@
             this.rbAll.TabIndex = 4;
             this.rbAll.Text = "همه";
             this.rbAll.UseVisualStyleBackColor = true;
+            this.rbAll.Visible = false;
             // 
             // rbToday
             // 
@@ -285,8 +308,10 @@
             this.rbToday.Name = "rbToday";
             this.rbToday.Size = new System.Drawing.Size(48, 18);
             this.rbToday.TabIndex = 3;
+            this.rbToday.TabStop = true;
             this.rbToday.Text = "امروز";
             this.rbToday.UseVisualStyleBackColor = true;
+            this.rbToday.Visible = false;
             this.rbToday.CheckedChanged += new System.EventHandler(this.rbToday_CheckedChanged);
             // 
             // btnSearch
@@ -319,18 +344,7 @@
             this.txtFilter.TabIndex = 0;
             this.txtFilter.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilter_KeyDown);
             // 
-            // rbYesterday
-            // 
-            this.rbYesterday.AutoSize = true;
-            this.rbYesterday.Location = new System.Drawing.Point(137, 3);
-            this.rbYesterday.Name = "rbYesterday";
-            this.rbYesterday.Size = new System.Drawing.Size(48, 18);
-            this.rbYesterday.TabIndex = 2;
-            this.rbYesterday.Text = "دیروز";
-            this.rbYesterday.UseVisualStyleBackColor = true;
-            this.rbYesterday.CheckedChanged += new System.EventHandler(this.rbYesterday_CheckedChanged);
-            // 
-            // frmMain
+            // frmRequests
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -339,7 +353,7 @@
             this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(960, 522);
-            this.Name = "frmMain";
+            this.Name = "frmRequests";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.Text = "شرکه زهره البصره";
@@ -349,7 +363,6 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPassengers)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -370,18 +383,19 @@
         private System.Windows.Forms.Button btnExportPDF;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.LinkLabel llbSettings;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFullName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPassportNum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colBornDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colIssueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colExpiryDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colGender;
         private System.Windows.Forms.RadioButton rbAll;
         private System.Windows.Forms.RadioButton rbToday;
         private System.Windows.Forms.CheckBox chkNotPrinted;
         private System.Windows.Forms.RadioButton rbYesterday;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPassengerID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRequestID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPassportNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFullName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colBornDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIssueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colExpiryDate;
+        private System.Windows.Forms.Button btnHistory;
     }
 }
 
