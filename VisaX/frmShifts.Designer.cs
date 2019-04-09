@@ -39,15 +39,16 @@
             this.btnSearchRequest = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnList = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvShifts = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPassportNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnList = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShifts)).BeginInit();
@@ -59,9 +60,9 @@
             this.dtpTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpTo.CustomFormat = "yyyy/MM/dd";
             this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpTo.Location = new System.Drawing.Point(629, 13);
+            this.dtpTo.Location = new System.Drawing.Point(638, 12);
             this.dtpTo.Name = "dtpTo";
-            this.dtpTo.Size = new System.Drawing.Size(121, 20);
+            this.dtpTo.Size = new System.Drawing.Size(121, 21);
             this.dtpTo.TabIndex = 4;
             // 
             // dtpFrom
@@ -69,25 +70,25 @@
             this.dtpFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpFrom.CustomFormat = "yyyy/MM/dd";
             this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFrom.Location = new System.Drawing.Point(825, 13);
+            this.dtpFrom.Location = new System.Drawing.Point(826, 9);
             this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.Size = new System.Drawing.Size(121, 20);
+            this.dtpFrom.Size = new System.Drawing.Size(121, 21);
             this.dtpFrom.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(756, 16);
+            this.label2.Location = new System.Drawing.Point(765, 17);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 13);
+            this.label2.Size = new System.Drawing.Size(41, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "تا تاریخ:";
             // 
             // btnSearch
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Location = new System.Drawing.Point(530, 11);
+            this.btnSearch.Location = new System.Drawing.Point(554, 12);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 1;
@@ -98,7 +99,7 @@
             // btnNew
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNew.Location = new System.Drawing.Point(850, 9);
+            this.btnNew.Location = new System.Drawing.Point(491, 9);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(142, 45);
             this.btnNew.TabIndex = 0;
@@ -110,9 +111,9 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(950, 16);
+            this.label1.Location = new System.Drawing.Point(953, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 13);
+            this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "از تاریخ:";
             // 
@@ -122,7 +123,7 @@
             this.llbSettings.AutoSize = true;
             this.llbSettings.Location = new System.Drawing.Point(7, 42);
             this.llbSettings.Name = "llbSettings";
-            this.llbSettings.Size = new System.Drawing.Size(43, 13);
+            this.llbSettings.Size = new System.Drawing.Size(45, 13);
             this.llbSettings.TabIndex = 5;
             this.llbSettings.TabStop = true;
             this.llbSettings.Text = "تنظیمات";
@@ -131,7 +132,7 @@
             // 
             this.btnSearchRequest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSearchRequest.Enabled = false;
-            this.btnSearchRequest.Location = new System.Drawing.Point(406, 9);
+            this.btnSearchRequest.Location = new System.Drawing.Point(47, 9);
             this.btnSearchRequest.Name = "btnSearchRequest";
             this.btnSearchRequest.Size = new System.Drawing.Size(142, 45);
             this.btnSearchRequest.TabIndex = 4;
@@ -142,7 +143,7 @@
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(554, 9);
+            this.btnDelete.Location = new System.Drawing.Point(195, 9);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(142, 45);
             this.btnDelete.TabIndex = 2;
@@ -157,11 +158,22 @@
             this.panel1.Controls.Add(this.btnSearchRequest);
             this.panel1.Controls.Add(this.btnDelete);
             this.panel1.Controls.Add(this.btnNew);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 389);
+            this.panel1.Location = new System.Drawing.Point(285, 440);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1004, 64);
+            this.panel1.Size = new System.Drawing.Size(645, 64);
             this.panel1.TabIndex = 16;
+            // 
+            // btnList
+            // 
+            this.btnList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnList.Enabled = false;
+            this.btnList.Location = new System.Drawing.Point(343, 9);
+            this.btnList.Name = "btnList";
+            this.btnList.Size = new System.Drawing.Size(142, 45);
+            this.btnList.TabIndex = 6;
+            this.btnList.Text = "متقاضیان";
+            this.btnList.UseVisualStyleBackColor = true;
+            this.btnList.Click += new System.EventHandler(this.btnList_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -170,8 +182,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             this.tableLayoutPanel1.Controls.Add(this.dgvShifts, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -179,7 +191,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1010, 456);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(933, 507);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // dgvShifts
@@ -191,18 +203,20 @@
             this.dgvShifts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvShifts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvShifts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colNumber,
             this.colID,
             this.colPassportNum,
             this.colFullName,
             this.colUser,
             this.colCount});
-            this.dgvShifts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvShifts.Location = new System.Drawing.Point(3, 59);
+            this.dgvShifts.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dgvShifts.Location = new System.Drawing.Point(-74, 59);
             this.dgvShifts.Name = "dgvShifts";
             this.dgvShifts.ReadOnly = true;
             this.dgvShifts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvShifts.Size = new System.Drawing.Size(1004, 324);
+            this.dgvShifts.Size = new System.Drawing.Size(1004, 375);
             this.dgvShifts.TabIndex = 0;
+            this.dgvShifts.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvShifts_RowPostPaint);
             this.dgvShifts.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvPassengers_RowsAdded);
             this.dgvShifts.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvPassengers_RowsRemoved);
             // 
@@ -214,10 +228,16 @@
             this.panel2.Controls.Add(this.btnSearch);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Location = new System.Drawing.Point(-74, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1004, 50);
             this.panel2.TabIndex = 17;
+            // 
+            // colNumber
+            // 
+            this.colNumber.HeaderText = "ردیف";
+            this.colNumber.Name = "colNumber";
+            this.colNumber.ReadOnly = true;
             // 
             // colID
             // 
@@ -255,28 +275,17 @@
             this.colCount.Name = "colCount";
             this.colCount.ReadOnly = true;
             // 
-            // btnList
-            // 
-            this.btnList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnList.Enabled = false;
-            this.btnList.Location = new System.Drawing.Point(702, 9);
-            this.btnList.Name = "btnList";
-            this.btnList.Size = new System.Drawing.Size(142, 45);
-            this.btnList.TabIndex = 6;
-            this.btnList.Text = "متقاضیان";
-            this.btnList.UseVisualStyleBackColor = true;
-            this.btnList.Click += new System.EventHandler(this.btnList_Click);
-            // 
             // frmShifts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1010, 456);
+            this.ClientSize = new System.Drawing.Size(933, 507);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.Name = "frmShifts";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
-            this.Text = "frmShifts";
+            this.Text = "شیفت ها";
             this.Load += new System.EventHandler(this.frmShifts_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -302,11 +311,12 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.DataGridView dgvShifts;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button btnList;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPassportNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFullName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUser;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
-        private System.Windows.Forms.Button btnList;
     }
 }

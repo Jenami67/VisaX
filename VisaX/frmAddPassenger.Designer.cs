@@ -291,6 +291,7 @@
             this.RightToLeftLayout = true;
             this.ShowInTaskbar = false;
             this.Text = "افزودن متقاضی";
+            this.Load += new System.EventHandler(this.frmAddPassenger_Load);
             ((System.ComponentModel.ISupportInitialize)(this.erp)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

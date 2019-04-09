@@ -69,6 +69,24 @@ namespace VisaX
             //}
         }
 
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            dgvPassengers.DataSource = (from r in ctx.Requests
+                                        where r.ShiftID == SelectedShift.ID
+                                           && (r.Passenger.FullName.Contains(txtFilter.Text)
+                                           || r.Passenger.PassportNum.Contains(txtFilter.Text))
+                                        select new
+                                        {
+                                            r.ID,
+                                            r.PassengerID,
+                                            r.Passenger.PassportNum,
+                                            r.Passenger.FullName,
+                                            r.Passenger.BornDate,
+                                            r.Passenger.IssueDate,
+                                            r.Passenger.ExpiryDate
+                                        }).ToList();
+        }//btnSearch_Click
+
         private void frmMain_Load(object sender, EventArgs e)
         {
             this.refreshGrid();
@@ -78,7 +96,7 @@ namespace VisaX
         {
             int id = (int)dgvPassengers.SelectedRows[0].Cells["colPassengerID"].Value;
             Passenger passenger = (from p in ctx.Passengers where p.ID == id select p).First();
-            new frmAddPassenger(passenger, this.ctx, this.SelectedShift,true).ShowDialog();
+            new frmAddPassenger(passenger, this.ctx, this.SelectedShift, true).ShowDialog();
             this.refreshGrid();
         }
 
@@ -92,7 +110,7 @@ namespace VisaX
         {
             for (int i = 0; i < dgvPassengers.Rows.Count; i++)
                 if (i % 2 != 0)
-                    dgvPassengers.Rows[i].DefaultCellStyle.BackColor = Color.WhiteSmoke;
+                    dgvPassengers.Rows[i].DefaultCellStyle.BackColor = Color.AliceBlue;
         }
 
         private void btnExportExcel_Click(object sender, EventArgs e)
@@ -182,20 +200,6 @@ namespace VisaX
             }//if
         }//btnExportPDF_Click
 
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            //if (rbToday.Checked)
-            //    dgvPassengers.DataSource = (from p in ctx.Passengers
-            //                                where (p.FullName.Contains(txtFilter.Text)
-            //                                    || p.PassportNum.Contains(txtFilter.Text)) && p.EntryDate == DateTime.Today
-            //                                select p).ToList();
-            //else
-            dgvPassengers.DataSource = (from p in ctx.Passengers
-                                        where p.FullName.Contains(txtFilter.Text)
-                                           || p.PassportNum.Contains(txtFilter.Text)
-                                        select p).ToList();
-        }//btnSearch_Click
-
         private void txtFilter_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -211,7 +215,7 @@ namespace VisaX
 
         private void dgvPassengers_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            btnDelete.Enabled = btnEdit.Enabled = btnExportExcel.Enabled = btnExportPDF.Enabled = btnHistory.Enabled=
+            btnDelete.Enabled = btnEdit.Enabled = btnExportExcel.Enabled = btnExportPDF.Enabled = btnHistory.Enabled =
                dgvPassengers.Rows.Count != 0;
             this.rowColor();
         }
@@ -355,6 +359,11 @@ namespace VisaX
             int id = (int)dgvPassengers.SelectedRows[0].Cells["colPassengerID"].Value;
             Passenger p = (from ps in ctx.Passengers where ps.ID == id select ps).First();
             new frmHistory(p).ShowDialog();
+        }
+
+        private void dgvPassengers_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            dgvPassengers.Rows[e.RowIndex].Cells[0].Value = (e.RowIndex + 1).ToString();
         }
     }
 }

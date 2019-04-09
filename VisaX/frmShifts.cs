@@ -22,6 +22,7 @@ namespace VisaX
         {
             dtpFrom.Value = dtpTo.Value.AddMonths(-1);
             refreshGrid();
+
         }
 
         private void refreshGrid()
@@ -45,7 +46,8 @@ namespace VisaX
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            byte max = (from s in ctx.Shifts where s.Date == DateTime.Today select s.ShiftNum).Max();
+            byte max = ctx.Shifts.Where(s => s.Date == DateTime.Today).Select(s => s.ShiftNum).DefaultIfEmpty<byte>(0).Max();
+            //(from s in ctx.Shifts where s.Date == DateTime.Today select s.ShiftNum).ma
             max++;
             string message = string.Format("تولید شیفت شماره {0} به تاریخ {1} توسط {2}؟", max, DateTime.Today.ToShortDateString(), Properties.Settings.Default.User.RealName);
             if (MessageBox.Show(message, "شیفت جدید", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes)
@@ -75,7 +77,7 @@ namespace VisaX
                 }
                 catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
                 {
-                    MessageBox.Show("امکان حذف شیفتی که متقاضی در آن ثبت شده وجود ندارد.\n" +ex.ToString());
+                    MessageBox.Show("امکان حذف شیفتی که متقاضی در آن ثبت شده وجود ندارد.\n" + ex.ToString());
                     ctx.Entry(shift).Reload();
                 }
                 refreshGrid();
@@ -84,28 +86,34 @@ namespace VisaX
 
         private void btnList_Click(object sender, EventArgs e)
         {
-            int id = (int)dgvShifts.SelectedRows[0].Cells[0].Value;
+            int id = int.Parse(dgvShifts.SelectedRows[0].Cells["colID"].Value.ToString());
             Shift shift = (from s in ctx.Shifts where s.ID == id select s).First();
             new frmRequests(shift).ShowDialog();
         }
 
         private void dgvPassengers_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            btnDelete.Enabled = btnList.Enabled = dgvShifts.Rows.Count != 0;
+            btnDelete.Enabled = btnList.Enabled = btnSearch.Enabled = dgvShifts.Rows.Count != 0;
             this.rowColor();
         }
 
         private void dgvPassengers_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            btnDelete.Enabled = btnList.Enabled = dgvShifts.Rows.Count != 0;
+            btnDelete.Enabled = btnList.Enabled = btnSearch.Enabled = dgvShifts.Rows.Count != 0;
             this.rowColor();
+
         }
 
         public void rowColor()
         {
             for (int i = 0; i < dgvShifts.Rows.Count; i++)
                 if (i % 2 != 0)
-                    dgvShifts.Rows[i].DefaultCellStyle.BackColor = Color.WhiteSmoke;
+                    dgvShifts.Rows[i].DefaultCellStyle.BackColor = Color.AliceBlue;
+        }
+
+        private void dgvShifts_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            this.dgvShifts.Rows[e.RowIndex].Cells[0].Value = (e.RowIndex + 1).ToString();
         }
     }
 }

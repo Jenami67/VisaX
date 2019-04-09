@@ -37,8 +37,8 @@ namespace VisaX
             txtPassportNum.Text = p.PassportNum;
             cmbGender.SelectedIndex = p.Gender;
             txtBornDate.Text = p.BornDate.HasValue ? p.BornDate.Value.ToShortDateString() : string.Empty;
-            txtIssueDate.Text = p.IssueDate.HasValue ? p.BornDate.Value.ToShortDateString() : string.Empty;
-            txtExpiryDate.Text = p.ExpiryDate.HasValue ? p.BornDate.Value.ToShortDateString() : string.Empty;
+            txtIssueDate.Text = p.IssueDate.HasValue ? p.IssueDate.Value.ToShortDateString() : string.Empty;
+            txtExpiryDate.Text = p.ExpiryDate.HasValue ? p.ExpiryDate.Value.ToShortDateString() : string.Empty;
             this.passenger = p;
             this.justEdit = justEdit;
         }
@@ -222,6 +222,11 @@ namespace VisaX
 
                 }//if
             }
+        }
+
+        private void frmAddPassenger_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
