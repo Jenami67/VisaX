@@ -42,13 +42,13 @@
             this.btnList = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvShifts = new System.Windows.Forms.DataGridView();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPassportNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShifts)).BeginInit();
@@ -99,7 +99,7 @@
             // btnNew
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNew.Location = new System.Drawing.Point(491, 9);
+            this.btnNew.Location = new System.Drawing.Point(699, 9);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(142, 45);
             this.btnNew.TabIndex = 0;
@@ -127,23 +127,24 @@
             this.llbSettings.TabIndex = 5;
             this.llbSettings.TabStop = true;
             this.llbSettings.Text = "تنظیمات";
+            this.llbSettings.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbSettings_LinkClicked);
             // 
             // btnSearchRequest
             // 
             this.btnSearchRequest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearchRequest.Enabled = false;
-            this.btnSearchRequest.Location = new System.Drawing.Point(47, 9);
+            this.btnSearchRequest.Location = new System.Drawing.Point(255, 9);
             this.btnSearchRequest.Name = "btnSearchRequest";
             this.btnSearchRequest.Size = new System.Drawing.Size(142, 45);
             this.btnSearchRequest.TabIndex = 4;
             this.btnSearchRequest.Text = "جستجو";
             this.btnSearchRequest.UseVisualStyleBackColor = true;
+            this.btnSearchRequest.Click += new System.EventHandler(this.btnSearchRequest_Click);
             // 
             // btnDelete
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(195, 9);
+            this.btnDelete.Location = new System.Drawing.Point(403, 9);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(142, 45);
             this.btnDelete.TabIndex = 2;
@@ -158,16 +159,16 @@
             this.panel1.Controls.Add(this.btnSearchRequest);
             this.panel1.Controls.Add(this.btnDelete);
             this.panel1.Controls.Add(this.btnNew);
-            this.panel1.Location = new System.Drawing.Point(285, 440);
+            this.panel1.Location = new System.Drawing.Point(77, 440);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(645, 64);
+            this.panel1.Size = new System.Drawing.Size(853, 64);
             this.panel1.TabIndex = 16;
             // 
             // btnList
             // 
             this.btnList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnList.Enabled = false;
-            this.btnList.Location = new System.Drawing.Point(343, 9);
+            this.btnList.Location = new System.Drawing.Point(551, 9);
             this.btnList.Name = "btnList";
             this.btnList.Size = new System.Drawing.Size(142, 45);
             this.btnList.TabIndex = 6;
@@ -216,22 +217,10 @@
             this.dgvShifts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvShifts.Size = new System.Drawing.Size(1004, 375);
             this.dgvShifts.TabIndex = 0;
+            this.dgvShifts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvShifts_CellDoubleClick);
             this.dgvShifts.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvShifts_RowPostPaint);
             this.dgvShifts.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvPassengers_RowsAdded);
             this.dgvShifts.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvPassengers_RowsRemoved);
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.dtpTo);
-            this.panel2.Controls.Add(this.dtpFrom);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.btnSearch);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(-74, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1004, 50);
-            this.panel2.TabIndex = 17;
             // 
             // colNumber
             // 
@@ -274,6 +263,19 @@
             this.colCount.HeaderText = "تعداد متقاضیان";
             this.colCount.Name = "colCount";
             this.colCount.ReadOnly = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.dtpTo);
+            this.panel2.Controls.Add(this.dtpFrom);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.btnSearch);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(-74, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1004, 50);
+            this.panel2.TabIndex = 17;
             // 
             // frmShifts
             // 

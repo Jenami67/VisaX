@@ -90,6 +90,7 @@ namespace VisaX
         private void frmMain_Load(object sender, EventArgs e)
         {
             this.refreshGrid();
+            this.Text = string.Format("متقاضیان ویزای تاریخ {0:yyyy/MM/dd} شیفت {1}" ,this.SelectedShift.Date, this.SelectedShift.ShiftNum);
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -117,18 +118,6 @@ namespace VisaX
         {
             string path = "./PassengerList.xls";
             string absPath = Path.GetFullPath(path);
-
-            //Statistic st = (from s in ctx.Statistics where s.Day == DateTime.Today select s).FirstOrDefault();
-            //if (st != null)
-            //    st.Times++;
-            //else
-            //{
-            //    st = new Statistic { Day = DateTime.Today, Times = 1 };
-            //    ctx.Statistics.Add(st);
-            //}
-
-
-            ctx.SaveChanges();
 
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Excel Documents (*.xls)|*.xls";
@@ -182,9 +171,9 @@ namespace VisaX
             List<string> files = new List<string>();
             if (sfd.ShowDialog() == DialogResult.OK)
             {
+                Directory.CreateDirectory(Path.GetTempPath() + "VisaX");
                 foreach (string file in Directory.GetFiles(Path.GetTempPath() + "VisaX"))
                     File.Delete(file);
-                Directory.CreateDirectory(Path.GetTempPath() + "VisaX");
 
                 for (int i = 0; i < dgvPassengers.SelectedRows.Count; i++)
                 {
@@ -236,16 +225,12 @@ namespace VisaX
             string fullPath = Path.GetTempPath() + String.Format("VisaX\\{0:00}.pdf", i);
             PdfStamper stamp = new PdfStamper(reader, new FileStream(fullPath, FileMode.Create));
             AcroFields form = stamp.AcroFields;
-            // stamp.FormFlattening = true;
-            //form.GenerateAppearances = true;
-            //stamp.FormFlattening = true;
+            
+          
             Passenger p = (Passenger)r.DataBoundItem;
             form.SetField("form1[0].#subform[0].#field[0]", p.FullName);
             //Radio for Gender
             form.SetField("form1[0].#subform[0].RadioButtonList[0]", (2 - p.Gender).ToString());
-            //form.SetField("form1[0].#subform[0].#field[2]", "ایرانیه");
-            //form.SetField("form1[0].#subform[0].#field[3]", "ایرانیه");
-            //form.SetField("form1[0].#subform[0].#field[9]", "ایران");
             form.SetField("form1[0].#subform[0].#field[8]", p.BornDate.HasValue ? p.BornDate.Value.Year.ToString() : string.Empty);
             form.SetField("form1[0].#subform[0].#field[5]", p.BornDate.HasValue ? p.BornDate.Value.Year.ToString("00") : string.Empty);
             form.SetField("form1[0].#subform[0].#field[6]", p.BornDate.HasValue ? p.BornDate.Value.Day.ToString("00") : string.Empty);
@@ -260,7 +245,6 @@ namespace VisaX
             form.SetField("form1[0].#subform[0].#field[30]", p.ExpiryDate.HasValue ? p.ExpiryDate.Value.Year.ToString() : string.Empty);
             form.SetField("form1[0].#subform[0].#field[27]", p.ExpiryDate.HasValue ? p.ExpiryDate.Value.Month.ToString() : string.Empty);//Month
             form.SetField("form1[0].#subform[0].#field[28]", p.ExpiryDate.HasValue ? p.ExpiryDate.Value.Day.ToString() : string.Empty); ;//Day
-            //form.SetFieldProperty("form1[0].#subform[0].#field[0]", "textcolor", iTextSharp.text.BaseColor.RED, null);
 
             stamp.Close();
             reader.Close();

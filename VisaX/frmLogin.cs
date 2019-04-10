@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,6 +13,7 @@ namespace VisaX
 {
     public partial class frmLogin : Form
     {
+        VisaXEntities ctx = new VisaXEntities();
         public frmLogin()
         {
             InitializeComponent();
@@ -19,10 +21,17 @@ namespace VisaX
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (txtPassword.Text == Properties.Settings.Default.Pass)
+
+            User usr = (from u in ctx.Users
+                        where u.UserName.Decrypt() == txtUserName.Text
+                        && u.Password == txtPassword.Text
+                        select u).FirstOrDefault();
+
+            if (usr != null)
             {
                 Hide();
-                new frmRequests().ShowDialog();
+                Properties.Settings.Default.User = usr;
+                new frmShifts().ShowDialog();
                 Close();
             }//if
             else
@@ -37,6 +46,34 @@ namespace VisaX
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+            
+        }
+
+        
+
+    }
+
+    public static class StringUtil
+    {
+        private static byte[] key = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
+        private static byte[] iv = new byte[8] { 1, 2, 3, 4, 5, 6, 7, 8 };
+
+        public static string Crypt(this string text)
+        {
+            SymmetricAlgorithm algorithm = DES.Create();
+            ICryptoTransform transform = algorithm.CreateEncryptor(key, iv);
+            byte[] inputbuffer = Encoding.Unicode.GetBytes(text);
+            byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
+            return Convert.ToBase64String(outputBuffer);
+        }
+
+        public static string Decrypt(this string text)
+        {
+            SymmetricAlgorithm algorithm = DES.Create();
+            ICryptoTransform transform = algorithm.CreateDecryptor(key, iv);
+            byte[] inputbuffer = Convert.FromBase64String(text);
+            byte[] outputBuffer = transform.TransformFinalBlock(inputbuffer, 0, inputbuffer.Length);
+            return Encoding.Unicode.GetString(outputBuffer);
         }
     }
 }

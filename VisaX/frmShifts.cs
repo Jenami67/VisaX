@@ -93,13 +93,13 @@ namespace VisaX
 
         private void dgvPassengers_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            btnDelete.Enabled = btnList.Enabled = btnSearch.Enabled = dgvShifts.Rows.Count != 0;
+            btnDelete.Enabled = btnList.Enabled = dgvShifts.Rows.Count != 0;
             this.rowColor();
         }
 
         private void dgvPassengers_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            btnDelete.Enabled = btnList.Enabled = btnSearch.Enabled = dgvShifts.Rows.Count != 0;
+            btnDelete.Enabled = btnList.Enabled = dgvShifts.Rows.Count != 0;
             this.rowColor();
 
         }
@@ -114,6 +114,24 @@ namespace VisaX
         private void dgvShifts_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             this.dgvShifts.Rows[e.RowIndex].Cells[0].Value = (e.RowIndex + 1).ToString();
+        }
+
+
+        private void dgvShifts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int id = int.Parse(dgvShifts.SelectedRows[0].Cells["colID"].Value.ToString());
+            Shift shift = (from s in ctx.Shifts where s.ID == id select s).First();
+            new frmRequests(shift).ShowDialog();
+        }
+
+        private void btnSearchRequest_Click(object sender, EventArgs e)
+        {
+            new frmSearch().ShowDialog();
+        }
+
+        private void llbSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new frmSettings().ShowDialog();
         }
     }
 }

@@ -45,5 +45,17 @@ namespace VisaX.Properties {
                 this["User"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DatesDisabled {
+            get {
+                return ((bool)(this["DatesDisabled"]));
+            }
+            set {
+                this["DatesDisabled"] = value;
+            }
+        }
     }
 }

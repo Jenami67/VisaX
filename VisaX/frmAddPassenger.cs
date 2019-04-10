@@ -223,10 +223,5 @@ namespace VisaX
                 }//if
             }
         }
-
-        private void frmAddPassenger_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

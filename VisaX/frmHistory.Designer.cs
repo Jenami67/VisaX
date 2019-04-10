@@ -31,14 +31,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvRequests = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnNew = new System.Windows.Forms.Button();
-            this.lblTitle = new System.Windows.Forms.Label();
             this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPassportNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnNew = new System.Windows.Forms.Button();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequests)).BeginInit();
             this.panel1.SuspendLayout();
@@ -86,39 +86,6 @@
             this.dgvRequests.TabIndex = 0;
             this.dgvRequests.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvRequests_RowPostPaint);
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.btnNew);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 392);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(764, 64);
-            this.panel1.TabIndex = 16;
-            // 
-            // btnNew
-            // 
-            this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNew.Location = new System.Drawing.Point(1414, -27);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(142, 45);
-            this.btnNew.TabIndex = 0;
-            this.btnNew.Text = "شیفت جدید";
-            this.btnNew.UseVisualStyleBackColor = true;
-            // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTitle.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.lblTitle.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.lblTitle.Location = new System.Drawing.Point(3, 0);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Padding = new System.Windows.Forms.Padding(5);
-            this.lblTitle.Size = new System.Drawing.Size(764, 44);
-            this.lblTitle.TabIndex = 17;
-            this.lblTitle.Text = "label1";
-            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // colNumber
             // 
             this.colNumber.HeaderText = "ردیف";
@@ -155,6 +122,39 @@
             this.colUser.Name = "colUser";
             this.colUser.ReadOnly = true;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnNew);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 392);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(764, 64);
+            this.panel1.TabIndex = 16;
+            // 
+            // btnNew
+            // 
+            this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNew.Location = new System.Drawing.Point(1414, -27);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(142, 45);
+            this.btnNew.TabIndex = 0;
+            this.btnNew.Text = "شیفت جدید";
+            this.btnNew.UseVisualStyleBackColor = true;
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTitle.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.lblTitle.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.lblTitle.Location = new System.Drawing.Point(3, 0);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Padding = new System.Windows.Forms.Padding(5);
+            this.lblTitle.Size = new System.Drawing.Size(764, 44);
+            this.lblTitle.TabIndex = 17;
+            this.lblTitle.Text = "label1";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // frmHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -165,7 +165,7 @@
             this.Name = "frmHistory";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
-            this.Text = "frmHistory";
+            this.Text = "سابقه متقاضی";
             this.Load += new System.EventHandler(this.frmHistory_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

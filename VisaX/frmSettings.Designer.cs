@@ -28,10 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtPdfPath = new System.Windows.Forms.TextBox();
             this.fbdPdf = new System.Windows.Forms.FolderBrowserDialog();
-            this.btnBrowse = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.txtCurrentPass = new System.Windows.Forms.TextBox();
@@ -40,42 +37,17 @@
             this.txtNewPass = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtRepNewPass = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtPdfPath = new System.Windows.Forms.TextBox();
+            this.btnBrowse = new System.Windows.Forms.Button();
+            this.btnChangePassword = new System.Windows.Forms.Button();
+            this.chkDatesDisabled = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(223, 11);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "محل ذخیره فایل های pdf:";
-            this.label1.Visible = false;
-            // 
-            // txtPdfPath
-            // 
-            this.txtPdfPath.Location = new System.Drawing.Point(59, 30);
-            this.txtPdfPath.Name = "txtPdfPath";
-            this.txtPdfPath.ReadOnly = true;
-            this.txtPdfPath.Size = new System.Drawing.Size(292, 20);
-            this.txtPdfPath.TabIndex = 1;
-            this.txtPdfPath.Visible = false;
-            // 
-            // btnBrowse
-            // 
-            this.btnBrowse.Location = new System.Drawing.Point(12, 27);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(39, 23);
-            this.btnBrowse.TabIndex = 2;
-            this.btnBrowse.Text = "...";
-            this.btnBrowse.UseVisualStyleBackColor = true;
-            this.btnBrowse.Visible = false;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(266, 144);
+            this.btnSave.Location = new System.Drawing.Point(263, 185);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(85, 42);
             this.btnSave.TabIndex = 3;
@@ -87,7 +59,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(29, 144);
+            this.btnCancel.Location = new System.Drawing.Point(21, 185);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(85, 42);
             this.btnCancel.TabIndex = 4;
@@ -146,13 +118,66 @@
             this.txtRepNewPass.Size = new System.Drawing.Size(110, 20);
             this.txtRepNewPass.TabIndex = 9;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(223, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(125, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "محل ذخیره فایل های pdf:";
+            this.label1.Visible = false;
+            // 
+            // txtPdfPath
+            // 
+            this.txtPdfPath.Location = new System.Drawing.Point(59, 30);
+            this.txtPdfPath.Name = "txtPdfPath";
+            this.txtPdfPath.ReadOnly = true;
+            this.txtPdfPath.Size = new System.Drawing.Size(292, 20);
+            this.txtPdfPath.TabIndex = 1;
+            this.txtPdfPath.Visible = false;
+            // 
+            // btnBrowse
+            // 
+            this.btnBrowse.Location = new System.Drawing.Point(12, 27);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(39, 23);
+            this.btnBrowse.TabIndex = 2;
+            this.btnBrowse.Text = "...";
+            this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Visible = false;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
+            // btnChangePassword
+            // 
+            this.btnChangePassword.Location = new System.Drawing.Point(12, 110);
+            this.btnChangePassword.Name = "btnChangePassword";
+            this.btnChangePassword.Size = new System.Drawing.Size(77, 29);
+            this.btnChangePassword.TabIndex = 11;
+            this.btnChangePassword.Text = "تغییر رمز";
+            this.btnChangePassword.UseVisualStyleBackColor = true;
+            this.btnChangePassword.Visible = false;
+            this.btnChangePassword.Click += new System.EventHandler(this.btnChangePassword_Click);
+            // 
+            // chkDatesDisabled
+            // 
+            this.chkDatesDisabled.AutoSize = true;
+            this.chkDatesDisabled.Location = new System.Drawing.Point(189, 146);
+            this.chkDatesDisabled.Name = "chkDatesDisabled";
+            this.chkDatesDisabled.Size = new System.Drawing.Size(165, 17);
+            this.chkDatesDisabled.TabIndex = 12;
+            this.chkDatesDisabled.Text = "فیلدهای تاریخ غیرفعال شوند.";
+            this.chkDatesDisabled.UseVisualStyleBackColor = true;
+            // 
             // frmSettings
             // 
             this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(367, 198);
+            this.ClientSize = new System.Drawing.Size(364, 239);
+            this.Controls.Add(this.chkDatesDisabled);
+            this.Controls.Add(this.btnChangePassword);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtRepNewPass);
             this.Controls.Add(this.label3);
@@ -178,11 +203,7 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtPdfPath;
         private System.Windows.Forms.FolderBrowserDialog fbdPdf;
-        private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TextBox txtCurrentPass;
@@ -191,5 +212,10 @@
         private System.Windows.Forms.TextBox txtNewPass;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtRepNewPass;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtPdfPath;
+        private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.Button btnChangePassword;
+        private System.Windows.Forms.CheckBox chkDatesDisabled;
     }
 }

@@ -96,7 +96,6 @@
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(123, 20);
             this.txtUserName.TabIndex = 0;
-            this.txtUserName.Visible = false;
             // 
             // label1
             // 
@@ -107,7 +106,6 @@
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "نام کاربری:";
-            this.label1.Visible = false;
             // 
             // frmLogin
             // 
