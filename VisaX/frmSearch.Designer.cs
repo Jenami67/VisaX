@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvPassengers = new System.Windows.Forms.DataGridView();
             this.colPassengerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,8 +85,8 @@
             // 
             this.dgvPassengers.AllowUserToAddRows = false;
             this.dgvPassengers.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(2);
-            this.dgvPassengers.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2);
+            this.dgvPassengers.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPassengers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPassengers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPassengers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -212,6 +212,7 @@
             this.btnHistory.TabIndex = 5;
             this.btnHistory.Text = "سابقه";
             this.btnHistory.UseVisualStyleBackColor = true;
+            this.btnHistory.Visible = false;
             // 
             // btnExportPDF
             // 
@@ -223,6 +224,7 @@
             this.btnExportPDF.TabIndex = 4;
             this.btnExportPDF.Text = "تولید pdf";
             this.btnExportPDF.UseVisualStyleBackColor = true;
+            this.btnExportPDF.Visible = false;
             // 
             // btnExportExcel
             // 
@@ -234,6 +236,7 @@
             this.btnExportExcel.TabIndex = 3;
             this.btnExportExcel.Text = "تولید اکسل";
             this.btnExportExcel.UseVisualStyleBackColor = true;
+            this.btnExportExcel.Visible = false;
             // 
             // btnDelete
             // 
@@ -245,6 +248,7 @@
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "حذف";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Visible = false;
             // 
             // btnEdit
             // 
@@ -256,6 +260,7 @@
             this.btnEdit.TabIndex = 1;
             this.btnEdit.Text = "ویرایش";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Visible = false;
             // 
             // btnNew
             // 
@@ -266,6 +271,7 @@
             this.btnNew.TabIndex = 0;
             this.btnNew.Text = "جدید";
             this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Visible = false;
             // 
             // panel2
             // 
@@ -364,6 +370,7 @@
             this.Name = "frmSearch";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
+            this.ShowInTaskbar = false;
             this.Text = "جستجو";
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPassengers)).EndInit();

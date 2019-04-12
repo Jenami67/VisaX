@@ -21,7 +21,7 @@ namespace VisaX
 
             //if (DateTime.Now < new DateTime(2019, 4, 28))
             VisaXEntities ctx = new VisaXEntities();
-           // Properties.Settings.Default.User = (from u in ctx.Users where u.ID == 1 select u).FirstOrDefault();
+            Properties.Settings.Default.User = (from u in ctx.Users where u.ID == 5 select u).FirstOrDefault();
             Application.Run(new frmLogin());
         }
     }

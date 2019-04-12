@@ -44,7 +44,8 @@ namespace VisaX
         }
         private void txtFilter_KeyDown(object sender, KeyEventArgs e)
         {
-            getData();
+            if (e.KeyCode == Keys.Enter)
+                getData();
         }
         private void dgvPassengers_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {

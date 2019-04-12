@@ -21,22 +21,22 @@ namespace VisaX
         {
             if (fbdPdf.ShowDialog() == DialogResult.OK)
             {
-                txtPdfPath.Text = fbdPdf.SelectedPath;
+                //txtPdfPath.Text = fbdPdf.SelectedPath;
                 //Properties.Settings.Default.PdfPath = fbdPdf.SelectedPath;
             }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (txtCurrentPass.Text == Properties.Settings.Default.Pass)
-                if (txtNewPass.Text == txtRepNewPass.Text)
-                {
-                    Properties.Settings.Default.Pass = txtNewPass.Text;
-                    Properties.Settings.Default.Save();
-                    MessageBox.Show("رمز عبور جدید تنظیم شد");
-                }//if
-                else
-                    MessageBox.Show("رمز عبور با تکرار آن تطابق ندارد");
+            //if (txtCurrentPass.Text == Properties.Settings.Default.Pass)
+            //    if (txtNewPass.Text == txtRepNewPass.Text)
+            //    {
+            //        Properties.Settings.Default.Pass = txtNewPass.Text;
+            //        Properties.Settings.Default.Save();
+            //        MessageBox.Show("رمز عبور جدید تنظیم شد");
+            //    }//if
+            //    else
+            //        MessageBox.Show("رمز عبور با تکرار آن تطابق ندارد");
 
             Properties.Settings.Default.DatesDisabled = chkDatesDisabled.Checked;
             this.Close();

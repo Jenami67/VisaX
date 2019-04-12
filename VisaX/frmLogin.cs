@@ -21,9 +21,14 @@ namespace VisaX
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            if(txtUserName.Text == string.Empty)
+            {
+                lblMsg.Text = "نام کاربری را وارد کنید.";
+                return;
+            }//if
 
             User usr = (from u in ctx.Users
-                        where u.UserName.Decrypt() == txtUserName.Text
+                        where u.UserName == txtUserName.Text
                         && u.Password == txtPassword.Text
                         select u).FirstOrDefault();
 
@@ -31,7 +36,7 @@ namespace VisaX
             {
                 Hide();
                 Properties.Settings.Default.User = usr;
-                new frmShifts().ShowDialog();
+                new frmShift().ShowDialog();
                 Close();
             }//if
             else

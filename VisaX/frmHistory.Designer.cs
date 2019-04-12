@@ -165,6 +165,7 @@
             this.Name = "frmHistory";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
+            this.ShowIcon = false;
             this.Text = "سابقه متقاضی";
             this.Load += new System.EventHandler(this.frmHistory_Load);
             this.tableLayoutPanel1.ResumeLayout(false);

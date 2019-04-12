@@ -46,7 +46,8 @@ namespace VisaX
                                             r.Passenger.FullName,
                                             r.Passenger.BornDate,
                                             r.Passenger.IssueDate,
-                                            r.Passenger.ExpiryDate
+                                            r.Passenger.ExpiryDate,
+                                            r.Passenger.Gender
                                         }).ToList();
 
             //DateTime yesterday = DateTime.Today.AddDays(-1);
@@ -90,7 +91,7 @@ namespace VisaX
         private void frmMain_Load(object sender, EventArgs e)
         {
             this.refreshGrid();
-            this.Text = string.Format("متقاضیان ویزای تاریخ {0:yyyy/MM/dd} شیفت {1}" ,this.SelectedShift.Date, this.SelectedShift.ShiftNum);
+            this.Text = string.Format("متقاضیان ویزای تاریخ {0:yyyy/MM/dd} شیفت {1}", this.SelectedShift.Date, this.SelectedShift.ShiftNum);
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -121,7 +122,7 @@ namespace VisaX
 
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Excel Documents (*.xls)|*.xls";
-            sfd.FileName = this.SelectedShift.Date.ToString("yyyy-MM-dd") + string.Format("({0:00})", this.SelectedShift.ShiftNum);
+            sfd.FileName = this.SelectedShift.Date.ToString("yyyy-MM-dd") + string.Format(" ({0:00})", this.SelectedShift.ShiftNum);
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 Excel.Application excelApllication = null;
@@ -136,14 +137,14 @@ namespace VisaX
                 int i = 1;
                 foreach (DataGridViewRow row in dgvPassengers.SelectedRows)
                 {
-                    excelWorkSheet.Cells[i + 7, 8].Value = row.Cells[1].Value;
-                    excelWorkSheet.Cells[i + 7, 7].Value = row.Cells[2].Value;
-                    excelWorkSheet.Cells[i + 7, 6].Value2 = (byte)row.Cells[6].Value == 0 ? "ذکر" : "انثی";
+                    excelWorkSheet.Cells[i + 7, 8].Value = row.Cells["colFullName"].Value;
+                    excelWorkSheet.Cells[i + 7, 7].Value = row.Cells["colPassportNum"].Value;
+                    excelWorkSheet.Cells[i + 7, 6].Value2 = (byte)row.Cells["colGender"].Value == 0 ? "ذکر" : "انثی";
 
                     //format error: Exception from HRESULT: 0x800A03EC
-                    excelWorkSheet.Cells[i + 7, 5].Value2 = row.Cells[3].Value;
-                    excelWorkSheet.Cells[i + 7, 4].Value2 = row.Cells[4].Value;
-                    excelWorkSheet.Cells[i + 7, 3].Value2 = row.Cells[5].Value;
+                    excelWorkSheet.Cells[i + 7, 5].Value2 = row.Cells["colBornDate"].Value;
+                    excelWorkSheet.Cells[i + 7, 4].Value2 = row.Cells["colIssueDate"].Value;
+                    excelWorkSheet.Cells[i + 7, 3].Value2 = row.Cells["colExpiryDate"].Value;
                     i++;
                 }
 
@@ -165,23 +166,21 @@ namespace VisaX
         private void btnExportPDF_Click(object sender, EventArgs e)
         {
             sfd.Filter = "Adobe Acrobat Documents (*.pdf)|*.pdf";
-            sfd.FileName = DateTime.Today.ToString("yyyy-MM-dd"); //+ string.Format("({0:00})", st.Times);
+            sfd.FileName = this.SelectedShift.Date.ToString("yyyy-MM-dd") + string.Format(" ({0:00})", this.SelectedShift.ShiftNum);
 
             Boolean xlsToo = MessageBox.Show("آیا مایلید فایل اکسل رکوردهای انتخاب شده هم تولید شود؟", "تولید همزمان اکسل", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes;
             List<string> files = new List<string>();
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                Directory.CreateDirectory(Path.GetTempPath() + "VisaX");
-                foreach (string file in Directory.GetFiles(Path.GetTempPath() + "VisaX"))
+                string dirPath = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\VisaX";
+                Directory.CreateDirectory(dirPath);
+                foreach (string file in Directory.GetFiles(dirPath))
                     File.Delete(file);
 
                 for (int i = 0; i < dgvPassengers.SelectedRows.Count; i++)
-                {
                     files.Add(generatePdf(dgvPassengers.SelectedRows[i], i + 1));
-                    //  ((Passenger)dgvPassengers.SelectedRows[i].DataBoundItem).Printed = true;
-                }//for
+
                 MergePDFs(files, sfd.FileName);
-                ctx.SaveChanges();
                 Process.Start(sfd.FileName);
                 if (xlsToo)
                     btnExportExcel_Click(null, null);
@@ -214,7 +213,7 @@ namespace VisaX
             new frmSettings().ShowDialog();
         }
 
-        private string generatePdf(DataGridViewRow r, int i)
+        private string generatePdf(DataGridViewRow r, int fileNum)
         {
             //Path to source file
             String source = ".\\VisaForm.pdf";
@@ -222,17 +221,26 @@ namespace VisaX
             PdfReader reader = new PdfReader(source);
 
             //PdfStamper object to modify the content of the PDF
-            string fullPath = Path.GetTempPath() + String.Format("VisaX\\{0:00}.pdf", i);
+            string fullPath = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + String.Format("\\VisaX\\{0:00}.pdf", fileNum);
             PdfStamper stamp = new PdfStamper(reader, new FileStream(fullPath, FileMode.Create));
             AcroFields form = stamp.AcroFields;
-            
-          
-            Passenger p = (Passenger)r.DataBoundItem;
+
+            Passenger p = new Passenger
+            {
+                FullName = r.Cells["colFullName"].Value.ToString(),
+                BornDate = (DateTime?)r.Cells["colBornDate"].Value,
+                ExpiryDate = (DateTime?)r.Cells["colExpiryDate"].Value,
+                IssueDate = (DateTime?)r.Cells["colIssueDate"].Value,
+                Gender = (byte)r.Cells["colGender"].Value,
+                ID = (int)r.Cells["colPassengerID"].Value,
+                PassportNum = r.Cells["colPassportNum"].Value.ToString()
+            };
+
             form.SetField("form1[0].#subform[0].#field[0]", p.FullName);
             //Radio for Gender
             form.SetField("form1[0].#subform[0].RadioButtonList[0]", (2 - p.Gender).ToString());
             form.SetField("form1[0].#subform[0].#field[8]", p.BornDate.HasValue ? p.BornDate.Value.Year.ToString() : string.Empty);
-            form.SetField("form1[0].#subform[0].#field[5]", p.BornDate.HasValue ? p.BornDate.Value.Year.ToString("00") : string.Empty);
+            form.SetField("form1[0].#subform[0].#field[5]", p.BornDate.HasValue ? p.BornDate.Value.Month.ToString("00") : string.Empty);
             form.SetField("form1[0].#subform[0].#field[6]", p.BornDate.HasValue ? p.BornDate.Value.Day.ToString("00") : string.Empty);
             form.SetField("form1[0].#subform[0].#field[21]", p.PassportNum);
 
@@ -288,28 +296,23 @@ namespace VisaX
             return merged;
         }
 
-        private void frmMain_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.F2:
-                    btnNew_Click(null, null);
-                    break;
-                case Keys.F3:
-                    txtFilter.Focus();
-                    break;
-                case Keys.F4:
-                    btnEdit_Click(null, null);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        private void rbToday_CheckedChanged(object sender, EventArgs e)
-        {
-            this.refreshGrid();
-        }
+        //private void frmMain_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    switch (e.KeyCode)
+        //    {
+        //        case Keys.F2:
+        //            btnNew_Click(null, null);
+        //            break;
+        //        case Keys.F3:
+        //            txtFilter.Focus();
+        //            break;
+        //        case Keys.F4:
+        //            btnEdit_Click(null, null);
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -323,20 +326,15 @@ namespace VisaX
             }//if
         }
 
-        private void chkNotPrinted_CheckedChanged(object sender, EventArgs e)
-        {
-            refreshGrid();
-        }
+        //private void chkNotPrinted_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    refreshGrid();
+        //}
 
-        private void rbYesterday_CheckedChanged(object sender, EventArgs e)
-        {
-            this.refreshGrid();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
+        //private void rbYesterday_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    this.refreshGrid();
+        //}
 
         private void btnHistory_Click(object sender, EventArgs e)
         {
@@ -348,6 +346,11 @@ namespace VisaX
         private void dgvPassengers_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             dgvPassengers.Rows[e.RowIndex].Cells[0].Value = (e.RowIndex + 1).ToString();
+        }
+
+        private void dgvPassengers_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnEdit_Click(null, null);
         }
     }
 }

@@ -29,6 +29,9 @@ namespace VisaX
         {
             this.ctx = ctx;
             this.selectedShift = shift;
+            if (passenger == null)
+                txtBornDate.Enabled = txtIssueDate.Enabled = txtExpiryDate.Enabled = !Properties.Settings.Default.DatesDisabled;
+            //TODO: may need revise and in enter value
         }
 
         public frmAddPassenger(Passenger p, VisaXEntities ctx, Shift shift, bool justEdit = false) : this(ctx, shift)
@@ -41,50 +44,40 @@ namespace VisaX
             txtExpiryDate.Text = p.ExpiryDate.HasValue ? p.ExpiryDate.Value.ToShortDateString() : string.Empty;
             this.passenger = p;
             this.justEdit = justEdit;
+            //if (passenger != null && passenger.BornDate.HasValue)
+            //    txtBornDate.Enabled = txtIssueDate.Enabled = txtExpiryDate.Enabled = true;
+            if (passenger != null )
+                txtBornDate.Enabled = txtIssueDate.Enabled = txtExpiryDate.Enabled = passenger.BornDate.HasValue;
         }
 
         private bool validateForm()
         {
             Control cntr = null;
-            bool retVal = true;
-            DateTime tempDate;
-
+            DateTime tempDate;//just to avoid syntax error
             erp.Clear();
 
-            if (txtFullName.Text.Trim().Length < 3)
-            {
-                cntr = txtFullName;
-                retVal = false;
-            }
-            else if (txtPassportNum.Text.Trim().Length != 8)
-            {
+            if (txtPassportNum.Text.Trim().Length != 8)
                 cntr = txtPassportNum;
-                retVal = false;
-            }
+            else if (txtFullName.Text.Trim().Length < 3)
+                cntr = txtFullName;
             else if (cmbGender.SelectedIndex == -1)
-            {
                 cntr = cmbGender;
-                retVal = false;
-            }
-            else if (!DateTime.TryParse(txtBornDate.Text, out tempDate))
-            {
-                cntr = txtBornDate;
-                retVal = false;
-            }
-            else if (!DateTime.TryParse(txtIssueDate.Text, out tempDate))
-            {
-                cntr = txtIssueDate;
-                retVal = false;
-            }
-            else if (!DateTime.TryParse(txtExpiryDate.Text, out tempDate))
-            {
-                cntr = txtExpiryDate;
-                retVal = false;
-            }
+            else if (!Properties.Settings.Default.DatesDisabled && txtBornDate.Enabled)
+                if (!DateTime.TryParse(txtBornDate.Text, out tempDate))
+                    cntr = txtBornDate;
+                else if (!DateTime.TryParse(txtIssueDate.Text, out tempDate))
+                    cntr = txtIssueDate;
+                else if (!DateTime.TryParse(txtExpiryDate.Text, out tempDate))
+                    cntr = txtExpiryDate;
 
-            if (retVal == false)
+            if (cntr == null)
+                return true;
+            else
+            {
                 erp.SetError(cntr, "ورودی معتبر نیست!");
-            return retVal;
+                cntr.Focus();
+                return false;
+            }//else
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -99,13 +92,16 @@ namespace VisaX
                         FullName = txtFullName.Text,
                         PassportNum = txtPassportNum.Text,
                         Gender = (byte)cmbGender.SelectedIndex,
-                        BornDate = DateTime.Parse(txtBornDate.Text),
-                        IssueDate = DateTime.Parse(txtIssueDate.Text),
-                        ExpiryDate = DateTime.Parse(txtExpiryDate.Text),
                         UserID = Properties.Settings.Default.User.ID
-                        //EntryDate = DateTime.Today,
-                        // Printed = false
                     };
+
+                    DateTime tempDate;
+                    if (DateTime.TryParse(txtBornDate.Text, out tempDate))
+                        p.BornDate = tempDate;
+                    if (DateTime.TryParse(txtIssueDate.Text, out tempDate))
+                        p.IssueDate = tempDate;
+                    if (DateTime.TryParse(txtExpiryDate.Text, out tempDate))
+                        p.ExpiryDate = tempDate;
 
                     p.Requests.Add(new Request
                     {
@@ -124,9 +120,15 @@ namespace VisaX
                     this.passenger.FullName = txtFullName.Text;
                     this.passenger.PassportNum = txtPassportNum.Text;
                     this.passenger.Gender = (byte)cmbGender.SelectedIndex;
-                    this.passenger.BornDate = DateTime.Parse(txtBornDate.Text);
-                    this.passenger.IssueDate = DateTime.Parse(txtIssueDate.Text);
-                    this.passenger.ExpiryDate = DateTime.Parse(txtExpiryDate.Text);
+                    DateTime tempDate;
+
+                    if (DateTime.TryParse(txtBornDate.Text, out tempDate))
+                        passenger.BornDate = tempDate;
+                    if (DateTime.TryParse(txtIssueDate.Text, out tempDate))
+                        passenger.IssueDate = tempDate;
+                    if (DateTime.TryParse(txtExpiryDate.Text, out tempDate))
+                        passenger.ExpiryDate = tempDate;
+
                     this.passenger.UserID = Properties.Settings.Default.User.ID;
 
                     sucMessage = "رکورد ویرایش شد";
@@ -200,7 +202,9 @@ namespace VisaX
 
         private void txtIssueDate_Leave(object sender, EventArgs e)
         {
-            txtExpiryDate.Text = DateTime.Parse(txtIssueDate.Text).AddYears(5).ToShortDateString();
+            DateTime tempDate;
+            if (DateTime.TryParse(txtIssueDate.Text, out tempDate))
+                txtExpiryDate.Text = tempDate.AddYears(5).ToShortDateString();
         }
 
         private void txtPassportNum_TextChanged(object sender, EventArgs e)
@@ -213,13 +217,14 @@ namespace VisaX
                                   select p).FirstOrDefault();
                 if (this.passenger != null)
                 {
+                    txtBornDate.Enabled = txtIssueDate.Enabled = txtExpiryDate.Enabled = passenger.BornDate.HasValue;
+
                     txtFullName.Text = this.passenger.FullName;
                     txtPassportNum.Text = this.passenger.PassportNum;
                     cmbGender.SelectedIndex = this.passenger.Gender;
                     txtBornDate.Text = this.passenger.BornDate.HasValue ? this.passenger.BornDate.Value.ToShortDateString() : string.Empty;
-                    txtIssueDate.Text = this.passenger.BornDate.HasValue ? this.passenger.BornDate.Value.ToShortDateString() : string.Empty;
-                    txtExpiryDate.Text = this.passenger.BornDate.HasValue ? this.passenger.BornDate.Value.ToShortDateString() : string.Empty;
-
+                    txtIssueDate.Text = this.passenger.IssueDate.HasValue ? this.passenger.IssueDate.Value.ToShortDateString() : string.Empty;
+                    txtExpiryDate.Text = this.passenger.ExpiryDate.HasValue ? this.passenger.ExpiryDate.Value.ToShortDateString() : string.Empty;
                 }//if
             }
         }
