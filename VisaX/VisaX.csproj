@@ -137,12 +137,6 @@
     <Compile Include="frmShift.Designer.cs">
       <DependentUpon>frmShift.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmShifts.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmShifts.Designer.cs">
-      <DependentUpon>frmShifts.cs</DependentUpon>
-    </Compile>
     <Compile Include="Passenger.cs">
       <DependentUpon>VisaXModel.tt</DependentUpon>
     </Compile>
@@ -208,9 +202,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmShift.resx">
       <DependentUpon>frmShift.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmShifts.resx">
-      <DependentUpon>frmShifts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

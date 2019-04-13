@@ -28,29 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvShifts = new System.Windows.Forms.DataGridView();
-            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPassportNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.llbUser = new System.Windows.Forms.LinkLabel();
             this.btnList = new System.Windows.Forms.Button();
             this.llbSettings = new System.Windows.Forms.LinkLabel();
             this.btnSearchRequest = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
+            this.llbAbout = new System.Windows.Forms.LinkLabel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.dtpFrom = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.llbUser = new System.Windows.Forms.LinkLabel();
-            this.llbAbout = new System.Windows.Forms.LinkLabel();
+            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPassportNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShifts)).BeginInit();
             this.panel1.SuspendLayout();
@@ -79,8 +79,8 @@
             // 
             this.dgvShifts.AllowUserToAddRows = false;
             this.dgvShifts.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2);
-            this.dgvShifts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2);
+            this.dgvShifts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvShifts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvShifts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvShifts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -103,48 +103,6 @@
             this.dgvShifts.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvPassengers_RowsAdded);
             this.dgvShifts.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvPassengers_RowsRemoved);
             // 
-            // colNumber
-            // 
-            this.colNumber.HeaderText = "ردیف";
-            this.colNumber.Name = "colNumber";
-            this.colNumber.ReadOnly = true;
-            // 
-            // colID
-            // 
-            this.colID.DataPropertyName = "ID";
-            this.colID.FillWeight = 50F;
-            this.colID.HeaderText = "کد";
-            this.colID.Name = "colID";
-            this.colID.ReadOnly = true;
-            // 
-            // colPassportNum
-            // 
-            this.colPassportNum.DataPropertyName = "Date";
-            this.colPassportNum.HeaderText = "تاریخ";
-            this.colPassportNum.Name = "colPassportNum";
-            this.colPassportNum.ReadOnly = true;
-            // 
-            // colFullName
-            // 
-            this.colFullName.DataPropertyName = "ShiftNum";
-            this.colFullName.HeaderText = "شیفت";
-            this.colFullName.Name = "colFullName";
-            this.colFullName.ReadOnly = true;
-            // 
-            // colUser
-            // 
-            this.colUser.DataPropertyName = "RealName";
-            this.colUser.HeaderText = "کاربر";
-            this.colUser.Name = "colUser";
-            this.colUser.ReadOnly = true;
-            // 
-            // colCount
-            // 
-            this.colCount.DataPropertyName = "Count";
-            this.colCount.HeaderText = "تعداد متقاضیان";
-            this.colCount.Name = "colCount";
-            this.colCount.ReadOnly = true;
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.llbUser);
@@ -159,6 +117,20 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(794, 61);
             this.panel1.TabIndex = 0;
+            // 
+            // llbUser
+            // 
+            this.llbUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.llbUser.AutoSize = true;
+            this.llbUser.LinkArea = new System.Windows.Forms.LinkArea(0, 6);
+            this.llbUser.Location = new System.Drawing.Point(90, 40);
+            this.llbUser.Name = "llbUser";
+            this.llbUser.Size = new System.Drawing.Size(36, 18);
+            this.llbUser.TabIndex = 12;
+            this.llbUser.TabStop = true;
+            this.llbUser.Text = "کاربر  |";
+            this.llbUser.UseCompatibleTextRendering = true;
+            this.llbUser.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbUser_LinkClicked);
             // 
             // btnList
             // 
@@ -219,6 +191,18 @@
             this.btnNew.Text = "شیفت جدید";
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // llbAbout
+            // 
+            this.llbAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.llbAbout.AutoSize = true;
+            this.llbAbout.Location = new System.Drawing.Point(9, 40);
+            this.llbAbout.Name = "llbAbout";
+            this.llbAbout.Size = new System.Drawing.Size(31, 13);
+            this.llbAbout.TabIndex = 13;
+            this.llbAbout.TabStop = true;
+            this.llbAbout.Text = "درباره";
+            this.llbAbout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbAbout_LinkClicked);
             // 
             // panel2
             // 
@@ -284,31 +268,48 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "از تاریخ:";
             // 
-            // llbUser
+            // colNumber
             // 
-            this.llbUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.llbUser.AutoSize = true;
-            this.llbUser.LinkArea = new System.Windows.Forms.LinkArea(0, 6);
-            this.llbUser.Location = new System.Drawing.Point(90, 40);
-            this.llbUser.Name = "llbUser";
-            this.llbUser.Size = new System.Drawing.Size(36, 18);
-            this.llbUser.TabIndex = 12;
-            this.llbUser.TabStop = true;
-            this.llbUser.Text = "کاربر  |";
-            this.llbUser.UseCompatibleTextRendering = true;
-            this.llbUser.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbUser_LinkClicked);
+            this.colNumber.HeaderText = "ردیف";
+            this.colNumber.Name = "colNumber";
+            this.colNumber.ReadOnly = true;
             // 
-            // llbAbout
+            // colID
             // 
-            this.llbAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.llbAbout.AutoSize = true;
-            this.llbAbout.Location = new System.Drawing.Point(9, 40);
-            this.llbAbout.Name = "llbAbout";
-            this.llbAbout.Size = new System.Drawing.Size(31, 13);
-            this.llbAbout.TabIndex = 13;
-            this.llbAbout.TabStop = true;
-            this.llbAbout.Text = "درباره";
-            this.llbAbout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbAbout_LinkClicked);
+            this.colID.DataPropertyName = "ID";
+            this.colID.FillWeight = 50F;
+            this.colID.HeaderText = "کد";
+            this.colID.Name = "colID";
+            this.colID.ReadOnly = true;
+            this.colID.Visible = false;
+            // 
+            // colPassportNum
+            // 
+            this.colPassportNum.DataPropertyName = "Date";
+            this.colPassportNum.HeaderText = "تاریخ";
+            this.colPassportNum.Name = "colPassportNum";
+            this.colPassportNum.ReadOnly = true;
+            // 
+            // colFullName
+            // 
+            this.colFullName.DataPropertyName = "ShiftNum";
+            this.colFullName.HeaderText = "شیفت";
+            this.colFullName.Name = "colFullName";
+            this.colFullName.ReadOnly = true;
+            // 
+            // colUser
+            // 
+            this.colUser.DataPropertyName = "RealName";
+            this.colUser.HeaderText = "کاربر";
+            this.colUser.Name = "colUser";
+            this.colUser.ReadOnly = true;
+            // 
+            // colCount
+            // 
+            this.colCount.DataPropertyName = "Count";
+            this.colCount.HeaderText = "تعداد متقاضیان";
+            this.colCount.Name = "colCount";
+            this.colCount.ReadOnly = true;
             // 
             // frmShift
             // 
@@ -350,13 +351,13 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvShifts;
+        private System.Windows.Forms.LinkLabel llbUser;
+        private System.Windows.Forms.LinkLabel llbAbout;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPassportNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFullName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUser;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
-        private System.Windows.Forms.LinkLabel llbUser;
-        private System.Windows.Forms.LinkLabel llbAbout;
     }
 }

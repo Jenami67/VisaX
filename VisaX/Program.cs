@@ -18,10 +18,6 @@ namespace VisaX
             Application.CurrentCulture = new System.Globalization.CultureInfo("fr-FR");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            //if (DateTime.Now < new DateTime(2019, 4, 28))
-            VisaXEntities ctx = new VisaXEntities();
-            Properties.Settings.Default.User = (from u in ctx.Users where u.ID == 5 select u).FirstOrDefault();
             Application.Run(new frmLogin());
         }
     }

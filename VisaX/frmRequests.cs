@@ -96,16 +96,20 @@ namespace VisaX
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            int selIndex = dgvPassengers.SelectedRows[0].Index;
             int id = (int)dgvPassengers.SelectedRows[0].Cells["colPassengerID"].Value;
             Passenger passenger = (from p in ctx.Passengers where p.ID == id select p).First();
             new frmAddPassenger(passenger, this.ctx, this.SelectedShift, true).ShowDialog();
             this.refreshGrid();
+            dgvPassengers.Rows[selIndex].Selected = true;
         }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
             if (new frmAddPassenger(ctx, this.SelectedShift).ShowDialog() == DialogResult.Cancel)
                 refreshGrid();
+            dgvPassengers.ClearSelection();
+            dgvPassengers.Rows[dgvPassengers.RowCount - 1].Selected = true;
         }
 
         public void rowColor()
@@ -198,14 +202,12 @@ namespace VisaX
         {
             btnDelete.Enabled = btnEdit.Enabled = btnExportExcel.Enabled = btnExportPDF.Enabled = btnHistory.Enabled =
                dgvPassengers.Rows.Count != 0;
-            this.rowColor();
         }
 
         private void dgvPassengers_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             btnDelete.Enabled = btnEdit.Enabled = btnExportExcel.Enabled = btnExportPDF.Enabled = btnHistory.Enabled =
                dgvPassengers.Rows.Count != 0;
-            this.rowColor();
         }
 
         private void llbSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -346,6 +348,7 @@ namespace VisaX
         private void dgvPassengers_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             dgvPassengers.Rows[e.RowIndex].Cells[0].Value = (e.RowIndex + 1).ToString();
+            this.rowColor();
         }
 
         private void dgvPassengers_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

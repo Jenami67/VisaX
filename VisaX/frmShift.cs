@@ -60,7 +60,8 @@ namespace VisaX
                 ctx.SaveChanges();
                 refreshGrid();
             }//if
-
+            dgvShifts.ClearSelection();
+            dgvShifts.Rows[dgvShifts.RowCount - 1].Selected = true;
         }//btnNew
 
         private void btnDelete_Click(object sender, EventArgs e)
