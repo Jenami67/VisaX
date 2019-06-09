@@ -21,7 +21,7 @@ namespace VisaX
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if(txtUserName.Text == string.Empty)
+            if (txtUserName.Text == string.Empty)
             {
                 lblMsg.Text = "نام کاربری را وارد کنید.";
                 return;
@@ -40,7 +40,10 @@ namespace VisaX
                 Close();
             }//if
             else
-                lblMsg.Text = "رمز عبور اشتباه است.";
+            {
+                txtPassword.Text = string.Empty;
+                lblMsg.Text = "نام کاربری یا رمز عبور اشتباه است.";
+            }
         }
 
         private void txtPassword_TextChanged(object sender, EventArgs e)
@@ -51,11 +54,7 @@ namespace VisaX
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
-            
         }
-
-        
-
     }
 
     public static class StringUtil

@@ -51,7 +51,7 @@
             this.txtPassword.Location = new System.Drawing.Point(75, 38);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '●';
-            this.txtPassword.Size = new System.Drawing.Size(142, 21);
+            this.txtPassword.Size = new System.Drawing.Size(165, 21);
             this.txtPassword.TabIndex = 2;
             this.txtPassword.TextChanged += new System.EventHandler(this.txtPassword_TextChanged);
             // 
@@ -79,8 +79,9 @@
             // lblMsg
             // 
             this.lblMsg.AutoSize = true;
+            this.lblMsg.Font = new System.Drawing.Font("Tahoma", 7.75F);
             this.lblMsg.ForeColor = System.Drawing.Color.Red;
-            this.lblMsg.Location = new System.Drawing.Point(78, 61);
+            this.lblMsg.Location = new System.Drawing.Point(75, 61);
             this.lblMsg.Name = "lblMsg";
             this.lblMsg.Size = new System.Drawing.Size(0, 13);
             this.lblMsg.TabIndex = 6;
@@ -90,7 +91,7 @@
             // 
             this.txtUserName.Location = new System.Drawing.Point(75, 12);
             this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(142, 21);
+            this.txtUserName.Size = new System.Drawing.Size(165, 21);
             this.txtUserName.TabIndex = 0;
             // 
             // label1
