@@ -100,7 +100,9 @@ namespace VisaX
             int id = (int)dgvPassengers.SelectedRows[0].Cells["colPassengerID"].Value;
             Passenger passenger = (from p in ctx.Passengers where p.ID == id select p).First();
             new frmAddPassenger(passenger, this.ctx, this.SelectedShift, true).ShowDialog();
-            this.refreshGrid();
+            refreshGrid();
+
+            dgvPassengers.ClearSelection();
             dgvPassengers.Rows[selIndex].Selected = true;
         }
 
@@ -109,7 +111,8 @@ namespace VisaX
             if (new frmAddPassenger(ctx, this.SelectedShift).ShowDialog() == DialogResult.Cancel)
                 refreshGrid();
             dgvPassengers.ClearSelection();
-            dgvPassengers.Rows[dgvPassengers.RowCount - 1].Selected = true;
+            if (dgvPassengers.RowCount > 0)
+                dgvPassengers.Rows[dgvPassengers.RowCount - 1].Selected = true;
         }
 
         public void rowColor()
