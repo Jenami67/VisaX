@@ -45,12 +45,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPassportNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPassportNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShifts)).BeginInit();
             this.panel1.SuspendLayout();
@@ -72,7 +73,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 57F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 67F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 464);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 465);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // dgvShifts
@@ -89,6 +90,7 @@
             this.colPassportNum,
             this.colFullName,
             this.colUser,
+            this.colDescription,
             this.colCount});
             this.dgvShifts.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvShifts.Location = new System.Drawing.Point(3, 60);
@@ -96,7 +98,7 @@
             this.dgvShifts.ReadOnly = true;
             this.dgvShifts.RowHeadersWidth = 20;
             this.dgvShifts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvShifts.Size = new System.Drawing.Size(794, 334);
+            this.dgvShifts.Size = new System.Drawing.Size(794, 335);
             this.dgvShifts.TabIndex = 2;
             this.dgvShifts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvShifts_CellDoubleClick);
             this.dgvShifts.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvShifts_RowPostPaint);
@@ -113,7 +115,7 @@
             this.panel1.Controls.Add(this.btnNew);
             this.panel1.Controls.Add(this.llbAbout);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 400);
+            this.panel1.Location = new System.Drawing.Point(3, 401);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(794, 61);
             this.panel1.TabIndex = 0;
@@ -268,11 +270,42 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "از تاریخ:";
             // 
-            // colNumber
+            // colCount
             // 
-            this.colNumber.HeaderText = "ردیف";
-            this.colNumber.Name = "colNumber";
-            this.colNumber.ReadOnly = true;
+            this.colCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colCount.DataPropertyName = "Count";
+            this.colCount.HeaderText = "تعداد متقاضیان";
+            this.colCount.Name = "colCount";
+            this.colCount.ReadOnly = true;
+            // 
+            // colDescription
+            // 
+            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDescription.DataPropertyName = "Description";
+            this.colDescription.HeaderText = "توضیحات";
+            this.colDescription.Name = "colDescription";
+            this.colDescription.ReadOnly = true;
+            // 
+            // colUser
+            // 
+            this.colUser.DataPropertyName = "RealName";
+            this.colUser.HeaderText = "کاربر";
+            this.colUser.Name = "colUser";
+            this.colUser.ReadOnly = true;
+            // 
+            // colFullName
+            // 
+            this.colFullName.DataPropertyName = "ShiftNum";
+            this.colFullName.HeaderText = "شیفت";
+            this.colFullName.Name = "colFullName";
+            this.colFullName.ReadOnly = true;
+            // 
+            // colPassportNum
+            // 
+            this.colPassportNum.DataPropertyName = "Date";
+            this.colPassportNum.HeaderText = "تاریخ";
+            this.colPassportNum.Name = "colPassportNum";
+            this.colPassportNum.ReadOnly = true;
             // 
             // colID
             // 
@@ -283,39 +316,19 @@
             this.colID.ReadOnly = true;
             this.colID.Visible = false;
             // 
-            // colPassportNum
+            // colNumber
             // 
-            this.colPassportNum.DataPropertyName = "Date";
-            this.colPassportNum.HeaderText = "تاریخ";
-            this.colPassportNum.Name = "colPassportNum";
-            this.colPassportNum.ReadOnly = true;
-            // 
-            // colFullName
-            // 
-            this.colFullName.DataPropertyName = "ShiftNum";
-            this.colFullName.HeaderText = "شیفت";
-            this.colFullName.Name = "colFullName";
-            this.colFullName.ReadOnly = true;
-            // 
-            // colUser
-            // 
-            this.colUser.DataPropertyName = "RealName";
-            this.colUser.HeaderText = "کاربر";
-            this.colUser.Name = "colUser";
-            this.colUser.ReadOnly = true;
-            // 
-            // colCount
-            // 
-            this.colCount.DataPropertyName = "Count";
-            this.colCount.HeaderText = "تعداد متقاضیان";
-            this.colCount.Name = "colCount";
-            this.colCount.ReadOnly = true;
+            this.colNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colNumber.HeaderText = "ردیف";
+            this.colNumber.Name = "colNumber";
+            this.colNumber.ReadOnly = true;
+            this.colNumber.Width = 54;
             // 
             // frmShift
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 464);
+            this.ClientSize = new System.Drawing.Size(800, 465);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MinimumSize = new System.Drawing.Size(816, 503);
@@ -358,6 +371,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPassportNum;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFullName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUser;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
     }
 }
