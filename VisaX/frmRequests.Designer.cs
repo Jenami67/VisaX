@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvPassengers = new System.Windows.Forms.DataGridView();
             this.colPassengerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,10 +48,6 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.rbYesterday = new System.Windows.Forms.RadioButton();
-            this.chkNotPrinted = new System.Windows.Forms.CheckBox();
-            this.rbAll = new System.Windows.Forms.RadioButton();
-            this.rbToday = new System.Windows.Forms.RadioButton();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtFilter = new System.Windows.Forms.TextBox();
@@ -84,8 +80,8 @@
             // 
             this.dgvPassengers.AllowUserToAddRows = false;
             this.dgvPassengers.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2);
-            this.dgvPassengers.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2);
+            this.dgvPassengers.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPassengers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPassengers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPassengers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -263,10 +259,6 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.rbYesterday);
-            this.panel2.Controls.Add(this.chkNotPrinted);
-            this.panel2.Controls.Add(this.rbAll);
-            this.panel2.Controls.Add(this.rbToday);
             this.panel2.Controls.Add(this.btnSearch);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.txtFilter);
@@ -275,53 +267,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(939, 50);
             this.panel2.TabIndex = 17;
-            // 
-            // rbYesterday
-            // 
-            this.rbYesterday.AutoSize = true;
-            this.rbYesterday.Location = new System.Drawing.Point(137, 3);
-            this.rbYesterday.Name = "rbYesterday";
-            this.rbYesterday.Size = new System.Drawing.Size(48, 18);
-            this.rbYesterday.TabIndex = 2;
-            this.rbYesterday.Text = "دیروز";
-            this.rbYesterday.UseVisualStyleBackColor = true;
-            this.rbYesterday.Visible = false;
-            // 
-            // chkNotPrinted
-            // 
-            this.chkNotPrinted.AutoSize = true;
-            this.chkNotPrinted.Location = new System.Drawing.Point(9, 27);
-            this.chkNotPrinted.Name = "chkNotPrinted";
-            this.chkNotPrinted.Size = new System.Drawing.Size(120, 18);
-            this.chkNotPrinted.TabIndex = 5;
-            this.chkNotPrinted.Text = "فقط چاپ نشده ها";
-            this.chkNotPrinted.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.chkNotPrinted.UseVisualStyleBackColor = true;
-            this.chkNotPrinted.Visible = false;
-            // 
-            // rbAll
-            // 
-            this.rbAll.AutoSize = true;
-            this.rbAll.Location = new System.Drawing.Point(17, 3);
-            this.rbAll.Name = "rbAll";
-            this.rbAll.Size = new System.Drawing.Size(47, 18);
-            this.rbAll.TabIndex = 4;
-            this.rbAll.Text = "همه";
-            this.rbAll.UseVisualStyleBackColor = true;
-            this.rbAll.Visible = false;
-            // 
-            // rbToday
-            // 
-            this.rbToday.AutoSize = true;
-            this.rbToday.Checked = true;
-            this.rbToday.Location = new System.Drawing.Point(80, 3);
-            this.rbToday.Name = "rbToday";
-            this.rbToday.Size = new System.Drawing.Size(48, 18);
-            this.rbToday.TabIndex = 3;
-            this.rbToday.TabStop = true;
-            this.rbToday.Text = "امروز";
-            this.rbToday.UseVisualStyleBackColor = true;
-            this.rbToday.Visible = false;
             // 
             // btnSearch
             // 
@@ -392,10 +337,6 @@
         private System.Windows.Forms.Button btnExportPDF;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton rbAll;
-        private System.Windows.Forms.RadioButton rbToday;
-        private System.Windows.Forms.CheckBox chkNotPrinted;
-        private System.Windows.Forms.RadioButton rbYesterday;
         private System.Windows.Forms.Button btnHistory;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPassengerID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRequestID;

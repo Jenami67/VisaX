@@ -18,7 +18,7 @@ namespace VisaX
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("نسخه  {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
-            this.labelCompanyName.Text = "برنامه نویس: محمود جنامی";
+            this.labelCompanyName.Text = string.Empty; // "برنامه نویس: محمود جنامی";
         }
 
         #region Assembly Attribute Accessors

@@ -57,5 +57,28 @@ namespace VisaX.Properties {
                 this["DatesDisabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("admin")]
+        public string LastUserName {
+            get {
+                return ((string)(this["LastUserName"]));
+            }
+            set {
+                this["LastUserName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::VisaX.RemoteUser RemoteUsr {
+            get {
+                return ((global::VisaX.RemoteUser)(this["RemoteUsr"]));
+            }
+            set {
+                this["RemoteUsr"] = value;
+            }
+        }
     }
 }

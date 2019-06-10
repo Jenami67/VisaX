@@ -21,11 +21,13 @@ namespace VisaX
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-            if (txtCurPass.Text == Properties.Settings.Default.User.Password)
+            string cryptedPass = StringUtil.Crypt(txtNewPass.Text);
+
+            if (StringUtil.Crypt(txtCurPass.Text) == Properties.Settings.Default.User.Password)
                 if (txtNewPass.Text == txtRepPass.Text)
                 {
-                    Properties.Settings.Default.User.Password = txtNewPass.Text;
-                    ctx.Users.Select(u => u).Where(u => u.ID == Properties.Settings.Default.User.ID).FirstOrDefault().Password = txtNewPass.Text;
+                    Properties.Settings.Default.User.Password = cryptedPass;
+                    ctx.Users.Select(u => u).Where(u => u.ID == Properties.Settings.Default.User.ID).FirstOrDefault().Password = cryptedPass;
                     ctx.SaveChanges();
                     MessageBox.Show("رمز عبور جدید تنظیم شد");
                     Close();

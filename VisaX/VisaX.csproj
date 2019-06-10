@@ -85,6 +85,12 @@
     <Compile Include="frmNewShift.Designer.cs">
       <DependentUpon>frmNewShift.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmRemoteLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRemoteLogin.Designer.cs">
+      <DependentUpon>frmRemoteLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmRenameUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,6 +156,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RemoteUser.cs">
+      <DependentUpon>VisaXCentralModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Request.cs">
       <DependentUpon>VisaXModel.tt</DependentUpon>
     </Compile>
@@ -159,6 +168,21 @@
     </Compile>
     <Compile Include="User.cs">
       <DependentUpon>VisaXModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VisaXCentralModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VisaXCentralModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VisaXCentralModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VisaXCentralModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VisaXCentralModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VisaXCentralModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="VisaXModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -183,6 +207,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewShift.resx">
       <DependentUpon>frmNewShift.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRemoteLogin.resx">
+      <DependentUpon>frmRemoteLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmRenameUser.resx">
       <DependentUpon>frmRenameUser.cs</DependentUpon>
@@ -245,6 +272,13 @@
     <Content Include="VisaForm.pdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EntityDeploy Include="VisaXCentralModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>VisaXCentralModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="VisaXCentralModel.edmx.diagram">
+      <DependentUpon>VisaXCentralModel.edmx</DependentUpon>
+    </None>
     <None Include="VisaXModel.edmx.diagram">
       <DependentUpon>VisaXModel.edmx</DependentUpon>
     </None>
@@ -255,6 +289,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="VisaXCentralModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VisaXCentralModel.edmx</DependentUpon>
+      <LastGenOutput>VisaXCentralModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="VisaXCentralModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VisaXCentralModel.edmx</DependentUpon>
+      <LastGenOutput>VisaXCentralModel.cs</LastGenOutput>
+    </Content>
     <Content Include="VisaXModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>VisaXModel.edmx</DependentUpon>
