@@ -162,6 +162,12 @@
     <Compile Include="Request.cs">
       <DependentUpon>VisaXModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="frmSendShifts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSendShifts.Designer.cs">
+      <DependentUpon>frmSendShifts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Shift.cs">
       <DependentUpon>VisaXModel.tt</DependentUpon>
@@ -251,6 +257,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="frmSendShifts.resx">
+      <DependentUpon>frmSendShifts.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <Content Include="PassengerList.xls">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

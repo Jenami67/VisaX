@@ -18,6 +18,7 @@ namespace VisaX
         {
             InitializeComponent();
 
+            //Login Automaticaly if there is a user saved in settings
             if (Properties.Settings.Default.RemoteUsr != null)
             {
                 RemoteUser usr = (from u in ctx.RemoteUsers
@@ -33,7 +34,7 @@ namespace VisaX
                     Close();
                 }//if
             }//if
-        }
+        }//frmRemoteLogin
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
@@ -54,9 +55,8 @@ namespace VisaX
             {
                 Hide();
                 Properties.Settings.Default.RemoteUsr = usr;
-                //Properties.Settings.Default.LastUserName = txtUserName.Text;
                 Properties.Settings.Default.Save();
-                new frmRemoteLogin().ShowDialog();
+                new frmLogin().ShowDialog();
                 Close();
             }//if
             else

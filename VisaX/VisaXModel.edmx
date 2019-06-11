@@ -36,6 +36,7 @@
           <Property Name="ShiftNum" Type="tinyint" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="Sent" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -200,6 +201,7 @@
           <NavigationProperty Name="Requests" Relationship="VisaXModel.FK_Request_Shift" FromRole="Shift" ToRole="Request" />
           <NavigationProperty Name="User" Relationship="VisaXModel.FK_Shift_User" FromRole="Shift" ToRole="User" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sent" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -306,6 +308,7 @@
           <EntitySetMapping Name="Shifts">
             <EntityTypeMapping TypeName="VisaXModel.Shift">
               <MappingFragment StoreEntitySet="Shift">
+                <ScalarProperty Name="Sent" ColumnName="Sent" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ShiftNum" ColumnName="ShiftNum" />
