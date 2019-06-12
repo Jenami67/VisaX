@@ -136,7 +136,7 @@ namespace VisaX
 
         private void llbAbout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            new frmse().ShowDialog();
+            new frmSendShifts().ShowDialog();
         }
 
         private void llbUser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

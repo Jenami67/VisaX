@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvShifts = new System.Windows.Forms.DataGridView();
             this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,9 +39,9 @@
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnList = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
+            this.btnIgnore = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnSendShifts = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShifts)).BeginInit();
             this.panel1.SuspendLayout();
@@ -67,8 +67,8 @@
             // 
             this.dgvShifts.AllowUserToAddRows = false;
             this.dgvShifts.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(2);
-            this.dgvShifts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2);
+            this.dgvShifts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvShifts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvShifts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvShifts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -144,48 +144,48 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnList);
-            this.panel1.Controls.Add(this.btnDelete);
-            this.panel1.Controls.Add(this.btnNew);
+            this.panel1.Controls.Add(this.btnIgnore);
+            this.panel1.Controls.Add(this.btnCancel);
+            this.panel1.Controls.Add(this.btnSendShifts);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 264);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(479, 58);
             this.panel1.TabIndex = 4;
             // 
-            // btnList
+            // btnIgnore
             // 
-            this.btnList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnList.Enabled = false;
-            this.btnList.Location = new System.Drawing.Point(194, 7);
-            this.btnList.Name = "btnList";
-            this.btnList.Size = new System.Drawing.Size(135, 45);
-            this.btnList.TabIndex = 14;
-            this.btnList.Text = "چشم پوشی";
-            this.btnList.UseVisualStyleBackColor = true;
+            this.btnIgnore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnIgnore.Enabled = false;
+            this.btnIgnore.Location = new System.Drawing.Point(194, 7);
+            this.btnIgnore.Name = "btnIgnore";
+            this.btnIgnore.Size = new System.Drawing.Size(135, 45);
+            this.btnIgnore.TabIndex = 14;
+            this.btnIgnore.Text = "چشم پوشی";
+            this.btnIgnore.UseVisualStyleBackColor = true;
             // 
-            // btnDelete
+            // btnCancel
             // 
-            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(9, 7);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(135, 45);
-            this.btnDelete.TabIndex = 13;
-            this.btnDelete.Text = "لغو";
-            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.Enabled = false;
+            this.btnCancel.Location = new System.Drawing.Point(9, 7);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(135, 45);
+            this.btnCancel.TabIndex = 13;
+            this.btnCancel.Text = "لغو";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // btnNew
+            // btnSendShifts
             // 
-            this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNew.Location = new System.Drawing.Point(335, 7);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(135, 45);
-            this.btnNew.TabIndex = 12;
-            this.btnNew.Text = "ارسال شیفت ها";
-            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnSendShifts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSendShifts.Location = new System.Drawing.Point(335, 7);
+            this.btnSendShifts.Name = "btnSendShifts";
+            this.btnSendShifts.Size = new System.Drawing.Size(135, 45);
+            this.btnSendShifts.TabIndex = 12;
+            this.btnSendShifts.Text = "ارسال شیفت ها";
+            this.btnSendShifts.UseVisualStyleBackColor = true;
             // 
-            // SendShifts
+            // frmSendShifts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -193,7 +193,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MinimizeBox = false;
-            this.Name = "SendShifts";
+            this.Name = "frmSendShifts";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -218,8 +218,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnList;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.Button btnIgnore;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnSendShifts;
     }
 }
