@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Data.Entity.Core.Objects;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
-using Microsoft.Office.Core;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using iTextSharp.text;
@@ -100,7 +95,9 @@ namespace VisaX
             int id = (int)dgvPassengers.SelectedRows[0].Cells["colPassengerID"].Value;
             Passenger passenger = (from p in ctx.Passengers where p.ID == id select p).First();
             new frmAddPassenger(passenger, this.ctx, this.SelectedShift, true).ShowDialog();
-            this.refreshGrid();
+            refreshGrid();
+
+            dgvPassengers.ClearSelection();
             dgvPassengers.Rows[selIndex].Selected = true;
         }
 
@@ -109,7 +106,8 @@ namespace VisaX
             if (new frmAddPassenger(ctx, this.SelectedShift).ShowDialog() == DialogResult.Cancel)
                 refreshGrid();
             dgvPassengers.ClearSelection();
-            dgvPassengers.Rows[dgvPassengers.RowCount - 1].Selected = true;
+            if (dgvPassengers.RowCount > 0)
+                dgvPassengers.Rows[dgvPassengers.RowCount - 1].Selected = true;
         }
 
         public void rowColor()
@@ -298,23 +296,23 @@ namespace VisaX
             return merged;
         }
 
-        //private void frmMain_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    switch (e.KeyCode)
-        //    {
-        //        case Keys.F2:
-        //            btnNew_Click(null, null);
-        //            break;
-        //        case Keys.F3:
-        //            txtFilter.Focus();
-        //            break;
-        //        case Keys.F4:
-        //            btnEdit_Click(null, null);
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
+        private void frmMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.F2:
+                    btnNew_Click(null, null);
+                    break;
+                case Keys.F3:
+                    txtFilter.Focus();
+                    break;
+                case Keys.F4:
+                    btnEdit_Click(null, null);
+                    break;
+                default:
+                    break;
+            }
+        }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -327,16 +325,6 @@ namespace VisaX
                 refreshGrid();
             }//if
         }
-
-        //private void chkNotPrinted_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    refreshGrid();
-        //}
-
-        //private void rbYesterday_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    this.refreshGrid();
-        //}
 
         private void btnHistory_Click(object sender, EventArgs e)
         {

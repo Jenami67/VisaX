@@ -16,6 +16,7 @@ namespace VisaX
         public frmShift()
         {
             InitializeComponent();
+            Text = Text + " - " + Properties.Settings.Default.User.RealName;
         }
 
         private void frmShifts_Load(object sender, EventArgs e)
@@ -34,6 +35,7 @@ namespace VisaX
                                         s.Date,
                                         s.ShiftNum,
                                         s.User.RealName,
+                                        s.Description,
                                         s.Requests.Count
                                     }).ToList();
         }
@@ -49,19 +51,22 @@ namespace VisaX
             //(from s in ctx.Shifts where s.Date == DateTime.Today select s.ShiftNum).ma
             max++;
             string message = string.Format("تولید شیفت شماره {0} به تاریخ {1} توسط {2}؟", max, DateTime.Today.ToShortDateString(), Properties.Settings.Default.User.RealName);
-            if (MessageBox.Show(message, "شیفت جدید", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes)
+            frmNewShift frmNewShift = new frmNewShift(message);
+            if (frmNewShift.ShowDialog() == DialogResult.Yes)
             {
                 ctx.Shifts.Add(new Shift
                 {
                     Date = DateTime.Today,
                     UserID = Properties.Settings.Default.User.ID,
-                    ShiftNum = max
+                    ShiftNum = max,
+                    Description = frmNewShift.txtDescription.Text
                 });
                 ctx.SaveChanges();
                 refreshGrid();
+
+                dgvShifts.ClearSelection();
+                dgvShifts.Rows[dgvShifts.RowCount - 1].Selected = true;
             }//if
-            dgvShifts.ClearSelection();
-            dgvShifts.Rows[dgvShifts.RowCount - 1].Selected = true;
         }//btnNew
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -131,7 +136,7 @@ namespace VisaX
 
         private void llbAbout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            new frmAbout().ShowDialog();
+            new frmse().ShowDialog();
         }
 
         private void llbUser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

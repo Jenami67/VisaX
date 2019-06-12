@@ -142,7 +142,16 @@ namespace VisaX
                         });
                 }//else
 
-                ctx.SaveChanges();
+                try
+                {
+                    ctx.SaveChanges();
+                }
+                catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
+                {
+                    if (ex.InnerException.Message.Contains("IX_Request")) { 
+                    MessageBox.Show("متقاضی مورد نظر قبلاً در این شیفت ثبت شده.\n" + ex.ToString());}
+                    ctx.Entry(passenger).Reload();
+                }
                 this.passenger = null;
                 txtPassportNum.Focus();
                 txtFullName.Text = txtPassportNum.Text = txtBornDate.Text = txtExpiryDate.Text = txtIssueDate.Text = string.Empty;

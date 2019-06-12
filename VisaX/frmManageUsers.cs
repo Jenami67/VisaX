@@ -94,7 +94,7 @@ namespace VisaX
             User usr = (User)dgvUsers.SelectedRows[0].DataBoundItem;
             if (MessageBox.Show("آیا مایل به پاک کردن رمز این کاربر هستید؟", "پاکسازی رمز " + usr.RealName, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes)
             {
-                ctx.Users.Select(u => u).Where(u => u.ID == usr.ID).FirstOrDefault().Password = string.Empty;
+                ctx.Users.Select(u => u).Where(u => u.ID == usr.ID).FirstOrDefault().Password = StringUtil.Crypt(string.Empty);
                 try
                 {
                     ctx.SaveChanges();

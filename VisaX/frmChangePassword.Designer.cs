@@ -45,7 +45,7 @@
             this.btnCancel.Location = new System.Drawing.Point(138, 133);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(85, 39);
-            this.btnCancel.TabIndex = 11;
+            this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "لغو";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -56,7 +56,7 @@
             this.btnOK.Location = new System.Drawing.Point(13, 133);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(85, 39);
-            this.btnOK.TabIndex = 10;
+            this.btnOK.TabIndex = 3;
             this.btnOK.Text = "تایید";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -76,7 +76,7 @@
             this.txtNewPass.Name = "txtNewPass";
             this.txtNewPass.PasswordChar = '●';
             this.txtNewPass.Size = new System.Drawing.Size(132, 21);
-            this.txtNewPass.TabIndex = 8;
+            this.txtNewPass.TabIndex = 1;
             // 
             // label1
             // 
@@ -93,7 +93,7 @@
             this.txtCurPass.Name = "txtCurPass";
             this.txtCurPass.PasswordChar = '●';
             this.txtCurPass.Size = new System.Drawing.Size(132, 21);
-            this.txtCurPass.TabIndex = 6;
+            this.txtCurPass.TabIndex = 0;
             // 
             // label3
             // 
@@ -110,7 +110,7 @@
             this.txtRepPass.Name = "txtRepPass";
             this.txtRepPass.PasswordChar = '●';
             this.txtRepPass.Size = new System.Drawing.Size(132, 21);
-            this.txtRepPass.TabIndex = 12;
+            this.txtRepPass.TabIndex = 2;
             // 
             // frmChangePassword
             // 

@@ -137,7 +137,6 @@
             this.textBoxDescription.Size = new System.Drawing.Size(271, 126);
             this.textBoxDescription.TabIndex = 23;
             this.textBoxDescription.TabStop = false;
-            this.textBoxDescription.Text = "شماره تماس برنامه نویس و پشتیبان:\r\n0936-2234120";
             // 
             // okButton
             // 
