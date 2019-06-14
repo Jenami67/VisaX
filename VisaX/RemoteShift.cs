@@ -12,20 +12,22 @@ namespace VisaX
     using System;
     using System.Collections.Generic;
     
-    public partial class RemoteUser
+    public partial class RemoteShift
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public RemoteUser()
+        public RemoteShift()
         {
-            this.RemoteShifts = new HashSet<RemoteShift>();
+            this.RemoteRequests = new HashSet<RemoteRequest>();
         }
     
         public int ID { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string RealName { get; set; }
+        public System.DateTime Date { get; set; }
+        public byte ShiftNum { get; set; }
+        public int RemoteUserID { get; set; }
+        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RemoteShift> RemoteShifts { get; set; }
+        public virtual ICollection<RemoteRequest> RemoteRequests { get; set; }
+        public virtual RemoteUser RemoteUser { get; set; }
     }
 }

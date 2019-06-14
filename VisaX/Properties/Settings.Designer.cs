@@ -72,12 +72,36 @@ namespace VisaX.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::VisaX.RemoteUser RemoteUsr {
+        public global::VisaX.RemoteUser RemoteUser {
             get {
-                return ((global::VisaX.RemoteUser)(this["RemoteUsr"]));
+                return ((global::VisaX.RemoteUser)(this["RemoteUser"]));
             }
             set {
-                this["RemoteUsr"] = value;
+                this["RemoteUser"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RemoteUserName {
+            get {
+                return ((string)(this["RemoteUserName"]));
+            }
+            set {
+                this["RemoteUserName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RemotePassword {
+            get {
+                return ((string)(this["RemotePassword"]));
+            }
+            set {
+                this["RemotePassword"] = value;
             }
         }
     }

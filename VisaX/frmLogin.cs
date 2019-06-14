@@ -17,7 +17,12 @@ namespace VisaX
         public frmLogin()
         {
             InitializeComponent();
+        }
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
             txtUserName.Text = Properties.Settings.Default.LastUserName;
+            if (txtUserName.Text.Length > 0)
+                this.ActiveControl = txtPassword;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

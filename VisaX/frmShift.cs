@@ -17,6 +17,7 @@ namespace VisaX
         {
             InitializeComponent();
             Text = Text + " - " + Properties.Settings.Default.User.RealName;
+
         }
 
         private void frmShifts_Load(object sender, EventArgs e)
@@ -36,7 +37,10 @@ namespace VisaX
                                         s.ShiftNum,
                                         s.User.RealName,
                                         s.Description,
-                                        s.Requests.Count
+                                        s.Requests.Count,
+                                        Sent = s.Sent ? "✓" : "✗"
+
+                                        //Sent = s.Sent ? "ارسال شده" : "مانده"
                                     }).ToList();
         }
 
@@ -71,7 +75,7 @@ namespace VisaX
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int id = (int)dgvShifts.SelectedRows[0].Cells[0].Value;
+            int id = (int)dgvShifts.SelectedRows[0].Cells["colID"].Value;
             Shift shift = (from s in ctx.Shifts where s.ID == id select s).First();
             if (MessageBox.Show("آیا مایل به حذف این شیفت هستید؟", "حذف شیفت", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes)
             {
@@ -94,6 +98,10 @@ namespace VisaX
             int id = int.Parse(dgvShifts.SelectedRows[0].Cells["colID"].Value.ToString());
             Shift shift = (from s in ctx.Shifts where s.ID == id select s).First();
             new frmRequests(shift).ShowDialog();
+            int selShift = dgvShifts.SelectedRows[0].Index;
+            refreshGrid();
+            dgvShifts.Rows[selShift].Selected = true;
+
         }
 
         private void dgvPassengers_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)

@@ -33,6 +33,7 @@ namespace VisaX
         {
             dgvPassengers.DataSource = (from r in ctx.Requests
                                         where r.ShiftID == SelectedShift.ID
+                                        orderby r.ID
                                         select new
                                         {
                                             r.ID,

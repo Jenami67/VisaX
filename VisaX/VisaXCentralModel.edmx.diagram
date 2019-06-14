@@ -5,7 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f2f55f63b7374740b6734df671f9167b" Name="Diagram1">
-        <EntityTypeShape EntityType="VisaXCenterModel.RemoteUser" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VisaXCenterModel.RemoteUser" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="VisaXCenterModel.RemoteRequest" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="VisaXCenterModel.RemoteShift" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="VisaXCenterModel.FK_Request_Shift" />
+        <AssociationConnector Association="VisaXCenterModel.FK_Shift_RemoteUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -17,23 +18,6 @@ namespace VisaX
         public frmRemoteLogin()
         {
             InitializeComponent();
-
-            //Login Automaticaly if there is a user saved in settings
-            if (Properties.Settings.Default.RemoteUsr != null)
-            {
-                RemoteUser usr = (from u in ctx.RemoteUsers
-                                  where u.UserName == Properties.Settings.Default.RemoteUsr.UserName
-                                  && u.Password == Properties.Settings.Default.RemoteUsr.Password
-                                  select u).FirstOrDefault();
-                if (usr != null)
-                {
-                    Hide();
-                    Properties.Settings.Default.RemoteUsr = usr;
-                    Properties.Settings.Default.Save();
-                    new frmLogin().ShowDialog();
-                    Close();
-                }//if
-            }//if
         }//frmRemoteLogin
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -45,7 +29,6 @@ namespace VisaX
             }//if
 
             string cryptedPass = StringUtil.Crypt(txtPassword.Text);
-
             RemoteUser usr = (from u in ctx.RemoteUsers
                               where u.UserName == txtUserName.Text
                               && u.Password == cryptedPass
@@ -54,7 +37,10 @@ namespace VisaX
             if (usr != null)
             {
                 Hide();
-                Properties.Settings.Default.RemoteUsr = usr;
+                Properties.Settings.Default.RemoteUser = usr;
+                Properties.Settings.Default.RemoteUserName = txtUserName.Text;
+                Properties.Settings.Default.RemotePassword = StringUtil.Crypt(txtPassword.Text);
+
                 Properties.Settings.Default.Save();
                 new frmLogin().ShowDialog();
                 Close();
@@ -69,6 +55,24 @@ namespace VisaX
         private void btnExit_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void frmRemoteLogin_Load(object sender, EventArgs e)
+        {
+            //Login Automaticaly if there is a user saved in settings
+            if (Properties.Settings.Default.RemoteUserName != string.Empty)
+            {
+                RemoteUser usr = (from u in ctx.RemoteUsers
+                                  where u.UserName == Properties.Settings.Default.RemoteUserName
+                                  && u.Password == Properties.Settings.Default.RemotePassword
+                                  select u).FirstOrDefault();
+                if (usr != null)
+                {
+                    Hide();
+                    new frmLogin().ShowDialog();
+                    Close();
+                }//if
+            }//if
         }
     }
 }

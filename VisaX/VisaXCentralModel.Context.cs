@@ -26,5 +26,7 @@ namespace VisaX
         }
     
         public virtual DbSet<RemoteUser> RemoteUsers { get; set; }
+        public virtual DbSet<RemoteRequest> RemoteRequests { get; set; }
+        public virtual DbSet<RemoteShift> RemoteShifts { get; set; }
     }
 }

@@ -138,6 +138,7 @@
             this.RightToLeftLayout = true;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "تایید هویت شعبه ...";
+            this.Load += new System.EventHandler(this.frmRemoteLogin_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
