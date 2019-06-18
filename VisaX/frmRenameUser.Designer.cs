@@ -1,4 +1,4 @@
-﻿namespace VisaX
+﻿namespace VisaXCentral
 {
     partial class frmRenameUser
     {

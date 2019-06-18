@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VisaX
+namespace VisaXCentral
 {
     using System;
     using System.Data.Entity;

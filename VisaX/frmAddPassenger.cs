@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
 
-namespace VisaX
+namespace VisaXCentral
 {
     public partial class frmAddPassenger : Form
     {

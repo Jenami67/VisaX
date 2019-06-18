@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace VisaX
+namespace VisaXCentral
 {
     partial class frmAbout : Form
     {

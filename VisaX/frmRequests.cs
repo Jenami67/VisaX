@@ -11,7 +11,7 @@ using System.Diagnostics;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 
-namespace VisaX
+namespace VisaXCentral
 {
     public partial class frmRequests : Form
     {

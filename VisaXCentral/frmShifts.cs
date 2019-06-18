@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace VisaXCentral
 {
-    public partial class frmShift : Form
+    public partial class frmShifts : Form
     {
         VisaXEntities ctx = new VisaXEntities();
-        public frmShift()
+        public frmShifts()
         {
             InitializeComponent();
             Text = Text + " - " + Properties.Settings.Default.User.RealName;
