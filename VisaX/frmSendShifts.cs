@@ -85,5 +85,18 @@ namespace VisaXCentral
         {
             DialogResult = DialogResult.Cancel;
         }
+
+        public void rowColor()
+        {
+            for (int i = 0; i < dgvShifts.Rows.Count; i++)
+                if (i % 2 != 0)
+                    dgvShifts.Rows[i].DefaultCellStyle.BackColor = Color.AliceBlue;
+        }
+
+        private void dgvShifts_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            this.dgvShifts.Rows[e.RowIndex].Cells[0].Value = (e.RowIndex + 1).ToString();
+            rowColor();
+        }
     }
 }

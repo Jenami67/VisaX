@@ -39,9 +39,10 @@ namespace VisaXCentral
                                         s.Description,
                                         s.Requests.Count,
                                         Sent = s.Sent ? "✓" : "✗"
-
-                                        //Sent = s.Sent ? "ارسال شده" : "مانده"
                                     }).ToList();
+
+            int cnt = ctx.Shifts.Where(s => s.Sent == false).Count();
+            llbSendShifts.Text = string.Format("ارسال شیفت ها ({0})", cnt);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -142,17 +143,23 @@ namespace VisaXCentral
             btnList_Click(null, null);
         }
 
-        private void llbAbout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            new frmSendShifts().ShowDialog();
-        }
-
         private void llbUser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (Properties.Settings.Default.User.ID == 1)
                 new frmManageUsers().ShowDialog();
             else
                 new frmChangePassword().ShowDialog();
+        }
+
+        private void llbSendShifts_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new frmSendShifts().ShowDialog();
+        }
+
+        private void dtpTo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                btnSearch_Click(null, null);
         }
     }
 }
