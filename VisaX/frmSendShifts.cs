@@ -13,7 +13,7 @@ namespace VisaXCentral
     public partial class frmSendShifts : Form
     {
         VisaXEntities ctx = new VisaXEntities();
-        VisaXCenteralEntities ctxCentral = new VisaXCenteralEntities();
+        VisaXCenteralEntities ctxCentral = new VisaXCenteralEntities("ASAWARI", "3Pg^gf81");
 
         public frmSendShifts()
         {
@@ -69,6 +69,7 @@ namespace VisaXCentral
             ctx.SaveChanges();
 
             MessageBox.Show("شیفت ها با موفقیت به مرکز ارسال شدند.", "ارسال شیفت ها", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading);
+            //TODO:Refresh Data and Control Exceptions
         }
 
         private void dgvShifts_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
