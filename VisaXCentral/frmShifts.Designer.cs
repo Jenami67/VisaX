@@ -43,26 +43,21 @@
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.llbUser = new System.Windows.Forms.LinkLabel();
             this.btnList = new System.Windows.Forms.Button();
-            this.llbSettings = new System.Windows.Forms.LinkLabel();
             this.btnSearchRequest = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
-            this.llbAbout = new System.Windows.Forms.LinkLabel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.chkJustNotPrinted = new System.Windows.Forms.CheckBox();
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.dtpFrom = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.chkJustNotPrinted = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShifts)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -194,7 +189,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Controls.Add(this.btnList);
             this.panel1.Controls.Add(this.btnSearchRequest);
             this.panel1.Controls.Add(this.btnDelete);
@@ -204,20 +198,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(794, 61);
             this.panel1.TabIndex = 0;
-            // 
-            // llbUser
-            // 
-            this.llbUser.AutoSize = true;
-            this.llbUser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.llbUser.LinkArea = new System.Windows.Forms.LinkArea(0, 6);
-            this.llbUser.Location = new System.Drawing.Point(172, 0);
-            this.llbUser.Name = "llbUser";
-            this.llbUser.Size = new System.Drawing.Size(33, 18);
-            this.llbUser.TabIndex = 12;
-            this.llbUser.TabStop = true;
-            this.llbUser.Text = "کاربر |";
-            this.llbUser.UseCompatibleTextRendering = true;
-            this.llbUser.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbUser_LinkClicked);
             // 
             // btnList
             // 
@@ -230,20 +210,6 @@
             this.btnList.Text = "متقاضیان";
             this.btnList.UseVisualStyleBackColor = true;
             this.btnList.Click += new System.EventHandler(this.btnList_Click);
-            // 
-            // llbSettings
-            // 
-            this.llbSettings.AutoSize = true;
-            this.llbSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.llbSettings.LinkArea = new System.Windows.Forms.LinkArea(0, 8);
-            this.llbSettings.Location = new System.Drawing.Point(115, 0);
-            this.llbSettings.Name = "llbSettings";
-            this.llbSettings.Size = new System.Drawing.Size(51, 18);
-            this.llbSettings.TabIndex = 10;
-            this.llbSettings.TabStop = true;
-            this.llbSettings.Text = "تنظیمات |";
-            this.llbSettings.UseCompatibleTextRendering = true;
-            this.llbSettings.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbSettings_LinkClicked);
             // 
             // btnSearchRequest
             // 
@@ -279,18 +245,6 @@
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
-            // llbAbout
-            // 
-            this.llbAbout.AutoSize = true;
-            this.llbAbout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.llbAbout.Location = new System.Drawing.Point(3, 0);
-            this.llbAbout.Name = "llbAbout";
-            this.llbAbout.Size = new System.Drawing.Size(106, 18);
-            this.llbAbout.TabIndex = 13;
-            this.llbAbout.TabStop = true;
-            this.llbAbout.Text = "ارسال شیفت ها (55)";
-            this.llbAbout.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbAbout_LinkClicked);
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.chkJustNotPrinted);
@@ -304,6 +258,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(794, 51);
             this.panel2.TabIndex = 1;
+            // 
+            // chkJustNotPrinted
+            // 
+            this.chkJustNotPrinted.AutoSize = true;
+            this.chkJustNotPrinted.Location = new System.Drawing.Point(319, 15);
+            this.chkJustNotPrinted.Name = "chkJustNotPrinted";
+            this.chkJustNotPrinted.Size = new System.Drawing.Size(110, 17);
+            this.chkJustNotPrinted.TabIndex = 10;
+            this.chkJustNotPrinted.Text = "فقط چاپ نشده ها";
+            this.chkJustNotPrinted.UseVisualStyleBackColor = true;
             // 
             // dtpTo
             // 
@@ -356,32 +320,6 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "از تاریخ:";
             // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 39F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.llbAbout, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.llbUser, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.llbSettings, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 37);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(208, 18);
-            this.tableLayoutPanel2.TabIndex = 14;
-            // 
-            // chkJustNotPrinted
-            // 
-            this.chkJustNotPrinted.AutoSize = true;
-            this.chkJustNotPrinted.Location = new System.Drawing.Point(319, 15);
-            this.chkJustNotPrinted.Name = "chkJustNotPrinted";
-            this.chkJustNotPrinted.Size = new System.Drawing.Size(110, 17);
-            this.chkJustNotPrinted.TabIndex = 10;
-            this.chkJustNotPrinted.Text = "فقط چاپ نشده ها";
-            this.chkJustNotPrinted.UseVisualStyleBackColor = true;
-            // 
             // frmShifts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -401,8 +339,6 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -412,7 +348,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnList;
-        private System.Windows.Forms.LinkLabel llbSettings;
         private System.Windows.Forms.Button btnSearchRequest;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnNew;
@@ -423,8 +358,6 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvShifts;
-        private System.Windows.Forms.LinkLabel llbUser;
-        private System.Windows.Forms.LinkLabel llbAbout;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPassportNum;
@@ -433,7 +366,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSent;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.CheckBox chkJustNotPrinted;
     }
 }
