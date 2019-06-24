@@ -42,7 +42,11 @@ namespace VisaXCentral
                                     }).ToList();
 
             int cnt = ctx.Shifts.Where(s => s.Sent == false).Count();
-            llbSendShifts.Text = string.Format("ارسال شیفت ها ({0})", cnt);
+            if (cnt == 0)
+                llbSendShifts.Text = "ارسال شیفت ها";
+            else
+                llbSendShifts.Text = string.Format("ارسال شیفت ها ({0})", cnt);
+
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -154,6 +158,7 @@ namespace VisaXCentral
         private void llbSendShifts_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             new frmSendShifts().ShowDialog();
+            refreshGrid();
         }
 
         private void dtpTo_KeyDown(object sender, KeyEventArgs e)

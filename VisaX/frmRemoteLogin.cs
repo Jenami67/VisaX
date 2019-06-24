@@ -16,7 +16,7 @@ namespace VisaXCentral
 {
     public partial class frmRemoteLogin : Form
     {
-        VisaXCenteralEntities ctx = new VisaXCenteralEntities("ASAWARI", "3Pg^gf81");
+        VisaXCenteralEntities ctx = new VisaXCenteralEntities("ASAWARI");
 
         public frmRemoteLogin()
         {
@@ -32,27 +32,36 @@ namespace VisaXCentral
             }//if
 
             string cryptedPass = StringUtil.Crypt(txtPassword.Text);
-            RemoteUser usr = (from u in ctx.RemoteUsers
-                              where u.UserName == txtUserName.Text
-                              && u.Password == cryptedPass
-                              select u).FirstOrDefault();
-
-            if (usr != null)
+            try
             {
-                Hide();
-                Properties.Settings.Default.RemoteUser = usr;
-                Properties.Settings.Default.RemoteUserName = txtUserName.Text;
-                Properties.Settings.Default.RemotePassword = StringUtil.Crypt(txtPassword.Text);
+                RemoteUser usr = (from u in ctx.RemoteUsers
+                                  where u.UserName == txtUserName.Text
+                                  && u.Password == cryptedPass
+                                  select u).FirstOrDefault();
 
-                Properties.Settings.Default.Save();
-                new frmLogin().ShowDialog();
-                Close();
-            }//if
-            else
-            {
-                txtPassword.Text = string.Empty;
-                lblMsg.Text = "نام کاربری یا رمز عبور اشتباه است.";
+                if (usr != null)
+                {
+                    Hide();
+                    Properties.Settings.Default.RemoteUser = usr;
+                    Properties.Settings.Default.RemoteUserName = txtUserName.Text;
+                    Properties.Settings.Default.RemotePassword = StringUtil.Crypt(txtPassword.Text);
+
+                    Properties.Settings.Default.Save();
+                    new frmLogin().ShowDialog();
+                    Close();
+                }//if
+                else
+                {
+                    txtPassword.Text = string.Empty;
+                    lblMsg.Text = "نام کاربری یا رمز عبور اشتباه است.";
+                }
             }
+            catch (System.Data.Entity.Core.EntityException ex)
+            {
+                if (ex.InnerException.HResult == -2146232060)
+                    MessageBox.Show("اتصال به پایگاه داده برقرار نشد. لطفا از اتصال به اینترنت مطمئن شوید...\n" + ex.ToString());
+            }
+
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -87,7 +96,6 @@ namespace VisaXCentral
 
             }//if
         }
-        //TODO:Refactor to make login method
     }
 
     public partial class VisaXCenteralEntities
@@ -95,7 +103,14 @@ namespace VisaXCentral
         public VisaXCenteralEntities(string user, string pwd)
             : base("name=VisaXCenterEntities")
         {
-            this.Database.Connection.ConnectionString = string.Format(this.Database.Connection.ConnectionString, user, pwd);
+            Database.Connection.ConnectionString = string.Format(this.Database.Connection.ConnectionString, user, pwd);
         }
+
+       public VisaXCenteralEntities(string user)
+            : base("name=VisaXCenterEntities")
+        {
+            if(user == "ASAWARI")
+            Database.Connection.ConnectionString = string.Format(this.Database.Connection.ConnectionString, user, "3Pg^gf81");
+        } 
     }
 }

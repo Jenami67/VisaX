@@ -13,7 +13,7 @@ namespace VisaXCentral
     public partial class frmSendShifts : Form
     {
         VisaXEntities ctx = new VisaXEntities();
-        VisaXCenteralEntities ctxCentral = new VisaXCenteralEntities("ASAWARI", "3Pg^gf81");
+        VisaXCenteralEntities ctxCentral = new VisaXCenteralEntities("ASAWARI");
 
         public frmSendShifts()
         {
@@ -62,14 +62,24 @@ namespace VisaXCentral
                                                           }).ToList<RemoteRequest>()
                                     }).ToList<RemoteShift>();
             ctxCentral.RemoteShifts.AddRange(ls);
-            ctxCentral.SaveChanges();
+            try
+            {
+                ctxCentral.SaveChanges();
+            }
+            catch (System.Data.Entity.Core.EntityException ex)
+            {
+                if (ex.InnerException.HResult == -2146232060)
+                    MessageBox.Show("اتصال به پایگاه داده برقرار نشد. لطفا از اتصال به اینترنت مطمئن شوید..\n" + ex.ToString());
+                ctxCentral = new VisaXCenteralEntities("ASAWARI");
+                return;
+            }
 
             foreach (var shift in ctx.Shifts.Select(s => s).Where(ss => ss.Sent == false))
                 shift.Sent = true;
             ctx.SaveChanges();
 
             MessageBox.Show("شیفت ها با موفقیت به مرکز ارسال شدند.", "ارسال شیفت ها", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading);
-            //TODO:Refresh Data and Control Exceptions
+            refreshGrid();
         }
 
         private void dgvShifts_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
