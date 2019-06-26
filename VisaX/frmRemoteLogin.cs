@@ -64,21 +64,18 @@ namespace VisaXCentral
 
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         private void frmRemoteLogin_Load(object sender, EventArgs e)
         {
             //Login Automaticaly if there is a user saved in settings
             if (Properties.Settings.Default.RemoteUserName != string.Empty)
             {
+                txtUserName.Text = Properties.Settings.Default.RemoteUserName;
+                txtPassword.Text = Properties.Settings.Default.RemotePassword;
                 try
                 {
                     RemoteUser usr = (from u in ctx.RemoteUsers
-                                      where u.UserName == Properties.Settings.Default.RemoteUserName
-                                      && u.Password == Properties.Settings.Default.RemotePassword
+                                      where u.UserName == txtUserName.Text
+                                      && u.Password == txtPassword.Text
                                       select u).FirstOrDefault();
 
                     if (usr != null)
@@ -92,10 +89,16 @@ namespace VisaXCentral
                 {
                     if (ex.InnerException.HResult == -2146232060)
                         MessageBox.Show("اتصال به پایگاه داده برقرار نشد. لطفا از اتصال به اینترنت مطمئن شوید..\n" + ex.ToString());
+                    return;
                 }
 
             }//if
         }
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
     }
 
     public partial class VisaXCenteralEntities
@@ -106,11 +109,11 @@ namespace VisaXCentral
             Database.Connection.ConnectionString = string.Format(this.Database.Connection.ConnectionString, user, pwd);
         }
 
-       public VisaXCenteralEntities(string user)
-            : base("name=VisaXCenterEntities")
+        public VisaXCenteralEntities(string user)
+             : base("name=VisaXCenterEntities")
         {
-            if(user == "ASAWARI")
-            Database.Connection.ConnectionString = string.Format(this.Database.Connection.ConnectionString, user, "3Pg^gf81");
-        } 
+            if (user == "ASAWARI")
+                Database.Connection.ConnectionString = string.Format(this.Database.Connection.ConnectionString, user, "3Pg^gf81");
+        }
     }
 }
