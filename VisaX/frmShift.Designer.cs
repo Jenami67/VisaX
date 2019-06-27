@@ -207,29 +207,29 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 49F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 127F));
             this.tableLayoutPanel2.Controls.Add(this.llbSendShifts, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.llbUser, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.llbSettings, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 40);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(-3, 40);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(194, 18);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(189, 18);
             this.tableLayoutPanel2.TabIndex = 15;
             // 
             // llbSendShifts
             // 
             this.llbSendShifts.AutoSize = true;
             this.llbSendShifts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.llbSendShifts.Location = new System.Drawing.Point(-11, 0);
+            this.llbSendShifts.Location = new System.Drawing.Point(-16, 0);
             this.llbSendShifts.Name = "llbSendShifts";
             this.llbSendShifts.Size = new System.Drawing.Size(121, 18);
             this.llbSendShifts.TabIndex = 13;
             this.llbSendShifts.TabStop = true;
-            this.llbSendShifts.Text = "ارسال شیفت ها (0)";
+            this.llbSendShifts.Text = "&ارسال شیفت ها (0)";
             this.llbSendShifts.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbSendShifts_LinkClicked);
             // 
             // llbUser
@@ -237,9 +237,9 @@
             this.llbUser.AutoSize = true;
             this.llbUser.Dock = System.Windows.Forms.DockStyle.Fill;
             this.llbUser.LinkArea = new System.Windows.Forms.LinkArea(0, 6);
-            this.llbUser.Location = new System.Drawing.Point(166, 0);
+            this.llbUser.Location = new System.Drawing.Point(160, 0);
             this.llbUser.Name = "llbUser";
-            this.llbUser.Size = new System.Drawing.Size(25, 18);
+            this.llbUser.Size = new System.Drawing.Size(26, 18);
             this.llbUser.TabIndex = 12;
             this.llbUser.TabStop = true;
             this.llbUser.Text = "کاربر";
@@ -251,9 +251,9 @@
             this.llbSettings.AutoSize = true;
             this.llbSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.llbSettings.LinkArea = new System.Windows.Forms.LinkArea(0, 8);
-            this.llbSettings.Location = new System.Drawing.Point(116, 0);
+            this.llbSettings.Location = new System.Drawing.Point(111, 0);
             this.llbSettings.Name = "llbSettings";
-            this.llbSettings.Size = new System.Drawing.Size(44, 18);
+            this.llbSettings.Size = new System.Drawing.Size(43, 18);
             this.llbSettings.TabIndex = 10;
             this.llbSettings.TabStop = true;
             this.llbSettings.Text = "تنظیمات";
@@ -268,7 +268,7 @@
             this.btnList.Name = "btnList";
             this.btnList.Size = new System.Drawing.Size(130, 45);
             this.btnList.TabIndex = 11;
-            this.btnList.Text = "متقاضیان";
+            this.btnList.Text = "&متقاضیان";
             this.btnList.UseVisualStyleBackColor = true;
             this.btnList.Click += new System.EventHandler(this.btnList_Click);
             // 
@@ -279,7 +279,7 @@
             this.btnSearchRequest.Name = "btnSearchRequest";
             this.btnSearchRequest.Size = new System.Drawing.Size(130, 45);
             this.btnSearchRequest.TabIndex = 9;
-            this.btnSearchRequest.Text = "جستجو";
+            this.btnSearchRequest.Text = "&جستجو";
             this.btnSearchRequest.UseVisualStyleBackColor = true;
             this.btnSearchRequest.Click += new System.EventHandler(this.btnSearchRequest_Click);
             // 
@@ -291,7 +291,7 @@
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(130, 45);
             this.btnDelete.TabIndex = 8;
-            this.btnDelete.Text = "حذف";
+            this.btnDelete.Text = "&حذف";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -302,7 +302,7 @@
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(130, 45);
             this.btnNew.TabIndex = 7;
-            this.btnNew.Text = "شیفت جدید";
+            this.btnNew.Text = "&شیفت جدید";
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
@@ -358,7 +358,7 @@
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 5;
-            this.btnSearch.Text = ">>>";
+            this.btnSearch.Text = "&>>>";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 

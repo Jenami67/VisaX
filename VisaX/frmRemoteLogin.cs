@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 
 namespace VisaXCentral
 {
@@ -41,12 +33,11 @@ namespace VisaXCentral
 
                 if (usr != null)
                 {
-                    Hide();
-                    Properties.Settings.Default.RemoteUser = usr;
                     Properties.Settings.Default.RemoteUserName = txtUserName.Text;
                     Properties.Settings.Default.RemotePassword = StringUtil.Crypt(txtPassword.Text);
-
                     Properties.Settings.Default.Save();
+
+                    Hide();
                     new frmLogin().ShowDialog();
                     Close();
                 }//if
@@ -70,12 +61,14 @@ namespace VisaXCentral
             if (Properties.Settings.Default.RemoteUserName != string.Empty)
             {
                 txtUserName.Text = Properties.Settings.Default.RemoteUserName;
-                txtPassword.Text = Properties.Settings.Default.RemotePassword;
+                txtPassword.Text = StringUtil.Decrypt(Properties.Settings.Default.RemotePassword);
+                string cryptedPass = StringUtil.Crypt(txtPassword.Text);
+
                 try
                 {
                     RemoteUser usr = (from u in ctx.RemoteUsers
                                       where u.UserName == txtUserName.Text
-                                      && u.Password == txtPassword.Text
+                                      && u.Password == cryptedPass
                                       select u).FirstOrDefault();
 
                     if (usr != null)
@@ -88,7 +81,7 @@ namespace VisaXCentral
                 catch (System.Data.Entity.Core.EntityException ex)
                 {
                     if (ex.InnerException.HResult == -2146232060)
-                        MessageBox.Show("اتصال به پایگاه داده برقرار نشد. لطفا از اتصال به اینترنت مطمئن شوید..\n" + ex.ToString());
+                        MessageBox.Show("اتصال به پایگاه داده برقرار نشد. لطفا از اتصال به اینترنت مطمئن شوید...\n\n" + ex.ToString());
                     return;
                 }
 
