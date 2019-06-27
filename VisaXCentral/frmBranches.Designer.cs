@@ -34,16 +34,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvBranches = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnChangePass = new System.Windows.Forms.Button();
-            this.btnDisable = new System.Windows.Forms.Button();
-            this.btnShowShifts = new System.Windows.Forms.Button();
             this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnChangePass = new System.Windows.Forms.Button();
+            this.btnDisable = new System.Windows.Forms.Button();
+            this.btnShowShifts = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBranches)).BeginInit();
             this.panel1.SuspendLayout();
@@ -107,49 +107,6 @@
             this.dgvBranches.Size = new System.Drawing.Size(571, 297);
             this.dgvBranches.TabIndex = 3;
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.btnChangePass);
-            this.panel1.Controls.Add(this.btnDisable);
-            this.panel1.Controls.Add(this.btnShowShifts);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 306);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(571, 58);
-            this.panel1.TabIndex = 4;
-            // 
-            // btnChangePass
-            // 
-            this.btnChangePass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnChangePass.Enabled = false;
-            this.btnChangePass.Location = new System.Drawing.Point(286, 7);
-            this.btnChangePass.Name = "btnChangePass";
-            this.btnChangePass.Size = new System.Drawing.Size(135, 45);
-            this.btnChangePass.TabIndex = 14;
-            this.btnChangePass.Text = "تغییر رمز";
-            this.btnChangePass.UseVisualStyleBackColor = true;
-            // 
-            // btnDisable
-            // 
-            this.btnDisable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDisable.Location = new System.Drawing.Point(145, 7);
-            this.btnDisable.Name = "btnDisable";
-            this.btnDisable.Size = new System.Drawing.Size(135, 45);
-            this.btnDisable.TabIndex = 13;
-            this.btnDisable.Text = "غیرفعال کردن";
-            this.btnDisable.UseVisualStyleBackColor = true;
-            // 
-            // btnShowShifts
-            // 
-            this.btnShowShifts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnShowShifts.Enabled = false;
-            this.btnShowShifts.Location = new System.Drawing.Point(427, 7);
-            this.btnShowShifts.Name = "btnShowShifts";
-            this.btnShowShifts.Size = new System.Drawing.Size(135, 45);
-            this.btnShowShifts.TabIndex = 12;
-            this.btnShowShifts.Text = "نمایش شیفت ها";
-            this.btnShowShifts.UseVisualStyleBackColor = true;
-            // 
             // colNumber
             // 
             this.colNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -197,6 +154,50 @@
             this.colCount.Name = "colCount";
             this.colCount.ReadOnly = true;
             this.colCount.Width = 53;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnChangePass);
+            this.panel1.Controls.Add(this.btnDisable);
+            this.panel1.Controls.Add(this.btnShowShifts);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 306);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(571, 58);
+            this.panel1.TabIndex = 4;
+            // 
+            // btnChangePass
+            // 
+            this.btnChangePass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnChangePass.Enabled = false;
+            this.btnChangePass.Location = new System.Drawing.Point(286, 7);
+            this.btnChangePass.Name = "btnChangePass";
+            this.btnChangePass.Size = new System.Drawing.Size(135, 45);
+            this.btnChangePass.TabIndex = 14;
+            this.btnChangePass.Text = "تغییر رمز";
+            this.btnChangePass.UseVisualStyleBackColor = true;
+            this.btnChangePass.Click += new System.EventHandler(this.btnChangePass_Click);
+            // 
+            // btnDisable
+            // 
+            this.btnDisable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDisable.Location = new System.Drawing.Point(145, 7);
+            this.btnDisable.Name = "btnDisable";
+            this.btnDisable.Size = new System.Drawing.Size(135, 45);
+            this.btnDisable.TabIndex = 13;
+            this.btnDisable.Text = "غیرفعال کردن";
+            this.btnDisable.UseVisualStyleBackColor = true;
+            // 
+            // btnShowShifts
+            // 
+            this.btnShowShifts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnShowShifts.Enabled = false;
+            this.btnShowShifts.Location = new System.Drawing.Point(427, 7);
+            this.btnShowShifts.Name = "btnShowShifts";
+            this.btnShowShifts.Size = new System.Drawing.Size(135, 45);
+            this.btnShowShifts.TabIndex = 12;
+            this.btnShowShifts.Text = "نمایش شیفت ها";
+            this.btnShowShifts.UseVisualStyleBackColor = true;
             // 
             // frmBranches
             // 

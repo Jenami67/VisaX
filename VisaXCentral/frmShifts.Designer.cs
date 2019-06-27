@@ -220,7 +220,6 @@
             this.btnSearchRequest.TabIndex = 9;
             this.btnSearchRequest.Text = "جستجو";
             this.btnSearchRequest.UseVisualStyleBackColor = true;
-            this.btnSearchRequest.Click += new System.EventHandler(this.btnSearchRequest_Click);
             // 
             // btnDelete
             // 
@@ -262,7 +261,7 @@
             // chkJustNotPrinted
             // 
             this.chkJustNotPrinted.AutoSize = true;
-            this.chkJustNotPrinted.Location = new System.Drawing.Point(319, 15);
+            this.chkJustNotPrinted.Location = new System.Drawing.Point(329, 15);
             this.chkJustNotPrinted.Name = "chkJustNotPrinted";
             this.chkJustNotPrinted.Size = new System.Drawing.Size(110, 17);
             this.chkJustNotPrinted.TabIndex = 10;
@@ -274,9 +273,9 @@
             this.dtpTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpTo.CustomFormat = "yyyy/MM/dd";
             this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpTo.Location = new System.Drawing.Point(443, 12);
+            this.dtpTo.Location = new System.Drawing.Point(464, 12);
             this.dtpTo.Name = "dtpTo";
-            this.dtpTo.Size = new System.Drawing.Size(121, 21);
+            this.dtpTo.Size = new System.Drawing.Size(110, 21);
             this.dtpTo.TabIndex = 9;
             // 
             // dtpFrom
@@ -284,16 +283,16 @@
             this.dtpFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpFrom.CustomFormat = "yyyy/MM/dd";
             this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFrom.Location = new System.Drawing.Point(620, 12);
+            this.dtpFrom.Location = new System.Drawing.Point(631, 12);
             this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.Size = new System.Drawing.Size(121, 21);
+            this.dtpFrom.Size = new System.Drawing.Size(110, 21);
             this.dtpFrom.TabIndex = 8;
             // 
             // label2
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(567, 17);
+            this.label2.Location = new System.Drawing.Point(577, 17);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 13);
             this.label2.TabIndex = 7;
@@ -302,9 +301,9 @@
             // btnSearch
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Location = new System.Drawing.Point(237, 11);
+            this.btnSearch.Location = new System.Drawing.Point(260, 10);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.Size = new System.Drawing.Size(62, 23);
             this.btnSearch.TabIndex = 5;
             this.btnSearch.Text = ">>>";
             this.btnSearch.UseVisualStyleBackColor = true;

@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="VisaXCenterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="RemoteRequest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShiftID" Type="int" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="90" Nullable="false" />
+          <Property Name="Gender" Type="tinyint" Nullable="false" />
+          <Property Name="PassportNum" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="BornDate" Type="date" />
+          <Property Name="IssueDate" Type="date" />
+          <Property Name="ExpiryDate" Type="date" />
+        </EntityType>
+        <EntityType Name="RemoteShift">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="ShiftNum" Type="tinyint" Nullable="false" />
+          <Property Name="RemoteUserID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="RemoteUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="RealName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Request_Shift">
+          <End Role="RemoteShift" Type="Self.RemoteShift" Multiplicity="1" />
+          <End Role="RemoteRequest" Type="Self.RemoteRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RemoteShift">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RemoteRequest">
+              <PropertyRef Name="ShiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shift_RemoteUser">
+          <End Role="RemoteUser" Type="Self.RemoteUser" Multiplicity="1" />
+          <End Role="RemoteShift" Type="Self.RemoteShift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RemoteUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RemoteShift">
+              <PropertyRef Name="RemoteUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VisaXCenterModelStoreContainer">
+          <EntitySet Name="RemoteRequest" EntityType="Self.RemoteRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RemoteShift" EntityType="Self.RemoteShift" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RemoteUser" EntityType="Self.RemoteUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Request_Shift" Association="Self.FK_Request_Shift">
+            <End Role="RemoteShift" EntitySet="RemoteShift" />
+            <End Role="RemoteRequest" EntitySet="RemoteRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shift_RemoteUser" Association="Self.FK_Shift_RemoteUser">
+            <End Role="RemoteUser" EntitySet="RemoteUser" />
+            <End Role="RemoteShift" EntitySet="RemoteShift" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VisaXCenterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="RemoteUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RealName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="RemoteShifts" Relationship="VisaXCenterModel.FK_Shift_RemoteUser" FromRole="RemoteUser" ToRole="RemoteShift" />
+        </EntityType>
+        <EntityContainer Name="VisaXCenteralEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="RemoteUsers" EntityType="Self.RemoteUser" />
+          <EntitySet Name="RemoteRequests" EntityType="VisaXCenterModel.RemoteRequest" />
+          <EntitySet Name="RemoteShifts" EntityType="VisaXCenterModel.RemoteShift" />
+          <AssociationSet Name="FK_Request_Shift" Association="VisaXCenterModel.FK_Request_Shift">
+            <End Role="RemoteShift" EntitySet="RemoteShifts" />
+            <End Role="RemoteRequest" EntitySet="RemoteRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shift_RemoteUser" Association="VisaXCenterModel.FK_Shift_RemoteUser">
+            <End Role="RemoteUser" EntitySet="RemoteUsers" />
+            <End Role="RemoteShift" EntitySet="RemoteShifts" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="RemoteRequest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShiftID" Type="Int32" Nullable="false" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="Byte" Nullable="false" />
+          <Property Name="PassportNum" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="BornDate" Type="DateTime" Precision="0" />
+          <Property Name="IssueDate" Type="DateTime" Precision="0" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="RemoteShift" Relationship="VisaXCenterModel.FK_Request_Shift" FromRole="RemoteRequest" ToRole="RemoteShift" />
+        </EntityType>
+        <EntityType Name="RemoteShift">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ShiftNum" Type="Byte" Nullable="false" />
+          <Property Name="RemoteUserID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RemoteRequests" Relationship="VisaXCenterModel.FK_Request_Shift" FromRole="RemoteShift" ToRole="RemoteRequest" />
+          <NavigationProperty Name="RemoteUser" Relationship="VisaXCenterModel.FK_Shift_RemoteUser" FromRole="RemoteShift" ToRole="RemoteUser" />
+        </EntityType>
+        <Association Name="FK_Request_Shift">
+          <End Type="VisaXCenterModel.RemoteShift" Role="RemoteShift" Multiplicity="1" />
+          <End Type="VisaXCenterModel.RemoteRequest" Role="RemoteRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RemoteShift">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RemoteRequest">
+              <PropertyRef Name="ShiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shift_RemoteUser">
+          <End Type="VisaXCenterModel.RemoteUser" Role="RemoteUser" Multiplicity="1" />
+          <End Type="VisaXCenterModel.RemoteShift" Role="RemoteShift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RemoteUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RemoteShift">
+              <PropertyRef Name="RemoteUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VisaXCenterModelStoreContainer" CdmEntityContainer="VisaXCenteralEntities">
+          <EntitySetMapping Name="RemoteUsers">
+            <EntityTypeMapping TypeName="VisaXCenterModel.RemoteUser">
+              <MappingFragment StoreEntitySet="RemoteUser">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RealName" ColumnName="RealName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RemoteRequests">
+            <EntityTypeMapping TypeName="VisaXCenterModel.RemoteRequest">
+              <MappingFragment StoreEntitySet="RemoteRequest">
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="BornDate" ColumnName="BornDate" />
+                <ScalarProperty Name="PassportNum" ColumnName="PassportNum" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RemoteShifts">
+            <EntityTypeMapping TypeName="VisaXCenterModel.RemoteShift">
+              <MappingFragment StoreEntitySet="RemoteShift">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RemoteUserID" ColumnName="RemoteUserID" />
+                <ScalarProperty Name="ShiftNum" ColumnName="ShiftNum" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

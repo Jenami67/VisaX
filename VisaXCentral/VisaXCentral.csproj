@@ -34,6 +34,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -49,6 +51,12 @@
     <Compile Include="frmBranches.Designer.cs">
       <DependentUpon>frmBranches.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChangePassword.Designer.cs">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmShifts.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,8 +65,35 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RemoteRequest.cs">
+      <DependentUpon>VisaXCentralModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RemoteShift.cs">
+      <DependentUpon>VisaXCentralModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RemoteUser.cs">
+      <DependentUpon>VisaXCentralModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VisaXCentralModel.Context.cs">
+      <DependentUpon>VisaXCentralModel.Context.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="VisaXCentralModel.cs">
+      <DependentUpon>VisaXCentralModel.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="VisaXCentralModel.Designer.cs">
+      <DependentUpon>VisaXCentralModel.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <EmbeddedResource Include="frmBranches.resx">
       <DependentUpon>frmBranches.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmShifts.resx">
       <DependentUpon>frmShifts.cs</DependentUpon>
@@ -81,6 +116,25 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EntityDeploy Include="VisaXCentralModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>VisaXCentralModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="VisaXCentralModel.edmx.diagram">
+      <DependentUpon>VisaXCentralModel.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="VisaXCentralModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VisaXCentralModel.edmx</DependentUpon>
+      <LastGenOutput>VisaXCentralModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="VisaXCentralModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>VisaXCentralModel.edmx</DependentUpon>
+      <LastGenOutput>VisaXCentralModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

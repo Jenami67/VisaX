@@ -1,22 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.Entity;
 
 namespace VisaXCentral
 {
     public partial class frmShifts : Form
     {
-        VisaXEntities ctx = new VisaXEntities();
+       // VisaXEntities ctx = new VisaXEntities();
+        VisaXCenteralEntities ctxCentral = new VisaXCenteralEntities("ASAWARI");
+
         public frmShifts()
         {
             InitializeComponent();
-            Text = Text + " - " + Properties.Settings.Default.User.RealName;
+           // Text = Text + " - " + Properties.Settings.Default.User.RealName;
 
         }
 
@@ -127,32 +126,25 @@ namespace VisaXCentral
             rowColor();
         }
 
-        private void btnSearchRequest_Click(object sender, EventArgs e)
-        {
-            new frmSearch().ShowDialog();
-        }
-
-        private void llbSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            new frmSettings().ShowDialog();
-        }
-
         private void dgvShifts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             btnList_Click(null, null);
         }
-
-        private void llbAbout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    }
+    public partial class VisaXCenteralEntities
+    {
+        public VisaXCenteralEntities(string user, string pwd)
+            : base("name=VisaXCenterEntities")
         {
-            new frmSendShifts().ShowDialog();
+            Database.Connection.ConnectionString = string.Format(this.Database.Connection.ConnectionString, user, pwd);
         }
 
-        private void llbUser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        public VisaXCenteralEntities(string user)
+             : base("name=VisaXCenterEntities")
         {
-            if (Properties.Settings.Default.User.ID == 1)
-                new frmManageUsers().ShowDialog();
-            else
-                new frmChangePassword().ShowDialog();
+            if (user == "ASAWARI")
+                Database.Connection.ConnectionString = string.Format(this.Database.Connection.ConnectionString, user, "3Pg^gf81");
         }
     }
+
 }
