@@ -39,6 +39,7 @@ namespace VisaXCentral
                                           Enabled = b.Enabled ? "✓" : "✗"
                                       }).ToList();
         }
+
         private void frmBranches_Load(object sender, EventArgs e)
         {
             refreshGrid();
@@ -134,5 +135,4 @@ namespace VisaXCentral
                 Database.Connection.ConnectionString = string.Format(this.Database.Connection.ConnectionString, user, "3Pg^gf81");
         }
     }
-
 }

@@ -3,9 +3,9 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using System.Data.Entity;
-using VisaX;
+//using VisaX;
 
-namespace VisaXCentral
+namespace VisaX
 {
     public partial class frmRemoteLogin : Form
     {
@@ -31,10 +31,14 @@ namespace VisaXCentral
                                   where u.UserName == txtUserName.Text
                                   && u.Password == cryptedPass
                                   select u).FirstOrDefault();
-
+                
                 if (usr != null)
                 {
-
+                    if (!usr.Enabled)
+                    {
+                        MessageBox.Show("ورود شما به سیستم از طریق مدیریت غیرفعال شده.\nامکان ورود به برنامه وجود ندارد لطفاً با مدیر سیستم تماس بگیرید.", "کاربر غیرفعال شده", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                        return;
+                    }
                     Properties.Settings.Default.RemoteUserName = txtUserName.Text;
                     Properties.Settings.Default.RemotePassword = StringUtil.Crypt(txtPassword.Text);
                     Properties.Settings.Default.Save();
@@ -72,9 +76,14 @@ namespace VisaXCentral
                                       where u.UserName == txtUserName.Text
                                       && u.Password == cryptedPass
                                       select u).FirstOrDefault();
-
                     if (usr != null)
                     {
+                        if (!usr.Enabled)
+                        {
+                            MessageBox.Show("ورود شما به سیستم از طریق مدیریت غیرفعال شده.\nامکان ورود به برنامه وجود ندارد لطفاً با مدیر سیستم تماس بگیرید.", "کاربر غیرفعال شده", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
+                        return;
+                        }
+
                         Hide();
                         new frmLogin().ShowDialog();
                         Close();

@@ -1,4 +1,4 @@
-﻿namespace VisaXCentral.Properties {
+﻿namespace VisaX.Properties {
     
     
     // This class allows you to handle specific events on the settings class:

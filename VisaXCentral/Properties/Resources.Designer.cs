@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VisaXCentral.Properties {
+namespace VisaX.Properties {
     using System;
     
     

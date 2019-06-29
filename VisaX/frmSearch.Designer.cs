@@ -1,4 +1,4 @@
-﻿namespace VisaXCentral
+﻿namespace VisaX
 {
     partial class frmSearch
     {

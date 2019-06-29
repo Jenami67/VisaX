@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VisaXCentral.Properties {
+namespace VisaX.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -37,9 +37,9 @@ namespace VisaXCentral.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::VisaXCentral.User User {
+        public global::VisaX.User User {
             get {
-                return ((global::VisaXCentral.User)(this["User"]));
+                return ((global::VisaX.User)(this["User"]));
             }
             set {
                 this["User"] = value;
@@ -72,9 +72,9 @@ namespace VisaXCentral.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::VisaXCentral.RemoteUser RemoteUser {
+        public global::VisaX.RemoteUser RemoteUser {
             get {
-                return ((global::VisaXCentral.RemoteUser)(this["RemoteUser"]));
+                return ((global::VisaX.RemoteUser)(this["RemoteUser"]));
             }
             set {
                 this["RemoteUser"] = value;

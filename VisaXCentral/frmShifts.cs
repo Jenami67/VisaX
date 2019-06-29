@@ -9,14 +9,11 @@ namespace VisaXCentral
 {
     public partial class frmShifts : Form
     {
-       // VisaXCenteralEntities ctx = new VisaXCenteralEntities();
-        VisaXCenteralEntities ctxCentral = new VisaXCenteralEntities("ASAWARI");
-
+        VisaXCenteralEntities ctx = new VisaXCenteralEntities("ASAWARI");
+        
         public frmShifts()
         {
             InitializeComponent();
-           // Text = Text + " - " + Properties.Settings.Default.User.RealName;
-
         }
 
         private void frmShifts_Load(object sender, EventArgs e)
@@ -27,7 +24,7 @@ namespace VisaXCentral
 
         private void refreshGrid()
         {
-            dgvShifts.DataSource = (from s in ctx.Shifts
+            dgvShifts.DataSource = (from s in 
                                     where s.Date >= dtpFrom.Value.Date && s.Date <= dtpTo.Value
                                     select new
                                     {
@@ -38,8 +35,6 @@ namespace VisaXCentral
                                         s.Description,
                                         s.Requests.Count,
                                         Sent = s.Sent ? "✓" : "✗"
-
-                                        //Sent = s.Sent ? "ارسال شده" : "مانده"
                                     }).ToList();
         }
 
@@ -48,69 +43,14 @@ namespace VisaXCentral
             refreshGrid();
         }
 
-        private void btnNew_Click(object sender, EventArgs e)
-        {
-            byte max = ctx.Shifts.Where(s => s.Date == DateTime.Today).Select(s => s.ShiftNum).DefaultIfEmpty<byte>(0).Max();
-            //(from s in ctx.Shifts where s.Date == DateTime.Today select s.ShiftNum).ma
-            max++;
-            string message = string.Format("تولید شیفت شماره {0} به تاریخ {1} توسط {2}؟", max, DateTime.Today.ToShortDateString(), Properties.Settings.Default.User.RealName);
-            frmNewShift frmNewShift = new frmNewShift(message);
-            if (frmNewShift.ShowDialog() == DialogResult.Yes)
-            {
-                ctx.Shifts.Add(new Shift
-                {
-                    Date = DateTime.Today,
-                    UserID = Properties.Settings.Default.User.ID,
-                    ShiftNum = max,
-                    Description = frmNewShift.txtDescription.Text
-                });
-                ctx.SaveChanges();
-                refreshGrid();
-
-                dgvShifts.ClearSelection();
-                dgvShifts.Rows[dgvShifts.RowCount - 1].Selected = true;
-            }//if
-        }//btnNew
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            int id = (int)dgvShifts.SelectedRows[0].Cells["colID"].Value;
-            Shift shift = (from s in ctx.Shifts where s.ID == id select s).First();
-            if (MessageBox.Show("آیا مایل به حذف این شیفت هستید؟", "حذف شیفت", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes)
-            {
-                ctx.Shifts.Remove(shift);
-                try
-                {
-                    ctx.SaveChanges();
-                }
-                catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
-                {
-                    MessageBox.Show("امکان حذف شیفتی که متقاضی در آن ثبت شده وجود ندارد.\n" + ex.ToString());
-                    ctx.Entry(shift).Reload();
-                }
-                refreshGrid();
-            }//if
-        }
-
-        private void btnList_Click(object sender, EventArgs e)
-        {
-            int id = int.Parse(dgvShifts.SelectedRows[0].Cells["colID"].Value.ToString());
-            Shift shift = (from s in ctx.Shifts where s.ID == id select s).First();
-            new frmRequests(shift).ShowDialog();
-            int selShift = dgvShifts.SelectedRows[0].Index;
-            refreshGrid();
-            dgvShifts.Rows[selShift].Selected = true;
-
-        }
-
         private void dgvPassengers_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            btnDelete.Enabled = btnList.Enabled = dgvShifts.Rows.Count != 0;
+            button1.Enabled = btnList.Enabled = dgvShifts.Rows.Count != 0;
         }
 
         private void dgvPassengers_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            btnDelete.Enabled = btnList.Enabled = dgvShifts.Rows.Count != 0;
+            button1.Enabled = btnList.Enabled = dgvShifts.Rows.Count != 0;
         }
 
         public void rowColor()
@@ -126,12 +66,12 @@ namespace VisaXCentral
             rowColor();
         }
 
-        private void dgvShifts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            btnList_Click(null, null);
-        }
+        //private void dgvShifts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    btnList_Click(null, null);
+        //}
     }
-    public partial class VisaXCenteralEntities
+    public partial class VisaXCenteralEntities:DbContext
     {
         public VisaXCenteralEntities(string user, string pwd)
             : base("name=VisaXCenterEntities")
