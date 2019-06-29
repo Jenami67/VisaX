@@ -34,16 +34,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvBranches = new System.Windows.Forms.DataGridView();
-            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnChangePass = new System.Windows.Forms.Button();
             this.btnDisable = new System.Windows.Forms.Button();
             this.btnShowShifts = new System.Windows.Forms.Button();
+            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLastSeen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEnabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBranches)).BeginInit();
             this.panel1.SuspendLayout();
@@ -84,10 +84,10 @@
             this.dgvBranches.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colNumber,
             this.colID,
-            this.colFullName,
+            this.colCount,
             this.colUser,
-            this.colDescription,
-            this.colCount});
+            this.colLastSeen,
+            this.colEnabled});
             this.dgvBranches.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBranches.Location = new System.Drawing.Point(3, 3);
             this.dgvBranches.Name = "dgvBranches";
@@ -106,54 +106,10 @@
             this.dgvBranches.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBranches.Size = new System.Drawing.Size(571, 297);
             this.dgvBranches.TabIndex = 3;
-            // 
-            // colNumber
-            // 
-            this.colNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colNumber.HeaderText = "ردیف";
-            this.colNumber.Name = "colNumber";
-            this.colNumber.ReadOnly = true;
-            this.colNumber.Width = 54;
-            // 
-            // colID
-            // 
-            this.colID.DataPropertyName = "ID";
-            this.colID.FillWeight = 50F;
-            this.colID.HeaderText = "کد";
-            this.colID.Name = "colID";
-            this.colID.ReadOnly = true;
-            this.colID.Visible = false;
-            // 
-            // colFullName
-            // 
-            this.colFullName.DataPropertyName = "ShiftNum";
-            this.colFullName.HeaderText = "شیفت ها";
-            this.colFullName.Name = "colFullName";
-            this.colFullName.ReadOnly = true;
-            // 
-            // colUser
-            // 
-            this.colUser.DataPropertyName = "RealName";
-            this.colUser.HeaderText = "نام کاربری";
-            this.colUser.Name = "colUser";
-            this.colUser.ReadOnly = true;
-            // 
-            // colDescription
-            // 
-            this.colDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDescription.DataPropertyName = "Description";
-            this.colDescription.HeaderText = "آخرین اتصال";
-            this.colDescription.Name = "colDescription";
-            this.colDescription.ReadOnly = true;
-            // 
-            // colCount
-            // 
-            this.colCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colCount.DataPropertyName = "Count";
-            this.colCount.HeaderText = "فعال";
-            this.colCount.Name = "colCount";
-            this.colCount.ReadOnly = true;
-            this.colCount.Width = 53;
+            this.dgvBranches.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvBranches_RowPostPaint);
+            this.dgvBranches.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvBranches_RowsAdded);
+            this.dgvBranches.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvBranches_RowsRemoved);
+            this.dgvBranches.SelectionChanged += new System.EventHandler(this.dgvBranches_SelectionChanged);
             // 
             // panel1
             // 
@@ -187,6 +143,7 @@
             this.btnDisable.TabIndex = 13;
             this.btnDisable.Text = "غیرفعال کردن";
             this.btnDisable.UseVisualStyleBackColor = true;
+            this.btnDisable.Click += new System.EventHandler(this.btnDisable_Click);
             // 
             // btnShowShifts
             // 
@@ -198,6 +155,55 @@
             this.btnShowShifts.TabIndex = 12;
             this.btnShowShifts.Text = "نمایش شیفت ها";
             this.btnShowShifts.UseVisualStyleBackColor = true;
+            this.btnShowShifts.Click += new System.EventHandler(this.btnShowShifts_Click);
+            // 
+            // colNumber
+            // 
+            this.colNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colNumber.HeaderText = "ردیف";
+            this.colNumber.Name = "colNumber";
+            this.colNumber.ReadOnly = true;
+            this.colNumber.Width = 54;
+            // 
+            // colID
+            // 
+            this.colID.DataPropertyName = "ID";
+            this.colID.FillWeight = 50F;
+            this.colID.HeaderText = "کد";
+            this.colID.Name = "colID";
+            this.colID.ReadOnly = true;
+            this.colID.Visible = false;
+            // 
+            // colCount
+            // 
+            this.colCount.DataPropertyName = "Count";
+            this.colCount.HeaderText = "شیفت ها";
+            this.colCount.Name = "colCount";
+            this.colCount.ReadOnly = true;
+            // 
+            // colUser
+            // 
+            this.colUser.DataPropertyName = "RealName";
+            this.colUser.HeaderText = "نام کاربری";
+            this.colUser.Name = "colUser";
+            this.colUser.ReadOnly = true;
+            // 
+            // colLastSeen
+            // 
+            this.colLastSeen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colLastSeen.DataPropertyName = "LastSeen";
+            this.colLastSeen.HeaderText = "آخرین اتصال";
+            this.colLastSeen.Name = "colLastSeen";
+            this.colLastSeen.ReadOnly = true;
+            // 
+            // colEnabled
+            // 
+            this.colEnabled.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colEnabled.DataPropertyName = "Enabled";
+            this.colEnabled.HeaderText = "فعال";
+            this.colEnabled.Name = "colEnabled";
+            this.colEnabled.ReadOnly = true;
+            this.colEnabled.Width = 53;
             // 
             // frmBranches
             // 
@@ -211,6 +217,7 @@
             this.RightToLeftLayout = true;
             this.Text = "لیست شعب ...";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmBranches_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBranches)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -222,16 +229,16 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.DataGridView dgvBranches;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFullName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colUser;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnChangePass;
         private System.Windows.Forms.Button btnDisable;
         private System.Windows.Forms.Button btnShowShifts;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUser;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLastSeen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEnabled;
     }
 }
 

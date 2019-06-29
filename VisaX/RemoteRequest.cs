@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VisaXCentral
+namespace VisaX
 {
     using System;
     using System.Collections.Generic;

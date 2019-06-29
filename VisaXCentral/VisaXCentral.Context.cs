@@ -13,10 +13,10 @@ namespace VisaXCentral
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class VisaXCenteralEntities : DbContext
+    public partial class VisaXCenterEntities : DbContext
     {
-        public VisaXCenteralEntities()
-            : base("name=VisaXCenteralEntities")
+        public VisaXCenterEntities()
+            : base("name=VisaXCenterEntities")
         {
         }
     
@@ -25,8 +25,8 @@ namespace VisaXCentral
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<RemoteUser> RemoteUsers { get; set; }
         public virtual DbSet<RemoteRequest> RemoteRequests { get; set; }
         public virtual DbSet<RemoteShift> RemoteShifts { get; set; }
+        public virtual DbSet<RemoteUser> RemoteUsers { get; set; }
     }
 }

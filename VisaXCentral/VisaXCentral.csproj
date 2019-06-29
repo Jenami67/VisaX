@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>VisaXCentral</RootNamespace>
     <AssemblyName>VisaXCentral</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,9 +32,19 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -57,46 +69,37 @@
     <Compile Include="frmChangePassword.Designer.cs">
       <DependentUpon>frmChangePassword.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmShifts.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmShifts.Designer.cs">
-      <DependentUpon>frmShifts.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteRequest.cs">
-      <DependentUpon>VisaXCentralModel.tt</DependentUpon>
+      <DependentUpon>VisaXCentral.tt</DependentUpon>
     </Compile>
     <Compile Include="RemoteShift.cs">
-      <DependentUpon>VisaXCentralModel.tt</DependentUpon>
+      <DependentUpon>VisaXCentral.tt</DependentUpon>
     </Compile>
     <Compile Include="RemoteUser.cs">
-      <DependentUpon>VisaXCentralModel.tt</DependentUpon>
+      <DependentUpon>VisaXCentral.tt</DependentUpon>
     </Compile>
-    <Compile Include="VisaXCentralModel.Context.cs">
-      <DependentUpon>VisaXCentralModel.Context.tt</DependentUpon>
+    <Compile Include="VisaXCentral.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>VisaXCentral.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="VisaXCentralModel.cs">
-      <DependentUpon>VisaXCentralModel.tt</DependentUpon>
+    <Compile Include="VisaXCentral.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>VisaXCentral.tt</DependentUpon>
     </Compile>
-    <Compile Include="VisaXCentralModel.Designer.cs">
-      <DependentUpon>VisaXCentralModel.edmx</DependentUpon>
+    <Compile Include="VisaXCentral.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>VisaXCentral.edmx</DependentUpon>
     </Compile>
     <EmbeddedResource Include="frmBranches.resx">
       <DependentUpon>frmBranches.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmChangePassword.resx">
       <DependentUpon>frmChangePassword.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmShifts.resx">
-      <DependentUpon>frmShifts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -106,7 +109,10 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -116,25 +122,28 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EntityDeploy Include="VisaXCentralModel.edmx">
+    <EntityDeploy Include="VisaXCentral.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>VisaXCentralModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>VisaXCentral.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="VisaXCentralModel.edmx.diagram">
-      <DependentUpon>VisaXCentralModel.edmx</DependentUpon>
+    <None Include="VisaXCentral.edmx.diagram">
+      <DependentUpon>VisaXCentral.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="VisaXCentralModel.Context.tt">
+    <Content Include="VisaXCentral.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>VisaXCentralModel.edmx</DependentUpon>
-      <LastGenOutput>VisaXCentralModel.Context.cs</LastGenOutput>
+      <DependentUpon>VisaXCentral.edmx</DependentUpon>
+      <LastGenOutput>VisaXCentral.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="VisaXCentralModel.tt">
+    <Content Include="VisaXCentral.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>VisaXCentralModel.edmx</DependentUpon>
-      <LastGenOutput>VisaXCentralModel.cs</LastGenOutput>
+      <DependentUpon>VisaXCentral.edmx</DependentUpon>
+      <LastGenOutput>VisaXCentral.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

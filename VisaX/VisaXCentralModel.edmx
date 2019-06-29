@@ -36,6 +36,8 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="RealName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastSeen" Type="date" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Request_Shift">
           <End Role="RemoteShift" Type="Self.RemoteShift" Multiplicity="1" />
@@ -87,6 +89,8 @@
           <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RealName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="RemoteShifts" Relationship="VisaXCenterModel.FK_Shift_RemoteUser" FromRole="RemoteUser" ToRole="RemoteShift" />
+          <Property Name="LastSeen" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityContainer Name="VisaXCenteralEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="RemoteUsers" EntityType="Self.RemoteUser" />
@@ -160,6 +164,8 @@
           <EntitySetMapping Name="RemoteUsers">
             <EntityTypeMapping TypeName="VisaXCenterModel.RemoteUser">
               <MappingFragment StoreEntitySet="RemoteUser">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="LastSeen" ColumnName="LastSeen" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

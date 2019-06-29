@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using System.Data.Entity;
+using VisaX;
 
 namespace VisaXCentral
 {
@@ -33,6 +34,7 @@ namespace VisaXCentral
 
                 if (usr != null)
                 {
+
                     Properties.Settings.Default.RemoteUserName = txtUserName.Text;
                     Properties.Settings.Default.RemotePassword = StringUtil.Crypt(txtPassword.Text);
                     Properties.Settings.Default.Save();
@@ -91,10 +93,9 @@ namespace VisaXCentral
         {
             Close();
         }
-
     }
 
-    public partial class VisaXCenteralEntities
+    public partial class VisaXCenteralEntities:DbContext
     {
         public VisaXCenteralEntities(string user, string pwd)
             : base("name=VisaXCenterEntities")

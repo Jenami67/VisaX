@@ -9,7 +9,7 @@ namespace VisaXCentral
 {
     public partial class frmShifts : Form
     {
-       // VisaXEntities ctx = new VisaXEntities();
+       // VisaXCenteralEntities ctx = new VisaXCenteralEntities();
         VisaXCenteralEntities ctxCentral = new VisaXCenteralEntities("ASAWARI");
 
         public frmShifts()
