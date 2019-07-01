@@ -69,7 +69,7 @@ namespace VisaX
             catch (System.Data.Entity.Core.EntityException ex)
             {
                 if (ex.InnerException.HResult == -2146232060)
-                    MessageBox.Show("اتصال به پایگاه داده برقرار نشد. لطفا از اتصال به اینترنت مطمئن شوید..\n" + ex.ToString());
+                    MessageBox.Show("اتصال به پایگاه داده برقرار نشد. لطفا از اتصال به اینترنت مطمئن شوید...\n" + ex.ToString());
                 ctxCentral = new VisaXCenteralEntities("ASAWARI");
                 return;
             }

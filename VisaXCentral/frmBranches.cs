@@ -24,7 +24,9 @@ namespace VisaXCentral
 
         private void btnShowShifts_Click(object sender, EventArgs e)
         {
-
+            int id = (int)dgvBranches.SelectedRows[0].Cells["colID"].Value;
+            RemoteUser user = ctx.RemoteUsers.Select(u => u).Where(u => u.ID == id).First<RemoteUser>();
+            new frmShifts(user).ShowDialog();
         }
 
         private void refreshGrid()
@@ -94,6 +96,14 @@ namespace VisaXCentral
         {
             if (dgvBranches.SelectedRows.Count > 0)
                 btnDisable.Text = dgvBranches.SelectedRows[0].Cells["colEnabled"].Value.ToString() == "✓" ? "غیرفعال کردن" : "فعال سازی";
+        }
+
+        private void btnNewBranch_Click(object sender, EventArgs e)
+        {
+            new frmAddUser().ShowDialog();
+            refreshGrid();
+            dgvBranches.ClearSelection();
+            dgvBranches.Rows[dgvBranches.RowCount - 1].Selected = true;
         }
     }
     public static class StringUtil

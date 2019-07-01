@@ -34,9 +34,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvShifts = new System.Windows.Forms.DataGridView();
+            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPassportNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnExportPDF = new System.Windows.Forms.Button();
             this.btnList = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
+            this.btnExportXls = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.chkJustNotPrinted = new System.Windows.Forms.CheckBox();
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
@@ -44,13 +51,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPassportNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShifts)).BeginInit();
             this.panel1.SuspendLayout();
@@ -120,114 +120,6 @@
             this.dgvShifts.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvPassengers_RowsAdded);
             this.dgvShifts.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvPassengers_RowsRemoved);
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.btnList);
-            this.panel1.Controls.Add(this.btnNew);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 401);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(794, 61);
-            this.panel1.TabIndex = 0;
-            // 
-            // btnList
-            // 
-            this.btnList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnList.Enabled = false;
-            this.btnList.Location = new System.Drawing.Point(379, 7);
-            this.btnList.Name = "btnList";
-            this.btnList.Size = new System.Drawing.Size(130, 45);
-            this.btnList.TabIndex = 11;
-            this.btnList.Text = "متقاضیان";
-            this.btnList.UseVisualStyleBackColor = true;
-            this.btnList.Visible = false;
-            // 
-            // btnNew
-            // 
-            this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNew.Location = new System.Drawing.Point(655, 7);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(130, 45);
-            this.btnNew.TabIndex = 7;
-            this.btnNew.Text = "خروجی اکسل";
-            this.btnNew.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.chkJustNotPrinted);
-            this.panel2.Controls.Add(this.dtpTo);
-            this.panel2.Controls.Add(this.dtpFrom);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.btnSearch);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(794, 51);
-            this.panel2.TabIndex = 1;
-            // 
-            // chkJustNotPrinted
-            // 
-            this.chkJustNotPrinted.AutoSize = true;
-            this.chkJustNotPrinted.Location = new System.Drawing.Point(329, 15);
-            this.chkJustNotPrinted.Name = "chkJustNotPrinted";
-            this.chkJustNotPrinted.Size = new System.Drawing.Size(110, 17);
-            this.chkJustNotPrinted.TabIndex = 10;
-            this.chkJustNotPrinted.Text = "فقط چاپ نشده ها";
-            this.chkJustNotPrinted.UseVisualStyleBackColor = true;
-            // 
-            // dtpTo
-            // 
-            this.dtpTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtpTo.CustomFormat = "yyyy/MM/dd";
-            this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpTo.Location = new System.Drawing.Point(464, 12);
-            this.dtpTo.Name = "dtpTo";
-            this.dtpTo.Size = new System.Drawing.Size(110, 21);
-            this.dtpTo.TabIndex = 9;
-            // 
-            // dtpFrom
-            // 
-            this.dtpFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtpFrom.CustomFormat = "yyyy/MM/dd";
-            this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpFrom.Location = new System.Drawing.Point(631, 12);
-            this.dtpFrom.Name = "dtpFrom";
-            this.dtpFrom.Size = new System.Drawing.Size(110, 21);
-            this.dtpFrom.TabIndex = 8;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(577, 17);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "تا تاریخ:";
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Location = new System.Drawing.Point(260, 10);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(62, 23);
-            this.btnSearch.TabIndex = 5;
-            this.btnSearch.Text = ">>>";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(743, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "از تاریخ:";
-            // 
             // colNumber
             // 
             this.colNumber.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -275,16 +167,128 @@
             this.colCount.Name = "colCount";
             this.colCount.ReadOnly = true;
             // 
-            // button1
+            // panel1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(519, 7);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 45);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "خروجی pdf";
-            this.button1.UseVisualStyleBackColor = true;
+            this.panel1.Controls.Add(this.btnExportPDF);
+            this.panel1.Controls.Add(this.btnList);
+            this.panel1.Controls.Add(this.btnExportXls);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 401);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(794, 61);
+            this.panel1.TabIndex = 0;
+            // 
+            // btnExportPDF
+            // 
+            this.btnExportPDF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportPDF.Enabled = false;
+            this.btnExportPDF.Location = new System.Drawing.Point(519, 7);
+            this.btnExportPDF.Name = "btnExportPDF";
+            this.btnExportPDF.Size = new System.Drawing.Size(130, 45);
+            this.btnExportPDF.TabIndex = 12;
+            this.btnExportPDF.Text = "خروجی pdf";
+            this.btnExportPDF.UseVisualStyleBackColor = true;
+            // 
+            // btnList
+            // 
+            this.btnList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnList.Enabled = false;
+            this.btnList.Location = new System.Drawing.Point(379, 7);
+            this.btnList.Name = "btnList";
+            this.btnList.Size = new System.Drawing.Size(130, 45);
+            this.btnList.TabIndex = 11;
+            this.btnList.Text = "متقاضیان";
+            this.btnList.UseVisualStyleBackColor = true;
+            this.btnList.Visible = false;
+            // 
+            // btnExportXls
+            // 
+            this.btnExportXls.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportXls.Location = new System.Drawing.Point(655, 7);
+            this.btnExportXls.Name = "btnExportXls";
+            this.btnExportXls.Size = new System.Drawing.Size(130, 45);
+            this.btnExportXls.TabIndex = 7;
+            this.btnExportXls.Text = "خروجی اکسل";
+            this.btnExportXls.UseVisualStyleBackColor = true;
+            this.btnExportXls.Click += new System.EventHandler(this.btnExportXls_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.chkJustNotPrinted);
+            this.panel2.Controls.Add(this.dtpTo);
+            this.panel2.Controls.Add(this.dtpFrom);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.btnSearch);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(794, 51);
+            this.panel2.TabIndex = 1;
+            // 
+            // chkJustNotPrinted
+            // 
+            this.chkJustNotPrinted.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkJustNotPrinted.AutoSize = true;
+            this.chkJustNotPrinted.Location = new System.Drawing.Point(348, 15);
+            this.chkJustNotPrinted.Name = "chkJustNotPrinted";
+            this.chkJustNotPrinted.Size = new System.Drawing.Size(110, 17);
+            this.chkJustNotPrinted.TabIndex = 10;
+            this.chkJustNotPrinted.Text = "فقط چاپ نشده ها";
+            this.chkJustNotPrinted.UseVisualStyleBackColor = true;
+            // 
+            // dtpTo
+            // 
+            this.dtpTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpTo.CustomFormat = "yyyy/MM/dd";
+            this.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpTo.Location = new System.Drawing.Point(468, 12);
+            this.dtpTo.Name = "dtpTo";
+            this.dtpTo.Size = new System.Drawing.Size(110, 21);
+            this.dtpTo.TabIndex = 9;
+            this.dtpTo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dtpTo_KeyDown);
+            // 
+            // dtpFrom
+            // 
+            this.dtpFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpFrom.CustomFormat = "yyyy/MM/dd";
+            this.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFrom.Location = new System.Drawing.Point(631, 12);
+            this.dtpFrom.Name = "dtpFrom";
+            this.dtpFrom.Size = new System.Drawing.Size(110, 21);
+            this.dtpFrom.TabIndex = 8;
+            this.dtpFrom.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dtpTo_KeyDown);
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(581, 17);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 13);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "تا تاریخ:";
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSearch.Location = new System.Drawing.Point(277, 10);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(62, 23);
+            this.btnSearch.TabIndex = 5;
+            this.btnSearch.Text = ">>>";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(743, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(42, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "از تاریخ:";
             // 
             // frmShifts
             // 
@@ -314,7 +318,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnList;
-        private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.Button btnExportXls;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DateTimePicker dtpTo;
         private System.Windows.Forms.DateTimePicker dtpFrom;
@@ -329,6 +333,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colFullName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnExportPDF;
     }
 }
