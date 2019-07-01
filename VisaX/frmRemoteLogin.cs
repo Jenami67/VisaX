@@ -31,7 +31,7 @@ namespace VisaX
                                   where u.UserName == txtUserName.Text
                                   && u.Password == cryptedPass
                                   select u).FirstOrDefault();
-                
+
                 if (usr != null)
                 {
                     if (!usr.Enabled)
@@ -42,6 +42,7 @@ namespace VisaX
                     Properties.Settings.Default.RemoteUserName = txtUserName.Text;
                     Properties.Settings.Default.RemotePassword = StringUtil.Crypt(txtPassword.Text);
                     Properties.Settings.Default.Save();
+                    this.RemoteUserID = usr.ID;
 
                     Hide();
                     new frmLogin().ShowDialog();
@@ -81,9 +82,9 @@ namespace VisaX
                         if (!usr.Enabled)
                         {
                             MessageBox.Show("ورود شما به سیستم از طریق مدیریت غیرفعال شده.\nامکان ورود به برنامه وجود ندارد لطفاً با مدیر سیستم تماس بگیرید.", "کاربر غیرفعال شده", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
-                        return;
+                            return;
                         }
-
+                        RemoteUserID = usr.ID;
                         Hide();
                         new frmLogin().ShowDialog();
                         Close();
@@ -95,16 +96,17 @@ namespace VisaX
                         MessageBox.Show("اتصال به پایگاه داده برقرار نشد. لطفا از اتصال به اینترنت مطمئن شوید...\n\n" + ex.ToString());
                     return;
                 }
-
             }//if
         }
         private void btnExit_Click(object sender, EventArgs e)
         {
             Close();
         }
+
+        public static int RemoteUserID { get; set; }
     }
 
-    public partial class VisaXCenteralEntities:DbContext
+    public partial class VisaXCenteralEntities : DbContext
     {
         public VisaXCenteralEntities(string user, string pwd)
             : base("name=VisaXCenterEntities")

@@ -17,7 +17,6 @@ namespace VisaX
         {
             InitializeComponent();
             Text = Text + " - " + Properties.Settings.Default.User.RealName;
-
         }
 
         private void frmShifts_Load(object sender, EventArgs e)

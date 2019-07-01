@@ -42,6 +42,7 @@ namespace VisaX
 
         private void btnSendShifts_Click(object sender, EventArgs e)
         {
+            RemoteUser remoteUserID = 
             List<RemoteShift> ls = (from s in ctx.Shifts
                                     where !s.Sent
                                     select new RemoteShift
@@ -62,6 +63,7 @@ namespace VisaX
                                                           }).ToList<RemoteRequest>()
                                     }).ToList<RemoteShift>();
             ctxCentral.RemoteShifts.AddRange(ls);
+            
             try
             {
                 ctxCentral.SaveChanges();

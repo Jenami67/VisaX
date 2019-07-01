@@ -110,6 +110,11 @@ namespace VisaXCentral
         {
             new frmGeneratePDF().ShowDialog();
         }
+
+        private void dgvBranches_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btnShowShifts_Click(null, null);
+        }
     }
     public static class StringUtil
     {

@@ -108,6 +108,7 @@
             this.dgvBranches.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBranches.Size = new System.Drawing.Size(676, 297);
             this.dgvBranches.TabIndex = 3;
+            this.dgvBranches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBranches_CellDoubleClick);
             this.dgvBranches.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvBranches_RowPostPaint);
             this.dgvBranches.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgvBranches_RowsAdded);
             this.dgvBranches.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvBranches_RowsRemoved);
