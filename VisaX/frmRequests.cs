@@ -205,8 +205,7 @@ namespace VisaX
 
         private void dgvPassengers_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            btnDelete.Enabled = btnEdit.Enabled = btnExportExcel.Enabled = btnExportPDF.Enabled = btnHistory.Enabled =
-               dgvPassengers.Rows.Count != 0;
+            dgvPassengers_RowsRemoved(null, null);
         }
 
         private void llbSettings_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -240,6 +239,7 @@ namespace VisaX
             form.SetField("form1[0].#subform[0].#field[0]", p.FullName);
             //Radio for Gender
             form.SetField("form1[0].#subform[0].RadioButtonList[0]", (2 - p.Gender).ToString());
+            form.SetField("form1[0].#subform[0].#field[4]", p.Gender == 1 ? "ربه بیت/خانه دار" : "کاسب/کارگر");
             form.SetField("form1[0].#subform[0].#field[8]", p.BornDate.HasValue ? p.BornDate.Value.Year.ToString() : string.Empty);
             form.SetField("form1[0].#subform[0].#field[5]", p.BornDate.HasValue ? p.BornDate.Value.Month.ToString("00") : string.Empty);
             form.SetField("form1[0].#subform[0].#field[6]", p.BornDate.HasValue ? p.BornDate.Value.Day.ToString("00") : string.Empty);

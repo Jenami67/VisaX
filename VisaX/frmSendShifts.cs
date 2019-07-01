@@ -84,12 +84,12 @@ namespace VisaX
 
         private void dgvShifts_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            btnIgnore.Enabled = btnSendShifts.Enabled = dgvShifts.Rows.Count > 0;
+             btnSendShifts.Enabled = dgvShifts.Rows.Count > 0;
         }
 
         private void dgvShifts_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            btnIgnore.Enabled = btnSendShifts.Enabled = dgvShifts.Rows.Count > 0;
+            dgvShifts_RowsAdded(null, null);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

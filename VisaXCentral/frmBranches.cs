@@ -105,6 +105,11 @@ namespace VisaXCentral
             dgvBranches.ClearSelection();
             dgvBranches.Rows[dgvBranches.RowCount - 1].Selected = true;
         }
+
+        private void llbGeneratePDF_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new frmGeneratePDF().ShowDialog();
+        }
     }
     public static class StringUtil
     {

@@ -42,7 +42,6 @@
             this.colDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnIgnore = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSendShifts = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
@@ -169,7 +168,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnIgnore);
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnSendShifts);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -177,17 +175,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(617, 58);
             this.panel1.TabIndex = 4;
-            // 
-            // btnIgnore
-            // 
-            this.btnIgnore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnIgnore.Enabled = false;
-            this.btnIgnore.Location = new System.Drawing.Point(332, 7);
-            this.btnIgnore.Name = "btnIgnore";
-            this.btnIgnore.Size = new System.Drawing.Size(135, 45);
-            this.btnIgnore.TabIndex = 14;
-            this.btnIgnore.Text = "چشم پوشی";
-            this.btnIgnore.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
@@ -245,7 +232,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescription;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnIgnore;
         private System.Windows.Forms.Button btnSendShifts;
         private System.Windows.Forms.Button btnCancel;
     }
