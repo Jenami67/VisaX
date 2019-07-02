@@ -42,14 +42,14 @@ namespace VisaX
 
         private void btnSendShifts_Click(object sender, EventArgs e)
         {
-            RemoteUser remoteUserID = 
+            int remoteUserID = frmRemoteLogin.RemoteUserID;
             List<RemoteShift> ls = (from s in ctx.Shifts
                                     where !s.Sent
                                     select new RemoteShift
                                     {
                                         Date = s.Date,
                                         ShiftNum = s.ShiftNum,
-                                        RemoteUserID = 2,
+                                        RemoteUserID = remoteUserID,
                                         Description = s.Description,
                                         RemoteRequests = (from r in s.Requests
                                                           select new RemoteRequest
@@ -63,7 +63,8 @@ namespace VisaX
                                                           }).ToList<RemoteRequest>()
                                     }).ToList<RemoteShift>();
             ctxCentral.RemoteShifts.AddRange(ls);
-            
+            ctxCentral.RemoteUsers.Where(u => u.ID == remoteUserID).First<RemoteUser>().LastSeen = DateTime.Now;
+
             try
             {
                 ctxCentral.SaveChanges();
@@ -86,7 +87,7 @@ namespace VisaX
 
         private void dgvShifts_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-             btnSendShifts.Enabled = dgvShifts.Rows.Count > 0;
+            btnSendShifts.Enabled = dgvShifts.Rows.Count > 0;
         }
 
         private void dgvShifts_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)

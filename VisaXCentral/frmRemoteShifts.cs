@@ -37,6 +37,7 @@ namespace VisaXCentral
             dgvShifts.DataSource = (from s in ctx.RemoteShifts
                                     where s.Date >= dtpFrom.Value.Date && s.Date <= dtpTo.Value
                                     && s.RemoteUserID == user.ID
+                                    && s.Exported != chkJustNotPrinted.Checked
                                     select new
                                     {
                                         s.ID,
@@ -125,6 +126,9 @@ namespace VisaXCentral
                 excelWorkSheet = null;
                 //Opens the created Excel file
                 Process.Start(sfd.FileName);
+
+                selectedShift.Exported = true;
+                ctx.SaveChanges();
             }
         }
 

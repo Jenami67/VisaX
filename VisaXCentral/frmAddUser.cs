@@ -37,6 +37,7 @@ namespace VisaXCentral
             {
                 UserName = txtUserName.Text,
                 RealName = txtFullName.Text,
+                LastSeen= DateTime.Now,
                 Password = string.Empty
             };
 

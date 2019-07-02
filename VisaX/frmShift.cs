@@ -16,11 +16,11 @@ namespace VisaX
         public frmShift()
         {
             InitializeComponent();
-            Text = Text + " - " + Properties.Settings.Default.User.RealName;
         }
 
         private void frmShifts_Load(object sender, EventArgs e)
         {
+            Text = Text + " - " + Properties.Settings.Default.User.RealName + " - (" + Properties.Settings.Default.User.UserName + ")";
             dtpFrom.Value = dtpTo.Value.AddMonths(-1);
             refreshGrid();
         }
@@ -105,7 +105,6 @@ namespace VisaX
             int selShift = dgvShifts.SelectedRows[0].Index;
             refreshGrid();
             dgvShifts.Rows[selShift].Selected = true;
-
         }
 
         private void dgvPassengers_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)

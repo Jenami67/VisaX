@@ -36,6 +36,7 @@ namespace VisaXCentral
                                       {
                                           b.ID,
                                           b.RealName,
+                                          b.UserName,
                                           b.LastSeen,
                                           b.RemoteShifts.Count,
                                           Enabled = b.Enabled ? "✓" : "✗"
@@ -73,23 +74,19 @@ namespace VisaXCentral
 
         private void btnDisable_Click(object sender, EventArgs e)
         {
+            int id = (int)dgvBranches.SelectedRows[0].Cells["colID"].Value;
             if (dgvBranches.SelectedRows[0].Cells["colEnabled"].Value.ToString() == "✓")
             {
                 if (MessageBox.Show("آیا مایل به غیرفعال کردن این شعبه هستید؟\nدر صورت غیرفعال سازی، کاربران این شعبه دیگر قادر به اجرای برنامه نخواهند بود.", "غیرفعال کردن شعبه", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign) == DialogResult.Yes)
-                {
-                    int id = (int)dgvBranches.SelectedRows[0].Cells["colID"].Value;
                     ctx.RemoteUsers.Select(u => u).Where(u => u.ID == id).First<RemoteUser>().Enabled = false;
-                    ctx.SaveChanges();
-                    refreshGrid();
-                }
-            }
+            }//if
             else if (MessageBox.Show("آیا مایل به فعال کردن این شعبه هستید؟", "فعال سازی شعبه", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign) == DialogResult.Yes)
-            {
-                int id = (int)dgvBranches.SelectedRows[0].Cells["colID"].Value;
                 ctx.RemoteUsers.Select(u => u).Where(u => u.ID == id).First<RemoteUser>().Enabled = true;
-                ctx.SaveChanges();
-                refreshGrid();
-            }
+            ctx.SaveChanges();
+
+            int selShift = dgvBranches.SelectedRows[0].Index;
+            refreshGrid();
+            dgvBranches.Rows[selShift].Selected = true;
         }
 
         private void dgvBranches_SelectionChanged(object sender, EventArgs e)

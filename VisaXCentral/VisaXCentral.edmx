@@ -27,6 +27,7 @@
           <Property Name="ShiftNum" Type="tinyint" Nullable="false" />
           <Property Name="RemoteUserID" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="Exported" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="RemoteUser">
           <Key>
@@ -36,8 +37,8 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="RealName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LastSeen" Type="date" Nullable="false" />
-          <Property Name="Enabled" Type="bit" />
+          <Property Name="LastSeen" Type="datetime" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Request_Shift">
           <End Role="RemoteShift" Type="Self.RemoteShift" Multiplicity="1" />
@@ -105,6 +106,7 @@
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="RemoteRequests" Relationship="Self.FK_Request_Shift" FromRole="RemoteShift" ToRole="RemoteRequest" />
           <NavigationProperty Name="RemoteUser" Relationship="Self.FK_Shift_RemoteUser" FromRole="RemoteShift" ToRole="RemoteUser" />
+          <Property Name="Exported" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="RemoteUser">
           <Key>
@@ -115,7 +117,7 @@
           <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RealName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="RemoteShifts" Relationship="Self.FK_Shift_RemoteUser" FromRole="RemoteUser" ToRole="RemoteShift" />
-          <Property Name="LastSeen" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LastSeen" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Enabled" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Request_Shift">
@@ -178,6 +180,7 @@
           <EntitySetMapping Name="RemoteShifts">
             <EntityTypeMapping TypeName="VisaXCenterModel.RemoteShift">
               <MappingFragment StoreEntitySet="RemoteShift">
+                <ScalarProperty Name="Exported" ColumnName="Exported" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="ShiftNum" ColumnName="ShiftNum" />

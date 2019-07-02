@@ -42,7 +42,7 @@ namespace VisaX
                     Properties.Settings.Default.RemoteUserName = txtUserName.Text;
                     Properties.Settings.Default.RemotePassword = StringUtil.Crypt(txtPassword.Text);
                     Properties.Settings.Default.Save();
-                    this.RemoteUserID = usr.ID;
+                    RemoteUserID = usr.ID;
 
                     Hide();
                     new frmLogin().ShowDialog();

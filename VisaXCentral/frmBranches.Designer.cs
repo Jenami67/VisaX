@@ -38,6 +38,7 @@
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLastSeen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEnabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -88,10 +89,12 @@
             this.colID,
             this.colCount,
             this.colUser,
+            this.colUserName,
             this.colLastSeen,
             this.colEnabled});
             this.dgvBranches.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvBranches.Location = new System.Drawing.Point(3, 3);
+            this.dgvBranches.MultiSelect = false;
             this.dgvBranches.Name = "dgvBranches";
             this.dgvBranches.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -141,9 +144,16 @@
             // colUser
             // 
             this.colUser.DataPropertyName = "RealName";
-            this.colUser.HeaderText = "نام کاربری";
+            this.colUser.HeaderText = "نام شعبه";
             this.colUser.Name = "colUser";
             this.colUser.ReadOnly = true;
+            // 
+            // colUserName
+            // 
+            this.colUserName.DataPropertyName = "UserName";
+            this.colUserName.HeaderText = "نام کاربری";
+            this.colUserName.Name = "colUserName";
+            this.colUserName.ReadOnly = true;
             // 
             // colLastSeen
             // 
@@ -261,14 +271,15 @@
         private System.Windows.Forms.Button btnChangePass;
         private System.Windows.Forms.Button btnDisable;
         private System.Windows.Forms.Button btnShowShifts;
+        private System.Windows.Forms.Button btnNewBranch;
+        private System.Windows.Forms.LinkLabel llbGeneratePDF;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUser;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLastSeen;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEnabled;
-        private System.Windows.Forms.Button btnNewBranch;
-        private System.Windows.Forms.LinkLabel llbGeneratePDF;
     }
 }
 
