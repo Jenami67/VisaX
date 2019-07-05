@@ -112,6 +112,27 @@ namespace VisaXCentral
         {
             btnShowShifts_Click(null, null);
         }
+
+        private void btnDelBranch_Click(object sender, EventArgs e)
+        {
+            int id = (int)dgvBranches.SelectedRows[0].Cells["colID"].Value;
+            RemoteUser usr = ctx.RemoteUsers.Where(u => u.ID == id).FirstOrDefault();
+            if (MessageBox.Show("آیا مایل به حذف این شعبه هستید؟", "حذف شعبه " + usr.RealName, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes)
+            {
+                ctx.RemoteUsers.Remove(usr);
+                try
+                {
+                    ctx.SaveChanges();
+                }
+                catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
+                {
+                    MessageBox.Show(".امکان حذف کاربری که عملیات انجام داده وجود ندارد\n\n" + ex.ToString().Remove(500) + "...", "خطا در حذف شعبه", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    ctx.Entry(usr).Reload();
+                    return;
+                }
+                refreshGrid();
+            }//if
+        }
     }
     public static class StringUtil
     {

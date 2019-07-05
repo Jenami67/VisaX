@@ -23,7 +23,6 @@ namespace VisaX
         private void getData()
         {
             dgvUsers.DataSource = (from u in ctx.Users select u).ToList();
-            //ctx.Users.Select(u => u).ToList();
         }
 
         private void dgvUsers_SelectionChanged(object sender, EventArgs e)
@@ -81,7 +80,7 @@ namespace VisaX
                 }
                 catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
                 {
-                    MessageBox.Show("امکان حذف کاربری که عملیات انجام داده وجود ندارد.\n\n" + ex.ToString().Remove(500) + "...", "خطا در ثبت اطلاعات");
+                    MessageBox.Show("امکان حذف کاربری که عملیات انجام داده وجود ندارد.\n\n" + ex.ToString().Remove(500) + "...", "خطا در حذف کاربر", MessageBoxButtons.OK , MessageBoxIcon.Stop);
                     ctx.Entry(usr).Reload();
                     return;
                 }
