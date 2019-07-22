@@ -18,6 +18,7 @@ namespace VisaX
         public RemoteUser()
         {
             this.RemoteShifts = new HashSet<RemoteShift>();
+            this.Messages = new HashSet<Message>();
         }
     
         public int ID { get; set; }
@@ -29,5 +30,7 @@ namespace VisaX
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RemoteShift> RemoteShifts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }

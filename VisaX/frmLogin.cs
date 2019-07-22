@@ -14,6 +14,7 @@ namespace VisaX
     public partial class frmLogin : Form
     {
         VisaXEntities ctx = new VisaXEntities();
+        VisaXCenteralEntities ctxCentral = new VisaXCenteralEntities("ASAWARI");
         public frmLogin()
         {
             InitializeComponent();
@@ -34,11 +35,20 @@ namespace VisaX
             }//if
 
             string cryptedPass = StringUtil.Crypt(txtPassword.Text);
-
-            User usr = (from u in ctx.Users
-                        where u.UserName == txtUserName.Text
-                        && u.Password == cryptedPass
-                        select u).FirstOrDefault();
+            User usr;
+            try
+            {
+                usr = (from u in ctx.Users
+                       where u.UserName == txtUserName.Text
+                       && u.Password == cryptedPass
+                       select u).FirstOrDefault();
+            }
+            catch (System.Data.Entity.Core.EntityException ex)
+            {
+                if (ex.Message == "The underlying provider failed on Open.")
+                    MessageBox.Show("اتصال به پایگاه داده محلی برقرار نشد...\n\n" + ex.ToString());
+                return;
+            }
 
             if (usr != null)
             {
@@ -46,6 +56,16 @@ namespace VisaX
                 Properties.Settings.Default.User = usr;
                 Properties.Settings.Default.LastUserName = txtUserName.Text;
                 Properties.Settings.Default.Save();
+
+                foreach (Message msg in ctxCentral.Messages.Where(m => m.RemoteUserID == frmRemoteLogin.RemoteUserID).Where(mm => mm.Seen == false))
+                {
+                    if (new frmMsg(msg).ShowDialog() == DialogResult.Yes)
+                        msg.Seen = true;
+                    else
+                        msg.Seen = false;
+                }//foreach
+                ctxCentral.SaveChanges();
+
                 new frmShift().ShowDialog();
                 Close();
             }//if

@@ -51,7 +51,7 @@ namespace VisaXCentral
 
         private void dgvBranches_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            btnShowShifts.Enabled = btnDisable.Enabled = btnChangePass.Enabled = dgvBranches.Rows.Count != 0;
+            btnSendMsg.Enabled = btnShowShifts.Enabled = btnDisable.Enabled = btnChangePass.Enabled = dgvBranches.Rows.Count != 0;
         }
 
         private void dgvBranches_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -132,6 +132,12 @@ namespace VisaXCentral
                 }
                 refreshGrid();
             }//if
+        }
+
+        private void btnSendMsg_Click(object sender, EventArgs e)
+        {
+            int id = (int)dgvBranches.SelectedRows[0].Cells["colID"].Value;
+            new frmMessages(id).ShowDialog();
         }
     }
     public static class StringUtil

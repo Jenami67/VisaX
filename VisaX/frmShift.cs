@@ -20,7 +20,7 @@ namespace VisaX
 
         private void frmShifts_Load(object sender, EventArgs e)
         {
-            Text = Text + " - " + Properties.Settings.Default.User.RealName + " - (" + Properties.Settings.Default.User.UserName + ")";
+            Text = " کاربر محلی: " + Properties.Settings.Default.User.RealName + " - نام شعبه: " + Properties.Settings.Default.RemoteUserName;
             dtpFrom.Value = dtpTo.Value.AddMonths(-1);
             refreshGrid();
         }
@@ -40,7 +40,7 @@ namespace VisaX
                                         Sent = s.Sent ? "✓" : "✗"
                                     }).ToList();
 
-            int cnt = ctx.Shifts.Where(s => s.Sent == false).Count();
+            int cnt = ctx.Shifts.Where(s => s.Sent == false).Where(s => s.Requests.Count > 0).Count();
             if (cnt == 0)
                 llbSendShifts.Text = "ارسال شیفت ها";
             else
@@ -56,7 +56,6 @@ namespace VisaX
         private void btnNew_Click(object sender, EventArgs e)
         {
             byte max = ctx.Shifts.Where(s => s.Date == DateTime.Today).Select(s => s.ShiftNum).DefaultIfEmpty<byte>(0).Max();
-            //(from s in ctx.Shifts where s.Date == DateTime.Today select s.ShiftNum).ma
             max++;
             string message = string.Format("تولید شیفت شماره {0} به تاریخ {1} توسط {2}؟", max, DateTime.Today.ToShortDateString(), Properties.Settings.Default.User.RealName);
             frmNewShift frmNewShift = new frmNewShift(message);
@@ -96,6 +95,23 @@ namespace VisaX
                 refreshGrid();
             }//if
         }
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            ctx = new VisaXEntities();
+            int id = (int)dgvShifts.SelectedRows[0].Cells["colID"].Value;
+            Shift shift = (from s in ctx.Shifts where s.ID == id select s).First();
+            string message = string.Format("ویرایش توضیحات شیفت شماره {0} با تاریخ {1} توسط {2}؟", shift.ShiftNum, shift.Date.ToShortDateString(), shift.User.RealName);
+            frmNewShift frmNewShift = new frmNewShift(message);
+            frmNewShift.txtDescription.Text = shift.Description;
+            if (frmNewShift.ShowDialog() == DialogResult.Yes)
+                shift.Description = frmNewShift.txtDescription.Text;
+
+            ctx.SaveChanges();
+            refreshGrid();
+
+            dgvShifts.ClearSelection();
+            dgvShifts.Rows[dgvShifts.RowCount - 1].Selected = true;
+        }//btnEdit
 
         private void btnList_Click(object sender, EventArgs e)
         {
@@ -109,12 +125,12 @@ namespace VisaX
 
         private void dgvPassengers_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            btnDelete.Enabled = btnList.Enabled = dgvShifts.Rows.Count != 0;
+            btnEdit.Enabled = btnDelete.Enabled = btnList.Enabled = dgvShifts.Rows.Count != 0;
         }
 
         private void dgvPassengers_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            btnDelete.Enabled = btnList.Enabled = dgvShifts.Rows.Count != 0;
+            dgvPassengers_RowsRemoved(null, null);
         }
 
         public void rowColor()

@@ -36,7 +36,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon_XYj_2.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -94,11 +95,26 @@
     <Compile Include="frmGeneratePDF.Designer.cs">
       <DependentUpon>frmGeneratePDF.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmNewMsg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewMsg.Designer.cs">
+      <DependentUpon>frmNewMsg.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmRemoteShifts.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmRemoteShifts.Designer.cs">
       <DependentUpon>frmRemoteShifts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMessages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMessages.designer.cs">
+      <DependentUpon>frmMessages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Message.cs">
+      <DependentUpon>VisaXCentral.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -138,8 +154,14 @@
     <EmbeddedResource Include="frmGeneratePDF.resx">
       <DependentUpon>frmGeneratePDF.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmNewMsg.resx">
+      <DependentUpon>frmNewMsg.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmRemoteShifts.resx">
       <DependentUpon>frmRemoteShifts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMessages.resx">
+      <DependentUpon>frmMessages.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -12,7 +12,6 @@ using System.Diagnostics;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
-using System.Collections.Generic;
 
 namespace VisaXCentral
 {

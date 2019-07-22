@@ -10,6 +10,8 @@
         <EntityTypeShape EntityType="VisaXCenterModel.RemoteShift" Width="1.5" PointX="3" PointY="1" />
         <AssociationConnector Association="VisaXCenterModel.FK_Request_Shift" />
         <AssociationConnector Association="VisaXCenterModel.FK_Shift_RemoteUser" />
+        <EntityTypeShape EntityType="VisaXCenterModel.Message" Width="1.5" PointX="3" PointY="4.5" />
+        <AssociationConnector Association="VisaXCenterModel.FK_Messages_RemoteUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

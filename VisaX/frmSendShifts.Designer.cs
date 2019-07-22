@@ -44,6 +44,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSendShifts = new System.Windows.Forms.Button();
+            this.btnSendSelectedShifts = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShifts)).BeginInit();
             this.panel1.SuspendLayout();
@@ -168,6 +169,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnSendSelectedShifts);
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnSendShifts);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -191,13 +193,25 @@
             // 
             this.btnSendShifts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSendShifts.Enabled = false;
-            this.btnSendShifts.Location = new System.Drawing.Point(473, 7);
+            this.btnSendShifts.Location = new System.Drawing.Point(463, 7);
             this.btnSendShifts.Name = "btnSendShifts";
-            this.btnSendShifts.Size = new System.Drawing.Size(135, 45);
+            this.btnSendShifts.Size = new System.Drawing.Size(145, 45);
             this.btnSendShifts.TabIndex = 12;
-            this.btnSendShifts.Text = "ارسال شیفت ها";
+            this.btnSendShifts.Text = "ارسال همه شیفت ها";
             this.btnSendShifts.UseVisualStyleBackColor = true;
             this.btnSendShifts.Click += new System.EventHandler(this.btnSendShifts_Click);
+            // 
+            // btnSendSelectedShifts
+            // 
+            this.btnSendSelectedShifts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSendSelectedShifts.Enabled = false;
+            this.btnSendSelectedShifts.Location = new System.Drawing.Point(312, 7);
+            this.btnSendSelectedShifts.Name = "btnSendSelectedShifts";
+            this.btnSendSelectedShifts.Size = new System.Drawing.Size(145, 45);
+            this.btnSendSelectedShifts.TabIndex = 14;
+            this.btnSendSelectedShifts.Text = "ارسال شیفت های منتخب";
+            this.btnSendSelectedShifts.UseVisualStyleBackColor = true;
+            this.btnSendSelectedShifts.Click += new System.EventHandler(this.btnSendSelectedShifts_Click);
             // 
             // frmSendShifts
             // 
@@ -234,5 +248,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnSendShifts;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnSendSelectedShifts;
     }
 }

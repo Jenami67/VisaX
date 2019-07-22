@@ -43,6 +43,7 @@
             this.colExpiryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colGender = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnExportPDFAll = new System.Windows.Forms.Button();
             this.btnHistory = new System.Windows.Forms.Button();
             this.btnExportPDF = new System.Windows.Forms.Button();
             this.btnExportExcel = new System.Windows.Forms.Button();
@@ -186,6 +187,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnExportPDFAll);
             this.panel1.Controls.Add(this.btnHistory);
             this.panel1.Controls.Add(this.btnExportPDF);
             this.panel1.Controls.Add(this.btnExportExcel);
@@ -198,13 +200,25 @@
             this.panel1.Size = new System.Drawing.Size(939, 64);
             this.panel1.TabIndex = 16;
             // 
+            // btnExportPDFAll
+            // 
+            this.btnExportPDFAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExportPDFAll.Enabled = false;
+            this.btnExportPDFAll.Location = new System.Drawing.Point(421, 10);
+            this.btnExportPDFAll.Name = "btnExportPDFAll";
+            this.btnExportPDFAll.Size = new System.Drawing.Size(122, 45);
+            this.btnExportPDFAll.TabIndex = 6;
+            this.btnExportPDFAll.Text = "تولید pdf (همه)";
+            this.btnExportPDFAll.UseVisualStyleBackColor = true;
+            this.btnExportPDFAll.Click += new System.EventHandler(this.btnExportPDF_Click);
+            // 
             // btnHistory
             // 
             this.btnHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnHistory.Enabled = false;
-            this.btnHistory.Location = new System.Drawing.Point(36, 9);
+            this.btnHistory.Location = new System.Drawing.Point(37, 10);
             this.btnHistory.Name = "btnHistory";
-            this.btnHistory.Size = new System.Drawing.Size(142, 45);
+            this.btnHistory.Size = new System.Drawing.Size(122, 45);
             this.btnHistory.TabIndex = 5;
             this.btnHistory.Text = "سابقه";
             this.btnHistory.UseVisualStyleBackColor = true;
@@ -214,11 +228,11 @@
             // 
             this.btnExportPDF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExportPDF.Enabled = false;
-            this.btnExportPDF.Location = new System.Drawing.Point(335, 9);
+            this.btnExportPDF.Location = new System.Drawing.Point(293, 10);
             this.btnExportPDF.Name = "btnExportPDF";
-            this.btnExportPDF.Size = new System.Drawing.Size(142, 45);
+            this.btnExportPDF.Size = new System.Drawing.Size(122, 45);
             this.btnExportPDF.TabIndex = 4;
-            this.btnExportPDF.Text = "تولید pdf";
+            this.btnExportPDF.Text = "تولید pdf (انتخابی)";
             this.btnExportPDF.UseVisualStyleBackColor = true;
             this.btnExportPDF.Click += new System.EventHandler(this.btnExportPDF_Click);
             // 
@@ -226,9 +240,9 @@
             // 
             this.btnExportExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExportExcel.Enabled = false;
-            this.btnExportExcel.Location = new System.Drawing.Point(186, 9);
+            this.btnExportExcel.Location = new System.Drawing.Point(165, 10);
             this.btnExportExcel.Name = "btnExportExcel";
-            this.btnExportExcel.Size = new System.Drawing.Size(142, 45);
+            this.btnExportExcel.Size = new System.Drawing.Size(122, 45);
             this.btnExportExcel.TabIndex = 3;
             this.btnExportExcel.Text = "تولید اکسل";
             this.btnExportExcel.UseVisualStyleBackColor = true;
@@ -238,9 +252,9 @@
             // 
             this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(485, 9);
+            this.btnDelete.Location = new System.Drawing.Point(549, 9);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(142, 45);
+            this.btnDelete.Size = new System.Drawing.Size(122, 45);
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "حذف";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -250,9 +264,9 @@
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEdit.Enabled = false;
-            this.btnEdit.Location = new System.Drawing.Point(635, 9);
+            this.btnEdit.Location = new System.Drawing.Point(677, 9);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(142, 45);
+            this.btnEdit.Size = new System.Drawing.Size(122, 45);
             this.btnEdit.TabIndex = 1;
             this.btnEdit.Text = "ویرایش";
             this.btnEdit.UseVisualStyleBackColor = true;
@@ -261,9 +275,9 @@
             // btnNew
             // 
             this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNew.Location = new System.Drawing.Point(785, 9);
+            this.btnNew.Location = new System.Drawing.Point(805, 9);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(142, 45);
+            this.btnNew.Size = new System.Drawing.Size(122, 45);
             this.btnNew.TabIndex = 0;
             this.btnNew.Text = "جدید";
             this.btnNew.UseVisualStyleBackColor = true;
@@ -323,7 +337,7 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.ShowInTaskbar = false;
-            this.Text = "شرکه زهره البصره";
+            this.Text = "متقاضیان";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -359,6 +373,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colIssueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colExpiryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGender;
+        private System.Windows.Forms.Button btnExportPDFAll;
     }
 }
 

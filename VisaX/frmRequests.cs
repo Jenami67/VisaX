@@ -138,18 +138,32 @@ namespace VisaX
                 excelWorkSheet = (Excel.Worksheet)excelWorkBook.Worksheets.get_Item(1);
 
                 int i = 1;
-                foreach (DataGridViewRow row in dgvPassengers.SelectedRows)
-                {
-                    excelWorkSheet.Cells[i + 7, 8].Value = row.Cells["colFullName"].Value;
-                    excelWorkSheet.Cells[i + 7, 7].Value = row.Cells["colPassportNum"].Value;
-                    excelWorkSheet.Cells[i + 7, 6].Value2 = (byte)row.Cells["colGender"].Value == 0 ? "ذکر" : "انثی";
+                if (sender == btnExportPDFAll)
+                    foreach (DataGridViewRow row in dgvPassengers.Rows)
+                    {
+                        excelWorkSheet.Cells[i + 7, 8].Value = row.Cells["colFullName"].Value;
+                        excelWorkSheet.Cells[i + 7, 7].Value = row.Cells["colPassportNum"].Value;
+                        excelWorkSheet.Cells[i + 7, 6].Value2 = (byte)row.Cells["colGender"].Value == 0 ? "ذکر" : "انثی";
 
-                    //format error: Exception from HRESULT: 0x800A03EC
-                    excelWorkSheet.Cells[i + 7, 5].Value2 = row.Cells["colBornDate"].Value;
-                    excelWorkSheet.Cells[i + 7, 4].Value2 = row.Cells["colIssueDate"].Value;
-                    excelWorkSheet.Cells[i + 7, 3].Value2 = row.Cells["colExpiryDate"].Value;
-                    i++;
-                }
+                        //format error: Exception from HRESULT: 0x800A03EC
+                        excelWorkSheet.Cells[i + 7, 5].Value2 = row.Cells["colBornDate"].Value;
+                        excelWorkSheet.Cells[i + 7, 4].Value2 = row.Cells["colIssueDate"].Value;
+                        excelWorkSheet.Cells[i + 7, 3].Value2 = row.Cells["colExpiryDate"].Value;
+                        i++;
+                    }//foreach
+                else
+                    foreach (DataGridViewRow row in dgvPassengers.SelectedRows)
+                    {
+                        excelWorkSheet.Cells[i + 7, 8].Value = row.Cells["colFullName"].Value;
+                        excelWorkSheet.Cells[i + 7, 7].Value = row.Cells["colPassportNum"].Value;
+                        excelWorkSheet.Cells[i + 7, 6].Value2 = (byte)row.Cells["colGender"].Value == 0 ? "ذکر" : "انثی";
+
+                        //format error: Exception from HRESULT: 0x800A03EC
+                        excelWorkSheet.Cells[i + 7, 5].Value2 = row.Cells["colBornDate"].Value;
+                        excelWorkSheet.Cells[i + 7, 4].Value2 = row.Cells["colIssueDate"].Value;
+                        excelWorkSheet.Cells[i + 7, 3].Value2 = row.Cells["colExpiryDate"].Value;
+                        i++;
+                    }
 
                 excelWorkBook.SaveAs(sfd.FileName, Excel.XlFileFormat.xlWorkbookNormal);
 
@@ -180,16 +194,45 @@ namespace VisaX
                 foreach (string file in Directory.GetFiles(dirPath))
                     File.Delete(file);
 
-                for (int i = 0; i < dgvPassengers.SelectedRows.Count; i++)
-                    files.Add(generatePdf(dgvPassengers.SelectedRows[i], i + 1));
+                if (sender == btnExportPDFAll)
+                    for (int i = 0; i < dgvPassengers.Rows.Count; i++)
+                        files.Add(generatePdf(dgvPassengers.Rows[i], i + 1));
+                else
+                    for (int i = 0; i < dgvPassengers.SelectedRows.Count; i++)
+                        files.Add(generatePdf(dgvPassengers.SelectedRows[i], i + 1));
 
                 MergePDFs(files, sfd.FileName);
                 Process.Start(sfd.FileName);
                 if (xlsToo)
-                    btnExportExcel_Click(null, null);
+                    btnExportExcel_Click(sender, null);
                 this.refreshGrid();
             }//if
         }//btnExportPDF_Click
+
+        //private void btnExportPDFAll_Click(object sender, EventArgs e)
+        //{
+        //    sfd.Filter = "Adobe Acrobat Documents (*.pdf)|*.pdf";
+        //    sfd.FileName = this.SelectedShift.Date.ToString("yyyy-MM-dd") + string.Format(" ({0:00})", this.SelectedShift.ShiftNum);
+
+        //    Boolean xlsToo = MessageBox.Show("آیا مایلید فایل اکسل رکوردهای انتخاب شده هم تولید شود؟", "تولید همزمان اکسل", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes;
+        //    List<string> files = new List<string>();
+        //    if (sfd.ShowDialog() == DialogResult.OK)
+        //    {
+        //        string dirPath = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\VisaX";
+        //        Directory.CreateDirectory(dirPath);
+        //        foreach (string file in Directory.GetFiles(dirPath))
+        //            File.Delete(file);
+
+        //        for (int i = 0; i < dgvPassengers.Rows.Count; i++)
+        //            files.Add(generatePdf(dgvPassengers.Rows[i], i + 1));
+
+        //        MergePDFs(files, sfd.FileName);
+        //        Process.Start(sfd.FileName);
+        //        if (xlsToo)
+        //            btnExportExcel_Click(btnExportPDFAll, null);
+        //        this.refreshGrid();
+        //    }//if
+        //}
 
         private void txtFilter_KeyDown(object sender, KeyEventArgs e)
         {
@@ -199,7 +242,7 @@ namespace VisaX
 
         private void dgvPassengers_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            btnDelete.Enabled = btnEdit.Enabled = btnExportExcel.Enabled = btnExportPDF.Enabled = btnHistory.Enabled =
+            btnDelete.Enabled = btnEdit.Enabled = btnExportExcel.Enabled = btnExportPDF.Enabled = btnExportPDFAll.Enabled = btnHistory.Enabled =
                dgvPassengers.Rows.Count != 0;
         }
 
@@ -282,16 +325,12 @@ namespace VisaX
                 {
                     merged = false;
                     if (reader != null)
-                    {
                         reader.Close();
-                    }
                 }
                 finally
                 {
                     if (document != null)
-                    {
                         document.Close();
-                    }
                 }
             }
             return merged;
