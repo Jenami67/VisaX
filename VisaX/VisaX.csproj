@@ -72,6 +72,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -97,6 +98,24 @@
     </Compile>
     <Compile Include="frmAddPassenger.Designer.cs">
       <DependentUpon>frmAddPassenger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBackup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBackup.Designer.cs">
+      <DependentUpon>frmBackup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmConnectionString.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConnectionString.Designer.cs">
+      <DependentUpon>frmConnectionString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmImportXls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImportXls.Designer.cs">
+      <DependentUpon>frmImportXls.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMsg.cs">
       <SubType>Form</SubType>
@@ -157,6 +176,12 @@
     </Compile>
     <Compile Include="frmRequests.Designer.cs">
       <DependentUpon>frmRequests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRestore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRestore.Designer.cs">
+      <DependentUpon>frmRestore.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSearch.cs">
       <SubType>Form</SubType>
@@ -240,7 +265,7 @@
       <DependentUpon>VisaXModel.edmx</DependentUpon>
     </Compile>
     <Content Include="VisaX_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>VisaX.mdf</DependentUpon>
     </Content>
     <EmbeddedResource Include="frmAbout.resx">
@@ -248,6 +273,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAddPassenger.resx">
       <DependentUpon>frmAddPassenger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBackup.resx">
+      <DependentUpon>frmBackup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConnectionString.resx">
+      <DependentUpon>frmConnectionString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImportXls.resx">
+      <DependentUpon>frmImportXls.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMsg.resx">
       <DependentUpon>frmMsg.cs</DependentUpon>
@@ -278,6 +312,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmRequests.resx">
       <DependentUpon>frmRequests.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRestore.resx">
+      <DependentUpon>frmRestore.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSearch.resx">
       <DependentUpon>frmSearch.cs</DependentUpon>
@@ -341,7 +378,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="VisaX.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="VisaXCentralModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

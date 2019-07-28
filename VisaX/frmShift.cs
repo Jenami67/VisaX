@@ -180,5 +180,15 @@ namespace VisaX
             if (e.KeyCode == Keys.Enter)
                 btnSearch_Click(null, null);
         }
+
+        private void lblBackup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new frmBackup().ShowDialog();
+        }
+
+        private void lblRestore_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new frmRestore().ShowDialog();
+        }
     }
 }

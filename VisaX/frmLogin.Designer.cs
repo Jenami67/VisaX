@@ -35,6 +35,7 @@
             this.lblMsg = new System.Windows.Forms.Label();
             this.txtUserName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblSetConnection = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // label2
@@ -103,6 +104,17 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "نام کاربری:";
             // 
+            // lblSetConnection
+            // 
+            this.lblSetConnection.AutoSize = true;
+            this.lblSetConnection.Location = new System.Drawing.Point(178, 126);
+            this.lblSetConnection.Name = "lblSetConnection";
+            this.lblSetConnection.Size = new System.Drawing.Size(62, 13);
+            this.lblSetConnection.TabIndex = 16;
+            this.lblSetConnection.TabStop = true;
+            this.lblSetConnection.Text = "تنظیم اتصال";
+            this.lblSetConnection.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblSetConnection_LinkClicked);
+            // 
             // frmLogin
             // 
             this.AcceptButton = this.btnLogin;
@@ -110,7 +122,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.CancelButton = this.btnExit;
-            this.ClientSize = new System.Drawing.Size(252, 133);
+            this.ClientSize = new System.Drawing.Size(252, 141);
+            this.Controls.Add(this.lblSetConnection);
             this.Controls.Add(this.lblMsg);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnLogin);
@@ -139,5 +152,6 @@
         private System.Windows.Forms.Label lblMsg;
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.LinkLabel lblSetConnection;
     }
 }

@@ -45,25 +45,6 @@ namespace VisaX
                                             r.Passenger.ExpiryDate,
                                             r.Passenger.Gender
                                         }).ToList();
-
-            //DateTime yesterday = DateTime.Today.AddDays(-1);
-            //dgvPassengers.AutoGenerateColumns = false;
-            //if (chkNotPrinted.Checked)
-            //    if (rbToday.Checked)
-            //        dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == DateTime.Today && p.Printed == false select p).ToList();
-            //    else if (rbYesterday.Checked)
-            //        dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == yesterday && p.Printed == false select p).ToList();
-            //    else
-            //        dgvPassengers.DataSource = (from p in ctx.Passengers where p.Printed == false select p).ToList();
-            //else
-            //{
-            //    if (rbToday.Checked)
-            //        dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == DateTime.Today select p).ToList();
-            //    else if (rbYesterday.Checked)
-            //        dgvPassengers.DataSource = (from p in ctx.Passengers where p.EntryDate == yesterday select p).ToList();
-            //    else
-            //        dgvPassengers.DataSource = (from p in ctx.Passengers select p).ToList();
-            //}
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -86,6 +67,7 @@ namespace VisaX
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            btnExportExcel.Enabled = btnExportPDF.Enabled = btnExportPDFAll.Enabled = SelectedShift.Sent;
             this.refreshGrid();
             this.Text = string.Format("متقاضیان ویزای تاریخ {0:yyyy/MM/dd} شیفت {1}", this.SelectedShift.Date, this.SelectedShift.ShiftNum);
         }
@@ -242,8 +224,9 @@ namespace VisaX
 
         private void dgvPassengers_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            btnDelete.Enabled = btnEdit.Enabled = btnExportExcel.Enabled = btnExportPDF.Enabled = btnExportPDFAll.Enabled = btnHistory.Enabled =
+            btnDelete.Enabled = btnEdit.Enabled =  btnHistory.Enabled =
                dgvPassengers.Rows.Count != 0;
+            btnExportExcel.Enabled = btnExportPDF.Enabled = btnExportPDFAll.Enabled =dgvPassengers.Rows.Count != 0 && SelectedShift.Sent;
         }
 
         private void dgvPassengers_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)

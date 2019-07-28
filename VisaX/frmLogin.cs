@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Core.EntityClient;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
@@ -84,6 +88,11 @@ namespace VisaX
         private void btnExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void lblSetConnection_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new frmConnectionString().ShowDialog();
         }
     }
 

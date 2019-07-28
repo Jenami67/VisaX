@@ -23,5 +23,8 @@
     <Setting Name="RemotePassword" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="BackupPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c:\</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

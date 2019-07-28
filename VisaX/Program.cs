@@ -18,7 +18,8 @@ namespace VisaX
             Application.CurrentCulture = new System.Globalization.CultureInfo("fr-FR");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmRemoteLogin());
+            //Application.Run(new frmRemoteLogin());
+            Application.Run(new frmImportXls());
         }
     }
 }

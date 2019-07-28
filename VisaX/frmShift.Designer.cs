@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvShifts = new System.Windows.Forms.DataGridView();
             this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,6 +58,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblBackup = new System.Windows.Forms.LinkLabel();
+            this.lblRestore = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShifts)).BeginInit();
             this.panel1.SuspendLayout();
@@ -87,17 +89,17 @@
             // 
             this.dgvShifts.AllowUserToAddRows = false;
             this.dgvShifts.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle21.Padding = new System.Windows.Forms.Padding(2);
-            this.dgvShifts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle21;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2);
+            this.dgvShifts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvShifts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvShifts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvShifts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvShifts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvShifts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colNumber,
@@ -113,17 +115,17 @@
             this.dgvShifts.MultiSelect = false;
             this.dgvShifts.Name = "dgvShifts";
             this.dgvShifts.ReadOnly = true;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvShifts.RowHeadersDefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvShifts.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvShifts.RowHeadersWidth = 20;
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgvShifts.RowsDefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvShifts.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvShifts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvShifts.Size = new System.Drawing.Size(849, 339);
             this.dgvShifts.TabIndex = 2;
@@ -224,14 +226,17 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 44F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 138F));
+            this.tableLayoutPanel2.Controls.Add(this.lblBackup, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.llbSendShifts, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.llbUser, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.llbSettings, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(-3, 40);
+            this.tableLayoutPanel2.Controls.Add(this.lblRestore, 2, 1);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(-3, 18);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(177, 18);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(177, 42);
             this.tableLayoutPanel2.TabIndex = 15;
             // 
             // llbSendShifts
@@ -240,7 +245,7 @@
             this.llbSendShifts.Location = new System.Drawing.Point(-31, 0);
             this.llbSendShifts.Margin = new System.Windows.Forms.Padding(0);
             this.llbSendShifts.Name = "llbSendShifts";
-            this.llbSendShifts.Size = new System.Drawing.Size(138, 18);
+            this.llbSendShifts.Size = new System.Drawing.Size(138, 22);
             this.llbSendShifts.TabIndex = 13;
             this.llbSendShifts.TabStop = true;
             this.llbSendShifts.Text = "ارسال شیفت ها (00)";
@@ -254,7 +259,7 @@
             this.llbUser.Location = new System.Drawing.Point(151, 0);
             this.llbUser.Margin = new System.Windows.Forms.Padding(0);
             this.llbUser.Name = "llbUser";
-            this.llbUser.Size = new System.Drawing.Size(26, 18);
+            this.llbUser.Size = new System.Drawing.Size(26, 22);
             this.llbUser.TabIndex = 12;
             this.llbUser.TabStop = true;
             this.llbUser.Text = "کاربر";
@@ -269,7 +274,7 @@
             this.llbSettings.Location = new System.Drawing.Point(107, 0);
             this.llbSettings.Margin = new System.Windows.Forms.Padding(0);
             this.llbSettings.Name = "llbSettings";
-            this.llbSettings.Size = new System.Drawing.Size(44, 18);
+            this.llbSettings.Size = new System.Drawing.Size(44, 22);
             this.llbSettings.TabIndex = 10;
             this.llbSettings.TabStop = true;
             this.llbSettings.Text = "تنظیمات";
@@ -388,6 +393,33 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "از تاریخ:";
             // 
+            // lblBackup
+            // 
+            this.lblBackup.AutoSize = true;
+            this.tableLayoutPanel2.SetColumnSpan(this.lblBackup, 2);
+            this.lblBackup.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblBackup.LinkArea = new System.Windows.Forms.LinkArea(0, 20);
+            this.lblBackup.Location = new System.Drawing.Point(107, 22);
+            this.lblBackup.Margin = new System.Windows.Forms.Padding(0);
+            this.lblBackup.Name = "lblBackup";
+            this.lblBackup.Size = new System.Drawing.Size(70, 20);
+            this.lblBackup.TabIndex = 14;
+            this.lblBackup.TabStop = true;
+            this.lblBackup.Text = "پشیبان گیری";
+            this.lblBackup.UseCompatibleTextRendering = true;
+            this.lblBackup.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblBackup_LinkClicked);
+            // 
+            // lblRestore
+            // 
+            this.lblRestore.AutoSize = true;
+            this.lblRestore.Location = new System.Drawing.Point(67, 22);
+            this.lblRestore.Name = "lblRestore";
+            this.lblRestore.Size = new System.Drawing.Size(37, 13);
+            this.lblRestore.TabIndex = 15;
+            this.lblRestore.TabStop = true;
+            this.lblRestore.Text = "بازیابی";
+            this.lblRestore.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblRestore_LinkClicked);
+            // 
             // frmShift
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -441,5 +473,7 @@
         private System.Windows.Forms.LinkLabel llbSettings;
         private System.Windows.Forms.LinkLabel llbSendShifts;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.LinkLabel lblBackup;
+        private System.Windows.Forms.LinkLabel lblRestore;
     }
 }
