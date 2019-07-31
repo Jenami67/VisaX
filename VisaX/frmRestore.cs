@@ -40,8 +40,11 @@ namespace VisaX
 
         private void frmRestore_Load(object sender, EventArgs e)
         {
-            foreach (string file in Directory.GetFiles(Properties.Settings.Default.BackupPath, "*.bak"))
-                cmbBackupFile.Items.Add(Path.GetFileNameWithoutExtension(file));
+            DirectoryInfo info = new DirectoryInfo(Properties.Settings.Default.BackupPath);
+            var files = info.GetFiles("*.bak").OrderBy(p => p.CreationTime);
+
+            foreach (var file in files)
+                cmbBackupFile.Items.Add(Path.GetFileNameWithoutExtension(file.Name));
             cmbBackupFile.SelectedIndex = cmbBackupFile.Items.Count - 1;
             cmbBackupFile.Tag = Properties.Settings.Default.BackupPath;
         }

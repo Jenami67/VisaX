@@ -52,8 +52,7 @@ namespace VisaX
                     rr[i - 1].FullName = excelWorkSheet.Cells[i + 7, 8].Value;
                     rr[i - 1].PassportNum = excelWorkSheet.Cells[i + 7, 7].Value.ToString();
                     rr[i - 1].Gender = (byte)(excelWorkSheet.Cells[i + 7, 6].Value2 == "ذکر" ? 0 : 1);
-                    /*TODO::*/
-                    rr[i - 1].UserID = 1;// Properties.Settings.Default.User;********************************************
+                    rr[i - 1].UserID = Properties.Settings.Default.User.ID; 
                     //format error: Exception from HRESULT: 0x800A03EC
                     if (excelWorkSheet.Cells[i + 7, 5].Value != null)
                     {

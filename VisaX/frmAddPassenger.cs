@@ -46,7 +46,7 @@ namespace VisaX
             this.justEdit = justEdit;
             //if (passenger != null && passenger.BornDate.HasValue)
             //    txtBornDate.Enabled = txtIssueDate.Enabled = txtExpiryDate.Enabled = true;
-            if (passenger != null )
+            if (passenger != null)
                 txtBornDate.Enabled = txtIssueDate.Enabled = txtExpiryDate.Enabled = passenger.BornDate.HasValue;
         }
 
@@ -148,8 +148,8 @@ namespace VisaX
                 }
                 catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
                 {
-                    if (ex.InnerException.Message.Contains("IX_Request")) { 
-                    MessageBox.Show("متقاضی مورد نظر قبلاً در این شیفت ثبت شده.\n" + ex.ToString());}
+                    if (ex.InnerException.InnerException.Message.Contains("AK_Date_PassengerID"))
+                        MessageBox.Show("متقاضی مورد نظر قبلاً در این روز ثبت شده.\n\n" + ex.ToString().Remove(500) );
                     ctx.Entry(passenger).Reload();
                 }
                 this.passenger = null;

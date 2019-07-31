@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvShifts = new System.Windows.Forms.DataGridView();
             this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,9 +45,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnEdit = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblBackup = new System.Windows.Forms.LinkLabel();
             this.llbSendShifts = new System.Windows.Forms.LinkLabel();
             this.llbUser = new System.Windows.Forms.LinkLabel();
             this.llbSettings = new System.Windows.Forms.LinkLabel();
+            this.lblRestore = new System.Windows.Forms.LinkLabel();
             this.btnList = new System.Windows.Forms.Button();
             this.btnSearchRequest = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -58,8 +60,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.lblBackup = new System.Windows.Forms.LinkLabel();
-            this.lblRestore = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShifts)).BeginInit();
             this.panel1.SuspendLayout();
@@ -89,17 +89,17 @@
             // 
             this.dgvShifts.AllowUserToAddRows = false;
             this.dgvShifts.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2);
-            this.dgvShifts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(2);
+            this.dgvShifts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvShifts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvShifts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvShifts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvShifts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvShifts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colNumber,
@@ -115,17 +115,17 @@
             this.dgvShifts.MultiSelect = false;
             this.dgvShifts.Name = "dgvShifts";
             this.dgvShifts.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvShifts.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvShifts.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvShifts.RowHeadersWidth = 20;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgvShifts.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvShifts.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvShifts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvShifts.Size = new System.Drawing.Size(849, 339);
             this.dgvShifts.TabIndex = 2;
@@ -212,6 +212,7 @@
             // btnEdit
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEdit.Enabled = false;
             this.btnEdit.Location = new System.Drawing.Point(334, 7);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(122, 45);
@@ -236,8 +237,25 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(177, 42);
             this.tableLayoutPanel2.TabIndex = 15;
+            // 
+            // lblBackup
+            // 
+            this.lblBackup.AutoSize = true;
+            this.tableLayoutPanel2.SetColumnSpan(this.lblBackup, 2);
+            this.lblBackup.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblBackup.LinkArea = new System.Windows.Forms.LinkArea(0, 20);
+            this.lblBackup.Location = new System.Drawing.Point(107, 22);
+            this.lblBackup.Margin = new System.Windows.Forms.Padding(0);
+            this.lblBackup.Name = "lblBackup";
+            this.lblBackup.Size = new System.Drawing.Size(70, 20);
+            this.lblBackup.TabIndex = 14;
+            this.lblBackup.TabStop = true;
+            this.lblBackup.Text = "پشیبان گیری";
+            this.lblBackup.UseCompatibleTextRendering = true;
+            this.lblBackup.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblBackup_LinkClicked);
             // 
             // llbSendShifts
             // 
@@ -280,6 +298,17 @@
             this.llbSettings.Text = "تنظیمات";
             this.llbSettings.UseCompatibleTextRendering = true;
             this.llbSettings.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbSettings_LinkClicked);
+            // 
+            // lblRestore
+            // 
+            this.lblRestore.AutoSize = true;
+            this.lblRestore.Location = new System.Drawing.Point(67, 22);
+            this.lblRestore.Name = "lblRestore";
+            this.lblRestore.Size = new System.Drawing.Size(37, 13);
+            this.lblRestore.TabIndex = 15;
+            this.lblRestore.TabStop = true;
+            this.lblRestore.Text = "بازیابی";
+            this.lblRestore.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblRestore_LinkClicked);
             // 
             // btnList
             // 
@@ -392,33 +421,6 @@
             this.label1.Size = new System.Drawing.Size(42, 13);
             this.label1.TabIndex = 6;
             this.label1.Text = "از تاریخ:";
-            // 
-            // lblBackup
-            // 
-            this.lblBackup.AutoSize = true;
-            this.tableLayoutPanel2.SetColumnSpan(this.lblBackup, 2);
-            this.lblBackup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblBackup.LinkArea = new System.Windows.Forms.LinkArea(0, 20);
-            this.lblBackup.Location = new System.Drawing.Point(107, 22);
-            this.lblBackup.Margin = new System.Windows.Forms.Padding(0);
-            this.lblBackup.Name = "lblBackup";
-            this.lblBackup.Size = new System.Drawing.Size(70, 20);
-            this.lblBackup.TabIndex = 14;
-            this.lblBackup.TabStop = true;
-            this.lblBackup.Text = "پشیبان گیری";
-            this.lblBackup.UseCompatibleTextRendering = true;
-            this.lblBackup.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblBackup_LinkClicked);
-            // 
-            // lblRestore
-            // 
-            this.lblRestore.AutoSize = true;
-            this.lblRestore.Location = new System.Drawing.Point(67, 22);
-            this.lblRestore.Name = "lblRestore";
-            this.lblRestore.Size = new System.Drawing.Size(37, 13);
-            this.lblRestore.TabIndex = 15;
-            this.lblRestore.TabStop = true;
-            this.lblRestore.Text = "بازیابی";
-            this.lblRestore.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblRestore_LinkClicked);
             // 
             // frmShift
             // 

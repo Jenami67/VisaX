@@ -67,7 +67,8 @@ namespace VisaX
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            btnExportExcel.Enabled = btnExportPDF.Enabled = btnExportPDFAll.Enabled = SelectedShift.Sent;
+            dgvPassengers_RowsRemoved(null, null);
+            btnNew.Enabled = !SelectedShift.Sent;
             this.refreshGrid();
             this.Text = string.Format("متقاضیان ویزای تاریخ {0:yyyy/MM/dd} شیفت {1}", this.SelectedShift.Date, this.SelectedShift.ShiftNum);
         }
@@ -118,6 +119,13 @@ namespace VisaX
                 System.Threading.Thread.Sleep(2000);
                 excelWorkBook = excelApllication.Workbooks.Open(absPath, 0, true, 5, "", "", true, Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
                 excelWorkSheet = (Excel.Worksheet)excelWorkBook.Worksheets.get_Item(1);
+
+                //Fill Header
+                excelWorkSheet.Cells[2, 2].Value2 = SelectedShift.Requests.Count;
+                excelWorkSheet.Cells[2, 3].Value2 = DateTime.Now.Date;
+                excelWorkSheet.Cells[2, 5].Value2 = SelectedShift.Date;
+                excelWorkSheet.Cells[2, 7].Value2 = Properties.Settings.Default.RemoteUser.RealName;
+                excelWorkSheet.Cells[2, 8].Value2 = SelectedShift.Description;
 
                 int i = 1;
                 if (sender == btnExportPDFAll)
@@ -191,31 +199,6 @@ namespace VisaX
             }//if
         }//btnExportPDF_Click
 
-        //private void btnExportPDFAll_Click(object sender, EventArgs e)
-        //{
-        //    sfd.Filter = "Adobe Acrobat Documents (*.pdf)|*.pdf";
-        //    sfd.FileName = this.SelectedShift.Date.ToString("yyyy-MM-dd") + string.Format(" ({0:00})", this.SelectedShift.ShiftNum);
-
-        //    Boolean xlsToo = MessageBox.Show("آیا مایلید فایل اکسل رکوردهای انتخاب شده هم تولید شود؟", "تولید همزمان اکسل", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes;
-        //    List<string> files = new List<string>();
-        //    if (sfd.ShowDialog() == DialogResult.OK)
-        //    {
-        //        string dirPath = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\VisaX";
-        //        Directory.CreateDirectory(dirPath);
-        //        foreach (string file in Directory.GetFiles(dirPath))
-        //            File.Delete(file);
-
-        //        for (int i = 0; i < dgvPassengers.Rows.Count; i++)
-        //            files.Add(generatePdf(dgvPassengers.Rows[i], i + 1));
-
-        //        MergePDFs(files, sfd.FileName);
-        //        Process.Start(sfd.FileName);
-        //        if (xlsToo)
-        //            btnExportExcel_Click(btnExportPDFAll, null);
-        //        this.refreshGrid();
-        //    }//if
-        //}
-
         private void txtFilter_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -224,9 +207,9 @@ namespace VisaX
 
         private void dgvPassengers_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            btnDelete.Enabled = btnEdit.Enabled =  btnHistory.Enabled =
+            btnDelete.Enabled = btnEdit.Enabled = btnHistory.Enabled =
                dgvPassengers.Rows.Count != 0;
-            btnExportExcel.Enabled = btnExportPDF.Enabled = btnExportPDFAll.Enabled =dgvPassengers.Rows.Count != 0 && SelectedShift.Sent;
+            btnExportExcel.Enabled = btnExportPDF.Enabled = btnExportPDFAll.Enabled = dgvPassengers.Rows.Count != 0 && SelectedShift.Sent;
         }
 
         private void dgvPassengers_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -368,10 +351,3 @@ namespace VisaX
         }
     }
 }
-//TODO: 
-//-Add Shortcuts
-//-Export by day - grid just current day or one day
-//-pdf in one page
-//-passport num in first to check if exist
-//-auto expiry date
-//-login password

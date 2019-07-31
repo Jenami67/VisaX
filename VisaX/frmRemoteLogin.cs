@@ -49,6 +49,7 @@ namespace VisaX
                     Properties.Settings.Default.RemotePassword = StringUtil.Crypt(txtPassword.Text);
                     Properties.Settings.Default.Save();
                     RemoteUserID = usr.ID;
+                    Properties.Settings.Default.RemoteUser = usr;
 
                     Hide();
                     new frmLogin().ShowDialog();
@@ -104,6 +105,7 @@ namespace VisaX
                         MessageBox.Show("شما قبلاً با نام شعبه دیگری شیفت ثبت کرده اید؛ لطفاً \t- با شعبه قبلی وارد شوید.\t- یا برنامه خام را دریافت کرده و با نام شعبه مورد نظر وارد شوید.\n", "کاربر غیرفعال شده", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
                         return;
                     }
+                    Properties.Settings.Default.RemoteUser = usr;
                     RemoteUserID = usr.ID;
                     Hide();
                     new frmLogin().ShowDialog();
