@@ -16,7 +16,7 @@ namespace VisaXCentral
 {
     public partial class frmShifts : Form
     {
-        VisaXCenterEntities ctx = new VisaXCenterEntities("ASAWARI");
+        VisaXCenteralEntities ctx = new VisaXCenteralEntities("ASAWARI");
         RemoteUser user;
 
         public frmShifts(RemoteUser user)

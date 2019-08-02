@@ -235,7 +235,7 @@ namespace VisaX
                     txtIssueDate.Text = this.passenger.IssueDate.HasValue ? this.passenger.IssueDate.Value.ToShortDateString() : string.Empty;
                     txtExpiryDate.Text = this.passenger.ExpiryDate.HasValue ? this.passenger.ExpiryDate.Value.ToShortDateString() : string.Empty;
                 }//if
-            }
+            }//if
         }
     }
 }

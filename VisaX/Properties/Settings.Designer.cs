@@ -116,5 +116,17 @@ namespace VisaX.Properties {
                 this["BackupPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string XlsPath {
+            get {
+                return ((string)(this["XlsPath"]));
+            }
+            set {
+                this["XlsPath"] = value;
+            }
+        }
     }
 }

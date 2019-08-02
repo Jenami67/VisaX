@@ -164,19 +164,19 @@ namespace VisaXCentral
         }
     }
 
-    public partial class VisaXCenterEntities : DbContext
-    {
-        public VisaXCenterEntities(string user, string pwd)
-            : base("name=VisaXCenterEntities")
-        {
-            Database.Connection.ConnectionString = string.Format(this.Database.Connection.ConnectionString, user, pwd);
-        }
+    //public partial class VisaXCenterEntities : DbContext
+    //{
+    //    public VisaXCenterEntities(string user, string pwd)
+    //        : base("name=VisaXCenterEntities")
+    //    {
+    //        Database.Connection.ConnectionString = string.Format(this.Database.Connection.ConnectionString, user, pwd);
+    //    }
 
-        public VisaXCenterEntities(string user)
-             : base("name=VisaXCenterEntities")
-        {
-            if (user == "ASAWARI")
-                Database.Connection.ConnectionString = string.Format(this.Database.Connection.ConnectionString, user, "3Pg^gf81");
-        }
-    }
+    //    public VisaXCenterEntities(string user)
+    //         : base("name=VisaXCenterEntities")
+    //    {
+    //        if (user == "ASAWARI")
+    //            Database.Connection.ConnectionString = string.Format(this.Database.Connection.ConnectionString, user, "3Pg^gf81");
+    //    }
+    //}
 }

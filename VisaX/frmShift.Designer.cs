@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvShifts = new System.Windows.Forms.DataGridView();
             this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,6 +43,7 @@
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.llbImportXls = new System.Windows.Forms.LinkLabel();
             this.btnEdit = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.lblBackup = new System.Windows.Forms.LinkLabel();
@@ -60,6 +61,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShifts)).BeginInit();
             this.panel1.SuspendLayout();
@@ -89,17 +91,17 @@
             // 
             this.dgvShifts.AllowUserToAddRows = false;
             this.dgvShifts.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(2);
-            this.dgvShifts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(2);
+            this.dgvShifts.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvShifts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvShifts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvShifts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvShifts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvShifts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colNumber,
@@ -115,17 +117,17 @@
             this.dgvShifts.MultiSelect = false;
             this.dgvShifts.Name = "dgvShifts";
             this.dgvShifts.ReadOnly = true;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvShifts.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvShifts.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvShifts.RowHeadersWidth = 20;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgvShifts.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgvShifts.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvShifts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvShifts.Size = new System.Drawing.Size(849, 339);
             this.dgvShifts.TabIndex = 2;
@@ -197,6 +199,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.linkLabel1);
+            this.panel1.Controls.Add(this.llbImportXls);
             this.panel1.Controls.Add(this.btnEdit);
             this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Controls.Add(this.btnList);
@@ -208,6 +212,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(849, 61);
             this.panel1.TabIndex = 0;
+            // 
+            // llbImportXls
+            // 
+            this.llbImportXls.AutoSize = true;
+            this.llbImportXls.Location = new System.Drawing.Point(180, 37);
+            this.llbImportXls.Name = "llbImportXls";
+            this.llbImportXls.Size = new System.Drawing.Size(86, 13);
+            this.llbImportXls.TabIndex = 17;
+            this.llbImportXls.TabStop = true;
+            this.llbImportXls.Text = "وارد سازی اکسل";
+            this.llbImportXls.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbImportXls_LinkClicked);
             // 
             // btnEdit
             // 
@@ -422,6 +437,17 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "از تاریخ:";
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(381, 24);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(74, 13);
+            this.linkLabel1.TabIndex = 18;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "همزمان سازی";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // frmShift
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -439,6 +465,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvShifts)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -477,5 +504,7 @@
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.LinkLabel lblBackup;
         private System.Windows.Forms.LinkLabel lblRestore;
+        private System.Windows.Forms.LinkLabel llbImportXls;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

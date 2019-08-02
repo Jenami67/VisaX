@@ -26,5 +26,8 @@
     <Setting Name="BackupPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">c:\</Value>
     </Setting>
+    <Setting Name="XlsPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

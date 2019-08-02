@@ -28,18 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnExportPDF = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnBrowse = new System.Windows.Forms.Button();
+            this.fbd = new System.Windows.Forms.FolderBrowserDialog();
             this.txtFileName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // ofd
-            // 
-            this.ofd.FileName = "ofd";
-            this.ofd.Filter = "Excel Documents (*.xls)|*.xls";
             // 
             // btnCancel
             // 
@@ -51,6 +46,7 @@
             this.btnCancel.TabIndex = 21;
             this.btnCancel.Text = "لغو";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnExportPDF
             // 
@@ -61,17 +57,17 @@
             this.btnExportPDF.TabIndex = 20;
             this.btnExportPDF.Text = "&وارد سازی متقاضیان";
             this.btnExportPDF.UseVisualStyleBackColor = true;
-            this.btnExportPDF.Click += new System.EventHandler(this.btnExportPDF_Click);
+            this.btnExportPDF.Click += new System.EventHandler(this.btnImportPDF_Click);
             // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(237, 9);
+            this.label1.Location = new System.Drawing.Point(185, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 13);
+            this.label1.Size = new System.Drawing.Size(177, 13);
             this.label1.TabIndex = 19;
-            this.label1.Text = "فایل اکسل را انتخاب کنید:";
+            this.label1.Text = "پوشه فایل های اکسل را انتخاب کنید:";
             // 
             // btnBrowse
             // 
@@ -87,17 +83,20 @@
             // txtFileName
             // 
             this.txtFileName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFileName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::VisaX.Properties.Settings.Default, "XlsPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.txtFileName.Location = new System.Drawing.Point(55, 27);
             this.txtFileName.Name = "txtFileName";
             this.txtFileName.ReadOnly = true;
             this.txtFileName.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtFileName.Size = new System.Drawing.Size(304, 21);
             this.txtFileName.TabIndex = 17;
+            this.txtFileName.Text = global::VisaX.Properties.Settings.Default.XlsPath;
             // 
             // frmImportXls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(374, 130);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnExportPDF);
@@ -117,12 +116,11 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.OpenFileDialog ofd;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnExportPDF;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.TextBox txtFileName;
+        private System.Windows.Forms.FolderBrowserDialog fbd;
     }
 }

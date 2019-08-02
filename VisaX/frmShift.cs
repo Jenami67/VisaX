@@ -190,5 +190,19 @@ namespace VisaX
         {
             new frmRestore().ShowDialog();
         }
+
+        private void llbImportXls_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new frmImportXls().ShowDialog();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            VisaXCenteralEntities ctx = new VisaXCenteralEntities("ASAWARI");
+            VisaXEntities ctxLocal = new VisaXEntities();
+
+            
+           // ctxLocal.Passengers.Except()
+        }
     }
 }

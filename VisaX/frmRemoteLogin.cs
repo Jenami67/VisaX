@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using System.Data.Entity;
+using System.Collections.Generic;
 //using VisaX;
 
 namespace VisaX
@@ -125,6 +126,17 @@ namespace VisaX
 
         //User info all over the program
         public static int RemoteUserID { get; set; }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            List<int> a = new List<int>();
+            a.AddRange(new[] { 1, 2, 3, 4 });
+
+            List<int> b = new List<int>();
+            b.AddRange(new[] { 1, 3, 4, 5 });
+            //a-b
+            List<int> c = a.Except(b).ToList();
+        }
     }
 
     public partial class VisaXCenteralEntities : DbContext
