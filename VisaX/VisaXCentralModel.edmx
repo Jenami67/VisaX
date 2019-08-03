@@ -16,6 +16,17 @@
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
           <Property Name="RemoteUserID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="RemotePassenger">
+          <Key>
+            <PropertyRef Name="PassportNum" />
+          </Key>
+          <Property Name="PassportNum" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="90" Nullable="false" />
+          <Property Name="Gender" Type="tinyint" Nullable="false" />
+          <Property Name="BornDate" Type="date" />
+          <Property Name="IssueDate" Type="date" />
+          <Property Name="ExpiryDate" Type="date" />
+        </EntityType>
         <EntityType Name="RemoteRequest">
           <Key>
             <PropertyRef Name="ID" />
@@ -91,6 +102,7 @@
         </Association>
         <EntityContainer Name="VisaXCenterModelStoreContainer">
           <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RemotePassenger" EntityType="Self.RemotePassenger" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RemoteRequest" EntityType="Self.RemoteRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RemoteShift" EntityType="Self.RemoteShift" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RemoteUser" EntityType="Self.RemoteUser" Schema="dbo" store:Type="Tables" />
@@ -141,6 +153,7 @@
             <End Role="RemoteUser" EntitySet="RemoteUsers" />
             <End Role="Message" EntitySet="Messages" />
           </AssociationSet>
+          <EntitySet Name="RemotePassengers" EntityType="VisaXCenterModel.RemotePassenger" />
         </EntityContainer>
         <EntityType Name="RemoteRequest">
           <Key>
@@ -219,6 +232,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="RemotePassenger">
+          <Key>
+            <PropertyRef Name="PassportNum" />
+          </Key>
+          <Property Name="PassportNum" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="Byte" Nullable="false" />
+          <Property Name="BornDate" Type="DateTime" Precision="0" />
+          <Property Name="IssueDate" Type="DateTime" Precision="0" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -272,6 +296,18 @@
                 <ScalarProperty Name="Seen" ColumnName="Seen" />
                 <ScalarProperty Name="RegTime" ColumnName="RegTime" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RemotePassengers">
+            <EntityTypeMapping TypeName="VisaXCenterModel.RemotePassenger">
+              <MappingFragment StoreEntitySet="RemotePassenger">
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="BornDate" ColumnName="BornDate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="PassportNum" ColumnName="PassportNum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

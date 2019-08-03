@@ -209,6 +209,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RemotePassenger.cs">
+      <DependentUpon>VisaXCentralModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="RemoteRequest.cs">
       <DependentUpon>VisaXCentralModel.tt</DependentUpon>
     </Compile>

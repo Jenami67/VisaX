@@ -43,14 +43,11 @@
             this.colCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.llbImportXls = new System.Windows.Forms.LinkLabel();
             this.btnEdit = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblBackup = new System.Windows.Forms.LinkLabel();
             this.llbSendShifts = new System.Windows.Forms.LinkLabel();
             this.llbUser = new System.Windows.Forms.LinkLabel();
             this.llbSettings = new System.Windows.Forms.LinkLabel();
-            this.lblRestore = new System.Windows.Forms.LinkLabel();
             this.btnList = new System.Windows.Forms.Button();
             this.btnSearchRequest = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -61,7 +58,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShifts)).BeginInit();
             this.panel1.SuspendLayout();
@@ -199,8 +195,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.linkLabel1);
-            this.panel1.Controls.Add(this.llbImportXls);
             this.panel1.Controls.Add(this.btnEdit);
             this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Controls.Add(this.btnList);
@@ -212,17 +206,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(849, 61);
             this.panel1.TabIndex = 0;
-            // 
-            // llbImportXls
-            // 
-            this.llbImportXls.AutoSize = true;
-            this.llbImportXls.Location = new System.Drawing.Point(180, 37);
-            this.llbImportXls.Name = "llbImportXls";
-            this.llbImportXls.Size = new System.Drawing.Size(86, 13);
-            this.llbImportXls.TabIndex = 17;
-            this.llbImportXls.TabStop = true;
-            this.llbImportXls.Text = "وارد سازی اکسل";
-            this.llbImportXls.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbImportXls_LinkClicked);
             // 
             // btnEdit
             // 
@@ -242,35 +225,16 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 44F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 138F));
-            this.tableLayoutPanel2.Controls.Add(this.lblBackup, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.llbSendShifts, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.llbUser, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.llbSettings, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.lblRestore, 2, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(-3, 18);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(-3, 36);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(177, 42);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(177, 22);
             this.tableLayoutPanel2.TabIndex = 15;
-            // 
-            // lblBackup
-            // 
-            this.lblBackup.AutoSize = true;
-            this.tableLayoutPanel2.SetColumnSpan(this.lblBackup, 2);
-            this.lblBackup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblBackup.LinkArea = new System.Windows.Forms.LinkArea(0, 20);
-            this.lblBackup.Location = new System.Drawing.Point(107, 22);
-            this.lblBackup.Margin = new System.Windows.Forms.Padding(0);
-            this.lblBackup.Name = "lblBackup";
-            this.lblBackup.Size = new System.Drawing.Size(70, 20);
-            this.lblBackup.TabIndex = 14;
-            this.lblBackup.TabStop = true;
-            this.lblBackup.Text = "پشیبان گیری";
-            this.lblBackup.UseCompatibleTextRendering = true;
-            this.lblBackup.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblBackup_LinkClicked);
             // 
             // llbSendShifts
             // 
@@ -313,17 +277,6 @@
             this.llbSettings.Text = "تنظیمات";
             this.llbSettings.UseCompatibleTextRendering = true;
             this.llbSettings.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbSettings_LinkClicked);
-            // 
-            // lblRestore
-            // 
-            this.lblRestore.AutoSize = true;
-            this.lblRestore.Location = new System.Drawing.Point(67, 22);
-            this.lblRestore.Name = "lblRestore";
-            this.lblRestore.Size = new System.Drawing.Size(37, 13);
-            this.lblRestore.TabIndex = 15;
-            this.lblRestore.TabStop = true;
-            this.lblRestore.Text = "بازیابی";
-            this.lblRestore.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblRestore_LinkClicked);
             // 
             // btnList
             // 
@@ -437,17 +390,6 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "از تاریخ:";
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(381, 24);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(74, 13);
-            this.linkLabel1.TabIndex = 18;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "همزمان سازی";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
             // frmShift
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -459,13 +401,13 @@
             this.Name = "frmShift";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
+            this.ShowIcon = false;
             this.Text = "شرکه زهره البصره ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmShifts_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvShifts)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -502,9 +444,5 @@
         private System.Windows.Forms.LinkLabel llbSettings;
         private System.Windows.Forms.LinkLabel llbSendShifts;
         private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.LinkLabel lblBackup;
-        private System.Windows.Forms.LinkLabel lblRestore;
-        private System.Windows.Forms.LinkLabel llbImportXls;
-        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

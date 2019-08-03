@@ -12,7 +12,7 @@ namespace VisaXCentral
 {
     public partial class frmAddUser : Form
     {
-        VisaXCenteralEntities ctx = new VisaXCenteralEntities("ASAWARI");
+        VisaXCenterNew ctx = new VisaXCenterNew("ASAWARI");
         public frmAddUser()
         {
             InitializeComponent();

@@ -107,7 +107,7 @@
             // lblSetConnection
             // 
             this.lblSetConnection.AutoSize = true;
-            this.lblSetConnection.Location = new System.Drawing.Point(178, 126);
+            this.lblSetConnection.Location = new System.Drawing.Point(179, 124);
             this.lblSetConnection.Name = "lblSetConnection";
             this.lblSetConnection.Size = new System.Drawing.Size(62, 13);
             this.lblSetConnection.TabIndex = 16;

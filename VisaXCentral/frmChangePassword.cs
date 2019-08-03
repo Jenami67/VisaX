@@ -7,7 +7,7 @@ namespace VisaXCentral
 {
     public partial class frmChangePassword : Form
     {
-        VisaXCenterEntities ctx = new VisaXCenterEntities("ASAWARI");
+        VisaXCenterNew ctx = new VisaXCenterNew("ASAWARI");
         int UserID;
         public frmChangePassword(int UserID)
         {

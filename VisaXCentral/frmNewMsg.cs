@@ -12,7 +12,7 @@ namespace VisaXCentral
 {
     public partial class frmNewMsg : Form
     {
-        VisaXCenterEntities ctx = new VisaXCenterEntities("ASAWARI");
+        VisaXCenterNew ctx = new VisaXCenterNew("ASAWARI");
         int curUsrID;
         public frmNewMsg()
         {

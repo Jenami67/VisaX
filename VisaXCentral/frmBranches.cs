@@ -11,7 +11,7 @@ namespace VisaXCentral
 {
     public partial class frmBranches : Form
     {
-        VisaXCenterEntities ctx = new VisaXCenterEntities("ASAWARI");
+        VisaXCenterNew ctx = new VisaXCenterNew("ASAWARI");
         public frmBranches()
         {
             InitializeComponent();

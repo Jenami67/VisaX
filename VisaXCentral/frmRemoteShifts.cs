@@ -16,7 +16,7 @@ namespace VisaXCentral
 {
     public partial class frmShifts : Form
     {
-        VisaXCenteralEntities ctx = new VisaXCenteralEntities("ASAWARI");
+        VisaXCenterNew ctx = new VisaXCenterNew("ASAWARI");
         RemoteUser user;
 
         public frmShifts(RemoteUser user)
@@ -239,22 +239,18 @@ namespace VisaXCentral
             }
             return merged;
         }
-
-        //private void dgvShifts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    btnList_Click(null, null);
-        //}
     }
-    public partial class VisaXCenteralEntities : DbContext
+
+    public partial class VisaXCenterNew : DbContext
     {
-        public VisaXCenteralEntities(string user, string pwd)
-            : base("name=VisaXCenterEntities")
+        public VisaXCenterNew(string user, string pwd)
+            : base("name=VisaXCenterNew")
         {
             Database.Connection.ConnectionString = string.Format(this.Database.Connection.ConnectionString, user, pwd);
         }
 
-        public VisaXCenteralEntities(string user)
-             : base("name=VisaXCenterEntities")
+        public VisaXCenterNew(string user)
+             : base("name=VisaXCenterNew")
         {
             if (user == "ASAWARI")
                 Database.Connection.ConnectionString = string.Format(this.Database.Connection.ConnectionString, user, "3Pg^gf81");

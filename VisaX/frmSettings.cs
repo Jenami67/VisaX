@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace VisaX
@@ -17,47 +10,38 @@ namespace VisaX
             InitializeComponent();
         }
 
-        private void btnBrowse_Click(object sender, EventArgs e)
-        {
-            if (fbdPdf.ShowDialog() == DialogResult.OK)
-            {
-                //txtPdfPath.Text = fbdPdf.SelectedPath;
-                //Properties.Settings.Default.PdfPath = fbdPdf.SelectedPath;
-            }
-        }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //if (txtCurrentPass.Text == Properties.Settings.Default.Pass)
-            //    if (txtNewPass.Text == txtRepNewPass.Text)
-            //    {
-            //        Properties.Settings.Default.Pass = txtNewPass.Text;
-            //        Properties.Settings.Default.Save();
-            //        MessageBox.Show("رمز عبور جدید تنظیم شد");
-            //    }//if
-            //    else
-            //        MessageBox.Show("رمز عبور با تکرار آن تطابق ندارد");
-
-            Properties.Settings.Default.DatesDisabled = chkDatesDisabled.Checked;
+            Properties.Settings.Default.Save();
             this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            //Properties.Settings.Default.Reload();
+            Properties.Settings.Default.Reload();
         }
 
-        private void frmSettings_Load(object sender, EventArgs e)
+        private void lblRestore_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //txtPdfPath.Text = Properties.Settings.Default.PdfPath;
-            //fbdPdf.SelectedPath = Properties.Settings.Default.PdfPath;
-            chkDatesDisabled.Checked = Properties.Settings.Default.DatesDisabled;
-
+            if (Properties.Settings.Default.User.ID == 1)
+                new frmRestore().ShowDialog();
+            else
+                MessageBox.Show("تنها کاربر admin قادر به بازیابی پایگاه داده است.", "بازیابی", MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading | MessageBoxOptions.RightAlign);
         }
 
-        private void btnChangePassword_Click(object sender, EventArgs e)
+        private void lblBackup_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            new frmBackup().ShowDialog();
+        }
 
+        private void llbImportXls_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new frmImportXls().ShowDialog();
+        }
+
+        private void lblSetConnection_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new frmConnectionString().ShowDialog();
         }
     }
 }

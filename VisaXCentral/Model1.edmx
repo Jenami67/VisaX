@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="VisaXCenterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="VisaXCenterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Messages">
           <Key>
             <PropertyRef Name="ID" />
@@ -119,10 +119,34 @@
             <End Role="RemoteShift" EntitySet="RemoteShift" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="VisaXCenterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Seen" Type="Boolean" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RemoteUserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RemoteUser" Relationship="Self.FK_Messages_RemoteUser" FromRole="Messages" ToRole="RemoteUser" />
+        </EntityType>
+        <EntityType Name="RemotePassenger">
+          <Key>
+            <PropertyRef Name="PassportNum" />
+          </Key>
+          <Property Name="PassportNum" Type="String" MaxLength="8" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="90" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="Byte" Nullable="false" />
+          <Property Name="BornDate" Type="DateTime" Precision="0" />
+          <Property Name="IssueDate" Type="DateTime" Precision="0" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="0" />
+        </EntityType>
         <EntityType Name="RemoteRequest">
           <Key>
             <PropertyRef Name="ID" />
@@ -146,9 +170,9 @@
           <Property Name="ShiftNum" Type="Byte" Nullable="false" />
           <Property Name="RemoteUserID" Type="Int32" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Exported" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="RemoteRequests" Relationship="Self.FK_Request_Shift" FromRole="RemoteShift" ToRole="RemoteRequest" />
           <NavigationProperty Name="RemoteUser" Relationship="Self.FK_Shift_RemoteUser" FromRole="RemoteShift" ToRole="RemoteUser" />
-          <Property Name="Exported" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="RemoteUser">
           <Key>
@@ -158,11 +182,25 @@
           <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RealName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="RemoteShifts" Relationship="Self.FK_Shift_RemoteUser" FromRole="RemoteUser" ToRole="RemoteShift" />
           <Property Name="LastSeen" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Enabled" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Messages" Relationship="VisaXCenterModel.FK_Messages_RemoteUser" FromRole="RemoteUser" ToRole="Message" />
+          <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_RemoteUser" FromRole="RemoteUser" ToRole="Messages" />
+          <NavigationProperty Name="RemoteShifts" Relationship="Self.FK_Shift_RemoteUser" FromRole="RemoteUser" ToRole="RemoteShift" />
         </EntityType>
+        <Association Name="FK_Messages_RemoteUser">
+          <End Role="RemoteUser" Type="Self.RemoteUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Messages" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RemoteUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="RemoteUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Request_Shift">
           <End Role="RemoteShift" Type="Self.RemoteShift" Multiplicity="1" />
           <End Role="RemoteRequest" Type="Self.RemoteRequest" Multiplicity="*" />
@@ -187,10 +225,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="VisaXCenterEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="VisaXCenterNew" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Messages" EntityType="Self.Message" />
+          <EntitySet Name="RemotePassengers" EntityType="Self.RemotePassenger" />
           <EntitySet Name="RemoteRequests" EntityType="Self.RemoteRequest" />
           <EntitySet Name="RemoteShifts" EntityType="Self.RemoteShift" />
           <EntitySet Name="RemoteUsers" EntityType="Self.RemoteUser" />
+          <AssociationSet Name="FK_Messages_RemoteUser" Association="Self.FK_Messages_RemoteUser">
+            <End Role="RemoteUser" EntitySet="RemoteUsers" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
           <AssociationSet Name="FK_Request_Shift" Association="Self.FK_Request_Shift">
             <End Role="RemoteShift" EntitySet="RemoteShifts" />
             <End Role="RemoteRequest" EntitySet="RemoteRequests" />
@@ -199,56 +243,37 @@
             <End Role="RemoteUser" EntitySet="RemoteUsers" />
             <End Role="RemoteShift" EntitySet="RemoteShifts" />
           </AssociationSet>
-          <EntitySet Name="Messages" EntityType="VisaXCenterModel.Message" />
-          <AssociationSet Name="FK_Messages_RemoteUser" Association="VisaXCenterModel.FK_Messages_RemoteUser">
-            <End Role="RemoteUser" EntitySet="RemoteUsers" />
-            <End Role="Message" EntitySet="Messages" />
-          </AssociationSet>
-          <EntitySet Name="RemotePassengers" EntityType="VisaXCenterModel.RemotePassenger" />
         </EntityContainer>
-        <EntityType Name="Message">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="RegTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Seen" Type="Boolean" Nullable="false" />
-          <Property Name="Text" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="RemoteUserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="RemoteUser" Relationship="VisaXCenterModel.FK_Messages_RemoteUser" FromRole="Message" ToRole="RemoteUser" />
-        </EntityType>
-        <Association Name="FK_Messages_RemoteUser">
-          <End Type="VisaXCenterModel.RemoteUser" Role="RemoteUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="VisaXCenterModel.Message" Role="Message" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RemoteUser">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Message">
-              <PropertyRef Name="RemoteUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="RemotePassenger">
-          <Key>
-            <PropertyRef Name="PassportNum" />
-          </Key>
-          <Property Name="PassportNum" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
-          <Property Name="FullName" Type="String" Nullable="false" MaxLength="90" FixedLength="false" Unicode="true" />
-          <Property Name="Gender" Type="Byte" Nullable="false" />
-          <Property Name="BornDate" Type="DateTime" Precision="0" />
-          <Property Name="IssueDate" Type="DateTime" Precision="0" />
-          <Property Name="ExpiryDate" Type="DateTime" Precision="0" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="VisaXCenterModelStoreContainer" CdmEntityContainer="VisaXCenterEntities">
+        <EntityContainerMapping StorageEntityContainer="VisaXCenterModelStoreContainer" CdmEntityContainer="VisaXCenterNew">
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="VisaXCenterModel.Message">
+              <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RegTime" ColumnName="RegTime" />
+                <ScalarProperty Name="Seen" ColumnName="Seen" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="RemoteUserID" ColumnName="RemoteUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RemotePassengers">
+            <EntityTypeMapping TypeName="VisaXCenterModel.RemotePassenger">
+              <MappingFragment StoreEntitySet="RemotePassenger">
+                <ScalarProperty Name="PassportNum" ColumnName="PassportNum" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="BornDate" ColumnName="BornDate" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="RemoteRequests">
             <EntityTypeMapping TypeName="VisaXCenterModel.RemoteRequest">
               <MappingFragment StoreEntitySet="RemoteRequest">
@@ -266,48 +291,24 @@
           <EntitySetMapping Name="RemoteShifts">
             <EntityTypeMapping TypeName="VisaXCenterModel.RemoteShift">
               <MappingFragment StoreEntitySet="RemoteShift">
-                <ScalarProperty Name="Exported" ColumnName="Exported" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="ShiftNum" ColumnName="ShiftNum" />
                 <ScalarProperty Name="RemoteUserID" ColumnName="RemoteUserID" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Exported" ColumnName="Exported" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RemoteUsers">
             <EntityTypeMapping TypeName="VisaXCenterModel.RemoteUser">
               <MappingFragment StoreEntitySet="RemoteUser">
-                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
-                <ScalarProperty Name="LastSeen" ColumnName="LastSeen" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="RealName" ColumnName="RealName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Messages">
-            <EntityTypeMapping TypeName="VisaXCenterModel.Message">
-              <MappingFragment StoreEntitySet="Messages">
-                <ScalarProperty Name="RemoteUserID" ColumnName="RemoteUserID" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="Seen" ColumnName="Seen" />
-                <ScalarProperty Name="RegTime" ColumnName="RegTime" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RemotePassengers">
-            <EntityTypeMapping TypeName="VisaXCenterModel.RemotePassenger">
-              <MappingFragment StoreEntitySet="RemotePassenger">
-                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
-                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
-                <ScalarProperty Name="BornDate" ColumnName="BornDate" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="PassportNum" ColumnName="PassportNum" />
+                <ScalarProperty Name="LastSeen" ColumnName="LastSeen" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

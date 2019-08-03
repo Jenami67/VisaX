@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VisaX
+namespace VisaXCentral
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class VisaXCenteralEntities : DbContext
+    public partial class VisaXCenterNew : DbContext
     {
-        public VisaXCenteralEntities()
-            : base("name=VisaXCenteralEntities")
+        public VisaXCenterNew()
+            : base("name=VisaXCenterNew")
         {
         }
     
@@ -25,10 +25,10 @@ namespace VisaX
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<RemoteUser> RemoteUsers { get; set; }
-        public virtual DbSet<RemoteRequest> RemoteRequests { get; set; }
-        public virtual DbSet<RemoteShift> RemoteShifts { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<RemotePassenger> RemotePassengers { get; set; }
+        public virtual DbSet<RemoteRequest> RemoteRequests { get; set; }
+        public virtual DbSet<RemoteShift> RemoteShifts { get; set; }
+        public virtual DbSet<RemoteUser> RemoteUsers { get; set; }
     }
 }

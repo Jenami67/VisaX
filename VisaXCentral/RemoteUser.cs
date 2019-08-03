@@ -17,8 +17,8 @@ namespace VisaXCentral
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public RemoteUser()
         {
-            this.RemoteShifts = new HashSet<RemoteShift>();
             this.Messages = new HashSet<Message>();
+            this.RemoteShifts = new HashSet<RemoteShift>();
         }
     
         public int ID { get; set; }
@@ -29,8 +29,8 @@ namespace VisaXCentral
         public bool Enabled { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RemoteShift> RemoteShifts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Message> Messages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RemoteShift> RemoteShifts { get; set; }
     }
 }

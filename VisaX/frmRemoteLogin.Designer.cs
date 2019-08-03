@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRemoteLogin));
             this.label1 = new System.Windows.Forms.Label();
             this.lblMsg = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
@@ -36,7 +37,8 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtUserName = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.picConnectionString = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picConnectionString)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -64,7 +66,7 @@
             // btnExit
             // 
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnExit.Location = new System.Drawing.Point(156, 123);
+            this.btnExit.Location = new System.Drawing.Point(153, 123);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(89, 40);
             this.btnExit.TabIndex = 12;
@@ -74,7 +76,7 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(15, 123);
+            this.btnLogin.Location = new System.Drawing.Point(12, 123);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(89, 40);
             this.btnLogin.TabIndex = 11;
@@ -115,15 +117,17 @@
             this.txtUserName.Size = new System.Drawing.Size(165, 21);
             this.txtUserName.TabIndex = 7;
             // 
-            // button1
+            // picConnectionString
             // 
-            this.button1.Location = new System.Drawing.Point(86, 104);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.picConnectionString.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picConnectionString.Image = ((System.Drawing.Image)(resources.GetObject("picConnectionString.Image")));
+            this.picConnectionString.Location = new System.Drawing.Point(229, 24);
+            this.picConnectionString.Name = "picConnectionString";
+            this.picConnectionString.Size = new System.Drawing.Size(24, 24);
+            this.picConnectionString.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picConnectionString.TabIndex = 14;
+            this.picConnectionString.TabStop = false;
+            this.picConnectionString.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // frmRemoteLogin
             // 
@@ -132,7 +136,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnExit;
             this.ClientSize = new System.Drawing.Size(264, 173);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.picConnectionString);
             this.Controls.Add(this.lblMsg);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnLogin);
@@ -151,6 +155,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "تایید هویت شعبه ...";
             this.Load += new System.EventHandler(this.frmRemoteLogin_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.picConnectionString)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -166,6 +171,6 @@
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtUserName;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox picConnectionString;
     }
 }
