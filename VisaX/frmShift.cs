@@ -40,7 +40,7 @@ namespace VisaX
                                         Sent = s.Sent ? "✓" : "✗"
                                     }).ToList();
 
-            int cnt = ctx.Shifts.Where(s => s.Sent == false).Where(s => s.Requests.Count > 0).Count();
+            int cnt = ctx.Shifts.Where(s => s.Sent == false).Where(s => s.Requests.Any()).Count();
             if (cnt == 0)
                 llbSendShifts.Text = "ارسال شیفت ها";
             else
@@ -115,6 +115,7 @@ namespace VisaX
 
         private void btnList_Click(object sender, EventArgs e)
         {
+            ctx = new VisaXEntities();
             int id = int.Parse(dgvShifts.SelectedRows[0].Cells["colID"].Value.ToString());
             Shift shift = (from s in ctx.Shifts where s.ID == id select s).First();
             new frmRequests(shift).ShowDialog();
@@ -181,6 +182,6 @@ namespace VisaX
                 btnSearch_Click(null, null);
         }
 
-     
+
     }
 }

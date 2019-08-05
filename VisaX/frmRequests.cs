@@ -68,7 +68,7 @@ namespace VisaX
         private void frmMain_Load(object sender, EventArgs e)
         {
             dgvPassengers_RowsRemoved(null, null);
-            btnNew.Enabled = !SelectedShift.Sent;
+            btnNew.Enabled = btnDelete.Enabled = btnEdit.Enabled = !SelectedShift.Sent;
             this.refreshGrid();
             this.Text = string.Format("متقاضیان ویزای تاریخ {0:yyyy/MM/dd} شیفت {1}", this.SelectedShift.Date, this.SelectedShift.ShiftNum);
         }
@@ -207,9 +207,13 @@ namespace VisaX
 
         private void dgvPassengers_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            btnDelete.Enabled = btnEdit.Enabled = btnHistory.Enabled =
-               dgvPassengers.Rows.Count != 0;
-            btnExportExcel.Enabled = btnExportPDF.Enabled = btnExportPDFAll.Enabled = dgvPassengers.Rows.Count != 0 && SelectedShift.Sent;
+            btnHistory.Enabled = dgvPassengers.Rows.Count > 0;
+
+            btnDelete.Enabled = btnEdit.Enabled = btnNew.Enabled = 
+                dgvPassengers.Rows.Count > 0 && !SelectedShift.Sent;
+
+            btnExportExcel.Enabled = btnExportPDF.Enabled = btnExportPDFAll.Enabled =
+                dgvPassengers.Rows.Count > 0 && SelectedShift.Sent;
         }
 
         private void dgvPassengers_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)

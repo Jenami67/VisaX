@@ -106,6 +106,10 @@ namespace VisaX
             foreach (var p in uniquePassengers)
                 msg.AppendLine(string.Format("- {0}\t ش.پ: {1}", p.FullName, p.PassportNum));
             msg.AppendLine("آیا مایل به وارد کردن آنها هستید؟");
+
+            if (new frmMsgBox(msg.ToString(), "وارد کردن متقاضیان به دیتابیس", MessageBoxButtons.YesNo).ShowDialog() == DialogResult.Yes)
+                MessageBox.Show("Test");
+
             if (MessageBox.Show(msg.ToString(), "وارد کردن متقاضیان به دیتابیس", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading) == DialogResult.Yes)
             {
                 ctx.Passengers.AddRange(uniquePassengers);

@@ -146,7 +146,6 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.ShowInTaskbar = false;
             this.Text = "تنظیمات";
-            this.Load += new System.EventHandler(this.frmSettings_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

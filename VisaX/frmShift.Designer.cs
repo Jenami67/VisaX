@@ -80,7 +80,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 67F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(855, 464);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(855, 465);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // dgvShifts
@@ -125,7 +125,7 @@
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dgvShifts.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvShifts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvShifts.Size = new System.Drawing.Size(849, 339);
+            this.dgvShifts.Size = new System.Drawing.Size(849, 340);
             this.dgvShifts.TabIndex = 2;
             this.dgvShifts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvShifts_CellDoubleClick);
             this.dgvShifts.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvShifts_RowPostPaint);
@@ -202,7 +202,7 @@
             this.panel1.Controls.Add(this.btnDelete);
             this.panel1.Controls.Add(this.btnNew);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 400);
+            this.panel1.Location = new System.Drawing.Point(3, 401);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(849, 61);
             this.panel1.TabIndex = 0;
@@ -232,7 +232,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 22F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(177, 22);
             this.tableLayoutPanel2.TabIndex = 15;
             // 
@@ -394,7 +394,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(855, 464);
+            this.ClientSize = new System.Drawing.Size(855, 465);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MinimumSize = new System.Drawing.Size(871, 503);
@@ -402,7 +402,7 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.ShowIcon = false;
-            this.Text = "شرکه زهره البصره ";
+            this.Text = "شیفت ها";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmShifts_Load);
             this.tableLayoutPanel1.ResumeLayout(false);

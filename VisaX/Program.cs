@@ -19,7 +19,7 @@ namespace VisaX
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmRemoteLogin());
-            // Application.Run(new frmImportXls());
+            // Application.Run();
         }
     }
 }

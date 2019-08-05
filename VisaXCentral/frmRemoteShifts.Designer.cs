@@ -304,7 +304,6 @@
             this.Name = "frmShifts";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
-            this.Text = "شرکه زهره البصره ";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmShifts_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
