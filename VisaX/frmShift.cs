@@ -89,7 +89,7 @@ namespace VisaX
                 }
                 catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
                 {
-                    MessageBox.Show("امکان حذف شیفتی که متقاضی در آن ثبت شده وجود ندارد.\n" + ex.ToString());
+                    new frmMsgBox(ex.ToString(), "امکان حذف شیفتی که متقاضی در آن ثبت شده وجود ندارد.").ShowDialog();
                     ctx.Entry(shift).Reload();
                 }
                 refreshGrid();

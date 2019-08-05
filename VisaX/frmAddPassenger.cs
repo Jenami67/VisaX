@@ -149,7 +149,7 @@ namespace VisaX
                 catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
                 {
                     if (ex.InnerException.InnerException.Message.Contains("AK_Date_PassengerID"))
-                        MessageBox.Show("متقاضی مورد نظر قبلاً در این روز ثبت شده.\n\n" + ex.ToString().Remove(500) );
+                        new frmMsgBox(ex.ToString(), "متقاضی مورد نظر قبلاً در این روز ثبت شده.").ShowDialog();
                     ctx.Entry(passenger).Reload();
                 }
                 this.passenger = null;

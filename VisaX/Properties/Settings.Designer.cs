@@ -128,5 +128,17 @@ namespace VisaX.Properties {
                 this["XlsPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\")]
+        public string ExportDestinationPath {
+            get {
+                return ((string)(this["ExportDestinationPath"]));
+            }
+            set {
+                this["ExportDestinationPath"] = value;
+            }
+        }
     }
 }

@@ -71,7 +71,6 @@ namespace VisaX
                 if (ex.InnerException.HResult == -2146232060)
                     new frmMsgBox(ex.ToString(), "اتصال به پایگاه داده برقرار نشد. لطفا از اتصال به اینترنت مطمئن شوید.").ShowDialog();
             }
-
         }
 
         private void frmRemoteLogin_Load(object sender, EventArgs e)

@@ -83,6 +83,7 @@ namespace VisaXCentral
 
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Excel Documents (*.xls)|*.xls";
+
             int shiftID = (int)dgvShifts.SelectedRows[0].Cells["colID"].Value;
             RemoteShift selectedShift = ctx.RemoteShifts.Where(s => s.ID == shiftID).First<RemoteShift>();
             sfd.FileName = this.user.UserName + " - " + selectedShift.Date.ToString("yyyy-MM-dd") + string.Format(" ({0:00})", selectedShift.ShiftNum);
@@ -146,7 +147,7 @@ namespace VisaXCentral
             int shiftID = (int)dgvShifts.SelectedRows[0].Cells["colID"].Value;
             RemoteShift selectedShift = ctx.RemoteShifts.Where(s => s.ID == shiftID).First<RemoteShift>();
 
-            Boolean xlsToo = MessageBox.Show("آیا مایلید فایل اکسل رکوردهای انتخاب شده هم تولید شود؟", "تولید همزمان اکسل", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes;
+            Boolean xlsToo = MessageBox.Show("آیا مایلید فایل اکسل هم تولید شود؟", "تولید همزمان اکسل", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes;
             List<string> files = new List<string>();
             if (sfd.ShowDialog() == DialogResult.OK)
             {
@@ -225,19 +226,20 @@ namespace VisaXCentral
                 {
                     merged = false;
                     if (reader != null)
-                    {
                         reader.Close();
-                    }
                 }
                 finally
                 {
                     if (document != null)
-                    {
                         document.Close();
-                    }
                 }
             }
             return merged;
+        }
+
+        private void btnList_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

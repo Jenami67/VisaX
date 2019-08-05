@@ -43,5 +43,11 @@ namespace VisaX
         {
             new frmConnectionString().ShowDialog();
         }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            if (fbdPdf.ShowDialog() == DialogResult.OK)
+                txtExportDestinationPath.Text = fbdPdf.SelectedPath;
+        }
     }
 }

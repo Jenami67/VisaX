@@ -201,6 +201,7 @@
             this.btnList.Text = "متقاضیان";
             this.btnList.UseVisualStyleBackColor = true;
             this.btnList.Visible = false;
+            this.btnList.Click += new System.EventHandler(this.btnList_Click);
             // 
             // btnExportXls
             // 

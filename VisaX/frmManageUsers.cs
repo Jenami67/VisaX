@@ -80,7 +80,8 @@ namespace VisaX
                 }
                 catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
                 {
-                    MessageBox.Show("امکان حذف کاربری که عملیات انجام داده وجود ندارد.\n\n" + ex.ToString().Remove(500) + "...", "خطا در حذف کاربر", MessageBoxButtons.OK , MessageBoxIcon.Stop);
+                    new frmMsgBox(ex.ToString(), "امکان حذف کاربری که عملیات انجام داده وجود ندارد.").ShowDialog();
+                    //MessageBox.Show("امکان حذف کاربری که عملیات انجام داده وجود ندارد.\n\n" + .Remove(500) + "...", "خطا در حذف کاربر", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     ctx.Entry(usr).Reload();
                     return;
                 }

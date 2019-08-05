@@ -101,16 +101,11 @@ namespace VisaX
             }//if
 
             StringBuilder msg = new StringBuilder();
-            msg.Append(allPassengers.Count - uniquePassengers.Count > 0 ? string.Format("تعداد {0} متقاضی قبلا وارد شده اند.\n", allPassengers.Count - uniquePassengers.Count) : "");
-            msg.Append(" متقاضیانی که وارد خواهند شد به شرح ذیل هستند:\n");
+            msg.Append((allPassengers.Count - uniquePassengers.Count) > 0 ? string.Format("تعداد {0} متقاضی قبلا وارد شده اند.\n", allPassengers.Count - uniquePassengers.Count) : "");
             foreach (var p in uniquePassengers)
                 msg.AppendLine(string.Format("- {0}\t ش.پ: {1}", p.FullName, p.PassportNum));
-            msg.AppendLine("آیا مایل به وارد کردن آنها هستید؟");
 
-            if (new frmMsgBox(msg.ToString(), "وارد کردن متقاضیان به دیتابیس", MessageBoxButtons.YesNo).ShowDialog() == DialogResult.Yes)
-                MessageBox.Show("Test");
-
-            if (MessageBox.Show(msg.ToString(), "وارد کردن متقاضیان به دیتابیس", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading) == DialogResult.Yes)
+            if (new frmMsgBox(msg.ToString(), " متقاضیانی که وارد خواهند شد به شرح ذیل هستند؛ آیا مایل به وارد کردن آنها هستید؟", MessageBoxButtons.YesNo).ShowDialog() == DialogResult.Yes)
             {
                 ctx.Passengers.AddRange(uniquePassengers);
                 ctx.SaveChanges();

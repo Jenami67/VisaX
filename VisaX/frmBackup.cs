@@ -41,10 +41,12 @@ namespace VisaX
             }//try
             catch (Exception ex)
             {
-                MessageBox.Show("خطایی در عملیات پشتیبان گیری رخ داد." + ex.Message);
+                new frmMsgBox(ex.ToString(), "خطایی در عملیات پشتیبان گیری رخ داد.").ShowDialog();
+                //MessageBox.Show("خطایی در عملیات پشتیبان گیری رخ داد." + ex.Message);
                 return;
             }//catch
-            MessageBox.Show("فایل پشتیبان تولید شد.", "پشتیبان گیری", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading);
+            new frmMsgBox("فایل پشتیبان تولید شد.", "پشتیبان گیری").ShowDialog();
+            //MessageBox.Show("فایل پشتیبان تولید شد.", "پشتیبان گیری", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading);
             Properties.Settings.Default.Save();
         }
     }

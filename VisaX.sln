@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisaX", "VisaX\VisaX.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisaXCentral", "VisaXCentral\VisaXCentral.csproj", "{893C49A1-98D8-4999-B492-772414B4FF22}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "VisaXSetup", "VisaXSetup\VisaXSetup.vdproj", "{D422AE3E-61F3-4815-9904-4B6B837410DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,8 @@ Global
 		{893C49A1-98D8-4999-B492-772414B4FF22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{893C49A1-98D8-4999-B492-772414B4FF22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{893C49A1-98D8-4999-B492-772414B4FF22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D422AE3E-61F3-4815-9904-4B6B837410DD}.Debug|Any CPU.ActiveCfg = Debug
+		{D422AE3E-61F3-4815-9904-4B6B837410DD}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
