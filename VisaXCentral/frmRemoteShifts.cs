@@ -78,59 +78,64 @@ namespace VisaXCentral
 
         private void btnExportXls_Click(object sender, EventArgs e)
         {
-            string path = "./PassengerList.xls";
-            string absPath = Path.GetFullPath(path);
+            string absPath = Path.GetFullPath("./PassengerList.xls");
 
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Excel Documents (*.xls)|*.xls";
+            //SaveFileDialog sfd = new SaveFileDialog();
+            //sfd.Filter = "Excel Documents (*.xls)|*.xls";
 
-            int shiftID = (int)dgvShifts.SelectedRows[0].Cells["colID"].Value;
-            RemoteShift selectedShift = ctx.RemoteShifts.Where(s => s.ID == shiftID).First<RemoteShift>();
-            sfd.FileName = this.user.UserName + " - " + selectedShift.Date.ToString("yyyy-MM-dd") + string.Format(" ({0:00})", selectedShift.ShiftNum);
+            FolderBrowserDialog sfd = new FolderBrowserDialog();
+            sfd.SelectedPath = Properties.Settings.Default.ExportDestinationPath;
+
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 Excel.Application excelApllication = null;
                 Excel.Workbook excelWorkBook = null;
                 Excel.Worksheet excelWorkSheet = null;
-
                 excelApllication = new Excel.Application();
                 System.Threading.Thread.Sleep(2000);
-                excelWorkBook = excelApllication.Workbooks.Open(absPath, 0, true, 5, "", "", true, Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
-                excelWorkSheet = (Excel.Worksheet)excelWorkBook.Worksheets.get_Item(1);
 
-                int i = 1;
-                foreach (RemoteRequest r in selectedShift.RemoteRequests)
+                foreach (DataGridViewRow item in dgvShifts.SelectedRows)
                 {
-                    excelWorkSheet.Cells[i + 7, 8].Value = r.FullName;
-                    excelWorkSheet.Cells[i + 7, 7].Value = r.PassportNum;
-                    excelWorkSheet.Cells[i + 7, 6].Value2 = (byte)r.Gender == 0 ? "ذکر" : "انثی";
+                    int shiftID = (int)item.Cells["colID"].Value;
+                    RemoteShift selectedShift = ctx.RemoteShifts.Where(s => s.ID == shiftID).First<RemoteShift>();
 
-                    //format error: Exception from HRESULT: 0x800A03EC
-                    if (r.BornDate.HasValue)
+                    excelWorkBook = excelApllication.Workbooks.Open(absPath, 0, true, 5, "", "", true, Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+                    excelWorkSheet = (Excel.Worksheet)excelWorkBook.Worksheets.get_Item(1);
+
+                    int i = 1;
+                    foreach (RemoteRequest r in selectedShift.RemoteRequests)
                     {
-                        excelWorkSheet.Cells[i + 7, 5].Value2 = r.BornDate;
-                        excelWorkSheet.Cells[i + 7, 4].Value2 = r.IssueDate;
-                        excelWorkSheet.Cells[i + 7, 3].Value2 = r.ExpiryDate;
-                    }//if
-                    i++;
-                }//foreach
+                        excelWorkSheet.Cells[i + 7, 8].Value = r.FullName;
+                        excelWorkSheet.Cells[i + 7, 7].Value = r.PassportNum;
+                        excelWorkSheet.Cells[i + 7, 6].Value2 = (byte)r.Gender == 0 ? "ذکر" : "انثی";
 
-                excelWorkBook.SaveAs(sfd.FileName, Excel.XlFileFormat.xlWorkbookNormal);
+                        if (r.BornDate.HasValue)
+                        {
+                            excelWorkSheet.Cells[i + 7, 5].Value2 = r.BornDate;
+                            excelWorkSheet.Cells[i + 7, 4].Value2 = r.IssueDate;
+                            excelWorkSheet.Cells[i + 7, 3].Value2 = r.ExpiryDate;
+                        }//if
+                        i++;
+                    }//foreach
+
+                    string fileName = user.UserName + " - " + selectedShift.Date.ToString("yyyy-MM-dd") + string.Format(" ({0:00})", selectedShift.ShiftNum);
+                    excelWorkBook.SaveAs(fileName, Excel.XlFileFormat.xlWorkbookNormal);
+                    selectedShift.Exported = true;
+                }//foreach
 
                 excelWorkBook.Close();
                 excelApllication.Quit();
-
                 Marshal.FinalReleaseComObject(excelWorkSheet);
                 Marshal.FinalReleaseComObject(excelWorkBook);
                 Marshal.FinalReleaseComObject(excelApllication);
                 excelApllication = null;
                 excelWorkSheet = null;
-                //Opens the created Excel file
-                Process.Start(sfd.FileName);
 
-                selectedShift.Exported = true;
+                //Opens the created Excel file
+                Process.Start(sfd.SelectedPath);
+
                 ctx.SaveChanges();
-            }
+            }//if
         }
 
         private void dtpTo_KeyDown(object sender, KeyEventArgs e)

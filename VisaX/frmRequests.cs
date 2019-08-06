@@ -103,12 +103,12 @@ namespace VisaX
 
         private void btnExportExcel_Click(object sender, EventArgs e)
         {
-            string path = "./PassengerList.xls";
-            string absPath = Path.GetFullPath(path);
+            string absPath = Path.GetFullPath("./PassengerList.xls");
 
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Excel Documents (*.xls)|*.xls";
             sfd.FileName = this.SelectedShift.Date.ToString("yyyy-MM-dd") + string.Format(" ({0:00})", this.SelectedShift.ShiftNum);
+
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 Excel.Application excelApllication = null;
@@ -156,15 +156,14 @@ namespace VisaX
                     }
 
                 excelWorkBook.SaveAs(sfd.FileName, Excel.XlFileFormat.xlWorkbookNormal);
-
                 excelWorkBook.Close();
                 excelApllication.Quit();
-
                 Marshal.FinalReleaseComObject(excelWorkSheet);
                 Marshal.FinalReleaseComObject(excelWorkBook);
                 Marshal.FinalReleaseComObject(excelApllication);
                 excelApllication = null;
                 excelWorkSheet = null;
+                
                 //Opens the created Excel file
                 Process.Start(sfd.FileName);
             }

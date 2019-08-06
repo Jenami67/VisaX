@@ -68,9 +68,9 @@ namespace VisaX
 
                     if (excelWorkSheet.Cells[i + 7, 5].Value != null)
                     {
-                        p.BornDate = DateTime.FromOADate(excelWorkSheet.Cells[i + 7, 5].Value2);
-                        p.IssueDate = DateTime.FromOADate(excelWorkSheet.Cells[i + 7, 4].Value2);
-                        p.ExpiryDate = DateTime.FromOADate(excelWorkSheet.Cells[i + 7, 3].Value2);
+                        p.BornDate = fromOADate(excelWorkSheet.Cells[i + 7, 5].Value2);
+                        p.IssueDate = fromOADate(excelWorkSheet.Cells[i + 7, 4].Value2);
+                        p.ExpiryDate = fromOADate(excelWorkSheet.Cells[i + 7, 3].Value2);
                     }//if
 
                     allPassengers.Add(p);
@@ -122,6 +122,14 @@ namespace VisaX
         private void btnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+        }
+
+        private DateTime? fromOADate(double d)
+        {
+            if (d >= -657435.0 && d <= 2958465.99999999)
+                return DateTime.FromOADate(d);
+            else
+                return null; 
         }
     }
 }
