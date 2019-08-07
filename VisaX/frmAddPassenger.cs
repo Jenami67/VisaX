@@ -150,7 +150,7 @@ namespace VisaX
                 {
                     if (ex.InnerException.InnerException.Message.Contains("AK_Date_PassengerID"))
                         new frmMsgBox(ex.ToString(), "متقاضی مورد نظر قبلاً در این روز ثبت شده.").ShowDialog();
-                    ctx.Entry(passenger).Reload();
+                    ctx= new VisaXEntities();
                 }
                 this.passenger = null;
                 txtPassportNum.Focus();

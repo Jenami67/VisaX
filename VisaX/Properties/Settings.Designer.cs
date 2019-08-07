@@ -107,7 +107,7 @@ namespace VisaX.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("c:\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\")]
         public string BackupPath {
             get {
                 return ((string)(this["BackupPath"]));
