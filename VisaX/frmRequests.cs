@@ -142,7 +142,14 @@ namespace VisaX
                         i++;
                     }//foreach
                 else
-                    foreach (DataGridViewRow row in dgvPassengers.SelectedRows)
+                {
+                    List<DataGridViewRow> rows =
+                        (from DataGridViewRow row in dgvPassengers.SelectedRows
+                         where !row.IsNewRow
+                         orderby row.Index
+                         select row).ToList<DataGridViewRow>();
+
+                    foreach (DataGridViewRow row in rows)
                     {
                         excelWorkSheet.Cells[i + 7, 8].Value = row.Cells["colFullName"].Value;
                         excelWorkSheet.Cells[i + 7, 7].Value = row.Cells["colPassportNum"].Value;
@@ -154,7 +161,7 @@ namespace VisaX
                         excelWorkSheet.Cells[i + 7, 3].Value2 = row.Cells["colExpiryDate"].Value;
                         i++;
                     }
-
+                }//else
                 excelWorkBook.SaveAs(sfd.FileName, Excel.XlFileFormat.xlWorkbookNormal);
                 excelWorkBook.Close();
                 excelApllication.Quit();
@@ -163,7 +170,7 @@ namespace VisaX
                 Marshal.FinalReleaseComObject(excelApllication);
                 excelApllication = null;
                 excelWorkSheet = null;
-                
+
                 //Opens the created Excel file
                 Process.Start(sfd.FileName);
             }
@@ -208,7 +215,7 @@ namespace VisaX
         {
             btnHistory.Enabled = dgvPassengers.Rows.Count > 0;
 
-            btnDelete.Enabled = btnEdit.Enabled = btnNew.Enabled = 
+            btnDelete.Enabled = btnEdit.Enabled = btnNew.Enabled =
                 dgvPassengers.Rows.Count > 0 && !SelectedShift.Sent;
 
             btnExportExcel.Enabled = btnExportPDF.Enabled = btnExportPDFAll.Enabled =

@@ -34,18 +34,31 @@ namespace VisaXCentral
 
         private void refreshGrid()
         {
-            dgvShifts.DataSource = (from s in ctx.RemoteShifts
-                                    where s.Date >= dtpFrom.Value.Date && s.Date <= dtpTo.Value
-                                    && s.RemoteUserID == user.ID
-                                    && s.Exported != chkJustNotPrinted.Checked
-                                    select new
-                                    {
-                                        s.ID,
-                                        s.Date,
-                                        s.ShiftNum,
-                                        s.RemoteRequests.Count,
-                                        s.Description,
-                                    }).ToList();
+            if (chkJustNotPrinted.Checked)
+                dgvShifts.DataSource = (from s in ctx.RemoteShifts
+                                        where s.Date >= dtpFrom.Value.Date && s.Date <= dtpTo.Value
+                                        && s.RemoteUserID == user.ID
+                                        && s.Exported
+                                        select new
+                                        {
+                                            s.ID,
+                                            s.Date,
+                                            s.ShiftNum,
+                                            s.RemoteRequests.Count,
+                                            s.Description,
+                                        }).ToList();
+            else
+                dgvShifts.DataSource = (from s in ctx.RemoteShifts
+                                        where s.Date >= dtpFrom.Value.Date && s.Date <= dtpTo.Value
+                                        && s.RemoteUserID == user.ID
+                                        select new
+                                        {
+                                            s.ID,
+                                            s.Date,
+                                            s.ShiftNum,
+                                            s.RemoteRequests.Count,
+                                            s.Description,
+                                        }).ToList();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -72,7 +85,7 @@ namespace VisaXCentral
 
         private void dgvShifts_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            this.dgvShifts.Rows[e.RowIndex].Cells[0].Value = (e.RowIndex + 1).ToString();
+            dgvShifts.Rows[e.RowIndex].Cells[0].Value = (e.RowIndex + 1).ToString();
             rowColor();
         }
 
@@ -119,7 +132,7 @@ namespace VisaXCentral
                     }//foreach
 
                     string fileName = user.UserName + " - " + selectedShift.Date.ToString("yyyy-MM-dd") + string.Format(" ({0:00})", selectedShift.ShiftNum);
-                    excelWorkBook.SaveAs(fileName, Excel.XlFileFormat.xlWorkbookNormal);
+                    excelWorkBook.SaveAs(sfd.SelectedPath + "\\" + fileName, Excel.XlFileFormat.xlWorkbookNormal);
                     selectedShift.Exported = true;
                 }//foreach
 

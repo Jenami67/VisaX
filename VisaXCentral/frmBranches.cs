@@ -31,22 +31,29 @@ namespace VisaXCentral
 
         private void refreshGrid()
         {
-            dgvBranches.DataSource = (from b in ctx.RemoteUsers
-                                      select new
-                                      {
-                                          b.ID,
-                                          b.RealName,
-                                          b.UserName,
-                                          b.LastSeen,
-                                          b.RemoteShifts.Count,
-                                          Enabled = b.Enabled ? "✓" : "✗"
-                                      }).ToList();
+            try
+            {
+                dgvBranches.DataSource = (from b in ctx.RemoteUsers
+                                          select new
+                                          {
+                                              b.ID,
+                                              b.RealName,
+                                              b.UserName,
+                                              b.LastSeen,
+                                              b.RemoteShifts.Count,
+                                              Enabled = b.Enabled ? "✓" : "✗"
+                                          }).ToList();
+            }
+            catch (System.Data.Entity.Core.EntityException ex)
+            {
+                if (ex.InnerException.HResult == -2146232060)
+                    new frmMsgBox(ex.ToString(), "اتصال به پایگاه داده برقرار نشد. لطفا از اتصال به اینترنت مطمئن شوید.").ShowDialog();
+            }
         }
 
         private void frmBranches_Load(object sender, EventArgs e)
         {
             refreshGrid();
-
         }
 
         private void dgvBranches_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
@@ -163,20 +170,4 @@ namespace VisaXCentral
             return Encoding.Unicode.GetString(outputBuffer);
         }
     }
-
-    //public partial class VisaXCenterEntities : DbContext
-    //{
-    //    public VisaXCenterEntities(string user, string pwd)
-    //        : base("name=VisaXCenterEntities")
-    //    {
-    //        Database.Connection.ConnectionString = string.Format(this.Database.Connection.ConnectionString, user, pwd);
-    //    }
-
-    //    public VisaXCenterEntities(string user)
-    //         : base("name=VisaXCenterEntities")
-    //    {
-    //        if (user == "ASAWARI")
-    //            Database.Connection.ConnectionString = string.Format(this.Database.Connection.ConnectionString, user, "3Pg^gf81");
-    //    }
-    //}
 }
