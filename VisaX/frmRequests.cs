@@ -293,6 +293,7 @@ namespace VisaX
                     foreach (string file in fileNames)
                     {
                         reader = new PdfReader(file);
+                        renameFields(reader.AcroFields);
                         pdf.AddDocument(reader);
                         reader.Close();
                     }
@@ -310,6 +311,17 @@ namespace VisaX
                 }
             }
             return merged;
+        }
+
+        private static int counter = 0;
+        private static void renameFields(AcroFields fields)
+        {
+            //int counter = 0;
+            ICollection<String> fieldNames = fields.Fields.Keys;
+            String prepend = String.Format("{0}", counter++);
+
+            foreach (String fieldName in fieldNames)
+                fields.RenameField(fieldName, prepend + fieldName);
         }
 
         private void frmMain_KeyDown(object sender, KeyEventArgs e)
