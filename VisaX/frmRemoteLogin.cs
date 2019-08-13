@@ -69,7 +69,7 @@ namespace VisaX
             catch (System.Data.Entity.Core.EntityException ex)
             {
                 if (ex.InnerException.HResult == -2146232060)
-                    new frmMsgBox(ex.ToString(), "اتصال به پایگاه داده برقرار نشد. لطفا از اتصال به اینترنت مطمئن شوید.").ShowDialog();
+                    new frmMsgBox(ex.ToString(), "اتصال به پایگاه داده برقرار نشد. لطفا از اتصال به اینترنت مطمئن شوید.", MessageBoxButtons.OK, MsgBoxIcon.Error).ShowDialog();
             }
         }
 
@@ -92,7 +92,7 @@ namespace VisaX
                 catch (System.Data.Entity.Core.EntityException ex)
                 {
                     if (ex.InnerException.HResult == -2146232060)
-                        new frmMsgBox(ex.ToString(), "اتصال به پایگاه داده برقرار نشد. لطفا از اتصال به اینترنت مطمئن شوید.").ShowDialog();
+                        new frmMsgBox(ex.ToString(), "اتصال به پایگاه داده برقرار نشد. لطفا از اتصال به اینترنت مطمئن شوید.", MessageBoxButtons.OK , MsgBoxIcon.Error).ShowDialog();
                     //MessageBox.Show("اتصال به پایگاه داده برقرار نشد. لطفا از اتصال به اینترنت مطمئن شوید...\n\n" + ex.ToString());
                     return;
                 }//catch
@@ -184,8 +184,9 @@ namespace VisaX
 
         private void sync()
         {
-            send();
-            receive();
+            //TODO:: UnComment
+            //send();
+            //receive();
         }
     }
 

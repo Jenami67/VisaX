@@ -36,9 +36,9 @@ namespace VisaXCentral
         {
             if (chkJustNotPrinted.Checked)
                 dgvShifts.DataSource = (from s in ctx.RemoteShifts
-                                        where s.Date >= dtpFrom.Value.Date && s.Date <= dtpTo.Value
+                                        where (s.Date >= dtpFrom.Value.Date && s.Date <= dtpTo.Value)
                                         && s.RemoteUserID == user.ID
-                                        && s.Exported
+                                        && s.Exported == false
                                         select new
                                         {
                                             s.ID,
@@ -49,7 +49,7 @@ namespace VisaXCentral
                                         }).ToList();
             else
                 dgvShifts.DataSource = (from s in ctx.RemoteShifts
-                                        where s.Date >= dtpFrom.Value.Date && s.Date <= dtpTo.Value
+                                        where (s.Date >= dtpFrom.Value.Date && s.Date <= dtpTo.Value)
                                         && s.RemoteUserID == user.ID
                                         select new
                                         {
@@ -106,6 +106,7 @@ namespace VisaXCentral
                 Excel.Worksheet excelWorkSheet = null;
                 excelApllication = new Excel.Application();
                 System.Threading.Thread.Sleep(2000);
+                string destDirPath = Directory.CreateDirectory(sfd.SelectedPath + "\\" + user.UserName).FullName;
 
                 foreach (DataGridViewRow item in dgvShifts.SelectedRows)
                 {
@@ -131,8 +132,8 @@ namespace VisaXCentral
                         i++;
                     }//foreach
 
-                    string fileName = user.UserName + " - " + selectedShift.Date.ToString("yyyy-MM-dd") + string.Format(" ({0:00})", selectedShift.ShiftNum);
-                    excelWorkBook.SaveAs(sfd.SelectedPath + "\\" + fileName, Excel.XlFileFormat.xlWorkbookNormal);
+                    string fileName = selectedShift.Date.ToString("yyyy-MM-dd") + string.Format(" ({0:00})", selectedShift.ShiftNum);
+                    excelWorkBook.SaveAs(destDirPath + "\\" + fileName, Excel.XlFileFormat.xlWorkbookNormal);
                     selectedShift.Exported = true;
                 }//foreach
 
@@ -145,46 +146,51 @@ namespace VisaXCentral
                 excelWorkSheet = null;
 
                 //Opens the created Excel file
-                Process.Start(sfd.SelectedPath);
-
+                Process.Start(destDirPath);
                 ctx.SaveChanges();
             }//if
         }
+        private void btnExportPDF_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog sfd = new FolderBrowserDialog();
+            sfd.SelectedPath = Properties.Settings.Default.ExportDestinationPath;
+
+            Boolean xlsToo = MessageBox.Show("آیا مایلید فایل اکسل هم تولید شود؟", "تولید همزمان اکسل", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes;
+            List<string> files = new List<string>();
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                string destDirPath = Directory.CreateDirectory(sfd.SelectedPath + "\\" + user.UserName).FullName;
+
+                foreach (DataGridViewRow row in dgvShifts.SelectedRows)
+                {
+                    string tempDirPath = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\VisaX";
+                    Directory.CreateDirectory(tempDirPath);
+                    foreach (string tempFile in Directory.GetFiles(tempDirPath))
+                        File.Delete(tempFile);
+
+                    int shiftID = (int)row.Cells["colID"].Value;
+                    RemoteShift selectedShift = ctx.RemoteShifts.Where(s => s.ID == shiftID).First<RemoteShift>();
+                    List<RemoteRequest> reqList = selectedShift.RemoteRequests.ToList();
+
+                    for (int i = 0; i < reqList.Count; i++)
+                        files.Add(generatePdf(reqList[i], i + 1));
+
+                    string fileName = selectedShift.Date.ToString("yyyy-MM-dd") + string.Format(" ({0:00})", selectedShift.ShiftNum);
+                    MergePDFs(files, fileName);
+                }//foreach
+                Process.Start(destDirPath);
+                if (xlsToo)
+                    btnExportXls_Click(null, null);
+                this.refreshGrid();
+            }//if
+        }//btnExportPDF_Click
 
         private void dtpTo_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
                 btnSearch_Click(null, null);
         }
-
-        private void btnExportPDF_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "Adobe Acrobat Documents (*.pdf)|*.pdf";
-
-            int shiftID = (int)dgvShifts.SelectedRows[0].Cells["colID"].Value;
-            RemoteShift selectedShift = ctx.RemoteShifts.Where(s => s.ID == shiftID).First<RemoteShift>();
-
-            Boolean xlsToo = MessageBox.Show("آیا مایلید فایل اکسل هم تولید شود؟", "تولید همزمان اکسل", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes;
-            List<string> files = new List<string>();
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                string dirPath = Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location) + "\\VisaX";
-                Directory.CreateDirectory(dirPath);
-                foreach (string file in Directory.GetFiles(dirPath))
-                    File.Delete(file);
-
-                List<RemoteRequest> reqList = selectedShift.RemoteRequests.ToList<RemoteRequest>();
-                for (int i = 0; i < reqList.Count; i++)
-                    files.Add(generatePdf(reqList[i], i + 1));
-
-                MergePDFs(files, sfd.FileName);
-                Process.Start(sfd.FileName);
-                if (xlsToo)
-                    btnExportXls_Click(null, null);
-                this.refreshGrid();
-            }//if
-        }//btnExportPDF_Click
 
         private string generatePdf(RemoteRequest r, int fileNum)
         {
@@ -253,11 +259,6 @@ namespace VisaXCentral
                 }
             }
             return merged;
-        }
-
-        private void btnList_Click(object sender, EventArgs e)
-        {
-
         }
     }
 

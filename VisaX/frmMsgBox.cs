@@ -4,6 +4,15 @@ using System.Windows.Forms;
 
 namespace VisaX
 {
+    public enum MsgBoxIcon
+    {
+        Error,
+        Success,
+        Question,
+        Stop,
+        None
+    }
+
     public partial class frmMsgBox : Form
     {
         MessageBoxButtons buttons;
@@ -11,7 +20,8 @@ namespace VisaX
         {
             InitializeComponent();
         }
-        public frmMsgBox(string message, string title = "", MessageBoxButtons buttons = MessageBoxButtons.OK) : this()
+
+        public frmMsgBox(string message, string title = "", MessageBoxButtons buttons = MessageBoxButtons.OK, MsgBoxIcon icon = MsgBoxIcon.None) : this()
         {
             txtMessage.Text = message;
             lblTitle.Text = title;
@@ -21,6 +31,24 @@ namespace VisaX
                 btnNo.Visible = true;
                 btnOK.Text = "بله";
             }//if
+
+            switch (icon)
+            {
+                case MsgBoxIcon.Error:
+                    picIcon.Image = imageList1.Images[0];
+                    break;
+                case MsgBoxIcon.Success:
+                    picIcon.Image = imageList1.Images[1];
+                    break;
+                case MsgBoxIcon.Question:
+                    picIcon.Image = imageList1.Images[2];
+                    break;
+                case MsgBoxIcon.Stop:
+                    picIcon.Image = imageList1.Images[2];
+                    break;
+                default:
+                    break;
+            }//switch
         }
 
         private void btnOK_Click(object sender, EventArgs e)

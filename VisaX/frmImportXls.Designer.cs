@@ -34,13 +34,15 @@
             this.btnBrowse = new System.Windows.Forms.Button();
             this.fbd = new System.Windows.Forms.FolderBrowserDialog();
             this.txtFileName = new System.Windows.Forms.TextBox();
+            this.bgw = new System.ComponentModel.BackgroundWorker();
+            this.pb = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(19, 73);
+            this.btnCancel.Location = new System.Drawing.Point(19, 66);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(135, 45);
             this.btnCancel.TabIndex = 21;
@@ -51,7 +53,7 @@
             // btnExportPDF
             // 
             this.btnExportPDF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExportPDF.Location = new System.Drawing.Point(224, 73);
+            this.btnExportPDF.Location = new System.Drawing.Point(224, 66);
             this.btnExportPDF.Name = "btnExportPDF";
             this.btnExportPDF.Size = new System.Drawing.Size(135, 45);
             this.btnExportPDF.TabIndex = 20;
@@ -92,12 +94,29 @@
             this.txtFileName.TabIndex = 17;
             this.txtFileName.Text = global::VisaX.Properties.Settings.Default.XlsPath;
             // 
+            // bgw
+            // 
+            this.bgw.WorkerReportsProgress = true;
+            this.bgw.WorkerSupportsCancellation = true;
+            this.bgw.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.bgw.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.bgw.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgw_RunWorkerCompleted);
+            // 
+            // pb
+            // 
+            this.pb.Location = new System.Drawing.Point(55, 27);
+            this.pb.Name = "pb";
+            this.pb.Size = new System.Drawing.Size(304, 21);
+            this.pb.TabIndex = 22;
+            this.pb.Visible = false;
+            // 
             // frmImportXls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(374, 130);
+            this.ClientSize = new System.Drawing.Size(374, 123);
+            this.Controls.Add(this.pb);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnExportPDF);
             this.Controls.Add(this.label1);
@@ -122,5 +141,7 @@
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.TextBox txtFileName;
         private System.Windows.Forms.FolderBrowserDialog fbd;
+        private System.ComponentModel.BackgroundWorker bgw;
+        private System.Windows.Forms.ProgressBar pb;
     }
 }

@@ -67,8 +67,9 @@ namespace VisaX
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            btnDelete.Enabled = btnEdit.Enabled = !SelectedShift.Sent;
             dgvPassengers_RowsRemoved(null, null);
-            btnNew.Enabled = btnDelete.Enabled = btnEdit.Enabled = !SelectedShift.Sent;
+            btnNew.Enabled = !SelectedShift.Sent;
             this.refreshGrid();
             this.Text = string.Format("متقاضیان ویزای تاریخ {0:yyyy/MM/dd} شیفت {1}", this.SelectedShift.Date, this.SelectedShift.ShiftNum);
         }
@@ -193,9 +194,17 @@ namespace VisaX
                 if (sender == btnExportPDFAll)
                     for (int i = 0; i < dgvPassengers.Rows.Count; i++)
                         files.Add(generatePdf(dgvPassengers.Rows[i], i + 1));
-                else
-                    for (int i = 0; i < dgvPassengers.SelectedRows.Count; i++)
-                        files.Add(generatePdf(dgvPassengers.SelectedRows[i], i + 1));
+                else //if selected
+                {
+                    List<DataGridViewRow> rows =
+                         (from DataGridViewRow row in dgvPassengers.SelectedRows
+                          where !row.IsNewRow
+                          orderby row.Index
+                          select row).ToList<DataGridViewRow>();
+
+                    for (int i = 0; i < rows.Count; i++)
+                        files.Add(generatePdf(rows[i], i + 1));
+                }//else
 
                 MergePDFs(files, sfd.FileName);
                 Process.Start(sfd.FileName);
@@ -293,7 +302,6 @@ namespace VisaX
                     foreach (string file in fileNames)
                     {
                         reader = new PdfReader(file);
-                        renameFields(reader.AcroFields);
                         pdf.AddDocument(reader);
                         reader.Close();
                     }
@@ -311,17 +319,6 @@ namespace VisaX
                 }
             }
             return merged;
-        }
-
-        private static int counter = 0;
-        private static void renameFields(AcroFields fields)
-        {
-            //int counter = 0;
-            ICollection<String> fieldNames = fields.Fields.Keys;
-            String prepend = String.Format("{0}", counter++);
-
-            foreach (String fieldName in fieldNames)
-                fields.RenameField(fieldName, prepend + fieldName);
         }
 
         private void frmMain_KeyDown(object sender, KeyEventArgs e)

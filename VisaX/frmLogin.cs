@@ -50,7 +50,7 @@ namespace VisaX
             catch (System.Data.Entity.Core.EntityException ex)
             {
                 if (ex.Message == "The underlying provider failed on Open.")
-                    new frmMsgBox(ex.ToString(), "اتصال به پایگاه داده محلی برقرار نشد...").ShowDialog();
+                    new frmMsgBox(ex.ToString(), "اتصال به پایگاه داده محلی برقرار نشد...", MessageBoxButtons.OK , MsgBoxIcon.Error).ShowDialog();
                 return;
             }
 

@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMsgBox));
             this.btnOK = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.picIcon = new System.Windows.Forms.PictureBox();
             this.btnNo = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picIcon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,7 +63,7 @@
             // 
             this.txtMessage.BackColor = System.Drawing.SystemColors.Control;
             this.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtMessage.Location = new System.Drawing.Point(56, 63);
+            this.txtMessage.Location = new System.Drawing.Point(61, 63);
             this.txtMessage.Multiline = true;
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.ReadOnly = true;
@@ -73,10 +75,9 @@
             // 
             // picIcon
             // 
-            this.picIcon.Image = ((System.Drawing.Image)(resources.GetObject("picIcon.Image")));
-            this.picIcon.Location = new System.Drawing.Point(12, 63);
+            this.picIcon.Location = new System.Drawing.Point(10, 63);
             this.picIcon.Name = "picIcon";
-            this.picIcon.Size = new System.Drawing.Size(38, 45);
+            this.picIcon.Size = new System.Drawing.Size(45, 45);
             this.picIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picIcon.TabIndex = 19;
             this.picIcon.TabStop = false;
@@ -92,6 +93,14 @@
             this.btnNo.UseVisualStyleBackColor = true;
             this.btnNo.Visible = false;
             this.btnNo.Click += new System.EventHandler(this.btnNo_Click);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "messagebox_critical small.png");
+            this.imageList1.Images.SetKeyName(1, "suc.png");
+            this.imageList1.Images.SetKeyName(2, "question Mark small.png");
             // 
             // frmMsgBox
             // 
@@ -127,5 +136,6 @@
         private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.PictureBox picIcon;
         private System.Windows.Forms.Button btnNo;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

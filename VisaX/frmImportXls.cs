@@ -2,16 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 using System.IO;
 
 namespace VisaX
@@ -25,6 +20,25 @@ namespace VisaX
 
         private void btnImportPDF_Click(object sender, EventArgs e)
         {
+            pb.Visible = true;
+            bgw.RunWorkerAsync();
+        }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            if (fbd.ShowDialog() == DialogResult.OK)
+                txtFileName.Text = fbd.SelectedPath;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            bgw.CancelAsync();
+            DialogResult = DialogResult.Cancel;
+        }
+
+        private void import()
+        {
+            int invalidDates = 0;
             if (txtFileName.Text == string.Empty)
             {
                 MessageBox.Show("ابتدا پوشه حاوی فایل های اکسل را انتخاب کنید.", "وارد کردن متقاضیان به دیتابیس", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.RightAlign | MessageBoxOptions.RtlReading);
@@ -40,42 +54,52 @@ namespace VisaX
             Excel.Worksheet excelWorkSheet = null;
             excelApllication = new Excel.Application();
             System.Threading.Thread.Sleep(2000);
-
+            double fileNum = 0;
             foreach (var file in files)
             {
-                string path = file.FullName;
-
-                excelWorkBook = excelApllication.Workbooks.Open(path, 0, true, 5, "", "", true, Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+                fileNum++;
+                excelWorkBook = excelApllication.Workbooks.Open(file.FullName, 0, true, 5, "", "", true, Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
                 excelWorkSheet = (Excel.Worksheet)excelWorkBook.Worksheets.get_Item(1);
-
-                int i = 1;
-                while (excelWorkSheet.Cells[i + 7, 8].Value != null)
+                int rowNum = 1;
+                while (excelWorkSheet.Cells[rowNum + 7, 8].Value != null)
                 {
-                    string passportNum = excelWorkSheet.Cells[i + 7, 7].Value.ToString();
-                    if (allPassengers.Select(r => r.PassportNum).Contains(passportNum))
+                    string passportNum = excelWorkSheet.Cells[rowNum + 7, 7].Value.ToString();
+                    if (allPassengers.Select(r => r.PassportNum).Contains(passportNum) || passportNum.Length != 8)
                     {
-                        i++;
+
+                        rowNum++;
                         continue;
                     }//if
 
                     Passenger p = new Passenger()
                     {
-                        FullName = excelWorkSheet.Cells[i + 7, 8].Value,
-                        PassportNum = excelWorkSheet.Cells[i + 7, 7].Value.ToString(),
-                        Gender = (byte)(excelWorkSheet.Cells[i + 7, 6].Value2 == "ذکر" ? 0 : 1),
+                        PassportNum = passportNum,
+                        FullName = excelWorkSheet.Cells[rowNum + 7, 8].Value,
+                        Gender = (byte)(excelWorkSheet.Cells[rowNum + 7, 6].Value2 == "ذکر" ? 0 : 1),
                         UserID = Properties.Settings.Default.User.ID
                     };
 
-                    if (excelWorkSheet.Cells[i + 7, 5].Value != null)
+                    if (excelWorkSheet.Cells[rowNum + 7, 5].Value != null)
                     {
-                        p.BornDate = fromOADate(excelWorkSheet.Cells[i + 7, 5].Value2);
-                        p.IssueDate = fromOADate(excelWorkSheet.Cells[i + 7, 4].Value2);
-                        p.ExpiryDate = fromOADate(excelWorkSheet.Cells[i + 7, 3].Value2);
+                        var bornDate = excelWorkSheet.Cells[rowNum + 7, 5].Value2;
+                        var issueDate = excelWorkSheet.Cells[rowNum + 7, 4].Value2;
+                        var expiryDate = excelWorkSheet.Cells[rowNum + 7, 3].Value2;
+
+                        if (bornDate is double && issueDate is double && expiryDate is double)
+                        {
+                            p.BornDate = DateTime.FromOADate(bornDate);
+                            p.IssueDate = DateTime.FromOADate(issueDate);
+                            p.ExpiryDate = DateTime.FromOADate(expiryDate);
+                        }//if
+                        else
+                            invalidDates++;
                     }//if
 
                     allPassengers.Add(p);
-                    i++;
+                    rowNum++;
                 }//while
+                int pr = (int)(fileNum / files.Count() * 100);
+                bgw.ReportProgress(pr);
             }//foreach
 
             excelWorkBook.Close();
@@ -101,35 +125,49 @@ namespace VisaX
             }//if
 
             StringBuilder msg = new StringBuilder();
-            msg.Append((allPassengers.Count - uniquePassengers.Count) > 0 ? string.Format("تعداد {0} متقاضی قبلا وارد شده اند.\n", allPassengers.Count - uniquePassengers.Count) : "");
+            msg.AppendLine("تعداد رکوردهای با تاریخ نامعتبر " + invalidDates.ToString());
+            msg.AppendLine((allPassengers.Count - uniquePassengers.Count) > 0 ? string.Format("تعداد {0} متقاضی قبلا وارد شده اند.\n", allPassengers.Count - uniquePassengers.Count) : "");
             foreach (var p in uniquePassengers)
                 msg.AppendLine(string.Format("- {0}\t ش.پ: {1}", p.FullName, p.PassportNum));
 
-            if (new frmMsgBox(msg.ToString(), " متقاضیانی که وارد خواهند شد به شرح ذیل هستند؛ آیا مایل به وارد کردن آنها هستید؟", MessageBoxButtons.YesNo).ShowDialog() == DialogResult.Yes)
+            if (new frmMsgBox(msg.ToString(), " متقاضیانی که وارد خواهند شد به شرح ذیل هستند؛ آیا مایل به وارد کردن آنها هستید؟", MessageBoxButtons.YesNo, MsgBoxIcon.Question).ShowDialog() == DialogResult.Yes)
             {
                 ctx.Passengers.AddRange(uniquePassengers);
                 ctx.SaveChanges();
             }//if
+
             Properties.Settings.Default.Save();
         }
 
-        private void btnBrowse_Click(object sender, EventArgs e)
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (fbd.ShowDialog() == DialogResult.OK)
-                txtFileName.Text = fbd.SelectedPath;
+            import();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
+            //if (bgw.IsBusy)
+            //    busyState();
+            pb.Value = e.ProgressPercentage;
         }
 
-        private DateTime? fromOADate(double d)
+        private void initialState()
         {
-            if (d >= -657435.0 && d <= 2958465.99999999)
-                return DateTime.FromOADate(d);
-            else
-                return null; 
+            btnBrowse.Enabled = true;
+            btnExportPDF.Enabled = true;
+            pb.Visible = true;
+        }
+
+        private void busyState()
+        {
+            btnBrowse.Enabled = false;
+            btnExportPDF.Enabled = false;
+            pb.Visible = false;
+        }
+
+        private void bgw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+           // initialState();
         }
     }
 }
