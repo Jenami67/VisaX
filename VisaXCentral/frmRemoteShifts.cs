@@ -93,9 +93,6 @@ namespace VisaXCentral
         {
             string absPath = Path.GetFullPath("./PassengerList.xls");
 
-            //SaveFileDialog sfd = new SaveFileDialog();
-            //sfd.Filter = "Excel Documents (*.xls)|*.xls";
-
             FolderBrowserDialog sfd = new FolderBrowserDialog();
             sfd.SelectedPath = Properties.Settings.Default.ExportDestinationPath;
 
@@ -176,7 +173,7 @@ namespace VisaXCentral
                     for (int i = 0; i < reqList.Count; i++)
                         files.Add(generatePdf(reqList[i], i + 1));
 
-                    string fileName = selectedShift.Date.ToString("yyyy-MM-dd") + string.Format(" ({0:00})", selectedShift.ShiftNum);
+                    string fileName =destDirPath + "\\" + selectedShift.Date.ToString("yyyy-MM-dd") + string.Format(" ({0:00})", selectedShift.ShiftNum) + ".pdf";
                     MergePDFs(files, fileName);
                 }//foreach
                 Process.Start(destDirPath);

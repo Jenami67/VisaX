@@ -139,12 +139,14 @@
             this.ClientSize = new System.Drawing.Size(770, 459);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.KeyPreview = true;
             this.Name = "frmHistory";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
             this.ShowIcon = false;
             this.Text = "سابقه متقاضی";
             this.Load += new System.EventHandler(this.frmHistory_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmHistory_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRequests)).EndInit();

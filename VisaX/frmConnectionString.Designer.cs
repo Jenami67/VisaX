@@ -131,6 +131,7 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmConnectionString";
@@ -139,6 +140,7 @@
             this.ShowInTaskbar = false;
             this.Text = "تنظیم اتصال به پایگاه داده ";
             this.Load += new System.EventHandler(this.frmConnectionString_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmConnectionString_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

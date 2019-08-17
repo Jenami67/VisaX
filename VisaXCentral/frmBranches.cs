@@ -146,6 +146,11 @@ namespace VisaXCentral
             int id = (int)dgvBranches.SelectedRows[0].Cells["colID"].Value;
             new frmMessages(id).ShowDialog();
         }
+
+        private void llbChangePass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new frmChangeAppPath().ShowDialog();
+        }
     }
     public static class StringUtil
     {

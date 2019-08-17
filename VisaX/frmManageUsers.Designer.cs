@@ -177,6 +177,7 @@
             this.RightToLeftLayout = true;
             this.ShowInTaskbar = false;
             this.Text = "مدیریت کاربران";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmManageUsers_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

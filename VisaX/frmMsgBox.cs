@@ -44,7 +44,7 @@ namespace VisaX
                     picIcon.Image = imageList1.Images[2];
                     break;
                 case MsgBoxIcon.Stop:
-                    picIcon.Image = imageList1.Images[2];
+                    picIcon.Image = imageList1.Images[3];
                     break;
                 default:
                     break;
@@ -73,6 +73,15 @@ namespace VisaX
         {
             if (IsEnglish(txtMessage.Text.First()))
                 txtMessage.TextAlign = HorizontalAlignment.Right;
+        }
+
+        private void frmMsgBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                DialogResult = DialogResult.Cancel;
+                Close();
+            }
         }
     }
 }

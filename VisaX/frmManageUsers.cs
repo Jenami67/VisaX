@@ -114,5 +114,11 @@ namespace VisaX
             if (new frmRenameUser(usr, ctx).ShowDialog() == DialogResult.OK)
                 getData();
         }
+
+        private void frmManageUsers_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                Close();
+        }
     }
 }

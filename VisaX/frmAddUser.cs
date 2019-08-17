@@ -23,13 +23,13 @@ namespace VisaX
             erp.Clear();
             if (txtUserName.Text.Trim() == string.Empty)
             {
-                erp.SetError(txtUserName, "نام کاربری را وارد کنید");
+                erp.SetError(txtUserName, "نام کاربری را وارد کنید.");
                 return;
             }
 
             if (txtFullName.Text.Trim().Length < 2)
             {
-                erp.SetError(txtFullName, "نام کامل کاربر را وارد کنید");
+                erp.SetError(txtFullName, "نام کامل کاربر را وارد کنید.");
                 return;
             }
 
@@ -37,7 +37,7 @@ namespace VisaX
             {
                 UserName = txtUserName.Text,
                 RealName = txtFullName.Text,
-                Password = string.Empty
+                Password = StringUtil.Crypt(string.Empty)
             };
 
             ctx.Users.Add(usr);
@@ -46,6 +46,12 @@ namespace VisaX
                 DialogResult = DialogResult.OK;
                 Close();
             }//if
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

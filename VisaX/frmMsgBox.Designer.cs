@@ -85,6 +85,7 @@
             // btnNo
             // 
             this.btnNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnNo.Location = new System.Drawing.Point(133, 239);
             this.btnNo.Name = "btnNo";
             this.btnNo.Size = new System.Drawing.Size(115, 42);
@@ -104,8 +105,10 @@
             // 
             // frmMsgBox
             // 
+            this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnNo;
             this.ClientSize = new System.Drawing.Size(415, 293);
             this.Controls.Add(this.btnNo);
             this.Controls.Add(this.picIcon);
@@ -114,6 +117,7 @@
             this.Controls.Add(this.lblTitle);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmMsgBox";
@@ -123,6 +127,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TopMost = true;
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmMsgBox_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.picIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

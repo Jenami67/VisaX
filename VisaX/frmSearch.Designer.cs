@@ -42,12 +42,6 @@
             this.colIssueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colExpiryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnHistory = new System.Windows.Forms.Button();
-            this.btnExportPDF = new System.Windows.Forms.Button();
-            this.btnExportExcel = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dtpTo = new System.Windows.Forms.DateTimePicker();
             this.dtpFrom = new System.Windows.Forms.DateTimePicker();
@@ -58,7 +52,6 @@
             this.txtFilter = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPassengers)).BeginInit();
-            this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,7 +70,7 @@
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(952, 505);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
@@ -105,7 +98,7 @@
             this.dgvPassengers.Name = "dgvPassengers";
             this.dgvPassengers.ReadOnly = true;
             this.dgvPassengers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPassengers.Size = new System.Drawing.Size(946, 373);
+            this.dgvPassengers.Size = new System.Drawing.Size(946, 417);
             this.dgvPassengers.TabIndex = 0;
             this.dgvPassengers.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvPassengers_RowPostPaint);
             // 
@@ -190,88 +183,11 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnHistory);
-            this.panel1.Controls.Add(this.btnExportPDF);
-            this.panel1.Controls.Add(this.btnExportExcel);
-            this.panel1.Controls.Add(this.btnDelete);
-            this.panel1.Controls.Add(this.btnEdit);
-            this.panel1.Controls.Add(this.btnNew);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 438);
+            this.panel1.Location = new System.Drawing.Point(3, 482);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(946, 64);
+            this.panel1.Size = new System.Drawing.Size(946, 20);
             this.panel1.TabIndex = 16;
-            // 
-            // btnHistory
-            // 
-            this.btnHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHistory.Enabled = false;
-            this.btnHistory.Location = new System.Drawing.Point(43, 9);
-            this.btnHistory.Name = "btnHistory";
-            this.btnHistory.Size = new System.Drawing.Size(142, 45);
-            this.btnHistory.TabIndex = 5;
-            this.btnHistory.Text = "سابقه";
-            this.btnHistory.UseVisualStyleBackColor = true;
-            this.btnHistory.Visible = false;
-            // 
-            // btnExportPDF
-            // 
-            this.btnExportPDF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExportPDF.Enabled = false;
-            this.btnExportPDF.Location = new System.Drawing.Point(342, 9);
-            this.btnExportPDF.Name = "btnExportPDF";
-            this.btnExportPDF.Size = new System.Drawing.Size(142, 45);
-            this.btnExportPDF.TabIndex = 4;
-            this.btnExportPDF.Text = "تولید pdf";
-            this.btnExportPDF.UseVisualStyleBackColor = true;
-            this.btnExportPDF.Visible = false;
-            // 
-            // btnExportExcel
-            // 
-            this.btnExportExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExportExcel.Enabled = false;
-            this.btnExportExcel.Location = new System.Drawing.Point(193, 9);
-            this.btnExportExcel.Name = "btnExportExcel";
-            this.btnExportExcel.Size = new System.Drawing.Size(142, 45);
-            this.btnExportExcel.TabIndex = 3;
-            this.btnExportExcel.Text = "تولید اکسل";
-            this.btnExportExcel.UseVisualStyleBackColor = true;
-            this.btnExportExcel.Visible = false;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(492, 9);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(142, 45);
-            this.btnDelete.TabIndex = 2;
-            this.btnDelete.Text = "حذف";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Visible = false;
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEdit.Enabled = false;
-            this.btnEdit.Location = new System.Drawing.Point(642, 9);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(142, 45);
-            this.btnEdit.TabIndex = 1;
-            this.btnEdit.Text = "ویرایش";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Visible = false;
-            // 
-            // btnNew
-            // 
-            this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNew.Location = new System.Drawing.Point(792, 9);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(142, 45);
-            this.btnNew.TabIndex = 0;
-            this.btnNew.Text = "جدید";
-            this.btnNew.UseVisualStyleBackColor = true;
-            this.btnNew.Visible = false;
             // 
             // panel2
             // 
@@ -372,9 +288,9 @@
             this.RightToLeftLayout = true;
             this.ShowInTaskbar = false;
             this.Text = "جستجو";
+            this.Load += new System.EventHandler(this.frmSearch_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPassengers)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
@@ -386,12 +302,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.DataGridView dgvPassengers;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnHistory;
-        private System.Windows.Forms.Button btnExportPDF;
-        private System.Windows.Forms.Button btnExportExcel;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Label label1;

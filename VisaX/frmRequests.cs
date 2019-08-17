@@ -79,7 +79,7 @@ namespace VisaX
             int selIndex = dgvPassengers.SelectedRows[0].Index;
             int id = (int)dgvPassengers.SelectedRows[0].Cells["colPassengerID"].Value;
             Passenger passenger = (from p in ctx.Passengers where p.ID == id select p).First();
-            new frmAddPassenger(passenger, this.ctx, this.SelectedShift, true).ShowDialog();
+            new frmAddPassenger(passenger, this.SelectedShift, true).ShowDialog();
             refreshGrid();
 
             dgvPassengers.ClearSelection();
@@ -88,7 +88,7 @@ namespace VisaX
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            if (new frmAddPassenger(ctx, this.SelectedShift).ShowDialog() == DialogResult.Cancel)
+            if (new frmAddPassenger(this.SelectedShift).ShowDialog() == DialogResult.Cancel)
                 refreshGrid();
             dgvPassengers.ClearSelection();
             if (dgvPassengers.RowCount > 0)
@@ -224,11 +224,12 @@ namespace VisaX
         {
             btnHistory.Enabled = dgvPassengers.Rows.Count > 0;
 
-            btnDelete.Enabled = btnEdit.Enabled = btnNew.Enabled =
+            btnDelete.Enabled = btnEdit.Enabled  =
                 dgvPassengers.Rows.Count > 0 && !SelectedShift.Sent;
 
             btnExportExcel.Enabled = btnExportPDF.Enabled = btnExportPDFAll.Enabled =
                 dgvPassengers.Rows.Count > 0 && SelectedShift.Sent;
+            btnNew.Enabled = !SelectedShift.Sent;
         }
 
         private void dgvPassengers_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
@@ -367,6 +368,28 @@ namespace VisaX
         private void dgvPassengers_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             btnEdit_Click(null, null);
+        }
+
+        private void frmRequests_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.N && e.Control && !SelectedShift.Sent)
+                btnNew_Click(null, null);
+            if (e.KeyCode == Keys.E && e.Control && btnEdit.Enabled)
+                btnEdit_Click(null, null);
+            if (e.KeyCode == Keys.D && e.Control && btnDelete.Enabled)
+                btnDelete_Click(null, null);
+
+            if (e.KeyCode == Keys.P && e.Control && SelectedShift.Sent)
+                btnExportPDF_Click(btnExportPDFAll, null);
+            if (e.KeyCode == Keys.P && e.Control && e.Shift && SelectedShift.Sent)
+                btnExportPDF_Click(null, null);
+            if (e.KeyCode == Keys.X && e.Control && SelectedShift.Sent)
+                btnExportExcel_Click(null, null);
+
+            if (e.KeyCode == Keys.H && e.Control && btnHistory.Enabled)
+                btnHistory_Click(null, null);
+            if (e.KeyCode == Keys.Escape)
+                Close();
         }
     }
 }

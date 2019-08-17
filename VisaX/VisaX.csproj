@@ -50,8 +50,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>background_Lbk_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <PlatformTarget>x86</PlatformTarget>
@@ -118,6 +117,12 @@
     </Compile>
     <Compile Include="frmConnectionString.Designer.cs">
       <DependentUpon>frmConnectionString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEditPassenger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditPassenger.Designer.cs">
+      <DependentUpon>frmEditPassenger.cs</DependentUpon>
     </Compile>
     <Compile Include="frmImportXls.cs">
       <SubType>Form</SubType>
@@ -281,6 +286,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VisaXModel.edmx</DependentUpon>
     </Compile>
+    <Content Include="background_Lbk_icon.ico" />
     <Content Include="VisaX_log.ldf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>VisaX.mdf</DependentUpon>
@@ -296,6 +302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmConnectionString.resx">
       <DependentUpon>frmConnectionString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditPassenger.resx">
+      <DependentUpon>frmEditPassenger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmImportXls.resx">
       <DependentUpon>frmImportXls.cs</DependentUpon>

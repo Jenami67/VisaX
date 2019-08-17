@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmShift));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvShifts = new System.Windows.Forms.DataGridView();
             this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,6 +60,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShifts)).BeginInit();
             this.panel1.SuspendLayout();
@@ -216,6 +219,7 @@
             this.btnEdit.Size = new System.Drawing.Size(122, 45);
             this.btnEdit.TabIndex = 16;
             this.btnEdit.Text = "&ویرایش";
+            this.toolTip1.SetToolTip(this.btnEdit, "Ctrl+E");
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
@@ -246,6 +250,7 @@
             this.llbSendShifts.TabIndex = 13;
             this.llbSendShifts.TabStop = true;
             this.llbSendShifts.Text = "ارسال شیفت ها (00)";
+            this.toolTip1.SetToolTip(this.llbSendShifts, "Ctrl+S");
             this.llbSendShifts.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbSendShifts_LinkClicked);
             // 
             // llbUser
@@ -260,6 +265,7 @@
             this.llbUser.TabIndex = 12;
             this.llbUser.TabStop = true;
             this.llbUser.Text = "کاربر";
+            this.toolTip1.SetToolTip(this.llbUser, "Ctrl+U");
             this.llbUser.UseCompatibleTextRendering = true;
             this.llbUser.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbUser_LinkClicked);
             // 
@@ -287,6 +293,7 @@
             this.btnList.Size = new System.Drawing.Size(122, 45);
             this.btnList.TabIndex = 11;
             this.btnList.Text = "&متقاضیان";
+            this.toolTip1.SetToolTip(this.btnList, "Ctrl+L");
             this.btnList.UseVisualStyleBackColor = true;
             this.btnList.Click += new System.EventHandler(this.btnList_Click);
             // 
@@ -298,6 +305,7 @@
             this.btnSearchRequest.Size = new System.Drawing.Size(122, 45);
             this.btnSearchRequest.TabIndex = 9;
             this.btnSearchRequest.Text = "&جستجو";
+            this.toolTip1.SetToolTip(this.btnSearchRequest, "Ctrl+F");
             this.btnSearchRequest.UseVisualStyleBackColor = true;
             this.btnSearchRequest.Click += new System.EventHandler(this.btnSearchRequest_Click);
             // 
@@ -310,6 +318,7 @@
             this.btnDelete.Size = new System.Drawing.Size(122, 45);
             this.btnDelete.TabIndex = 8;
             this.btnDelete.Text = "&حذف";
+            this.toolTip1.SetToolTip(this.btnDelete, "Ctrl+D");
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -321,6 +330,7 @@
             this.btnNew.Size = new System.Drawing.Size(122, 45);
             this.btnNew.TabIndex = 7;
             this.btnNew.Text = "&شیفت جدید";
+            this.toolTip1.SetToolTip(this.btnNew, "Ctrl+N");
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
@@ -397,14 +407,16 @@
             this.ClientSize = new System.Drawing.Size(855, 465);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(871, 503);
             this.Name = "frmShift";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
-            this.ShowIcon = false;
             this.Text = "شیفت ها";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmShifts_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmShift_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvShifts)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -444,5 +456,6 @@
         private System.Windows.Forms.LinkLabel llbSettings;
         private System.Windows.Forms.LinkLabel llbSendShifts;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

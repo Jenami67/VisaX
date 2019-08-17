@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBranches));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvBranches = new System.Windows.Forms.DataGridView();
             this.colNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,6 +43,7 @@
             this.colLastSeen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEnabled = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.llbChangePass = new System.Windows.Forms.LinkLabel();
             this.btnSendMsg = new System.Windows.Forms.Button();
             this.btnDelBranch = new System.Windows.Forms.Button();
             this.llbGeneratePDF = new System.Windows.Forms.LinkLabel();
@@ -67,7 +69,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(803, 391);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(859, 391);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // dgvBranches
@@ -111,7 +113,7 @@
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dgvBranches.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvBranches.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBranches.Size = new System.Drawing.Size(797, 321);
+            this.dgvBranches.Size = new System.Drawing.Size(853, 321);
             this.dgvBranches.TabIndex = 3;
             this.dgvBranches.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBranches_CellDoubleClick);
             this.dgvBranches.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvBranches_RowPostPaint);
@@ -176,6 +178,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.llbChangePass);
             this.panel1.Controls.Add(this.btnSendMsg);
             this.panel1.Controls.Add(this.btnDelBranch);
             this.panel1.Controls.Add(this.llbGeneratePDF);
@@ -186,14 +189,27 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 330);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(797, 58);
+            this.panel1.Size = new System.Drawing.Size(853, 58);
             this.panel1.TabIndex = 4;
+            // 
+            // llbChangePass
+            // 
+            this.llbChangePass.AutoSize = true;
+            this.llbChangePass.LinkArea = new System.Windows.Forms.LinkArea(0, 9);
+            this.llbChangePass.Location = new System.Drawing.Point(59, 38);
+            this.llbChangePass.Name = "llbChangePass";
+            this.llbChangePass.Size = new System.Drawing.Size(51, 18);
+            this.llbChangePass.TabIndex = 19;
+            this.llbChangePass.TabStop = true;
+            this.llbChangePass.Text = "تغییر رمز |";
+            this.llbChangePass.UseCompatibleTextRendering = true;
+            this.llbChangePass.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbChangePass_LinkClicked);
             // 
             // btnSendMsg
             // 
             this.btnSendMsg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSendMsg.Enabled = false;
-            this.btnSendMsg.Location = new System.Drawing.Point(552, 7);
+            this.btnSendMsg.Location = new System.Drawing.Point(608, 7);
             this.btnSendMsg.Name = "btnSendMsg";
             this.btnSendMsg.Size = new System.Drawing.Size(115, 45);
             this.btnSendMsg.TabIndex = 18;
@@ -204,7 +220,7 @@
             // btnDelBranch
             // 
             this.btnDelBranch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelBranch.Location = new System.Drawing.Point(68, 7);
+            this.btnDelBranch.Location = new System.Drawing.Point(124, 7);
             this.btnDelBranch.Name = "btnDelBranch";
             this.btnDelBranch.Size = new System.Drawing.Size(115, 45);
             this.btnDelBranch.TabIndex = 17;
@@ -226,7 +242,7 @@
             // btnNewBranch
             // 
             this.btnNewBranch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNewBranch.Location = new System.Drawing.Point(189, 7);
+            this.btnNewBranch.Location = new System.Drawing.Point(245, 7);
             this.btnNewBranch.Name = "btnNewBranch";
             this.btnNewBranch.Size = new System.Drawing.Size(115, 45);
             this.btnNewBranch.TabIndex = 15;
@@ -238,7 +254,7 @@
             // 
             this.btnChangePass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnChangePass.Enabled = false;
-            this.btnChangePass.Location = new System.Drawing.Point(431, 7);
+            this.btnChangePass.Location = new System.Drawing.Point(487, 7);
             this.btnChangePass.Name = "btnChangePass";
             this.btnChangePass.Size = new System.Drawing.Size(115, 45);
             this.btnChangePass.TabIndex = 14;
@@ -250,7 +266,7 @@
             // 
             this.btnDisable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDisable.Enabled = false;
-            this.btnDisable.Location = new System.Drawing.Point(310, 7);
+            this.btnDisable.Location = new System.Drawing.Point(366, 7);
             this.btnDisable.Name = "btnDisable";
             this.btnDisable.Size = new System.Drawing.Size(115, 45);
             this.btnDisable.TabIndex = 13;
@@ -262,7 +278,7 @@
             // 
             this.btnShowShifts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnShowShifts.Enabled = false;
-            this.btnShowShifts.Location = new System.Drawing.Point(673, 7);
+            this.btnShowShifts.Location = new System.Drawing.Point(729, 7);
             this.btnShowShifts.Name = "btnShowShifts";
             this.btnShowShifts.Size = new System.Drawing.Size(115, 45);
             this.btnShowShifts.TabIndex = 12;
@@ -274,9 +290,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 391);
+            this.ClientSize = new System.Drawing.Size(859, 391);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmBranches";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.RightToLeftLayout = true;
@@ -310,6 +327,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colLastSeen;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEnabled;
         private System.Windows.Forms.Button btnSendMsg;
+        private System.Windows.Forms.LinkLabel llbChangePass;
     }
 }
 

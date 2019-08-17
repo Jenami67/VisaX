@@ -55,5 +55,11 @@ namespace VisaX
                 if (i % 2 != 0)
                     dgvPassengers.Rows[i].DefaultCellStyle.BackColor = Color.AliceBlue;
         }
+
+        private void frmSearch_Load(object sender, EventArgs e)
+        {
+            txtFilter.Focus();
+            dtpFrom.Value = dtpTo.Value.AddMonths(-1);
+        }
     }
 }

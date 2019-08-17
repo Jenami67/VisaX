@@ -34,5 +34,17 @@ namespace VisaXCentral.Properties {
                 this["ExportDestinationPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("sQK+C2AC8AM=")]
+        public string Ram {
+            get {
+                return ((string)(this["Ram"]));
+            }
+            set {
+                this["Ram"] = value;
+            }
+        }
     }
 }

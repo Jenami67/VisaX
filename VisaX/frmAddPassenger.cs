@@ -13,7 +13,7 @@ namespace VisaX
 {
     public partial class frmAddPassenger : Form
     {
-        private VisaXEntities ctx;
+        private VisaXEntities ctx = new VisaXEntities();
         private PersianCalendar pc = new PersianCalendar();
         private DateTime dt;
         private Passenger passenger;
@@ -25,16 +25,15 @@ namespace VisaX
             InitializeComponent();
         }
 
-        public frmAddPassenger(VisaXEntities ctx, Shift shift) : this()
+        public frmAddPassenger(Shift shift) : this()
         {
-            this.ctx = ctx;
             this.selectedShift = shift;
             if (passenger == null)
                 txtBornDate.Enabled = txtIssueDate.Enabled = txtExpiryDate.Enabled = !Properties.Settings.Default.DatesDisabled;
             //TODO: may need revise and in enter value
         }
 
-        public frmAddPassenger(Passenger p, VisaXEntities ctx, Shift shift, bool justEdit = false) : this(ctx, shift)
+        public frmAddPassenger(Passenger p, Shift shift, bool justEdit = false) : this(shift)
         {
             txtFullName.Text = p.FullName;
             txtPassportNum.Text = p.PassportNum;
@@ -138,7 +137,7 @@ namespace VisaX
                         this.passenger.Requests.Add(new Request
                         {
                             ShiftID = this.selectedShift.ID,
-                            UserID = Properties.Settings.Default.User.ID,
+                            UserID = Properties.Settings.Default.User.ID
                         });
                 }//else
 
@@ -150,7 +149,7 @@ namespace VisaX
                 {
                     if (ex.InnerException.InnerException.Message.Contains("AK_Date_PassengerID"))
                         new frmMsgBox(ex.ToString(), "متقاضی مورد نظر قبلاً در این روز ثبت شده.", MessageBoxButtons.OK, MsgBoxIcon.Stop).ShowDialog();
-                    ctx= new VisaXEntities();
+                    ctx = new VisaXEntities();
                 }
                 this.passenger = null;
                 txtPassportNum.Focus();

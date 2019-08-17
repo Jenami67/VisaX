@@ -16,7 +16,7 @@ namespace VisaXCentral
             Application.CurrentCulture = new System.Globalization.CultureInfo("fr-FR");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmBranches());
+            Application.Run(new frmLogin());
         }
     }
 }

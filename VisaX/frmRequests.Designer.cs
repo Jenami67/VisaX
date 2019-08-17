@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -54,6 +55,7 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtFilter = new System.Windows.Forms.TextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPassengers)).BeginInit();
             this.panel1.SuspendLayout();
@@ -209,6 +211,7 @@
             this.btnExportPDFAll.Size = new System.Drawing.Size(122, 45);
             this.btnExportPDFAll.TabIndex = 6;
             this.btnExportPDFAll.Text = "تولید pdf (همه)";
+            this.toolTip1.SetToolTip(this.btnExportPDFAll, "Ctrl+P");
             this.btnExportPDFAll.UseVisualStyleBackColor = true;
             this.btnExportPDFAll.Click += new System.EventHandler(this.btnExportPDF_Click);
             // 
@@ -221,6 +224,7 @@
             this.btnHistory.Size = new System.Drawing.Size(122, 45);
             this.btnHistory.TabIndex = 5;
             this.btnHistory.Text = "سابقه";
+            this.toolTip1.SetToolTip(this.btnHistory, "Ctrl+H");
             this.btnHistory.UseVisualStyleBackColor = true;
             this.btnHistory.Click += new System.EventHandler(this.btnHistory_Click);
             // 
@@ -233,6 +237,7 @@
             this.btnExportPDF.Size = new System.Drawing.Size(122, 45);
             this.btnExportPDF.TabIndex = 4;
             this.btnExportPDF.Text = "تولید pdf (انتخابی)";
+            this.toolTip1.SetToolTip(this.btnExportPDF, "Ctrl+Shift+P");
             this.btnExportPDF.UseVisualStyleBackColor = true;
             this.btnExportPDF.Click += new System.EventHandler(this.btnExportPDF_Click);
             // 
@@ -245,6 +250,7 @@
             this.btnExportExcel.Size = new System.Drawing.Size(122, 45);
             this.btnExportExcel.TabIndex = 3;
             this.btnExportExcel.Text = "تولید اکسل";
+            this.toolTip1.SetToolTip(this.btnExportExcel, "Ctrl+X");
             this.btnExportExcel.UseVisualStyleBackColor = true;
             this.btnExportExcel.Click += new System.EventHandler(this.btnExportExcel_Click);
             // 
@@ -257,6 +263,7 @@
             this.btnDelete.Size = new System.Drawing.Size(122, 45);
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "حذف";
+            this.toolTip1.SetToolTip(this.btnDelete, "Ctrl+D");
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -269,6 +276,7 @@
             this.btnEdit.Size = new System.Drawing.Size(122, 45);
             this.btnEdit.TabIndex = 1;
             this.btnEdit.Text = "ویرایش";
+            this.toolTip1.SetToolTip(this.btnEdit, "Ctrl+E");
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
@@ -280,6 +288,7 @@
             this.btnNew.Size = new System.Drawing.Size(122, 45);
             this.btnNew.TabIndex = 0;
             this.btnNew.Text = "جدید";
+            this.toolTip1.SetToolTip(this.btnNew, "Ctrl+N");
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
@@ -340,6 +349,7 @@
             this.Text = "متقاضیان";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMain_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmRequests_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPassengers)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -374,6 +384,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colExpiryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGender;
         private System.Windows.Forms.Button btnExportPDFAll;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

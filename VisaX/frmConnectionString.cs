@@ -21,6 +21,7 @@ namespace VisaX
             {
                 CsTools.SaveCs("VisaXEntities", txtConnectionString.Text);
                 MessageBox.Show("اتصال به پایگاه داده تنظیم شد.", " اتصال به پایگاه داده...", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading);
+                Application.Restart();
             }
             else
                 MessageBox.Show("اتصال به پایگاه داده معتبر نیست.\n" + ex.Message);
@@ -77,6 +78,12 @@ namespace VisaX
         private void cmbDataSource_TextChanged(object sender, EventArgs e)
         {
             txtConnectionString.Text = CsTools.ChangeCsWithMetadata(txtConnectionString.Text, cmbDataSource.Text).ConnectionString;
+        }
+
+        private void frmConnectionString_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                Close();
         }
     }
 

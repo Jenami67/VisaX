@@ -184,9 +184,8 @@ namespace VisaX
 
         private void sync()
         {
-            //TODO:: UnComment
-            //send();
-            //receive();
+            send();
+            receive();
         }
     }
 

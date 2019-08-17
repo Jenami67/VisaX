@@ -182,6 +182,23 @@ namespace VisaX
                 btnSearch_Click(null, null);
         }
 
+        private void frmShift_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.N && e.Control)
+                btnNew_Click(null, null);
+            if (e.KeyCode == Keys.D && e.Control && btnDelete.Enabled)
+                btnDelete_Click(null, null);
+            if (e.KeyCode == Keys.E && e.Control && btnEdit.Enabled)
+                btnEdit_Click(null, null);
+            if (e.KeyCode == Keys.L && e.Control && btnList.Enabled)
+                btnList_Click(null, null);
+            if (e.KeyCode == Keys.F && e.Control)
+                btnSearchRequest_Click(null, null);
 
+            if (e.KeyCode == Keys.U && e.Control)
+                llbUser_LinkClicked(null, null);
+            if (e.KeyCode == Keys.S && e.Control)
+                llbSendShifts_LinkClicked(null, null);
+        }
     }
 }
