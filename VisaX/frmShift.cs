@@ -80,7 +80,7 @@ namespace VisaX
         {
             int id = (int)dgvShifts.SelectedRows[0].Cells["colID"].Value;
             Shift shift = (from s in ctx.Shifts where s.ID == id select s).First();
-            if (MessageBox.Show("آیا مایل به حذف این شیفت هستید؟", "حذف شیفت", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes)
+            if (new frmMsgBox("آیا مایل به حذف این شیفت هستید؟", "حذف شیفت", MessageBoxButtons.YesNo, MsgBoxIcon.Question).ShowDialog() == DialogResult.Yes)
             {
                 ctx.Shifts.Remove(shift);
                 try
@@ -164,10 +164,17 @@ namespace VisaX
 
         private void llbUser_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (Properties.Settings.Default.User.ID == 1)
-                new frmManageUsers().ShowDialog();
-            else
-                new frmChangePassword().ShowDialog();
+            try
+            {
+                if (Properties.Settings.Default.User.ID == 1)
+                    new frmManageUsers().ShowDialog();
+                else
+                    new frmChangePassword().ShowDialog();
+            }
+            catch (System.NullReferenceException ex)
+            {
+                new frmMsgBox(ex.Message, "لطفاً برنامه را مجدداً کنید.", MessageBoxButtons.OK, MsgBoxIcon.Error).ShowDialog();
+            }
         }
 
         private void llbSendShifts_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

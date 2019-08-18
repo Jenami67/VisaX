@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
 using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Core.EntityClient;
-using System.Data.SqlClient;
-using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace VisaX
@@ -50,7 +42,7 @@ namespace VisaX
             catch (System.Data.Entity.Core.EntityException ex)
             {
                 if (ex.Message == "The underlying provider failed on Open.")
-                    new frmMsgBox(ex.ToString(), "اتصال به پایگاه داده محلی برقرار نشد...", MessageBoxButtons.OK , MsgBoxIcon.Error).ShowDialog();
+                    new frmMsgBox(ex.ToString(), "اتصال به پایگاه داده محلی برقرار نشد...", MessageBoxButtons.OK, MsgBoxIcon.Error).ShowDialog();
                 return;
             }
 
@@ -62,12 +54,11 @@ namespace VisaX
                 Properties.Settings.Default.Save();
 
                 foreach (Message msg in ctxCentral.Messages.Where(m => m.RemoteUserID == frmRemoteLogin.RemoteUserID).Where(mm => mm.Seen == false))
-                {
                     if (new frmMsg(msg).ShowDialog() == DialogResult.Yes)
                         msg.Seen = true;
                     else
                         msg.Seen = false;
-                }//foreach
+
                 ctxCentral.SaveChanges();
 
                 new frmShift().ShowDialog();

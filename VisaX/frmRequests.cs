@@ -315,7 +315,6 @@ namespace VisaX
                 }
                 finally
                 {
-                    if (document != null)
                         document.Close();
                 }
             }
@@ -344,7 +343,7 @@ namespace VisaX
         {
             int id = (int)dgvPassengers.SelectedRows[0].Cells["colRequestID"].Value;
             Request req = (from p in ctx.Requests where p.ID == id select p).First();
-            if (MessageBox.Show("آیا مایل به حذف این درخواست هستید؟", req.Passenger.FullName, MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.RtlReading) == DialogResult.Yes)
+            if (new frmMsgBox ("آیا مایل به حذف این درخواست هستید؟", "حذف در خواست " +  req.Passenger.FullName, MessageBoxButtons.YesNo, MsgBoxIcon.Question).ShowDialog() == DialogResult.Yes)
             {
                 ctx.Requests.Remove(req);
                 ctx.SaveChanges();
